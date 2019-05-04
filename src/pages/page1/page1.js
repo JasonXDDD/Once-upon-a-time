@@ -1,20 +1,37 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TextInput,
+ } from "react-native";
 import NaviBar from '../../components/navi-bar'
 import ToolBar from '../../components/tool-bar'
+import Canvas from '../../components/Canvas'
+import { inject, observer } from 'mobx-react'
+
+
+@inject('rootStore')
+@observer
 export default class Page1 extends Component {
-
-
+  constructor(props) {
+    super(props)
+    this.store = props.rootStore.appStore
+} 
+ 
   render() {
     return (
-      <View style={{flex: 1}}>
+
+      <View style={{flex: 1,backgroundColor:'#f3f3f3'}}>
         <NaviBar title={'編輯故事'}/>
+          <Canvas />
           <ToolBar />
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>編輯故事</Text>
-        </View>
       </View>
+      
     )
   }
+
 }
 
