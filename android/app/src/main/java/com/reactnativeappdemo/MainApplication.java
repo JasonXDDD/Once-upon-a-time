@@ -3,6 +3,7 @@ package com.reactnativeappdemo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.zappi.ui.material.letter.icon.RNMaterialLetterIconPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNViewShotPackage(),
             new RNMaterialLetterIconPackage(),
             new LottiePackage(),
             new RNDeviceInfo(),

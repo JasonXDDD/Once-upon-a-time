@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-view-shot')
     implementation project(':react-native-material-letter-icon')
     implementation project(':lottie-react-native')
     implementation project(':react-native-device-info')

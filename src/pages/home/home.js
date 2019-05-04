@@ -18,20 +18,7 @@ export default class Home extends Component {
         <NaviBar title={'Home'}/>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Text>Home</Text>
-          <TouchableOpacity style={styles.button} onPress={() => {
-            //添加timer的次数
-            this.store.tick();
-            const list = this.store.list;
 
-            list.push({
-              number: this.store.timer,
-              label: '第'+this.store.timer + '次点击'
-            })
-
-            this.store.setList(list)
-          }}>
-            <Text style={styles.buttonText}>跳转到List{'第'+this.store.timer + '次点击'}</Text>
-          </TouchableOpacity>
         </View>
       </View>
     )

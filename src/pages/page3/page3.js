@@ -1,16 +1,37 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import NaviBar from '../../components/navi-bar';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Switch,
+  TextInput,
+  Picker,
+  Slider,
+  WebView,
+  ART
+ } from "react-native";
+import NaviBar from '../../components/navi-bar'
+import { inject, observer } from 'mobx-react'
 
+@inject('rootStore')
+@observer
 export default class Page3 extends Component {
+  constructor(props) {
+    super(props)
+    this.store = props.rootStore.appStore
+  }
+
+
   render() {
+
     return (
       <View style={{flex: 1}}>
-        <NaviBar title={'Page3'}/>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Page3</Text>
-        </View>
+        <NaviBar title={'Page2'}/>
+
       </View>
     )
   }
 }
+
