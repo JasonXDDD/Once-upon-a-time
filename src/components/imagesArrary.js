@@ -33,9 +33,11 @@ export default class ImagesArrary extends Component {
                                         const copy = this.store.copy;
                                             for (let i = 0; i < this.store.count; i++) {
                                               copy.push(
+                                                <Gestures>
                                                     <Image
                                                     source={content.image}
-                                                    />    
+                                                    /> 
+                                                    </Gestures>    
                                               );
                                             }
                                             this.store.setCopy(copy)
