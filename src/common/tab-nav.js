@@ -28,7 +28,7 @@ const TabRouterMap = {
   page1: {
     screen: Page1,
     navigationOptions: {
-      tabBarLabel: '說故事',
+      tabBarLabel: '編輯故事',
       tabBarIcon:({focused}) => (
         <Icon
           focused={focused}
@@ -42,6 +42,21 @@ const TabRouterMap = {
   },
   page2: {
     screen: Page2,
+    navigationOptions: {
+      tabBarLabel: '錄影故事',
+      tabBarIcon:({focused}) => (
+        <Icon
+          focused={focused}
+          size={32}
+          name="ios-star"
+          color={focused ? '#000' : '#9b9c9b'}
+          style={[styles.icon]}
+        />
+      )
+    }
+  },
+  page3: {
+    screen: Page3,
     navigationOptions: {
       tabBarLabel: '故事箱',
       tabBarIcon:({focused}) => (
