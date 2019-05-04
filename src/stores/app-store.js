@@ -58,10 +58,7 @@ class AppStore {
   @observable
   count = 0 
 
-  @action
-  copyAddElement() {
-    this.count = 1
-  }
+
   @action
   setCopy(data){
     this.copy = data
