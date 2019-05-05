@@ -15,58 +15,12 @@ export default class ToolBar extends Component {
     constructor(props) {
         super(props)
         this.store = props.rootStore.appStore
-        this.state = {
-            copy : []
-        }
     } 
-
-
-
-    setCopy(data){
-        this.copy = data
-      }
   
       drawerContent = () => {
-        const ImageBox = this.store.list.map((list) =>             
-        <Collapse key={list.id}>
-            <CollapseHeader >
-                <Separator bordered style={styles.tabTitle}>
-                <Text style={styles.tabText}>{list.title}</Text>
-                </Separator>
-            </CollapseHeader>                
-            <CollapseBody style={styles.imagesArrary}>
-            {              
-                           list.content.map(content => 
-                            <Gestures key={content.id}>
-                                <ListItem  onPressIn={() => {
-                                        const copy = this.state.copy
-                                        for (let i = 0; i < 1; i++) {
-                                            copy.push(
-                                              <Gestures>
-                                                <Image
-                                                source={content.image}
-                                                />  
-                                                </Gestures>
-                                          );
-                                        }
-                                        this.setCopy(copy)
-                                }}>                            
-                                    <Image
-                                    style={{ width: 125, height: 125,}}
-                                    source={content.image}
-                                    />                            
-                                </ListItem> 
-                            </Gestures>
-                        )
-            }
-            </CollapseBody>                
-        </Collapse>
-        );
-
         return (
-        
                 <View style={styles.animatedBox}>
-                        {ImageBox}
+                        <ImagesArrary {...this.props} />
                         <TouchableOpacity onPress={() => {this.store.toggleOpen()}}
                             style={{
                                 backgroundColor: this.store.icon,
@@ -94,22 +48,16 @@ export default class ToolBar extends Component {
 
     render() {
         return (
-        <View>
-               <View style={styles.container}>
-                    <MenuDrawer 
+        <View style={styles.container}>
+                <MenuDrawer 
                     open={this.store.open} 
                     drawerContent={this.drawerContent()}
                     drawerPercentage={20}
-                    animationTime={250}
+                    animationTime={180}
                     overlay={false}
                     opacity={0}
                     >
-                    </MenuDrawer>
-
-                </View>
-                <View style={styles.screen}>
-                    {this.state.copy}
-                </View>
+                </MenuDrawer>
         </View>
         )
     }
@@ -117,14 +65,21 @@ export default class ToolBar extends Component {
 
 const styles = StyleSheet.flatten({
     container: {
-        flex: 1,
-        height:'100%',
+       flex: 1,
+       flexDirection: 'row',
+       justifyContent: 'flex-start',
+       textAlign: 'center',
     },
     animatedBox: {
         height: '86%',
         top: -5,
         backgroundColor: '#d4d2d2',
-        position: 'relative',
+    },
+    imagesArrary: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',    
     },
     icon: {
         position: 'relative',
@@ -144,19 +99,4 @@ const styles = StyleSheet.flatten({
         color: '#fff',
         position: 'absolute',
     },
-    imagesArrary: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',    
-    },
-    screen: {
-        position: 'absolute',
-        backgroundColor: "#f6f6f6",
-        borderColor: "#888888",
-        overflow: 'hidden',
-        borderWidth: 1,
-        borderRadius: 15,
-        right: 100,
-      },
 })
