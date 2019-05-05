@@ -1,16 +1,15 @@
-import {observable, action} from 'mobx'
+import { observable, action } from 'mobx'
+import { observer } from "mobx-react";
 import Girl from './../../src/assets/images/girl.png'
 import Night from './../../src/assets/images/night.jpg'
-import { captureRef, captureScreen } from "react-native-view-shot";
-import Gestures from 'react-native-easy-gestures'
-
+import { Alert } from 'react-native'
 
 
 class AppStore {
   //tool-bar
   @observable
   open = false
-  
+
   @observable
   pressButton = false
 
@@ -20,53 +19,58 @@ class AppStore {
   @observable
   icon = '#00137b'  
 
+  @observable
+  rightDirection = 100
+
   @action
   toggleOpen() {
     this.open = !this.open
     this.pressButton = !this.pressButton
     this.text = this.pressButton ? "#00137b":"#ffffff";
     this.icon = this.pressButton ? "#ffffff":"#00137b";
+    this.rightDirection = this.pressButton ? -100 : 100;
   }
   //imagesArrary
   @observable
     list = [{
-            id: 1,
+            id: 'scenes',
             title: '場景',
             content: [{
-              id: 1,
+              id: 'outside',
               image: Night,
             },{
-              id: 2,
+              id: 'inside',
               image: Night,
             }]
     },{
-            id: 2,
+            id: 'character',
             title: '人物',
             content: [{
-              id: 1,
+              id: 'girl',
               image: Girl,
             },{
-              id: 2,
+              id: 'boy',
               image: Girl,
             }]
     }]
 
-
-  @observable    
-  copy = []
-
-  @observable
-  count = 0 
-
-
   @action
-  setCopy(data){
-    this.copy = data
-  }
+  selectImage(key) {
+
+    Alert.alert(
+      '確定要刪除 ' + key + ' 嗎？',
+      ' ',
+      [
+        {text: '確定', onPress: () => console.log('確定')},
+        {text: '取消', onPress: () => console.log('取消')},
+      ],
+      { cancelable: false }
+    )    
+
+  }  
+
+
   
-
-
-
 }
 
 const appStore = new AppStore()
