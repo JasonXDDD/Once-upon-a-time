@@ -2,8 +2,17 @@ import { observable, action } from 'mobx'
 import { observer } from "mobx-react";
 import Girl from './../../src/assets/images/girl.png'
 import Night from './../../src/assets/images/night.jpg'
-import { Alert } from 'react-native'
-
+import ReactNative, { 
+  Alert, 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableHighlight, 
+  TouchableOpacity, 
+  Image, 
+  ScrollView,
+  UIManager,
+  findNodeHandle, } from 'react-native'
 
 class AppStore {
   //tool-bar
@@ -22,6 +31,9 @@ class AppStore {
   @observable
   rightDirection = 100
 
+  @observable
+  undoSave = 120
+
   @action
   toggleOpen() {
     this.open = !this.open
@@ -29,6 +41,7 @@ class AppStore {
     this.text = this.pressButton ? "#00137b":"#ffffff";
     this.icon = this.pressButton ? "#ffffff":"#00137b";
     this.rightDirection = this.pressButton ? -100 : 100;
+    this.undoSave = this.pressButton ? 20 : 120;
   }
   //imagesArrary
   @observable
@@ -53,24 +66,16 @@ class AppStore {
               image: Girl,
             }]
     }]
+  
+  @observable
+  save = []
+
 
   @action
-  selectImage(key) {
+  positionCanvas(data){
+    this.save = data
+  } 
 
-    Alert.alert(
-      '確定要刪除 ' + key + ' 嗎？',
-      ' ',
-      [
-        {text: '確定', onPress: () => console.log('確定')},
-        {text: '取消', onPress: () => console.log('取消')},
-      ],
-      { cancelable: false }
-    )    
-
-  }  
-
-
-  
 }
 
 const appStore = new AppStore()

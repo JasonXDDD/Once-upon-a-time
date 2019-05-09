@@ -6,12 +6,14 @@ import {
   ScrollView,
   Image,
   TextInput,
-  Animated
+  Animated,
+  TouchableHighlight
  } from "react-native";
 import NaviBar from '../../components/navi-bar'
 import ToolBar from '../../components/ToolBar'
 import { inject, observer } from 'mobx-react'
-import Canvas from './../../components/Canvas'
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 
 @inject('rootStore')
 @observer
@@ -19,16 +21,8 @@ export default class Page1 extends Component {
   constructor(props) {
     super(props)
     this.store = props.rootStore.appStore
-    this.state = {
-      parentCopy : []
-    }
 } 
 
-setCopy(copy) {
-  this.setState({
-    parentCopy: copy
-  })
-}
 
 
 
@@ -36,10 +30,11 @@ setCopy(copy) {
   render() {
     return (
 
-      <View style={{flex: 1,backgroundColor:'#f3f3f3'}}>
-        <NaviBar title={'編輯故事'}/>
-        <ToolBar setCopy={(copy) => this.setCopy(copy)} />
-        <View style={{
+      <View style={{flex: 1}}>
+        <NaviBar title={'錄影故事'}/>
+
+        <View 
+        style={{
           position: 'absolute',
           width: '80%',
           height: '80%',
@@ -50,9 +45,9 @@ setCopy(copy) {
           overflow: 'hidden',
           borderWidth: 1,
           borderRadius: 15,
-        }} >
-                {this.state.parentCopy}
-          </View>
+        }}>
+        {this.store.save}
+        </View>
       </View>
       
     )
