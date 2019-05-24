@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Platform, StatusB
 import { inject, observer } from 'mobx-react'
 import Gestures from 'react-native-easy-gestures'
 
-
 @inject('rootStore')
 @observer
 export default class Canvas extends Component {
@@ -17,7 +16,7 @@ export default class Canvas extends Component {
   render() {
     return (    
           <View style={styles.screen}>
-                {this.store.copy}
+                {this.store.setCopy}
           </View>
 
     )
