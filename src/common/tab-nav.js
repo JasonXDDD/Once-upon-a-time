@@ -13,7 +13,7 @@ const TabRouterMap = {
   home: {
     screen: Home,
     navigationOptions: {
-      tabBarLabel: '回主頁',
+      tabBarLabel: '創故事',
       tabBarIcon:({focused}) => (
         <Icon
           focused={focused}
@@ -28,7 +28,7 @@ const TabRouterMap = {
   page1: {
     screen: Page1,
     navigationOptions: {
-      tabBarLabel: '編輯故事',
+      tabBarLabel: '錄故事',
       tabBarIcon:({focused}) => (
         <Icon
           focused={focused}
@@ -43,7 +43,7 @@ const TabRouterMap = {
   page2: {
     screen: Page2,
     navigationOptions: {
-      tabBarLabel: '錄影故事',
+      tabBarLabel: '畫故事',
       tabBarIcon:({focused}) => (
         <Icon
           focused={focused}
@@ -58,7 +58,7 @@ const TabRouterMap = {
   page3: {
     screen: Page3,
     navigationOptions: {
-      tabBarLabel: '故事箱',
+      tabBarLabel: '看故事',
       tabBarIcon:({focused}) => (
         <Icon
           focused={focused}
