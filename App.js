@@ -7,6 +7,7 @@ import {Provider as ProviderAntd, Modal} from '@ant-design/react-native'
 import { Provider, observer } from 'mobx-react'
 import * as stores from './src/stores/index';
 
+
 @observer
 export default class App extends Component {
   constructor(props) {

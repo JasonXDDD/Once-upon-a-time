@@ -138,6 +138,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-svg')
+    implementation project(':@terrylinla_react-native-sketch-canvas')
     implementation project(':react-native-view-shot')
     implementation project(':react-native-material-letter-icon')
     implementation project(':lottie-react-native')

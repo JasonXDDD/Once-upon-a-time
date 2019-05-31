@@ -3,6 +3,8 @@ package com.reactnativeappdemo;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.zappi.ui.material.letter.icon.RNMaterialLetterIconPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
@@ -29,6 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SvgPackage(),
+            new SketchCanvasPackage(),
             new RNViewShotPackage(),
             new RNMaterialLetterIconPackage(),
             new LottiePackage(),
