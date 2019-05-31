@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {createBottomTabNavigator} from 'react-navigation';
 
@@ -7,35 +7,45 @@ import Home from '../pages/home/home';
 import Page3 from '../pages/page3/page3';
 import Page1 from '../pages/page1/page1';
 import Page2 from '../pages/page2/page2';
+import Recice from '../components/stick/recice';
+
 import {colors} from '../assets/styles/colors-theme';
+
+import EditStorySelected from '../assets/images/TabBar/EditStory_Selected.png'
+import EditStoryUnselected from '../assets/images/TabBar/EditStory_Unselected.png'
+
+import RecordStorySelected from '../assets/images/TabBar/RecordStory_Selected.png'
+import RecordStoryUnselected from '../assets/images/TabBar/RecordStory_Unselected.png'
+
+import DrawStorySelected from '../assets/images/TabBar/DrawStory_Selected.png'
+import DrawStoryUnselected from '../assets/images/TabBar/DrawStory_Unselected.png'
+
+import LookStorySelected from '../assets/images/TabBar/LookStory_Selected.png'
+import LookStoryUnselected from '../assets/images/TabBar/LookStory_Unselected.png'
 
 const TabRouterMap = {
   home: {
     screen: Home,
     navigationOptions: {
-      tabBarLabel: '創故事',
+      tabBarLabel: '   ',
       tabBarIcon:({focused}) => (
-        <Icon
+          <Image
           focused={focused}
-          size={32}
-          name="ios-star"
-          color={focused ? '#000' : '#9b9c9b'}
           style={[styles.icon]}
-        />
+          source={focused ? EditStorySelected : EditStoryUnselected}
+          />
       )
     }
   },
   page1: {
     screen: Page1,
     navigationOptions: {
-      tabBarLabel: '錄故事',
+      tabBarLabel: '   ',
       tabBarIcon:({focused}) => (
-        <Icon
+        <Image
           focused={focused}
-          size={32}
-          name="ios-star"
-          color={focused ? '#000' : '#9b9c9b'}
           style={[styles.icon]}
+          source={focused ? RecordStorySelected : RecordStoryUnselected}
         />
       )
     }
@@ -43,14 +53,12 @@ const TabRouterMap = {
   page2: {
     screen: Page2,
     navigationOptions: {
-      tabBarLabel: '畫故事',
+      tabBarLabel: '   ',
       tabBarIcon:({focused}) => (
-        <Icon
+        <Image
           focused={focused}
-          size={32}
-          name="ios-star"
-          color={focused ? '#000' : '#9b9c9b'}
           style={[styles.icon]}
+          source={focused ? DrawStorySelected : DrawStoryUnselected}
         />
       )
     }
@@ -58,14 +66,12 @@ const TabRouterMap = {
   page3: {
     screen: Page3,
     navigationOptions: {
-      tabBarLabel: '看故事',
+      tabBarLabel: '   ',
       tabBarIcon:({focused}) => (
-        <Icon
+        <Image
           focused={focused}
-          size={32}
-          name="ios-star"
-          color={focused ? '#000' : '#9b9c9b'}
           style={[styles.icon]}
+          source={focused ? LookStorySelected : LookStoryUnselected}
         />
       )
     }
@@ -91,17 +97,16 @@ export const TabNav = createBottomTabNavigator(TabRouterMap,{
     pressOpacity: 0.8,
     //tab bar的样式
     style: {
-      backgroundColor: '#d4d2d2',
+      backgroundColor: 'rgba(248, 248, 248, 0.82)',
       flexDirection:'row',
       justifyContent: 'space-around',
       alignItems:'center',
+      paddingLeft: 155,
+      paddingRight: 155,
     },
     //tab bar的文本样式
     labelStyle: {
-      fontSize: 16,
-      margin: 1,
-      position: 'absolute',
-      bottom: 0,
+      fontSize: 14,
     },
     //tab 页指示符的样式 (tab页下面的一条线).
     indicatorStyle: {height: 0},
@@ -120,7 +125,9 @@ export const TabNav = createBottomTabNavigator(TabRouterMap,{
 
 const styles = StyleSheet.flatten({
   icon: {
+    width: 129,
+    height: 75,
     position: 'absolute',
-    top: 0,
+    bottom: 0,
   }
 })

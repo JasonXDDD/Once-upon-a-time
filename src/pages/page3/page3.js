@@ -1,129 +1,92 @@
 import React, { Component } from 'react'
-import ReactNative, { View, TouchableOpacity, Platform, StyleSheet, Text, findNodeHandle } from 'react-native';
-import Gestures from 'react-native-easy-gestures' 
-export default class Page3 extends Component
-{
-   constructor()
-   {
-       super();
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TextInput,
+  Animated,
+  ImageBackground,
+  TouchableOpacity,
+ } from "react-native";
+import { inject, observer } from 'mobx-react'
+import NaviBar from '../../components/navi-bar'
+import Carousel from 'react-native-carousel-control'
 
-       this.state = { 
-         x: null, 
-         y: null, 
-         width: null, 
-         height: null,
-         left: 0,
-         top: 0,
-      }
-   }
+import LookStory_BG from '../../assets/images/LookStory/BG.png'
 
-   calculateDimensions = () =>
-   {
-       this.refs.innerView.measureLayout(ReactNative.findNodeHandle(this.refs.containerView), ( xPos, yPos, Width, Height ) =>
-       {
-           this.setState({ x: xPos, y: yPos, width: Width, height: Height });
-       });
-   }
+import Fake from '../../assets/images/LookStory/Fake.png'
 
-   setDimensions = () =>
-   {
-      this.setState({
-        left: this.state.x,
-        top: this.state.y
-      })
-      alert(this.state.x)
-      alert(this.state.y)
-   }
+import Delet from '../../assets/images/LookStory/Btn_delete.png'
+import Share from '../../assets/images/LookStory/Btn_share.png'
 
-   render()
-   {
-       return(
-
-           <View ref = "containerView" style = { styles.container }>
-
-              <Gestures>
-               <View ref = "innerView" style={{
-                 left: this.state.left,
-                 top: this.state.top,
-                 backgroundColor: '#01579B',
-                 marginBottom: 50,
-                 justifyContent: 'center',
-                 alignItems: 'center'
-               }}>
-                   <Text style = { styles.calculatedText }>X: { this.state.x }</Text>
-                   <Text style = { styles.calculatedText }>Y: { this.state.y }</Text>
-               </View>
-               </Gestures> 
-
-               <Gestures style={{position: 'absolute'}}>
-               <View style={{
-                 left: this.state.left,
-                 top: this.state.top,
-                 backgroundColor: '#01579B',
-                 marginBottom: 50,
-                 justifyContent: 'center',
-                 alignItems: 'center'
-               }}>
-                   <Text style = { styles.calculatedText }>left: { this.state.x }</Text>
-                   <Text style = { styles.calculatedText }>top: { this.state.y }</Text>             
-               </View> 
-               </Gestures> 
-
-               <TouchableOpacity activeOpacity = { 0.8 } style = { styles.Btn } onPress = { this.calculateDimensions }>
-                   <Text style = { styles.text }>Calculate Blue Box's Dimensions</Text>
-               </TouchableOpacity>
+@inject('rootStore')
+@observer
+export default class Page3 extends Component {
+  constructor(props) {
+    super(props)
+    this.store = props.rootStore.appStore
+} 
 
 
-               <TouchableOpacity onPress = { this.setDimensions }>
-                  <Text style = { styles.text }>set Blue Box's Dimensions</Text>
-              </TouchableOpacity>
-           </View>
-       );
-   }
+
+  render() {
+    return (
+
+      <ImageBackground source={LookStory_BG} style={{flex: 1}}>
+        <NaviBar title={'看故事'}/>
+        <Carousel pageStyle={{
+          position: 'absolute',
+          left: 284,
+          top: 130,
+        }}>
+            <TouchableOpacity style={{
+                width: 457,
+                height: 317,
+                borderWidth: 1,
+                borderRadius: 15,
+                backgroundColor: "#f6f6f6",
+                borderColor: "#bebebe",                
+            }}>
+                <Image
+                source={Fake}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                }} />
+            </TouchableOpacity>
+        </Carousel>
+        <View style={{
+            position: 'absolute',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: 129,
+            left: 448,
+            bottom: 130,
+        }}>
+            <TouchableOpacity>
+                <Image
+                source={Delet}
+                style={{
+                    width: 54,
+                    height: 54,
+                }} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Image
+                source={Share}
+                style={{
+                    width: 54,
+                    height: 54,
+                }} />
+            </TouchableOpacity>
+        </View>
+      </ImageBackground>
+      
+    )
+  }
+
 }
 
-const styles = StyleSheet.create(
-{
-   container:
-   {
-       flex: 1,
-       justifyContent: 'center',
-       alignItems: 'center',
-       backgroundColor: '#aaa',
-       marginTop: (Platform.OS === 'ios') ? 20 : 0
-   },
-
-   innerView:
-   {
-       backgroundColor: '#01579B',
-       marginBottom: 50,
-       justifyContent: 'center',
-       alignItems: 'center'
-   },
-
-   Btn:
-   {
-       position: 'absolute',
-       left: 0,
-       right: 0,
-       bottom: 0,
-       paddingHorizontal: 10,
-       height: 50,
-       justifyContent: 'center',
-       alignItems: 'center',
-       backgroundColor: 'rgba(0, 0, 0, 0.5)'
-   },
-
-   text:
-   {
-       color: 'white',
-       fontSize: 17
-   },
-
-   calculatedText:
-   {
-       color: 'white',
-       marginVertical: 5,
-       fontSize: 16
-   }
-});

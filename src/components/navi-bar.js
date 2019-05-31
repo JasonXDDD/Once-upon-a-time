@@ -22,9 +22,7 @@ export default class NaviBar extends Component {
     return (
       
       <View style={[styles.naviBar, props.style]}>
-          <View style={{width: 40}}>
-            
-          <View/>
+          <View style={{width: 40}}><View/>
         </View>
         <Text style={{color: props.titleColor || '#000',fontWeight: 'bold',fontSize: 20,}}>{props.title}</Text>
         <View style={{width: 40}}>

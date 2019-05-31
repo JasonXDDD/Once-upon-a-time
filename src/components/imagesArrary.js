@@ -9,7 +9,8 @@ import ReactNative, {
     Image, 
     ScrollView,
     UIManager,
-    findNodeHandle, } from 'react-native'
+    findNodeHandle,
+    setNativeProps } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import { observable, autorun, action } from 'mobx'
 import { Collapse, CollapseHeader, CollapseBody } from "accordion-collapse-react-native";
@@ -19,21 +20,21 @@ import Gestures from 'react-native-easy-gestures'
 
   
 @inject('rootStore')
-
+@observer
 export default class ImagesArrary extends Component {
     constructor(props) {
         super(props)
         this.store = props.rootStore.appStore
         this.state = {
             copy: [], 
-            left: 50,
-            top: 50,
+            x: null, 
+            y: null, 
         }
         
     } 
 
-  
 
+    
     componentWillReceiveProps(nextProps) {
         if (nextProps.parentCopy !== this.state.copy) {
           this.parentCopy()
@@ -45,6 +46,8 @@ export default class ImagesArrary extends Component {
         this.setState({
           copy: []
         })
+        this.store.x = [];
+        this.store.y = [];
         console.log(parentCopy)
       }
 
@@ -72,52 +75,52 @@ export default class ImagesArrary extends Component {
           this.props.setCopy(array)
         }
       }
+
       
+
 
 
     render() {
         const ImageBox = this.store.list.map((list) =>             
         <Collapse key={list.id}>
-            <CollapseHeader >
+            <CollapseHeader>
                 <Separator bordered style={styles.tabTitle}>
+                <Image 
+                source={list.icon}
+                style={styles.drawerIcon} />
                 <Text style={styles.tabText}>{list.title}</Text>
                 </Separator>
             </CollapseHeader>                
             <CollapseBody style={styles.imagesArrary}>
             {         
                            list.content.map(content => 
-                                <ListItem  key={content.id} onPressIn={() => {
-                                        const x = this.state.x;
-                                        const y = this.state.y;
+                                <ListItem style={{borderBottomWidth: 0}} key={content.id} onPressIn={() => {
+                                    this.store.addcount();
                                         const copy = this.state.copy;
                                         const min = 1;
                                         const max = 100;
                                         const rand = min + Math.random() * (max - min);
                                         for (let i = 0; i < 1; i++) {
                                           copy.push(
-                                                <View 
-                                                key={content.id + rand}
-                                                ref={ref => this.store.containerView = ref}>
                                                 <Gestures
+                                                key={content.id + rand}
                                                 style={{
                                                     position: 'absolute',
                                                 }}>
                                                 <TouchableHighlight
-                                                ref={ref => this.store.innerView = ref} 
+                                                ref={ref => this.store[`innerView${this.store.count}`] = ref}
                                                 onLongPress={() => {this.selectImage(content.id + rand)}}>
                                                 <Image
                                                 source={content.image}
                                                 />  
                                                 </TouchableHighlight>
                                                 </Gestures>
-                                                </View> 
                                           );
                                         }
                                         this.props.setCopy(copy)
-                                        this.store.toggleOpen()
                                 }}>                            
                                     <Image
-                                    style={{ width: 125, height: 125,}}
+                                    style={{ width: 78, height: 78,}}
                                     source={content.image}
                                     />                            
                                 </ListItem> 
@@ -138,22 +141,32 @@ export default class ImagesArrary extends Component {
 
 const styles = StyleSheet.flatten({
 tabTitle: {
-    backgroundColor: '#b5b5b5',
+    backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 18, 
+    height: 28,
 },
+drawerIcon: {
+    width: 24,
+    height: 24,
+    position: 'absolute',
+    left: 35,
+    },
 tabText: {
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,
-    color: '#fff',
+    left: 62,
+    color: '#000',
     position: 'absolute',
 },
 imagesArrary: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',    
+    width: '100%',  
+    marginTop: 18,   
 },
 })
