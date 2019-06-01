@@ -8,6 +8,26 @@ import ToolItem from './toolItem';
 @observer
 export default class ToolBar extends Component {
 
+  toolList = [
+    {
+      type: 'scene',
+      color: '#3776b1',
+      top: 30
+    },
+
+    {
+      type: 'character',
+      color: '#3776b1',
+      top: 100
+    },
+
+    {
+      type: 'sticker',
+      color: '#3e97a5',
+      top: 170
+    }
+  ]
+
   constructor(props) {
     super(props)
     this.store = props.rootStore.toolStore
@@ -16,94 +36,44 @@ export default class ToolBar extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* scene choose */}
-        <View
-          style={[
-            styles.toolPane,
-            {
-              backgroundColor: '#3776b1',
-              left: this.store.open !== '' ? 0 : -135,
-              opacity: this.store.open === 'scene' ? 1 : 0,
-            },
-          ]}>
-          
-          <ToolItem type="scene"></ToolItem>
-        </View>
-      
+        {
+          this.toolList.map(ele => {
+            return (
+              <View key={ele.type}>
 
-        <TouchableOpacity
-          onPress={() => {
-            this.store.toggleOpen('scene')
-          }}
-          style={[
-            styles.toolIcon,
-            { top: 30, left: this.store.open !== '' ? 135: 0 },
-          ]}
-        >
-          <Image source={this.store.sceneBtn} style={styles.icon} />
-        </TouchableOpacity>
+                {/* tool pane */}
+                <View
+                  style={[
+                    styles.toolPane,
+                    {
+                      backgroundColor: ele.color,
+                      left: this.store.open !== '' ? 0 : -135,
+                      opacity: this.store.open === ele.type ? 1 : 0,
+                    },
+                  ]}>
+                  <ToolItem type={ele.type}></ToolItem>
+                </View>
 
+                {/* tool icon */}                
+                <TouchableOpacity
+                  onPress={() => {
+                    this.store.toggleOpen(ele.type)
+                  }}
+                  style={[
+                    styles.toolIcon,
+                    { 
+                      top: ele.top, 
+                      left: this.store.open !== '' ? 135: 0
+                    },
+                  ]}
+                >
+                  <Image source={this.store[ele.type+ 'Btn']} style={styles.icon} />
+                </TouchableOpacity>
 
-
-
-        {/* character choose */}
-        <View
-          style={[
-            styles.toolPane,
-            {
-              backgroundColor: '#3776b1',
-              left: this.store.open !== '' ? 0 : -135,
-              opacity: this.store.open === 'character' ? 1 : 0,
-            },
-          ]}>
-          
-          <ToolItem type="character"></ToolItem>          
-        </View>
-
-
-        <TouchableOpacity
-          onPress={() => {
-            this.store.toggleOpen('character')
-          }}
-          style={[
-            styles.toolIcon,
-            { top: 100, left: this.store.open !== '' ? 135: 0 },
-          ]}
-        >
-          <Image source={this.store.characterBtn} style={styles.icon} />
-        </TouchableOpacity>
-
-
-
-
-
-        {/* sticker choose */}
-        <View
-          style={[
-            styles.toolPane,
-            {
-              backgroundColor: '#3e97a5',
-              left: this.store.open !== '' ? 0 : -135,
-              opacity: this.store.open === 'sticker' ? 1 : 0,
-            },
-          ]}>
-          <ToolItem type="sticker"></ToolItem>
-        </View>
-      
-
-        <TouchableOpacity
-          onPress={() => {
-            this.store.toggleOpen('sticker')
-          }}
-          style={[
-            styles.toolIcon,
-            { top: 170, left: this.store.open !== '' ? 135: 0 },
-          ]}
-        >
-          <Image source={this.store.stickerBtn} style={styles.icon} />
-        </TouchableOpacity>
-
-
+              </View>
+            )
+          })
+        }
       </View>
     )
   }
