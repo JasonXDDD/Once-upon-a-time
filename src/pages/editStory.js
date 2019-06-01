@@ -7,8 +7,12 @@ import EditStory_BG from '../assets/images/EditStory/BG.png'
 import Redo from '../assets/images/EditStory/btn_redo.png'
 import Save from '../assets/images/EditStory/btn_save.png'
 import Teaching from '../assets/images/EditStory/Teaching.png'
+
 import ToolBar from '../components/toolBar';
 import { observable } from 'mobx';
+import StoryBoard from '../components/story/storyBoard';
+import StoryTool from '../components/story/storyTool';
+import StoryToolRecord from '../components/story/storyToolRecord';
 
 @inject('rootStore')
 @observer
@@ -16,14 +20,15 @@ export default class EditStory extends React.Component {
 
 	constructor(props) {
     super(props)
-    this.store = props.rootStore.toolStore
   }
 	render() {
 		return (
 			<ImageBackground source={EditStory_BG} style={{ flex: 1 }}>
 				<ToolBar></ToolBar>
-				
-				<Text>! {this.store.open}</Text>
+
+				<StoryBoard></StoryBoard>
+				<StoryTool></StoryTool>
+				<StoryToolRecord></StoryToolRecord>
 			</ImageBackground>
 		);
 	}

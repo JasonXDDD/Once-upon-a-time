@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { observer, inject } from 'mobx-react';
+import StoryItem from './story/storyItem';
 
 @inject('rootStore')
 @observer
@@ -8,12 +9,11 @@ export default class ToolItem extends Component {
   constructor(props){
     super(props);
     this.store = props.rootStore.toolStore;
+    this.story = props.rootStore.storyStore;
     this.type = props.type;
   }
+  
   render(){
-
-    // console.log(this.type, this.store[this.type][0].image);
-    
     return (
       <View style={{marginTop: 10}}>
       {
@@ -21,7 +21,10 @@ export default class ToolItem extends Component {
           console.log(ele.id, ele.image);
           
           return (
-            <TouchableOpacity style={styles.toolImage} key={ele.id}>
+            <TouchableOpacity style={styles.toolImage} key={ele.id} 
+            onPress={()=>{
+              this.addStoryItem(ele)
+            }}>
               <Image style={{ width: 78, height: 78 }} source={ele.image}></Image>
               <Text style={{color: 'white'}}>{ele.id}</Text>
             </TouchableOpacity>
@@ -30,6 +33,18 @@ export default class ToolItem extends Component {
       }
       </View>
     )
+  }
+
+  addStoryItem(element){
+    let data = {
+      image: element.image,
+      id: element.id,
+      key: this.story.story.length
+    }
+
+    this.story.story.push((
+      <StoryItem key={data.id + data.key} select={data}></StoryItem>
+    ))
   }
 }
 

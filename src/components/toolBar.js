@@ -48,7 +48,7 @@ export default class ToolBar extends Component {
                     {
                       backgroundColor: ele.color,
                       left: this.store.open !== '' ? 0 : -135,
-                      opacity: this.store.open === ele.type ? 1 : 0,
+                      display: this.store.open === ele.type ?  'flex': 'none',
                     },
                   ]}>
                   <ToolItem type={ele.type}></ToolItem>

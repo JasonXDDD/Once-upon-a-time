@@ -2,31 +2,17 @@ import { observable, action } from "mobx";
 
 
 export default class StoryStore {
-	@observable userInfo;
-	@observable text;
-
-	constructor() {
-		this.userInfo = "123";
-		this.text = "Hello, this is UserPage!!!";
+	@observable story = [];
+	@observable storyScene = {
+		scene: {},
+		item: []
 	}
 
+	@observable containerView;
+	@observable innerView = [];
+
 	@action
-	getListData = () => {
-		fetch(`http://yapi.demo.qunar.com/mock/5228/record/list`)
-			.then(
-				action("fetchRes", res => {
-					return res.json();
-				})
-			)
-			.then(
-				action("fetchSuccess", data => {
-					return (this.userInfo = data);
-				})
-			)
-			.catch(
-				action("fetchError", e => {
-					console.log(e.message);
-				})
-			);
-	};
+	removeItem(id){
+		this.story.splice(id, 1)
+	}
 }

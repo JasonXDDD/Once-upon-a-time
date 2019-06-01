@@ -6,4 +6,4 @@ const toolStore = new ToolStore();
   
 
 
-export { toolStore }
+export { storyStore, toolStore }
