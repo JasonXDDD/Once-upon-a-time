@@ -1,39 +1,76 @@
 
-import { createBottomTabNavigator, createAppContainer, createStackNavigator } from "react-navigation";
-import { StyleSheet } from 'react-native';
-// import Icon from 'react-native-vector-icons/Ionicons';
-import HomeScreen from "../pages/homeScreen";
-import EditStory from "../pages/editStory";
-import RecordStory from "../pages/recordStory";
-import StoryBox from "../pages/storyBox";
+import React from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, Image, } from 'react-native'
+import { createBottomTabNavigator, createAppContainer, createStackNavigator } from "react-navigation"
+// import Icon from 'react-native-vector-icons/Ionicons'
+import HomeScreen from "../pages/homeScreen"
+import EditStory from "../pages/editStory"
+import DrawSticker from '../pages/drawSticker'
+import StoryBox from "../pages/storyBox"
+
+import EditStorySelected from '../assets/images/TabBar/EditStory_Selected.png'
+import EditStoryUnselected from '../assets/images/TabBar/EditStory_Unselected.png'
+
+import RecordStorySelected from '../assets/images/TabBar/RecordStory_Selected.png'
+import RecordStoryUnselected from '../assets/images/TabBar/RecordStory_Unselected.png'
+
+import DrawStorySelected from '../assets/images/TabBar/DrawStory_Selected.png'
+import DrawStoryUnselected from '../assets/images/TabBar/DrawStory_Unselected.png'
+
+import LookStorySelected from '../assets/images/TabBar/LookStory_Selected.png'
+import LookStoryUnselected from '../assets/images/TabBar/LookStory_Unselected.png'
 
 const TabMap = {
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      tabBarLabel: '主頁',
-      
+      tabBarLabel: '   ',
+      tabBarIcon:({focused}) => (
+          <Image
+          focused={focused}
+          style={[styles.icon]}
+          source={focused ? RecordStorySelected : RecordStoryUnselected}
+          />
+      )
     }
   },
   EditStory: {
     screen: EditStory,
     navigationOptions: {
-      tabBarLabel: '創故事',
-      
+      tabBarLabel: '   ',
+      tabBarIcon:({focused}) => (
+        <Image
+          focused={focused}
+          style={[styles.icon]}
+          source={focused ? EditStorySelected : EditStoryUnselected}
+        />
+      )
     }
   },
-  RecordStory: {
-    screen: RecordStory,
+  DrwaSticker: {
+    screen: DrawSticker,
     navigationOptions: {
-      tabBarLabel: '錄影故事',
-      
+      tabBarLabel: '   ',
+      tabBarIcon:({focused}) => (
+        <Image
+          focused={focused}
+          style={[styles.icon]}
+          source={focused ? DrawStorySelected : DrawStoryUnselected}
+        />
+      )
     }
   },
   StoryBox: {
     screen: StoryBox,
     navigationOptions: {
-      tabBarLabel: '故事箱',
-      
+      tabBarLabel: '   ',
+      tabBarIcon:({focused}) => (
+        <Image
+          focused={focused}
+          style={[styles.icon]}
+          source={focused ? LookStorySelected : LookStoryUnselected}
+        />
+      )
     }
   },
 }
@@ -46,3 +83,11 @@ const TabBar = createAppContainer(TabNavigator);
 
 export default TabBar;
 
+const styles = StyleSheet.flatten({
+  icon: {
+    width: 129,
+    height: 75,
+    position: 'absolute',
+    bottom: 0,
+  }
+})
