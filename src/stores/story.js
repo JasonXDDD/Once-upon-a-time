@@ -1,7 +1,7 @@
 import { observable, action } from "mobx";
 
 
-class StoryStore {
+export default class StoryStore {
 	@observable userInfo;
 	@observable text;
 
@@ -30,7 +30,3 @@ class StoryStore {
 			);
 	};
 }
-
-const storyStore = new StoryStore();
-
-export { storyStore };

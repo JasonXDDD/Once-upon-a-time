@@ -138,6 +138,10 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-view-shot')
+    implementation project(':react-native-svg')
+    implementation project(':react-native-device-info')
+    implementation project(':@terrylinla_react-native-sketch-canvas')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])

@@ -4,8 +4,8 @@ import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import TabBar from './src/components/tabBar';
 import { SafeAreaView } from 'react-navigation';
 import { Provider, observer } from 'mobx-react'
-import * as store from './src/store/index';
-
+import {Provider as ProviderAntd} from '@ant-design/react-native'
+import * as store from './src/stores/index';
 
 type Props = {};
 
@@ -14,15 +14,19 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Provider rootStore={store}>
-        <SafeAreaView
-          style={{flex: 1}}
-          forceInset={{
-            top: 'always',
-            bottom: 'always'
-          }}
-        >
-          <TabBar></TabBar>
-        </SafeAreaView>
+        <ProviderAntd>
+
+          <SafeAreaView
+            style={{flex: 1}}
+            forceInset={{
+              top: 'always',
+              bottom: 'always'
+            }}>
+            
+            <TabBar></TabBar>
+          </SafeAreaView>
+        
+        </ProviderAntd>
       </Provider>
     );
   }
