@@ -39,12 +39,11 @@ export default class ToolItem extends Component {
     let data = {
       image: element.image,
       id: element.id,
-      key: this.story.story.length
+      key: this.story.story.length,
+      ref: {}
     }
 
-    this.story.story.push((
-      <StoryItem key={data.id + data.key} select={data}></StoryItem>
-    ))
+    this.story.story.push(data)
   }
 }
 

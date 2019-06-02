@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { inject, observer } from "mobx-react"
+import StoryItem from './storyItem';
 
 
 
@@ -22,7 +23,11 @@ export default class StoryBoard extends Component {
         ref={ref => { this.store.containerView = ref }}
         style={[styles.storyBoard, {right: this.getRight(), bottom: this.getBottom() }]}>
         
-        {this.store.story}
+        {this.store.story.map(ele=>{
+          return (
+            <StoryItem key={ele.id + ele.key} select={ele}></StoryItem>
+          )
+        })}
       </View>
     )
   }
