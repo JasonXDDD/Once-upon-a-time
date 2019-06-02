@@ -2,6 +2,8 @@ import { observable, action } from "mobx";
 
 
 export default class StoryStore {
+	@observable isRecord = false;
+	
 	@observable story = [];
 	@observable storyScene = {
 		scene: {},

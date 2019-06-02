@@ -13,6 +13,8 @@ import { observable } from 'mobx';
 import StoryBoard from '../components/story/storyBoard';
 import StoryTool from '../components/story/storyTool';
 import StoryToolRecord from '../components/story/storyToolRecord';
+import GoBack from '../components/record/goBack';
+import RecordTool from '../components/record/recordTool';
 
 @inject('rootStore')
 @observer
@@ -23,8 +25,10 @@ export default class RecordStory extends React.Component {
   }
 	render() {
 		return (
-			<ImageBackground source={EditStory_BG} style={{ flex: 1 }}>
-				<StoryBoard></StoryBoard>
+      <ImageBackground source={EditStory_BG} style={{ flex: 1 }}>
+        <GoBack navigation={this.props.navigation}></GoBack>
+        <StoryBoard></StoryBoard>
+        <RecordTool navigation={this.props.navigation}></RecordTool>
 			</ImageBackground>
 		);
 	}

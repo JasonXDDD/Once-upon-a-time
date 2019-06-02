@@ -8,7 +8,8 @@ import Btn_Recording from '../../assets/images/RecordStory/Btn_Recording.png'
 export default class StoryToolRecord extends Component {
   constructor(props) {
     super(props)
-    this.store = props.rootStore.storyStore
+    this.store = props.rootStore.storyStore;
+    this.toolbar = props.rootStore.toolStore;    
     this.navigation = props.navigation
   }
 
@@ -16,9 +17,11 @@ export default class StoryToolRecord extends Component {
     return (
       <View style={styles.storyTool}>
         <TouchableOpacity 
-        onPress={() =>
-          this.navigation.navigate('RecordStory')
-        }>
+        onPress={() => {
+          this.store.isRecord = true;
+          this.toolbar.open = '';
+          this.navigation.navigate('RecordStory');
+        }}>
           <Image style={styles.toolIcon} source={Btn_Recording}/>
         </TouchableOpacity>
       </View>
