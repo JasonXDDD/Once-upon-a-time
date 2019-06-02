@@ -14,7 +14,7 @@ export default class GoBack extends Component {
 
   render() {
     return (
-      <View style={styles.storyTool}>
+      <View style={styles.goBackTool}>
         <TouchableOpacity onPress={() => { 
           this.store.isRecord = false;
           this.navigation.navigate('EditStory')
@@ -27,9 +27,10 @@ export default class GoBack extends Component {
 }
 
 const styles = StyleSheet.flatten({
-  storyTool: {
-    top: 20 + 20,
+  goBackTool: {
+    top: 10,
     left: 5,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     position: 'absolute',

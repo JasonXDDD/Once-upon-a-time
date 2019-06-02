@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { View, Image,TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Image,TouchableOpacity, StyleSheet, requireNativeComponent } from 'react-native'
 import { inject, observer } from 'mobx-react'
 
 import Btn_Recording from '../../assets/images/RecordStory/Btn_Recording.png'
+
+
+const SwiftRecordTool = requireNativeComponent('RecordTool')
 
 @inject('rootStore')
 @observer
@@ -15,32 +18,14 @@ export default class RecordTool extends Component {
 
   render() {
     return (
-      <View style={styles.storyTool}>
-        <TouchableOpacity onPress={() => { 
-          this.store.isRecord = false;
-          this.navigation.navigate('EditStory')
-        }}>
-          <Image style={styles.toolIcon} source={Btn_Recording} />
-        </TouchableOpacity>
-      </View>
+      <SwiftRecordTool style={styles.recordTool}/>
     )
   }
 }
 
 const styles = StyleSheet.flatten({
-  storyTool: {
-    top: 20 + 20,
-    right: 5,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    position: 'absolute',
-    width: 58,
-    height: 48
-  },
-
-  toolIcon: {
-    width: 48,
-    height: 48,
-    marginHorizontal: 5
+  recordTool: {
+    top: 10,
+    width: 160,
   }
 })

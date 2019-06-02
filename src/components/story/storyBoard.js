@@ -21,7 +21,7 @@ export default class StoryBoard extends Component {
     return (   
       <View
         ref={ref => { this.store.containerView = ref }}
-        style={[styles.storyBoard, {right: this.getRight(), bottom: this.getBottom() }]}>
+        style={[styles.storyBoard, {right: this.getRight(), top: this.getTop() }]}>
         
         {this.store.story.map(ele=>{
           return (
@@ -35,23 +35,22 @@ export default class StoryBoard extends Component {
   getRight(){
     if(this.toolbar.open !== '') return -110
     else {
-      if(this.store.isRecord) return (width/2) - (900/2)
+      if(this.store.isRecord) return (width/2) - (width * 0.9/2)
       else return 25
     }
   }
 
-  getBottom(){
-    if(this.store.isRecord) return (height/2) - (650/2)
+  getTop(){
+    if(this.store.isRecord) return (height/2) - (height * 0.85/2)
     else return 25
   }
 }
 
-
 const styles = StyleSheet.flatten({
   storyBoard: {
+    width: width * 0.9,
+    height: height * 0.8,
     position: 'absolute',
-    width: 900,
-    height: 650,
     backgroundColor: '#f6f6f6',
     borderColor: '#bebebe',
     overflow: 'hidden',

@@ -48,6 +48,9 @@
 		650469F25DEC4C5EA3B89F46 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DFA16549AC94773A68A2D26 /* FontAwesome5_Solid.ttf */; };
 		6C1702957D3A4CE98FF5330B /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFEAD2EA4BB640BE8FE1DE51 /* Ionicons.ttf */; };
 		71FFCDE9ACA644F7B9C86493 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFD01CA41A63445A8E3B5E59 /* AntDesign.ttf */; };
+		788E427322A425F400EA68CC /* RecordTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E427222A425F400EA68CC /* RecordTool.swift */; };
+		788E427922A4270200EA68CC /* RecordToolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E427822A4270200EA68CC /* RecordToolManager.swift */; };
+		788E427B22A4273300EA68CC /* RecordToolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 788E427A22A4273300EA68CC /* RecordToolManager.m */; };
 		7FED3F3FFE85418189DF2DE4 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DED6ADA95835410DAF429D58 /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9128C483091340E3A9B79E1C /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00CFBBB74043492784DDEEDB /* Feather.ttf */; };
@@ -472,6 +475,10 @@
 		72B0AF8AF54843AC9E25147D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		755A81336DA9477BB8325253 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		781123F92945443FB21B9686 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		788E426B22A424E500EA68CC /* OnceUponATime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OnceUponATime-Bridging-Header.h"; sourceTree = "<group>"; };
+		788E427222A425F400EA68CC /* RecordTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTool.swift; sourceTree = "<group>"; };
+		788E427822A4270200EA68CC /* RecordToolManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordToolManager.swift; sourceTree = "<group>"; };
+		788E427A22A4273300EA68CC /* RecordToolManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecordToolManager.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		89C2E9217C1247BE8601E691 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
@@ -657,6 +664,10 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				788E426B22A424E500EA68CC /* OnceUponATime-Bridging-Header.h */,
+				788E427222A425F400EA68CC /* RecordTool.swift */,
+				788E427822A4270200EA68CC /* RecordToolManager.swift */,
+				788E427A22A4273300EA68CC /* RecordToolManager.m */,
 			);
 			name = OnceUponATime;
 			sourceTree = "<group>";
@@ -991,6 +1002,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 5UGJ2FWVS4;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1536,8 +1548,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				788E427322A425F400EA68CC /* RecordTool.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				788E427922A4270200EA68CC /* RecordToolManager.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				788E427B22A4273300EA68CC /* RecordToolManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1589,6 +1604,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1634,6 +1650,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1678,6 +1695,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1704,6 +1722,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = OnceUponATime;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OnceUponATime-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1714,6 +1735,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1739,6 +1761,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = OnceUponATime;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "OnceUponATime-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

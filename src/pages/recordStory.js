@@ -25,7 +25,7 @@ export default class RecordStory extends React.Component {
   }
 	render() {
 		return (
-      <ImageBackground source={EditStory_BG} style={{ flex: 1 }}>
+      <ImageBackground source={EditStory_BG} style={{ flex: 1, flexDirection: 'row', justifyContent: "center" }}>
         <GoBack navigation={this.props.navigation}></GoBack>
         <StoryBoard></StoryBoard>
         <RecordTool navigation={this.props.navigation}></RecordTool>
