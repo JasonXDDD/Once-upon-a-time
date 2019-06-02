@@ -16,7 +16,7 @@ import StoryToolRecord from '../components/story/storyToolRecord';
 
 @inject('rootStore')
 @observer
-export default class EditStory extends React.Component {
+export default class RecordStory extends React.Component {
 
 	constructor(props) {
     super(props)
@@ -24,11 +24,7 @@ export default class EditStory extends React.Component {
 	render() {
 		return (
 			<ImageBackground source={EditStory_BG} style={{ flex: 1 }}>
-				<ToolBar></ToolBar>
-
 				<StoryBoard></StoryBoard>
-				<StoryTool></StoryTool>
-				<StoryToolRecord navigation={this.props.navigation}></StoryToolRecord>
 			</ImageBackground>
 		);
 	}

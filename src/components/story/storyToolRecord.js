@@ -9,16 +9,16 @@ export default class StoryToolRecord extends Component {
   constructor(props) {
     super(props)
     this.store = props.rootStore.storyStore
+    this.navigation = props.navigation
   }
 
   render() {
     return (
       <View style={styles.storyTool}>
         <TouchableOpacity 
-        // onPress={() => {
-        //   this.store.positionCanvas(this.state.parentCopy)
-        // }}
-        >
+        onPress={() =>
+          this.navigation.navigate('RecordStory')
+        }>
           <Image style={styles.toolIcon} source={Btn_Recording}/>
         </TouchableOpacity>
       </View>

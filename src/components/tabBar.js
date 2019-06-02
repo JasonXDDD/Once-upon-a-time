@@ -4,9 +4,9 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, } from 'react-native'
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from "react-navigation"
 // import Icon from 'react-native-vector-icons/Ionicons'
 import HomeScreen from "../pages/homeScreen"
-import EditStory from "../pages/editStory"
 import DrawSticker from '../pages/drawSticker'
 import StoryBox from "../pages/storyBox"
+import StoryNavigator from '../pages/storyNavigator'
 
 import EditStorySelected from '../assets/images/TabBar/EditStory_Selected.png'
 import EditStoryUnselected from '../assets/images/TabBar/EditStory_Unselected.png'
@@ -35,7 +35,7 @@ const TabMap = {
     }
   },
   EditStory: {
-    screen: EditStory,
+    screen: StoryNavigator,
     navigationOptions: {
       tabBarLabel: '   ',
       tabBarIcon:({focused}) => (
@@ -74,6 +74,7 @@ const TabMap = {
     }
   },
 }
+
 
 const TabNavigator = createBottomTabNavigator(TabMap, {
 	initialRouteName: "Home"
