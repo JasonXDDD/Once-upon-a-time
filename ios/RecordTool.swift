@@ -38,7 +38,6 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
   }
   
   
-  @available(iOS 10.0, *)
   lazy var start: UIButton = {
     let b = UIButton.init(type: UIButton.ButtonType.system)
     b.setTitle("Start", for: .normal)
@@ -67,8 +66,7 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
   }()
   
   
-  @objc @available(iOS 10.0, *)
-  func startRecording() {
+  @objc func startRecording() {
     
     guard recorder.isAvailable else {
       print("Recording is not available at this time.")
@@ -76,12 +74,16 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
     }
     
     recorder.isMicrophoneEnabled = true
-    recorder.startRecording{ [unowned self] (error) in
-      guard error == nil else {
-        print("There was an error starting the recording.")
-        return
+    if #available(iOS 10.0, *) {
+      recorder.startRecording{ [unowned self] (error) in
+        guard error == nil else {
+          print("There was an error starting the recording.", error)
+          return
+        }
+        print("Started Recording Successfully")
       }
-      print("Started Recording Successfully")
+    } else {
+      // Fallback on earlier versions
     }
   }
   
@@ -114,6 +116,7 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
           
           //          preview?.previewControllerDelegate = self
           self.findViewController()!.present(preview!, animated: true, completion: nil)
+          
         })
         
         alert.addAction(editAction)
@@ -123,8 +126,5 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
     }
   }
   
-  func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
-    self.findViewController()!.dismiss(animated: true)
-  }
 }
 

@@ -21,6 +21,7 @@
     "react-native-carousel-control": "^2.0.1",
     "react-native-device-info": "^1.5.0",
     "react-native-easy-gestures": "^2.2.4",
+    "react-native-fs": "^2.13.3",
     "react-native-gesture-handler": "^1.2.1",
     "react-native-segment-controller": "^1.0.0",
     "react-native-segmented-control-tab": "^3.4.0",

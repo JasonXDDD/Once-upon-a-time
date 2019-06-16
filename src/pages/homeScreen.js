@@ -9,7 +9,7 @@ export default class HomeScreen extends React.Component {
 			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 				
 			<TouchableOpacity style={styles.button}>
-				<Text style={styles.buttonText}> Record </Text>
+				<Text style={styles.buttonText}> Recofrd </Text>
 			</TouchableOpacity>
 
 			<TouchableOpacity style={styles.button}>
