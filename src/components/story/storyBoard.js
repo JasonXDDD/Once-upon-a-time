@@ -25,7 +25,7 @@ export default class StoryBoard extends Component {
         
         {this.store.story.map(ele=>{
           return (
-            <StoryItem key={ele.id + ele.key} select={ele}></StoryItem>
+            <StoryItem key={ele.key} select={ele}></StoryItem>
           )
         })}
       </View>

@@ -14,7 +14,7 @@ export default class StoryStore {
 	@observable innerView = [];
 
 	@action
-	removeItem(id){
-		this.story.splice(id, 1)
+	removeItem(key){
+		this.story.splice(this.story.indexOf(this.story.filter(ele => ele.key === key)[0]), 1)
 	}
 }
