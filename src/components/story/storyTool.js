@@ -14,7 +14,7 @@ export default class StoryTool extends Component {
 
   render() {
     return (
-      <View style={styles.storyTool}>
+      <View style={[ styles.storyTool, {display: this.store.isRecord? 'none': 'flex'}]}>
         <TouchableOpacity onPress={() => { this.store.story = [] }}>
           <Image style={styles.toolIcon} source={Redo} />
         </TouchableOpacity>

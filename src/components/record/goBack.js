@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image,TouchableOpacity, StyleSheet } from 'react-native'
 import { inject, observer } from 'mobx-react'
+import { NavigationActions } from 'react-navigation'
 
 import Redo from '../../assets/images/EditStory/btn_redo.png'
 @inject('rootStore')
@@ -12,12 +13,21 @@ export default class GoBack extends Component {
     this.navigation = props.navigation
   }
 
+  showBar() {
+    const setParamsAction = NavigationActions.setParams({
+      params: { showTabBar: true },
+      key: this.navigation.state.key,
+		})
+		
+    this.navigation.dispatch(setParamsAction)
+  }
+
   render() {
     return (
-      <View style={styles.goBackTool}>
+      <View style={[styles.goBackTool, {display: !this.store.isRecord? 'none': 'flex'}]}>
         <TouchableOpacity onPress={() => { 
           this.store.isRecord = false;
-          this.navigation.navigate('EditStory')
+          this.showBar();
         }}>
           <Image style={styles.toolIcon} source={Redo} />
         </TouchableOpacity>

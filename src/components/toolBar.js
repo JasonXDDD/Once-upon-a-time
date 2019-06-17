@@ -31,11 +31,12 @@ export default class ToolBar extends Component {
   constructor(props) {
     super(props)
     this.store = props.rootStore.toolStore
+    this.story = props.rootStore.storyStore
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[ styles.container, {display: this.story.isRecord? 'none': 'flex'}]}>
         {
           this.toolList.map(ele => {
             return (

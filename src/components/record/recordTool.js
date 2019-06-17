@@ -18,7 +18,7 @@ export default class RecordTool extends Component {
 
   render() {
     return (
-      <SwiftRecordTool style={styles.recordTool}/>
+      <SwiftRecordTool style={[styles.recordTool, {display: !this.store.isRecord? 'none': 'flex'}]}/>
     )
   }
 }
@@ -27,5 +27,7 @@ const styles = StyleSheet.flatten({
   recordTool: {
     top: 10,
     width: 160,
+    position: 'absolute',
+    right: 0
   }
 })

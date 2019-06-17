@@ -6,7 +6,7 @@ import { createBottomTabNavigator, createAppContainer, createStackNavigator } fr
 import HomeScreen from "../pages/homeScreen"
 import DrawSticker from '../pages/drawSticker'
 import StoryBox from "../pages/storyBox"
-import StoryNavigator from '../pages/storyNavigator'
+import EditStory from "../pages/editStory"
 
 import EditStorySelected from '../assets/images/TabBar/EditStory_Selected.png'
 import EditStoryUnselected from '../assets/images/TabBar/EditStory_Unselected.png'
@@ -35,16 +35,24 @@ const TabMap = {
     }
   },
   EditStory: {
-    screen: StoryNavigator,
-    navigationOptions: {
-      tabBarLabel: '   ',
-      tabBarIcon:({focused}) => (
-        <Image
-          focused={focused}
-          style={[styles.icon]}
-          source={focused ? EditStorySelected : EditStoryUnselected}
-        />
-      )
+    screen: EditStory,
+    navigationOptions: ({ navigation }) => {
+      const showTabBar = navigation.state && navigation.state.params
+        ? navigation.state.params.showTabBar : true;
+      
+      return {
+        tabBarLabel: '   ',
+        tabBarVisible: showTabBar,
+        animationEnabled: true,
+        tabBarIcon:({focused}) => (
+          <Image
+            focused={focused}
+            style={[styles.icon]}
+            source={focused ? EditStorySelected : EditStoryUnselected}
+          />
+        )
+      }
+      
     }
   },
   DrwaSticker: {
@@ -79,6 +87,7 @@ const TabMap = {
 const TabNavigator = createBottomTabNavigator(TabMap, {
 	initialRouteName: "Home"
 });
+
 
 const TabBar = createAppContainer(TabNavigator);
 
