@@ -1,47 +1,34 @@
+
 import React, {Component} from 'react';
-import {StatusBar} from 'react-native';
-import {SafeAreaView} from 'react-navigation'
-import Router from './src/router';
-import {colors} from './src/assets/styles/colors-theme';
-import {Provider as ProviderAntd, Modal} from '@ant-design/react-native'
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import TabBar from './src/components/tabBar';
+import { SafeAreaView } from 'react-navigation';
 import { Provider, observer } from 'mobx-react'
-import * as stores from './src/stores/index';
+import {Provider as ProviderAntd} from '@ant-design/react-native'
+import * as store from './src/stores/index';
+
+type Props = {};
 
 @observer
-export default class App extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-
-
-
+export default class App extends Component<Props> {
   render() {
     return (
-      <Provider rootStore={stores}>
+      <Provider rootStore={store}>
         <ProviderAntd>
+
           <SafeAreaView
-            style={{flex: 1, backgroundColor: colors.statusBarColor}}
+            style={{flex: 1}}
             forceInset={{
               top: 'always',
               bottom: 'always'
-            }}
-          >
-            <StatusBar
-              animated={true}
-              barStyle={'dark-content'}
-              backgroundColor={colors.statusBarColor}
-              translucent={true}
-            />
-            <Router />
+            }}>
+            
+            <TabBar></TabBar>
           </SafeAreaView>
+        
         </ProviderAntd>
       </Provider>
     );
   }
-
-
-
-
-
 }
+

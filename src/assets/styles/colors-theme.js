@@ -3,5 +3,5 @@
  * @type {{statusBarColor: string}}
  */
 export const colors = {
-  statusBarColor: '#d4d2d2'
+  statusBarColor: 'rgba(248, 248, 248, 0.82)'
 }
