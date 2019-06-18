@@ -3,27 +3,29 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { inject, observer } from "mobx-react"
 import StoryItem from './storyItem';
 
-
-
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+const BOARD_WIDTH = screenWidth * 0.9;
+const BOARD_HEIGHT = screenHeight * 0.8;
+const BOARD_POS_BASIC = 25;
+const TOOL_PANE_WIDTH = 135;
 
 @inject('rootStore')
 @observer
 export default class StoryBoard extends Component {
   constructor(props){
     super(props);
-    this.store = props.rootStore.storyStore;
-    this.toolbar = props.rootStore.toolStore;
+    this.storyStore = props.rootStore.storyStore;
+    this.toolStore = props.rootStore.toolStore;
   }
 
   render(){
     return (   
       <View
-        ref={ref => { this.store.containerView = ref }}
+        ref={ref => { this.storyStore.containerView = ref }}
         style={[styles.storyBoard, {right: this.getRight(), top: this.getTop() }]}>
         
-        {this.store.story.map(ele=>{
+        {this.storyStore.story.map(ele=>{
           return (
             <StoryItem key={ele.key} select={ele}></StoryItem>
           )
@@ -32,24 +34,25 @@ export default class StoryBoard extends Component {
     )
   }
 
+  // deal with position of any status
   getRight(){
-    if(this.toolbar.open !== '') return -110
+    if(this.toolStore.open !== '') return -1 * (TOOL_PANE_WIDTH - BOARD_POS_BASIC)
     else {
-      if(this.store.isRecord) return (width/2) - (width * 0.9/2)
-      else return 25
+      if(this.storyStore.isRecord) return (screenWidth/2) - (BOARD_WIDTH/2) // be center
+      else return BOARD_POS_BASIC
     }
   }
 
   getTop(){
-    if(this.store.isRecord) return (height/2) - (height * 0.85/2)
-    else return 25
+    if(this.storyStore.isRecord) return (screenHeight/2) - (BOARD_HEIGHT/2) // be center
+    else return BOARD_POS_BASIC
   }
 }
 
-const styles = StyleSheet.flatten({
+const styles = StyleSheet.create({
   storyBoard: {
-    width: width * 0.9,
-    height: height * 0.8,
+    width: BOARD_WIDTH,
+    height: BOARD_HEIGHT,
     position: 'absolute',
     backgroundColor: '#f6f6f6',
     borderColor: '#bebebe',

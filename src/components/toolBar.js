@@ -4,6 +4,8 @@ import { inject, observer } from 'mobx-react'
 import { observable } from 'mobx'
 import ToolItem from './toolItem';
 
+const TOOL_PANE_WIDTH = 135;
+
 @inject('rootStore')
 @observer
 export default class ToolBar extends Component {
@@ -30,13 +32,14 @@ export default class ToolBar extends Component {
 
   constructor(props) {
     super(props)
-    this.store = props.rootStore.toolStore
-    this.story = props.rootStore.storyStore
+    this.toolStore = props.rootStore.toolStore
+    this.storyStore = props.rootStore.storyStore
   }
 
   render() {
     return (
-      <View style={[ styles.container, {display: this.story.isRecord? 'none': 'flex'}]}>
+      <View style={[ styles.container, {display: this.storyStore.isRecord? 'none': 'flex'}]}>
+        
         {
           this.toolList.map(ele => {
             return (
@@ -44,31 +47,30 @@ export default class ToolBar extends Component {
 
                 {/* tool pane */}
                 <View
-                  style={[
-                    styles.toolPane,
+                  style={[ styles.toolPane,
                     {
                       backgroundColor: ele.color,
-                      left: this.store.open !== '' ? 0 : -135,
-                      display: this.store.open === ele.type ?  'flex': 'none',
-                    },
+                      left: this.toolStore.open !== '' ? 0 : -1 * TOOL_PANE_WIDTH,
+                      display: this.toolStore.open === ele.type ?  'flex': 'none',
+                    }
                   ]}>
                   <ToolItem type={ele.type}></ToolItem>
                 </View>
 
+
+
                 {/* tool icon */}                
                 <TouchableOpacity
-                  onPress={() => {
-                    this.store.toggleOpen(ele.type)
-                  }}
+                  onPress={() => { this.toolStore.toggleOpen(ele.type) }}
                   style={[
                     styles.toolIcon,
                     { 
                       top: ele.top, 
-                      left: this.store.open !== '' ? 135: 0
+                      left: this.toolStore.open !== '' ? TOOL_PANE_WIDTH: 0
                     },
                   ]}
                 >
-                  <Image source={this.store[ele.type+ 'Btn']} style={styles.icon} />
+                  <Image source={this.toolStore[ele.type+ 'Btn']} style={styles.icon} />
                 </TouchableOpacity>
 
               </View>
@@ -80,13 +82,14 @@ export default class ToolBar extends Component {
   }
 }
 
-const styles = StyleSheet.flatten({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     textAlign: 'center',
   },
+
   icon: {
     position: 'relative',
     width: 54,
@@ -95,7 +98,7 @@ const styles = StyleSheet.flatten({
 
   toolPane: {
     position: 'absolute',
-    width: 135,
+    width: TOOL_PANE_WIDTH,
     height: '100%',
   },
 

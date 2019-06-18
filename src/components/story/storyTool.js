@@ -4,47 +4,52 @@ import { inject, observer } from 'mobx-react'
 
 import Redo from '../../assets/images/EditStory/btn_redo.png'
 import Save from '../../assets/images/EditStory/btn_save.png'
+
+const ICON_SIZE = 48;
+const BOARD_POS_BASIC = 25;
+
 @inject('rootStore')
 @observer
 export default class StoryTool extends Component {
   constructor(props) {
     super(props)
-    this.store = props.rootStore.storyStore
+    this.storyStore = props.rootStore.storyStore
   }
 
   render() {
     return (
-      <View style={[ styles.storyTool, {display: this.store.isRecord? 'none': 'flex'}]}>
-        <TouchableOpacity onPress={() => { this.store.story = [] }}>
+      <View style={[ styles.storyTool, {display: this.storyStore.isRecord? 'none': 'flex'}]}>
+        
+        {/* clear board */}
+        <TouchableOpacity onPress={() => { this.storyStore.story = [] }}>
           <Image style={styles.toolIcon} source={Redo} />
         </TouchableOpacity>
 
-        <TouchableOpacity 
-        // onPress={() => {
-        //   this.store.positionCanvas(this.state.parentCopy)
-        // }}
-        >
+        {/* save, no use */}
+        {/*
+          <TouchableOpacity>
           <Image style={styles.toolIcon} source={Save}/>
         </TouchableOpacity>
+        */}
       </View>
     )
   }
 }
 
-const styles = StyleSheet.flatten({
+const styles = StyleSheet.create({
   storyTool: {
-    top: 20 + 20,
-    right: 20 + 20,
+    top: BOARD_POS_BASIC + 20,
+    right: BOARD_POS_BASIC + 20,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     position: 'absolute',
-    width: 48 + 48 + 5 * 4,
-    height: 48
+    width: (ICON_SIZE + 5 *2) *1,
+    height: ICON_SIZE
   },
 
   toolIcon: {
-    width: 48,
-    height: 48,
+    width: ICON_SIZE,
+    height: ICON_SIZE,
     marginHorizontal: 5
   }
 })

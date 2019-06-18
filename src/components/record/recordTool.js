@@ -4,7 +4,6 @@ import { inject, observer } from 'mobx-react'
 
 import Btn_Recording from '../../assets/images/RecordStory/Btn_Recording.png'
 
-
 const SwiftRecordTool = requireNativeComponent('RecordTool')
 
 @inject('rootStore')
@@ -12,18 +11,18 @@ const SwiftRecordTool = requireNativeComponent('RecordTool')
 export default class RecordTool extends Component {
   constructor(props) {
     super(props)
-    this.store = props.rootStore.storyStore
+    this.storyStore = props.rootStore.storyStore
     this.navigation = props.navigation
   }
 
   render() {
     return (
-      <SwiftRecordTool style={[styles.recordTool, {display: !this.store.isRecord? 'none': 'flex'}]}/>
+      <SwiftRecordTool style={[styles.recordTool, {display: !this.storyStore.isRecord? 'none': 'flex'}]}/>
     )
   }
 }
 
-const styles = StyleSheet.flatten({
+const styles = StyleSheet.create({
   recordTool: {
     top: 10,
     width: 160,

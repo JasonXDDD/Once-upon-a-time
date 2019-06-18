@@ -4,12 +4,15 @@ import { inject, observer } from 'mobx-react'
 import { NavigationActions } from 'react-navigation'
 
 import Redo from '../../assets/images/EditStory/btn_redo.png'
+
+const ICON_SIZE = 48;
+
 @inject('rootStore')
 @observer
 export default class GoBack extends Component {
   constructor(props) {
     super(props)
-    this.store = props.rootStore.storyStore
+    this.storyStore = props.rootStore.storyStore
     this.navigation = props.navigation
   }
 
@@ -24,9 +27,9 @@ export default class GoBack extends Component {
 
   render() {
     return (
-      <View style={[styles.goBackTool, {display: !this.store.isRecord? 'none': 'flex'}]}>
+      <View style={[styles.goBackTool, {display: !this.storyStore.isRecord? 'none': 'flex'}]}>
         <TouchableOpacity onPress={() => { 
-          this.store.isRecord = false;
+          this.storyStore.isRecord = false;
           this.showBar();
         }}>
           <Image style={styles.toolIcon} source={Redo} />
@@ -36,7 +39,7 @@ export default class GoBack extends Component {
   }
 }
 
-const styles = StyleSheet.flatten({
+const styles = StyleSheet.create({
   goBackTool: {
     top: 10,
     left: 5,
@@ -44,13 +47,12 @@ const styles = StyleSheet.flatten({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     position: 'absolute',
-    width: 58,
-    height: 48
+    height: ICON_SIZE
   },
 
   toolIcon: {
-    width: 48,
-    height: 48,
+    width: ICON_SIZE,
+    height: ICON_SIZE,
     marginHorizontal: 5
   }
 })
