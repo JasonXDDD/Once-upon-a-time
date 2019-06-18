@@ -102,7 +102,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.reactnativeappdemo"
+        applicationId "com.onceuponatime"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -138,10 +138,11 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-fs')
     implementation project(':react-native-view-shot')
-    implementation project(':react-native-material-letter-icon')
-    implementation project(':lottie-react-native')
+    implementation project(':react-native-svg')
     implementation project(':react-native-device-info')
+    implementation project(':@terrylinla_react-native-sketch-canvas')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
