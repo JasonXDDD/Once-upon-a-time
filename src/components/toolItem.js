@@ -43,7 +43,7 @@ export default class ToolItem extends Component {
       category: type,
       name: element.id,
       key: element.id + this.count,
-      ref: {},
+      style: "{}",
     }
 
     this.count ++;

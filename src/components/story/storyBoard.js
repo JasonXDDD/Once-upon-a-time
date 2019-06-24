@@ -22,9 +22,9 @@ export default class StoryBoard extends Component {
   render(){
     return (   
       <View style={[styles.storyBoard, {right: this.getRight(), top: this.getTop() }]}>
-        {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map(ele=>{
+        {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map((ele, id)=>{
           return (
-            <StoryItem key={ele.key} select={ele}></StoryItem>
+            <StoryItem key={ele.key} select={ele} idofarray={id}></StoryItem>
           )
         })}
       </View>
