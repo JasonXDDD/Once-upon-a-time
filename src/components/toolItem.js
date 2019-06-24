@@ -51,12 +51,12 @@ export default class ToolItem extends Component {
     // deal with scene item, It must be first item (under all characters) & only one
     if (type === 'scene') {
       if (
-        this.storyStore.story.length !== 0 &&
-        this.storyStore.story[0].category === 'scene'
+        this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.length !== 0 &&
+        this.storyStore.storyScene[this.storyStore.selectSceneIndex].story[0].category === 'scene'
       )
-        this.storyStore.story[0] = data
-      else this.storyStore.story.unshift(data)
-    } else this.storyStore.story.push(data)
+        this.storyStore.storyScene[this.storyStore.selectSceneIndex].story[0] = data
+      else this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.unshift(data)
+    } else this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.push(data)
   }
 }
 

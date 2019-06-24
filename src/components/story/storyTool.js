@@ -21,7 +21,7 @@ export default class StoryTool extends Component {
       <View style={[ styles.storyTool, {display: this.storyStore.isRecord? 'none': 'flex'}]}>
         
         {/* clear board */}
-        <TouchableOpacity onPress={() => { this.storyStore.story = [] }}>
+        <TouchableOpacity onPress={() => { this.storyStore.storyScene[this.storyStore.selectSceneIndex].story = [] }}>
           <Image style={styles.toolIcon} source={Redo} />
         </TouchableOpacity>
 
@@ -43,13 +43,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     position: 'absolute',
-    width: (ICON_SIZE + 5 *2) *1,
+    width: ICON_SIZE,
     height: ICON_SIZE
   },
 
   toolIcon: {
     width: ICON_SIZE,
-    height: ICON_SIZE,
-    marginHorizontal: 5
+    height: ICON_SIZE
   }
 })

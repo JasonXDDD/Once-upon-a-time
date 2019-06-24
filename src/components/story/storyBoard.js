@@ -21,11 +21,8 @@ export default class StoryBoard extends Component {
 
   render(){
     return (   
-      <View
-        ref={ref => { this.storyStore.containerView = ref }}
-        style={[styles.storyBoard, {right: this.getRight(), top: this.getTop() }]}>
-        
-        {this.storyStore.story.map(ele=>{
+      <View style={[styles.storyBoard, {right: this.getRight(), top: this.getTop() }]}>
+        {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map(ele=>{
           return (
             <StoryItem key={ele.key} select={ele}></StoryItem>
           )
