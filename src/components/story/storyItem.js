@@ -27,7 +27,7 @@ export default class StoryItem extends React.Component {
     this.id = props.idofarray
   }
 
-  selectImage(item) {
+  deleteImage(item) {
     Alert.alert(
       '確定要刪除圖片嗎？',
       item.name,
@@ -64,7 +64,7 @@ export default class StoryItem extends React.Component {
       >
         <TouchableHighlight
           onLongPress={() => {
-            this.selectImage(this.item)
+            this.deleteImage(this.item)
           }}
         >
           <Image

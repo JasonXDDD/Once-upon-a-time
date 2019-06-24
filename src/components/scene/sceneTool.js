@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Text, TouchableOpacity, ImageBackground, StyleSheet, Dimensions } from 'react-native'
+import { View, Image, Text, TouchableOpacity, ImageBackground, StyleSheet, Dimensions, Alert } from 'react-native'
 import { inject, observer } from 'mobx-react'
 
 import Save from '../../assets/images/EditStory/btn_save.png'
@@ -21,6 +21,29 @@ export default class SceneTool extends Component {
     this.storyStore = props.rootStore.storyStore
   }
 
+  deleteScene(id) {
+    Alert.alert(
+      '確定要刪除場景嗎？',
+      id+1,
+      [
+        {
+          text: '確定',
+          onPress: () => {
+            if(id+1 === this.storyStore.storyScene.length) 
+              this.storyStore.selectSceneIndex = this.storyStore.storyScene.length -1
+            
+            this.storyStore.storyScene.splice(id, 1);
+          },
+        },
+        {
+          text: '取消',
+          onPress: () => console.log('取消'),
+        },
+      ],
+      { cancelable: false }
+    )
+  }
+
   render() {
     return (
       <View style={[ styles.sceneTool, {display: this.storyStore.isRecord? 'none': 'flex'}]}>
@@ -36,10 +59,12 @@ export default class SceneTool extends Component {
           {         
             this.storyStore.storyScene.map((ele, id) => {
               return (
-                <TouchableOpacity key={id} style={{marginHorizontal: 10}} onPress={() => { 
-                  console.log(JSON.stringify(this.storyStore.storyScene[this.storyStore.selectSceneIndex].story));
+                <TouchableOpacity key={id} style={{marginHorizontal: 10}} 
+                onPress={() => { 
                   this.storyStore.selectSceneIndex = id; 
-                }}>
+                }}
+                
+                onLongPress={()=>{this.deleteScene(id)}}>
                   <Image style={styles.toolIcon} source={Save} />
                   <Text style={styles.toolNumber}>{id+1}</Text>
                 </TouchableOpacity>
@@ -48,7 +73,10 @@ export default class SceneTool extends Component {
           }
           </ImageBackground>
         
-          <TouchableOpacity onPress={() => {  }}>
+          <TouchableOpacity onPress={() => { 
+            this.storyStore.storyScene.push({story: []});
+            this.storyStore.selectSceneIndex = this.storyStore.storyScene.length - 1;          
+          }}>
             <Image style={styles.toolIcon} source={Save} />
           </TouchableOpacity>
         </View>
