@@ -13,6 +13,7 @@ import StoryTool from '../components/story/storyTool'
 import StoryToolRecord from '../components/story/storyToolRecord'
 import GoBack from '../components/record/goBack'
 import RecordTool from '../components/record/recordTool'
+import SceneTool from '../components/scene/sceneTool';
 
 @inject('rootStore')
 @observer
@@ -28,13 +29,16 @@ export default class EditStory extends React.Component {
         <ToolBar />
         <StoryBoard />
 
+        {/* scene tool */}
+        <SceneTool />
+
         {/* when edit */}
         <StoryTool />
         <StoryToolRecord navigation={this.props.navigation} />
 
         {/* when record */}
         <GoBack navigation={this.props.navigation} />
-        <RecordTool navigation={this.props.navigation} />
+        <RecordTool navigation={this.props.navigation} />    
       </ImageBackground>
     )
   }

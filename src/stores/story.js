@@ -5,16 +5,23 @@ export default class StoryStore {
 	@observable isRecord = false;
 	
 	@observable story = [];
-	@observable storyScene = {
-		scene: {},
-		item: []
-	}
+	@observable selectSceneIndex = 0;
+	@observable storyScene = [
+		{story: []},
+		{story: []},
+		{story: []}
+	];
 
-	@observable containerView;
-	@observable innerView = [];
+	@observable openScenePane = false;
+
+
 
 	@action
 	removeItem(key){
-		this.story.splice(this.story.indexOf(this.story.filter(ele => ele.key === key)[0]), 1)
+		this.storyScene[this.selectSceneIndex].story.splice(
+			this.storyScene[this.selectSceneIndex].story.indexOf(
+				this.storyScene[this.selectSceneIndex].story.filter(ele => ele.key === key)
+			[0]), 
+		1)
 	}
 }
