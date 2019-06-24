@@ -18,10 +18,13 @@ const BOARD_HEIGHT = screenHeight * 0.8
 @inject('rootStore')
 @observer
 export default class StoryItem extends React.Component {
+  initStyle;
+
   constructor(props) {
     super(props)
     this.storyStore = props.rootStore.storyStore
     this.item = props.select
+    this.id = props.idofarray
   }
 
   selectImage(item) {
@@ -45,29 +48,32 @@ export default class StoryItem extends React.Component {
   }
 
   render() {
-    if (this.item.ref != {})
-      return (
-        <Gestures
-          draggable={this.item.category != 'scene' ? true : false}
-          rotatable={this.item.category != 'scene' ? true : false}
-          scalable={this.item.category != 'scene' ? true : false}
-          style={{ position: 'absolute' }}
-          onEnd={(event, styles) => {
-            this.item.ref = styles
+    this.initStyle = JSON.parse(this.item.style);
+    if(!this.initStyle['position'])
+      this.initStyle['position'] = 'absolute';
+
+    return (
+      <Gestures
+        draggable={this.item.category != 'scene' ? true : false}
+        rotatable={this.item.category != 'scene' ? true : false}
+        scalable={this.item.category != 'scene' ? true : false}
+        style={{...this.initStyle}}
+        onEnd={(event, styles) => {
+          this.item.style = JSON.stringify(styles);
+        }}
+      >
+        <TouchableHighlight
+          onLongPress={() => {
+            this.selectImage(this.item)
           }}
         >
-          <TouchableHighlight
-            onLongPress={() => {
-              this.selectImage(this.item)
-            }}
-          >
-            <Image
-              source={this.item.image}
-              style={this.item.category != 'scene' ? {} : styles.background}
-            />
-          </TouchableHighlight>
-        </Gestures>
-      )
+          <Image
+            source={this.item.image}
+            style={this.item.category != 'scene' ? {} : styles.background}
+          />
+        </TouchableHighlight>
+      </Gestures>
+    )
   }
 }
 

@@ -36,7 +36,10 @@ export default class SceneTool extends Component {
           {         
             this.storyStore.storyScene.map((ele, id) => {
               return (
-                <TouchableOpacity key={id} style={{marginHorizontal: 10}} onPress={() => { this.storyStore.selectSceneIndex = id }}>
+                <TouchableOpacity key={id} style={{marginHorizontal: 10}} onPress={() => { 
+                  console.log(JSON.stringify(this.storyStore.storyScene[this.storyStore.selectSceneIndex].story));
+                  this.storyStore.selectSceneIndex = id; 
+                }}>
                   <Image style={styles.toolIcon} source={Save} />
                   <Text style={styles.toolNumber}>{id+1}</Text>
                 </TouchableOpacity>
