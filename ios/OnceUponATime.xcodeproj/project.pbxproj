@@ -29,7 +29,6 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		17605F88D10946598D7EE4EF /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06915F12950B4F56A7D677D8 /* Zocial.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157351DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */; };
@@ -49,7 +48,6 @@
 		6C1702957D3A4CE98FF5330B /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFEAD2EA4BB640BE8FE1DE51 /* Ionicons.ttf */; };
 		71FFCDE9ACA644F7B9C86493 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CFD01CA41A63445A8E3B5E59 /* AntDesign.ttf */; };
 		78000BB222BC024A00500F4C /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 780468DE22B59FC200351C0C /* libRCTCameraRoll.a */; };
-		78000BB422BC033600500F4C /* index.ios.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 78000BB322BC033600500F4C /* index.ios.jsbundle */; };
 		788E427322A425F400EA68CC /* RecordTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E427222A425F400EA68CC /* RecordTool.swift */; };
 		788E427922A4270200EA68CC /* RecordToolManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788E427822A4270200EA68CC /* RecordToolManager.swift */; };
 		788E427B22A4273300EA68CC /* RecordToolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 788E427A22A4273300EA68CC /* RecordToolManager.m */; };
@@ -499,7 +497,6 @@
 		678A014AEF9B4AA4BB904FF9 /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; };
 		72B0AF8AF54843AC9E25147D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		755A81336DA9477BB8325253 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		78000BB322BC033600500F4C /* index.ios.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = index.ios.jsbundle; path = bundle/index.ios.jsbundle; sourceTree = "<group>"; };
 		780468D922B59FC200351C0C /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		781123F92945443FB21B9686 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		788E426B22A424E500EA68CC /* OnceUponATime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OnceUponATime-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -687,7 +684,6 @@
 		13B07FAE1A68108700A75B9A /* OnceUponATime */ = {
 			isa = PBXGroup;
 			children = (
-				78000BB322BC033600500F4C /* index.ios.jsbundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1562,7 +1558,6 @@
 				650469F25DEC4C5EA3B89F46 /* FontAwesome5_Solid.ttf in Resources */,
 				2D386CE7FD544E0D878578B6 /* Foundation.ttf in Resources */,
 				6C1702957D3A4CE98FF5330B /* Ionicons.ttf in Resources */,
-				78000BB422BC033600500F4C /* index.ios.jsbundle in Resources */,
 				AF51425037FD4ED6A858A4EA /* MaterialCommunityIcons.ttf in Resources */,
 				E1838618438C4C83A161D4DE /* MaterialIcons.ttf in Resources */,
 				B566CDFDB2F54303BA720FAA /* Octicons.ttf in Resources */,
@@ -1575,7 +1570,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
