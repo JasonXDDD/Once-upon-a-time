@@ -5,8 +5,8 @@ import StoryItem from './storyItem';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-const BOARD_WIDTH = screenWidth * 0.9;
-const BOARD_HEIGHT = screenHeight * 0.8;
+const BOARD_WIDTH = screenWidth * 0.76;
+const BOARD_HEIGHT = screenHeight * 0.7;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
 
@@ -41,7 +41,9 @@ export default class StoryBoard extends Component {
   }
 
   getTop(){
-    if(this.storyStore.isRecord) return (screenHeight/2) - (BOARD_HEIGHT/2) // be center
+    if(this.storyStore.isRecord) 
+      // be center - bottom offset
+      return (screenHeight/2) - (BOARD_HEIGHT/2) - (screenHeight*0.06)
     else return BOARD_POS_BASIC
   }
 }
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     width: BOARD_WIDTH,
     height: BOARD_HEIGHT,
     position: 'absolute',
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#f6f6f677',
     borderColor: '#bebebe',
     overflow: 'hidden',
     borderWidth: 1,
