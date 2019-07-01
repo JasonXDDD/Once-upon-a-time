@@ -68,7 +68,7 @@ export default class StoryItem extends React.Component {
           }}
         >
           <Image
-            source={this.item.image}
+            source={JSON.parse(this.item.image)}
             style={this.item.category != 'scene' ? {} : styles.background}
           />
         </TouchableHighlight>
