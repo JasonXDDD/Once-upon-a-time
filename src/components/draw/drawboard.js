@@ -22,6 +22,12 @@ const TOOL_PANE_WIDTH = 135;
 const ICON_SIZE = 48;
 
 
+const DRAW_BOARD_WIDTH = BOARD_WIDTH * 0.98;
+const DRAW_BOARD_HEIGHT = BOARD_HEIGHT * 0.98;
+const DRAW_PANE_SIZE = 400;
+
+
+
 @inject('rootStore')
 @observer
 export default class DrawBoard extends Component {
@@ -38,26 +44,54 @@ export default class DrawBoard extends Component {
 
         {/* draw pane size */}
         <View style={{
-          backgroundColor: '#00000099',
           position: 'absolute',
-          width: BOARD_WIDTH * 0.98,
-          height: BOARD_HEIGHT * 0.98,
+          width: DRAW_BOARD_WIDTH,
+          height: DRAW_BOARD_HEIGHT,
           top: BOARD_HEIGHT * 0.07,
           left: BOARD_WIDTH * 0.01
         }}>
- 
+
+          {/* pane style */}
+          <View style={[styles.drawPane, {
+            backgroundColor: '#FFFFFF',
+            position: 'absolute',
+            left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
+            top: ICON_SIZE
+          }]}>
+          </View>
+
+
           {/* snapshot */}
           <ViewShot ref="viewShot" options={{ format: "png" }}>
 
+            {/* import image */}
             <View style={[styles.drawPane, {
-              backgroundColor: '#abcabc44'
+              position: 'absolute',
+              left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
+              top: ICON_SIZE
+
             }]}>
               { this.genImage(this.toolStore.drawItem) }
             </View>
 
+            {/* target */}
+            <View style={[styles.drawPane, {
+              marginTop: ICON_SIZE,
+              marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
+            }]}></View>
+            
+
             <RNSketchCanvas
-              containerStyle={{ flex: 1, }}
-              canvasStyle={{ flex: 1, }}
+              containerStyle={{ 
+                position: 'absolute',
+                width: DRAW_BOARD_WIDTH,
+                height: DRAW_BOARD_HEIGHT,
+                padding: 10
+              }}
+              canvasStyle={[styles.drawPane, { 
+                left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
+                top: 5
+              }]}
               defaultStrokeIndex={0}
               defaultStrokeWidth={6}
               
@@ -108,14 +142,23 @@ export default class DrawBoard extends Component {
   
   snapshot(){
     this.refs['viewShot'].capture().then(uri => {
-      console.log("do something with ", uri);
+      this.toolStore.sticker.push({
+        id: 'XD',
+        image: JSON.stringify({
+          uri: uri, 
+          width: DRAW_PANE_SIZE, 
+          height: DRAW_PANE_SIZE
+        })
+      })
     });
   }
 
   genImage(ele){
-    return (
-      <Image style={styles.drawPane} source={ele.image}></Image>
-    )
+    if(ele.image){
+      return (
+        <Image style={styles.drawPane} source={JSON.parse(ele.image)}></Image>
+      )
+    }
   }
 	getRight(){
     if(this.toolStore.open !== '') return -1 * (TOOL_PANE_WIDTH - BOARD_POS_BASIC)
