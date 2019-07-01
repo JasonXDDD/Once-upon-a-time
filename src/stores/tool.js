@@ -55,6 +55,8 @@ export default class ToolStore {
     }
   ]
 
+  @observable drawItem = {}
+
   
   @action
   toggleOpen(type) {

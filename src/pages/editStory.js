@@ -28,7 +28,7 @@ export default class EditStory extends React.Component {
     return (
       <ImageBackground source={this.storyStore.isRecord? RecordStory_BG: EditStory_BG} style={{ flex: 1 }}>
         {/* draw board and tool */}
-        <ToolBar />
+        <ToolBar select="edit"/>
         <StoryBoard />
 
         {/* scene tool */}
