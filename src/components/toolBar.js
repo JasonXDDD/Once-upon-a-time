@@ -54,7 +54,7 @@ export default class ToolBar extends Component {
                       display: this.toolStore.open === ele.type ?  'flex': 'none',
                     }
                   ]}>
-                  <ToolItem type={ele.type}></ToolItem>
+                  <ToolItem select={this.props.select} type={ele.type}></ToolItem>
                 </View>
 
 

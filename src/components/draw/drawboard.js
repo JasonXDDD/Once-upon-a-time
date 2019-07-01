@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, Dimensions, ImageBackground} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, Dimensions, ImageBackground, TouchableOpacity} from 'react-native';
 import RNSketchCanvas from '@terrylinla/react-native-sketch-canvas'
 import { inject, observer } from "mobx-react"
 
@@ -11,6 +11,7 @@ import Eraser from '../../assets/images/DrawStory/btn_eraser.png'
 import Plus from '../../assets/images/DrawStory/btn_penPlus.png'
 import Delet from '../../assets/images/LookStory/Btn_delete.png'
 import Camera from '../../assets/images/DrawStory/btn_camera.png'
+import ViewShot from 'react-native-view-shot';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -18,6 +19,7 @@ const BOARD_WIDTH = screenWidth * 0.76;
 const BOARD_HEIGHT = screenHeight * 0.7;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
+const ICON_SIZE = 48;
 
 
 @inject('rootStore')
@@ -31,30 +33,28 @@ export default class DrawBoard extends Component {
 	
 	render() {
 		return (
-		
-				<ImageBackground source={DrawBoard_IMG} resizeMode='contain' style={[styles.drawBoard, {right: this.getRight()}]}>
-          
+      <ImageBackground source={DrawBoard_IMG} resizeMode='contain' style={[styles.drawBoard, {right: this.getRight()}]}>
         
-          <View style={{
-            position: 'absolute',
-            width: 785,
-            height: 545,
-            top: 25,
-            right: 65,
-            paddingHorizontal: 20,
-            paddingVertical: 20
-          }}>
 
-            <View style={{
-              backgroundColor: '#FFFFFF',
-              width: 500,
-              height: 500,
-              position: 'absolute',
-              overflow: 'hidden',
-            }}>
+        {/* draw pane size */}
+        <View style={{
+          backgroundColor: '#00000099',
+          position: 'absolute',
+          width: BOARD_WIDTH * 0.98,
+          height: BOARD_HEIGHT * 0.98,
+          top: BOARD_HEIGHT * 0.07,
+          left: BOARD_WIDTH * 0.01
+        }}>
+ 
+          {/* snapshot */}
+          <ViewShot ref="viewShot" options={{ format: "png" }}>
+
+            <View style={[styles.drawPane, {
+              backgroundColor: '#abcabc44'
+            }]}>
+              { this.genImage(this.toolStore.drawItem) }
             </View>
-        
-              
+
             <RNSketchCanvas
               containerStyle={{ flex: 1, }}
               canvasStyle={{ flex: 1, }}
@@ -85,18 +85,38 @@ export default class DrawBoard extends Component {
               }>
 
             </RNSketchCanvas>
-          
+
+          </ViewShot>
 
 
-          </View>
+          <TouchableOpacity 
+            onPress={()=> {
+              this.snapshot()
+            }}
+            style={{
+              position: 'absolute',
+              left: '46%',
+            }}>
+            <Image source={Camera} style={[styles.icon]}/>
+            </TouchableOpacity>
+        </View>
 
-				</ImageBackground>
 
-
-				
+      </ImageBackground>	
 		);
-	}
+  }
+  
+  snapshot(){
+    this.refs['viewShot'].capture().then(uri => {
+      console.log("do something with ", uri);
+    });
+  }
 
+  genImage(ele){
+    return (
+      <Image style={styles.drawPane} source={ele.image}></Image>
+    )
+  }
 	getRight(){
     if(this.toolStore.open !== '') return -1 * (TOOL_PANE_WIDTH - BOARD_POS_BASIC)
     else {
@@ -113,7 +133,18 @@ const styles = StyleSheet.create({
     height: screenHeight,
     position: 'absolute',
     overflow: 'hidden',
-	},
+  },
+  
+
+  drawPane: {
+    height: 400,
+    width: 400
+  },
+
+  icon: {
+    height: ICON_SIZE,
+    width: ICON_SIZE
+  },
 	
   strokeColorButton: {
     marginHorizontal: 2.5, 
@@ -123,6 +154,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     flexDirection: 'column'
   },
+
   strokeWidthButton: {
     marginHorizontal: 2.5, marginVertical: 8, width: 30, height: 30, borderRadius: 15,
     justifyContent: 'center', alignItems: 'center', backgroundColor: '#39579A', right: 575,

@@ -37,19 +37,7 @@ const TabMap = {
       
     }
   },
-  DrwaSticker: {
-    screen: DrawSticker,
-    navigationOptions: {
-      tabBarLabel: '   ',
-      tabBarIcon:({focused}) => (
-        <Image
-          focused={focused}
-          style={[styles.icon]}
-          source={focused ? DrawStorySelected : DrawStoryUnselected}
-        />
-      )
-    }
-  },
+
   StoryBox: {
     screen: StoryBox,
     navigationOptions: {
@@ -63,6 +51,22 @@ const TabMap = {
       )
     }
   },
+
+  
+  DrwaSticker: {
+    screen: DrawSticker,
+    navigationOptions: {
+      tabBarLabel: '   ',
+      tabBarIcon:({focused}) => (
+        <Image
+          focused={focused}
+          style={[styles.icon]}
+          source={focused ? DrawStorySelected : DrawStoryUnselected}
+        />
+      )
+    }
+  },
+  
 }
 
 

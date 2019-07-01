@@ -26,7 +26,10 @@ export default class ToolItem extends Component {
               style={styles.toolImage}
               key={ele.id}
               onPress={() => {
-                this.addStoryItem(ele, this.type)
+                if(this.props.select === 'edit')
+                  this.addStoryItem(ele, this.type)
+                else if(this.props.select === 'draw')
+                  this.addDrawItem(ele)
               }}>
               <Image style={{ width: 78, height: 78 }} source={ele.image} />
               <Text style={{ color: 'white' }}>{ele.id}</Text>
@@ -35,6 +38,15 @@ export default class ToolItem extends Component {
         })}
       </View>
     )
+  }
+
+  addDrawItem(element){
+    let data = {
+      image: element.image,
+      name: element.id,
+    }
+
+    this.toolStore.drawItem = data;
   }
 
   addStoryItem(element, type) {
@@ -58,6 +70,8 @@ export default class ToolItem extends Component {
       else this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.unshift(data)
     } else this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.push(data)
   }
+
+  
 }
 
 const styles = StyleSheet.create({
