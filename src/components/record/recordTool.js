@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   recordTool: {
     top: 10,
     width: 160,
-    height: 80,
+    height: 30,
     position: 'absolute',
     right: 0  
   }

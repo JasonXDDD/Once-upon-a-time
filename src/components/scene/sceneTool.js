@@ -7,8 +7,8 @@ import BG_Scene from '../../assets/images/EditStory/BG_ScenesBar.png'
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-const BOARD_WIDTH = screenWidth * 0.9;
-const BOARD_HEIGHT = screenHeight * 0.8;
+const BOARD_WIDTH = screenWidth * 0.76;
+const BOARD_HEIGHT = screenHeight * 0.7;
 const ICON_SIZE = 48;
 const BOARD_POS_BASIC = 25;
 
@@ -46,14 +46,17 @@ export default class SceneTool extends Component {
 
   render() {
     return (
-      <View style={[ styles.sceneTool, {display: this.storyStore.isRecord? 'none': 'flex'}]}>
+      <View style={[ styles.sceneTool ]}>
         
         {/* scene board */}
-        <TouchableOpacity onPress={() => { this.storyStore.openScenePane = !this.storyStore.openScenePane; }}>
+        <TouchableOpacity style={{display: this.storyStore.isRecord? 'none': 'flex'}}
+          onPress={() => { this.storyStore.openScenePane = !this.storyStore.openScenePane; }}>
           <Image style={styles.toolIcon} source={Save} />
         </TouchableOpacity>
 
-        <View style={[styles.scenePane, {display: this.storyStore.openScenePane? 'flex': 'none'}]}>
+        <View style={[styles.scenePane, 
+          {display: this.storyStore.openScenePane? 'flex': 'none'}, 
+          this.storyStore.isRecord? styles.sceneRecordPane: {}]}>
         
           <ImageBackground source={BG_Scene} style={[styles.sceneBar]}>
           {         
@@ -73,9 +76,12 @@ export default class SceneTool extends Component {
           }
           </ImageBackground>
         
-          <TouchableOpacity onPress={() => { 
-            this.storyStore.storyScene.push({story: []});
-            this.storyStore.selectSceneIndex = this.storyStore.storyScene.length - 1;          
+          <TouchableOpacity style={{display: this.storyStore.isRecord? 'none': 'flex'}}
+            onPress={() => { 
+              if(this.storyStore.storyScene.length < 7){
+                this.storyStore.storyScene.push({story: []});
+                this.storyStore.selectSceneIndex = this.storyStore.storyScene.length - 1;   
+              }
           }}>
             <Image style={styles.toolIcon} source={Save} />
           </TouchableOpacity>
@@ -102,8 +108,15 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
+  sceneRecordPane: {
+    display: 'flex',
+    position: 'absolute',
+    bottom: screenHeight * - 0.2,
+    left: screenWidth * -0.05
+  },
+
   sceneBar: {
-    width: BOARD_WIDTH - BOARD_POS_BASIC - (ICON_SIZE*2) - 20 - 20,
+    width: BOARD_WIDTH - BOARD_POS_BASIC - (ICON_SIZE*2) - 20 - 10,
     height: ICON_SIZE + 10,
     marginHorizontal: 10,
     paddingHorizontal: 100,

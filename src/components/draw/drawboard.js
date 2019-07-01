@@ -14,8 +14,8 @@ import Camera from '../../assets/images/DrawStory/btn_camera.png'
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-const BOARD_WIDTH = screenWidth * 0.9;
-const BOARD_HEIGHT = screenHeight * 0.8;
+const BOARD_WIDTH = screenWidth * 0.76;
+const BOARD_HEIGHT = screenHeight * 0.7;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
 

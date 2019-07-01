@@ -12,8 +12,8 @@ import Gestures from 'react-native-easy-gestures'
 
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
-const BOARD_WIDTH = screenWidth * 0.9
-const BOARD_HEIGHT = screenHeight * 0.8
+const BOARD_WIDTH = screenWidth * 0.76
+const BOARD_HEIGHT = screenHeight * 0.7
 
 @inject('rootStore')
 @observer
