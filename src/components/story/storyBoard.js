@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     width: BOARD_WIDTH,
     height: BOARD_HEIGHT,
     position: 'absolute',
-    backgroundColor: '#f6f6f677',
+    backgroundColor: '#f6f6f6',
     borderColor: '#bebebe',
     overflow: 'hidden',
     borderWidth: 1,
