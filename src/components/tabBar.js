@@ -11,8 +11,8 @@ import EditStorySelected from '../assets/images/TabBar/EditStory_Selected.png'
 import EditStoryUnselected from '../assets/images/TabBar/EditStory_Unselected.png'
 import DrawStorySelected from '../assets/images/TabBar/DrawStory_Selected.png'
 import DrawStoryUnselected from '../assets/images/TabBar/DrawStory_Unselected.png'
-import LookStorySelected from '../assets/images/TabBar/LookStory_Selected.png'
-import LookStoryUnselected from '../assets/images/TabBar/LookStory_Unselected.png'
+import StoryBoxSelected from '../assets/images/TabBar/StoryBox_Selected.png'
+import StoryBoxUnselected from '../assets/images/TabBar/StoryBox_Unselected.png'
 
 const TabMap = {
   
@@ -46,7 +46,7 @@ const TabMap = {
         <Image
           focused={focused}
           style={[styles.icon]}
-          source={focused ? LookStorySelected : LookStoryUnselected}
+          source={focused ? StoryBoxSelected : StoryBoxUnselected}
         />
       )
     }

@@ -10,7 +10,7 @@ import Redo from '../../assets/images/EditStory/btn_redo.png'
 import Reback from '../../assets/images/DrawStory/btn_reback.png'
 import Eraser from '../../assets/images/DrawStory/btn_eraser.png'
 import Plus from '../../assets/images/DrawStory/btn_penPlus.png'
-import Delete from '../../assets/images/LookStory/Btn_delete.png'
+import Delete from '../../assets/images/StoryBox/Btn_delete.png'
 import Camera from '../../assets/images/DrawStory/btn_camera.png'
 import ViewShot from 'react-native-view-shot';
 
@@ -109,7 +109,6 @@ export default class DrawBoard extends Component {
                 padding: 10
               }}
               canvasStyle={[styles.drawPane, { 
-                backgroundColor: '#00000066',
                 left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
                 top: 38,
                 marginBottom: 100
@@ -144,7 +143,6 @@ export default class DrawBoard extends Component {
               
 
             </RNSketchCanvas>
-
           </ViewShot>
 
 
