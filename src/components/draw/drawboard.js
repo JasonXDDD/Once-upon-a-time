@@ -3,13 +3,14 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, Dimensions, ImageBackground, TouchableOpacity} from 'react-native';
 import RNSketchCanvas from '@terrylinla/react-native-sketch-canvas'
 import { inject, observer } from "mobx-react"
+import DialogInput from 'react-native-dialog-input'
 
 import DrawBoard_IMG from '../../assets/images/DrawStory/drawBoard.png'
 import Redo from '../../assets/images/EditStory/btn_redo.png'
 import Reback from '../../assets/images/DrawStory/btn_reback.png'
 import Eraser from '../../assets/images/DrawStory/btn_eraser.png'
 import Plus from '../../assets/images/DrawStory/btn_penPlus.png'
-import Delet from '../../assets/images/LookStory/Btn_delete.png'
+import Delete from '../../assets/images/LookStory/Btn_delete.png'
 import Camera from '../../assets/images/DrawStory/btn_camera.png'
 import ViewShot from 'react-native-view-shot';
 
@@ -31,7 +32,26 @@ const DRAW_PANE_SIZE = 400;
 @inject('rootStore')
 @observer
 export default class DrawBoard extends Component {
-	constructor(props){
+  colorList = [
+    { color: '#FF75B5' },
+    { color: '#FF403F' },
+    { color: '#FF7D1C' },
+    { color: '#FFFF57' },
+    { color: '#49C37C' },
+    { color: '#6BCCF7' },
+    { color: '#2367C0' },
+    { color: '#9323A1' },
+    { color: '#FFD298' },
+    { color: '#84574F' },
+    { color: '#FFFFFF' },
+    { color: '#000000' }
+  ]
+  
+  state = {
+    isDialogVisible: false
+  }
+
+  constructor(props){
     super(props);
     this.storyStore = props.rootStore.storyStore;
     this.toolStore = props.rootStore.toolStore;
@@ -89,11 +109,14 @@ export default class DrawBoard extends Component {
                 padding: 10
               }}
               canvasStyle={[styles.drawPane, { 
+                backgroundColor: '#00000066',
                 left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
-                top: 5
+                top: 38,
+                marginBottom: 100
               }]}
               defaultStrokeIndex={0}
               defaultStrokeWidth={6}
+              strokeColors={this.colorList}
               
               strokeComponent={color => (
                 <View style={[{ backgroundColor: color, opacity: 0.5 }, styles.strokeColorButton]} />
@@ -103,20 +126,22 @@ export default class DrawBoard extends Component {
                   <View style={[{ backgroundColor: color, opacity: 1 }, styles.strokeColorButton]} />
                 )
               }}
-              strokeWidthComponent={(w) => {
-                return (
-                  <Image style={{ width: 48, height: 48, marginLeft: 20 }} source={Plus}/>
-                )
-              }}
+              
               undoComponent={
-                <Image style={{ width: 48, height: 48, marginRight: 20 }} source={Reback}/>
+                <Image style={[ styles.icon, { position: 'absolute', right: DRAW_BOARD_WIDTH * 0.07, top: 60 }]} source={Reback}/>
               }
               clearComponent={
-                <Image style={{ width: 48, height: 48 }} source={Redo}/>
+                <Image style={[ styles.icon, { position: 'absolute', right: DRAW_BOARD_WIDTH * 0.07, top: 120 }]} source={Redo}/>
               }
               eraseComponent={
-                <Image style={{ width: 48, height: 48 }} source={Eraser}/>
-              }>
+                <Image style={[ styles.icon, { position: 'absolute', left: DRAW_BOARD_WIDTH * 0.07, top: 60 }]} source={Eraser}/>
+              }
+              strokeWidthComponent={(w) => {
+                return (
+                  <Image style={[ styles.icon, { position: 'absolute', left: DRAW_BOARD_WIDTH * -0.9, top: 120 }]} source={Plus}/>
+                )
+              }}>
+              
 
             </RNSketchCanvas>
 
@@ -125,7 +150,7 @@ export default class DrawBoard extends Component {
 
           <TouchableOpacity 
             onPress={()=> {
-              this.snapshot()
+              this.setState({isDialogVisible: true})  
             }}
             style={{
               position: 'absolute',
@@ -135,21 +160,36 @@ export default class DrawBoard extends Component {
             </TouchableOpacity>
         </View>
 
+        <DialogInput isDialogVisible={this.state.isDialogVisible}
+          title={"他叫什麼名字？"}
+          message={"請給他一個名字吧"}
+          hintInput ={"名字"}
+          submitInput={ (inputText) => {
+            this.snapshot(inputText)
+            this.setState({isDialogVisible: false})
+          }}
+          closeDialog={ () => {
+            this.setState({isDialogVisible: false})            
+          }}>
+        </DialogInput>
+
 
       </ImageBackground>	
 		);
   }
   
-  snapshot(){
+  snapshot(name){
     this.refs['viewShot'].capture().then(uri => {
       this.toolStore.sticker.push({
-        id: 'XD',
+        id: name,
         image: JSON.stringify({
           uri: uri, 
           width: DRAW_PANE_SIZE, 
           height: DRAW_PANE_SIZE
         })
       })
+
+      this.toolStore.open = 'sticker'
     });
   }
 
