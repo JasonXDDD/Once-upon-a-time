@@ -5,7 +5,7 @@ import { observable } from "mobx";
 import ToolItem from "./toolItem";
 
 const TOOL_PANE_WIDTH = 135;
-
+const ICON_SIZE = 50;
 @inject("rootStore")
 @observer
 export default class ToolBar extends Component {
@@ -13,19 +13,19 @@ export default class ToolBar extends Component {
     {
       type: "scene",
       color: "#f68a50",
-      top: 30
+      top: (ICON_SIZE + 10) * 0 + 30
     },
 
     {
       type: "character",
       color: "#fec64c",
-      top: 113
+      top: (ICON_SIZE + 10) * 1 + 30
     },
 
     {
       type: "sticker",
       color: "#3e97a5",
-      top: 196
+      top: (ICON_SIZE + 10) * 2 + 30
     }
   ];
 
@@ -89,15 +89,16 @@ export default class ToolBar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: TOOL_PANE_WIDTH,
     flexDirection: "row",
-    justifyContent: "flex-start",
-    textAlign: "center"
+    // justifyContent: "flex-start",
+    // textAlign: "center"
   },
 
   icon: {
     position: "relative",
-    width: 80,
-    height: 80
+    width: ICON_SIZE,
+    height: ICON_SIZE
   },
 
   toolPane: {

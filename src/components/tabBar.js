@@ -19,12 +19,21 @@ import StoryBoxUnselected from "../assets/images/TabBar/StoryBox_Unselected.png"
 
 const styles = StyleSheet.create({
   icon: {
-    width: 200,
-    height: 120,
+    width: 150,
+    height: 80,
     position: "absolute",
     bottom: 25
   }
 });
+
+const tabStyle = {
+  position: "absolute",
+  bottom: 0,
+  width: "100%",
+  backgroundColor: "translate",
+  borderTopColor: "rgba(255, 255, 255, 0)"
+}
+
 
 const TabMap = {
   EditStory: {
@@ -40,13 +49,7 @@ const TabMap = {
         tabBarVisible: showTabBar,
         animationEnabled: true,
         tabBarOptions: {
-          style: {
-            position: "absolute",
-            bottom: 0,
-            width: "100%",
-            backgroundColor: "translate",
-            borderTopColor: "rgba(255, 255, 255, 0)"
-          }
+          style: tabStyle
         },
         tabBarIcon: ({ focused }) => (
           <Image
@@ -64,13 +67,7 @@ const TabMap = {
     navigationOptions: {
       tabBarLabel: "   ",
       tabBarOptions: {
-        style: {
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
-          backgroundColor: "translate",
-          borderTopColor: "rgba(255, 255, 255, 0)"
-        }
+        style: tabStyle
       },
       tabBarIcon: ({ focused }) => (
         <Image
@@ -87,13 +84,7 @@ const TabMap = {
     navigationOptions: {
       tabBarLabel: "   ",
       tabBarOptions: {
-        style: {
-          position: "absolute",
-          bottom: 0,
-          width: "100%",
-          backgroundColor: "translate",
-          borderTopColor: "rgba(255, 255, 255, 0)"
-        }
+        style: tabStyle
       },
       tabBarIcon: ({ focused }) => (
         <Image

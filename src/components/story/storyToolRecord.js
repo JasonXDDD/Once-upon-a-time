@@ -13,7 +13,7 @@ import Btn_Recording from "../../assets/images/RecordStory/Btn_Recording.png";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
-const ICON_SIZE = 80;
+const ICON_SIZE = 60;
 
 @inject("rootStore")
 @observer
@@ -58,15 +58,15 @@ export default class StoryToolRecord extends Component {
 
 const styles = StyleSheet.create({
   storyTool: {
-    left: screenWidth / 2 - ICON_SIZE,
+    left: screenWidth / 2 - ICON_SIZE /2,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute"
   },
 
   toolIcon: {
-    marginTop: 20,
-    width: 130,
+    marginTop: 10,
+    width: ICON_SIZE / 50 * 80,
     height: ICON_SIZE,
     marginHorizontal: 5
   }

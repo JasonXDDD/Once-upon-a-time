@@ -20,8 +20,10 @@ const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76;
 const BOARD_HEIGHT = screenHeight * 0.7;
-const ICON_SIZE = 75;
+const ICON_SIZE = 50;
 const BOARD_POS_BASIC = 25;
+const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 
 @inject("rootStore")
 @observer
@@ -39,11 +41,14 @@ export default class SceneTool extends Component {
         {
           text: "確定",
           onPress: () => {
-            if (id + 1 === this.storyStore.storyScene.length)
-              this.storyStore.selectSceneIndex =
-                this.storyStore.storyScene.length - 1;
-
-            this.storyStore.storyScene.splice(id, 1);
+            if(this.storyStore.storyScene.length == 1) {
+              Alert.alert("最後一張囉！不能刪了")
+            }
+            else {
+              this.storyStore.selectSceneIndex = this.storyStore.selectSceneIndex - 1;
+              this.storyStore.storyScene.splice(id, 1);
+            }
+            
           }
         },
         {
@@ -65,7 +70,7 @@ export default class SceneTool extends Component {
             this.storyStore.openScenePane = !this.storyStore.openScenePane;
           }}
         >
-          <Image style={styles.toolIcon} source={Save} />
+          <Image style={styles.sceneIcon} source={Save} />
         </TouchableOpacity>
 
         <View
@@ -80,11 +85,12 @@ export default class SceneTool extends Component {
               return (
                 <TouchableOpacity
                   key={id}
-                  style={{ marginHorizontal: 10, left: 83 }}
+                  style={{ marginHorizontal: 10, left: 100 }}
                   onPress={() => {
                     this.storyStore.selectSceneIndex = id;
                   }}
                   onLongPress={() => {
+                    this.storyStore.selectSceneIndex = id;
                     this.deleteScene(id);
                   }}
                 >
@@ -118,10 +124,11 @@ export default class SceneTool extends Component {
 
 const styles = StyleSheet.create({
   sceneTool: {
-    top: BOARD_POS_BASIC + BOARD_HEIGHT - ICON_SIZE - 20,
-    right: BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE - 20,
+    top: BOARD_TOP + BOARD_HEIGHT - ICON_SIZE - 20,
+    right: BOARD_RIGHT + BOARD_WIDTH - ICON_SIZE - 20,
     flexDirection: "row",
     justifyContent: "flex-start",
+    alignItems: "center",
     position: "absolute",
     width: ICON_SIZE,
     height: ICON_SIZE
@@ -135,15 +142,20 @@ const styles = StyleSheet.create({
   sceneRecordPane: {
     display: "flex",
     position: "absolute",
-    bottom: screenHeight * -0.2,
-    left: screenWidth * -0.05
+    bottom: -1 * (ICON_SIZE + 15 + 30),
+    left: ICON_SIZE
   },
 
   sceneBar: {
     width: BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60,
-    height: 80,
+    height: ICON_SIZE + 15,
     flexDirection: "row",
     alignItems: "center"
+  },
+
+  sceneIcon: {
+    width: ICON_SIZE * 1.1,
+    height: ICON_SIZE * 1.1
   },
 
   toolIcon: {
@@ -152,16 +164,16 @@ const styles = StyleSheet.create({
   },
 
   toolNumber: {
-    left: 22,
+    left: ICON_SIZE * 60 / 100 - 6,
     position: "absolute",
-    top: 10,
-    fontSize: 25,
+    top: ICON_SIZE / 2 - 12,
+    fontSize: 20,
     color: "#ef9d17",
     fontWeight: "bold"
   },
 
   NumberBackground: {
-    width: 60,
-    height: 50
+    width: ICON_SIZE * 60 / 50,
+    height: ICON_SIZE
   }
 });
