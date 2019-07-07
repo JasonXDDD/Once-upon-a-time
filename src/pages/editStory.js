@@ -1,34 +1,37 @@
-import React, { Component } from 'react'
-import { Platform, ImageBackground, Dimensions } from 'react-native'
-import { inject, observer } from 'mobx-react'
+import React, { Component } from "react";
+import { Platform, ImageBackground, Dimensions } from "react-native";
+import { inject, observer } from "mobx-react";
 
-import EditStory_BG from '../assets/images/EditStory/BG.png'
-import RecordStory_BG from '../assets/images/RecordStory/BG.png'
-import Redo from '../assets/images/EditStory/btn_redo.png'
-import Save from '../assets/images/EditStory/btn_save.png'
-import Teaching from '../assets/images/EditStory/Teaching.png'
+import EditStory_BG from "../assets/images/EditStory/BG.jpg";
+import RecordStory_BG from "../assets/images/RecordStory/BG.png";
+import Redo from "../assets/images/EditStory/btn_redo.png";
+import Save from "../assets/images/EditStory/btn_save.png";
+import Teaching from "../assets/images/EditStory/Teaching.png";
 
-import ToolBar from '../components/toolBar'
-import StoryBoard from '../components/story/storyBoard'
-import StoryTool from '../components/story/storyTool'
-import StoryToolRecord from '../components/story/storyToolRecord'
-import GoBack from '../components/record/goBack'
-import RecordTool from '../components/record/recordTool'
-import SceneTool from '../components/scene/sceneTool';
+import ToolBar from "../components/toolBar";
+import StoryBoard from "../components/story/storyBoard";
+import StoryTool from "../components/story/storyTool";
+import StoryToolRecord from "../components/story/storyToolRecord";
+import GoBack from "../components/record/goBack";
+import RecordTool from "../components/record/recordTool";
+import SceneTool from "../components/scene/sceneTool";
 
-@inject('rootStore')
+@inject("rootStore")
 @observer
 export default class EditStory extends React.Component {
   constructor(props) {
-    super(props)
-    this.storyStore = props.rootStore.storyStore    
+    super(props);
+    this.storyStore = props.rootStore.storyStore;
   }
 
   render() {
     return (
-      <ImageBackground source={this.storyStore.isRecord? RecordStory_BG: EditStory_BG} style={{ flex: 1 }}>
+      <ImageBackground
+        source={this.storyStore.isRecord ? RecordStory_BG : EditStory_BG}
+        style={{ flex: 1 }}
+      >
         {/* draw board and tool */}
-        <ToolBar select="edit"/>
+        <ToolBar select="edit" />
         <StoryBoard />
 
         {/* scene tool */}
@@ -40,8 +43,8 @@ export default class EditStory extends React.Component {
 
         {/* when record */}
         <GoBack navigation={this.props.navigation} />
-        <RecordTool navigation={this.props.navigation} />    
+        <RecordTool navigation={this.props.navigation} />
       </ImageBackground>
-    )
+    );
   }
 }
