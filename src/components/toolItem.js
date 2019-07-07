@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { observer, inject } from 'mobx-react'
 import StoryItem from './story/storyItem'
 
@@ -18,7 +18,7 @@ export default class ToolItem extends Component {
 
   render() {
     return (
-      <View style={{ marginTop: 10 }}>
+      <ScrollView style={{ marginTop: 10 }}>
         {this.toolStore[this.type].map(ele => {
           
           return (
@@ -31,12 +31,12 @@ export default class ToolItem extends Component {
                 else if(this.props.select === 'draw')
                   this.addDrawItem(ele)
               }}>
-              <Image style={{ width: 78, height: 78 }} source={JSON.parse(ele.image)} />
+              <Image style={{ width: 100, height: 80 }} source={JSON.parse(ele.image)} />
               <Text style={{ color: 'white' }}>{ele.id}</Text>
             </TouchableOpacity>
           )
         })}
-      </View>
+      </ScrollView>
     )
   }
 

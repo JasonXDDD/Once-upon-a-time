@@ -7,6 +7,8 @@ const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76;
 const BOARD_HEIGHT = screenHeight * 0.7;
+const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
 
@@ -24,7 +26,7 @@ export default class StoryBoard extends Component {
       <View
         style={[
           styles.storyBoard,
-          { right: this.getRight(), top: this.getTop() }
+          { right: BOARD_RIGHT, top: BOARD_TOP }
         ]}
       >
         {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map(
@@ -36,23 +38,6 @@ export default class StoryBoard extends Component {
     );
   }
 
-  // deal with position of any status
-  getRight() {
-    if (this.toolStore.open !== "")
-      return -1 * (TOOL_PANE_WIDTH - BOARD_POS_BASIC);
-    else {
-      if (this.storyStore.isRecord) return screenWidth / 2 - BOARD_WIDTH / 2;
-      // be center
-      else return BOARD_POS_BASIC;
-    }
-  }
-
-  getTop() {
-    if (this.storyStore.isRecord)
-      // be center - bottom offset
-      return screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
-    else return BOARD_POS_BASIC;
-  }
 }
 
 const styles = StyleSheet.create({

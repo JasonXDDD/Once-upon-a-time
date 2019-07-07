@@ -31,8 +31,8 @@ export default class EditStory extends React.Component {
         style={{ flex: 1 }}
       >
         {/* draw board and tool */}
-        <ToolBar select="edit" />
         <StoryBoard />
+        <ToolBar select="edit" />
 
         {/* scene tool */}
         <SceneTool />

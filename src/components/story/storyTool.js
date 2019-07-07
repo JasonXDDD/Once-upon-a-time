@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Image, TouchableOpacity, Dimensions, StyleSheet } from "react-native";
 import { inject, observer } from "mobx-react";
 
 import Redo from "../../assets/images/EditStory/btn_redo.png";
 import Save from "../../assets/images/EditStory/btn_save.png";
 
-const ICON_SIZE = 70;
-const BOARD_POS_BASIC = 25;
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+const BOARD_WIDTH = screenWidth * 0.76
+const BOARD_HEIGHT = screenHeight * 0.7
+const ICON_SIZE = 40;
+const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 
 @inject("rootStore")
 @observer
@@ -48,8 +54,8 @@ export default class StoryTool extends Component {
 
 const styles = StyleSheet.create({
   storyTool: {
-    top: BOARD_POS_BASIC + 20,
-    right: BOARD_POS_BASIC + 20,
+    top: BOARD_TOP + 20,
+    right: BOARD_RIGHT + 20,
     flexDirection: "row",
     justifyContent: "flex-start",
     position: "absolute",
