@@ -14,6 +14,7 @@ import { inject, observer } from "mobx-react";
 import Save from "../../assets/images/EditStory/btn_save.png";
 import BG_Scene from "../../assets/images/EditStory/BG_ScenesBar.png";
 import Btn_NumberBackground from "../../assets/images/EditStory/Btn_SceneNumberBackground.png";
+import Btn_NumberBackground_Selected from "../../assets/images/EditStory/Btn_SceneNumberBackground_selected.png";
 import Btn_AddScene from "../../assets/images/EditStory/Btn_AddScene.png";
 
 const screenWidth = Dimensions.get("window").width;
@@ -96,7 +97,7 @@ export default class SceneTool extends Component {
                 >
                   <Image
                     style={styles.NumberBackground}
-                    source={Btn_NumberBackground}
+                    source={this.storyStore.selectSceneIndex === id? Btn_NumberBackground_Selected: Btn_NumberBackground}
                   />
                   <Text style={styles.toolNumber}>{id + 1}</Text>
                 </TouchableOpacity>
@@ -142,13 +143,13 @@ const styles = StyleSheet.create({
   sceneRecordPane: {
     display: "flex",
     position: "absolute",
-    bottom: -1 * (ICON_SIZE + 15 + 30),
+    bottom: -1 * (ICON_SIZE + 15 + 50),
     left: ICON_SIZE
   },
 
   sceneBar: {
     width: BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60,
-    height: ICON_SIZE + 15,
+    height: ICON_SIZE + 20,
     flexDirection: "row",
     alignItems: "center"
   },

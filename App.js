@@ -6,7 +6,7 @@ import { Provider, observer } from "mobx-react";
 import { Provider as ProviderAntd } from "@ant-design/react-native";
 import * as store from "./src/stores/index";
 @observer
-export default class App extends Component<Props> {
+export default class App extends Component<Props> {  
   render() {
     return (
       <Provider rootStore={store}>
@@ -20,3 +20,5 @@ export default class App extends Component<Props> {
   }
 }
 
+
+console.disableYellowBox = true;

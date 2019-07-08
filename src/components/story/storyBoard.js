@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     borderColor: "#bebebe",
     overflow: "hidden",
     borderWidth: 1,
-    borderRadius: 10
+    borderRadius: 10,
   }
 });

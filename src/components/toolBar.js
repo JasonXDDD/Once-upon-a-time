@@ -4,7 +4,10 @@ import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
 import ToolItem from "./toolItem";
 
+import ToolBar_Tap from "../assets/images/img_Topmenu.png";
+
 const TOOL_PANE_WIDTH = 135;
+const TOOL_PANE_OFFSET = 25;
 const ICON_SIZE = 50;
 @inject("rootStore")
 @observer
@@ -13,19 +16,19 @@ export default class ToolBar extends Component {
     {
       type: "scene",
       color: "#f68a50",
-      top: (ICON_SIZE + 10) * 0 + 30
+      top: (ICON_SIZE + 10) * 0 + TOOL_PANE_OFFSET
     },
 
     {
       type: "character",
       color: "#fec64c",
-      top: (ICON_SIZE + 10) * 1 + 30
+      top: (ICON_SIZE + 10) * 1 + TOOL_PANE_OFFSET
     },
 
     {
       type: "sticker",
       color: "#3e97a5",
-      top: (ICON_SIZE + 10) * 2 + 30
+      top: (ICON_SIZE + 10) * 2 + TOOL_PANE_OFFSET
     }
   ];
 
@@ -37,12 +40,10 @@ export default class ToolBar extends Component {
 
   render() {
     return (
-      <View
-        style={[
-          styles.container,
-          { display: this.storyStore.isRecord ? "none" : "flex" }
-        ]}
-      >
+      <View style={[ styles.container,
+        { display: this.storyStore.isRecord ? "none" : "flex" }
+      ]} >
+        
         {this.toolList.map(ele => {
           return (
             <View key={ele.type}>
@@ -57,6 +58,7 @@ export default class ToolBar extends Component {
                   }
                 ]}
               >
+                <Image style={{width: TOOL_PANE_WIDTH, height: TOOL_PANE_OFFSET}} source={ToolBar_Tap}></Image>                
                 <ToolItem select={this.props.select} type={ele.type} />
               </View>
 
