@@ -83,7 +83,8 @@ export default class DrawBoard extends Component {
   ];
 
   state = {
-    isDialogVisible: false
+    isDialogVisible: false,
+    selectColor: '#FF75B5'
   };
 
   constructor(props) {
@@ -132,11 +133,14 @@ export default class DrawBoard extends Component {
                 </ImageBackground>
               )
             }}
-              strokeSelectedComponent={(color, index, changed) => (
-                <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
-                  <View style={{ backgroundColor: color, opacity: 1 }} />
-                </ImageBackground>
-              )}
+              strokeSelectedComponent={(color, index, changed) => {
+                if(changed) this.setState({selectColor: color})
+                return (
+                  <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
+                    <View style={{ backgroundColor: color, opacity: 1 }} />
+                  </ImageBackground>
+                )
+              }}
               undoComponent={
                 <Image
                   style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 100 } ]}
@@ -160,10 +164,16 @@ export default class DrawBoard extends Component {
               }
               strokeWidthComponent={w => {
                 return (
-                  <Image
-                    style={[ styles.icon, { position: "absolute", left: DRAW_BOARD_WIDTH * -0.92, top: 200 } ]}
-                    source={Plus}
-                  />
+                  <View style={{ position: "absolute", left: DRAW_BOARD_WIDTH * -0.92, top: 200 }}>
+                    <Image style={[ styles.icon ]} source={Plus} />
+
+                    <View style={[styles.strokeWidthButton, { backgroundColor: this.state.selectColor }]}>
+                      <View  style={{
+                        backgroundColor: 'white', marginBottom: 1,
+                        width: Math.sqrt(w / 3) * 10, height: Math.sqrt(w / 3) * 10, borderRadius: Math.sqrt(w / 3) * 10 / 2
+                      }} />
+                    </View>
+                  </View>
                 );
               }}
             />
@@ -197,6 +207,10 @@ export default class DrawBoard extends Component {
         />
       </ImageBackground>
     );
+  }
+
+  updateColor(color){
+    this.setState({selectColor: color})
   }
 
   snapshot(name) {
@@ -239,7 +253,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     position: "absolute",
     left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-    top: DRAW_PANE_TOP
+    top: DRAW_PANE_TOP,
+    borderRadius: 10
   },
 
   imagePane: {
@@ -284,5 +299,10 @@ const styles = StyleSheet.create({
     height: ICON_SIZE,
     marginTop: 50,
     marginLeft: -3
-  }
+  },
+
+  strokeWidthButton: {
+    marginHorizontal: 10, marginVertical: 10, width: 30, height: 30, borderRadius: 15,
+    justifyContent: 'center', alignItems: 'center'
+  },
 });

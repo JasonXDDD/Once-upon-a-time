@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Image, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { inject, observer } from "mobx-react";
 import { NavigationActions } from "react-navigation";
 
-import Redo from "../../assets/images/EditStory/btn_redo.png";
+import Btn_Edit from "../../assets/images/RecordStory/Btn_Edit.png";
 
-const ICON_SIZE = 48;
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+const ICON_SIZE = 60;
 
 @inject("rootStore")
 @observer
@@ -39,7 +41,7 @@ export default class GoBack extends Component {
             this.showBar();
           }}
         >
-          <Image style={styles.toolIcon} source={Redo} />
+          <Image style={styles.toolIcon} source={Btn_Edit} />
         </TouchableOpacity>
       </View>
     );
@@ -48,17 +50,15 @@ export default class GoBack extends Component {
 
 const styles = StyleSheet.create({
   goBackTool: {
-    top: 10,
-    left: 5,
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    position: "absolute",
-    height: ICON_SIZE
+    left: screenWidth / 2 - ICON_SIZE /2,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute"
   },
 
   toolIcon: {
-    width: ICON_SIZE,
+    marginTop: 10,
+    width: ICON_SIZE / 50 * 80,
     height: ICON_SIZE,
     marginHorizontal: 5
   }
