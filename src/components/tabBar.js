@@ -1,15 +1,17 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground, Dimensions } from "react-native";
 import {
   createBottomTabNavigator,
   createAppContainer,
-  createStackNavigator
+  createStackNavigator,
+  BottomTabBar
 } from "react-navigation";
 
 import DrawSticker from "../pages/drawSticker";
 import StoryBox from "../pages/storyBox";
 import EditStory from "../pages/editStory";
 
+import TabBar_BG from "../assets/images/TabBar/BG.png";
 import EditStorySelected from "../assets/images/TabBar/EditStory_Selected.png";
 import EditStoryUnselected from "../assets/images/TabBar/EditStory_Unselected.png";
 import DrawStorySelected from "../assets/images/TabBar/DrawStory_Selected.png";
@@ -17,23 +19,8 @@ import DrawStoryUnselected from "../assets/images/TabBar/DrawStory_Unselected.pn
 import StoryBoxSelected from "../assets/images/TabBar/StoryBox_Selected.png";
 import StoryBoxUnselected from "../assets/images/TabBar/StoryBox_Unselected.png";
 
-const styles = StyleSheet.create({
-  icon: {
-    width: 150,
-    height: 80,
-    position: "absolute",
-    bottom: 25
-  }
-});
-
-const tabStyle = {
-  position: "absolute",
-  bottom: 0,
-  width: "100%",
-  backgroundColor: "translate",
-  borderTopColor: "rgba(255, 255, 255, 0)"
-}
-
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 
 const TabMap = {
   EditStory: {
@@ -48,9 +35,6 @@ const TabMap = {
         tabBarLabel: "   ",
         tabBarVisible: showTabBar,
         animationEnabled: true,
-        tabBarOptions: {
-          style: tabStyle
-        },
         tabBarIcon: ({ focused }) => (
           <Image
             focused={focused}
@@ -65,10 +49,7 @@ const TabMap = {
   StoryBox: {
     screen: StoryBox,
     navigationOptions: {
-      tabBarLabel: "   ",
-      tabBarOptions: {
-        style: tabStyle
-      },
+      tabBarLabel: "   ", 
       tabBarIcon: ({ focused }) => (
         <Image
           focused={focused}
@@ -83,9 +64,6 @@ const TabMap = {
     screen: DrawSticker,
     navigationOptions: {
       tabBarLabel: "   ",
-      tabBarOptions: {
-        style: tabStyle
-      },
       tabBarIcon: ({ focused }) => (
         <Image
           focused={focused}
@@ -97,10 +75,54 @@ const TabMap = {
   }
 };
 
+
+const TabBarComponent = (props) => (
+  <BottomTabBar {...props} />  
+);
+
 const TabNavigator = createBottomTabNavigator(TabMap, {
-  initialRouteName: "EditStory"
+  initialRouteName: "EditStory",
+  tabBarComponent: (props) => ( 
+    <View style={styles.tabView}>
+      <Image style={styles.tabBar} source={TabBar_BG} />
+      <TabBarComponent {...props} style={styles.tabStyle}/>
+    </View>
+  )
 });
 
 const TabBar = createAppContainer(TabNavigator);
 
 export default TabBar;
+
+const styles = StyleSheet.create({
+  icon: {
+    width: 150,
+    height: 80,
+    position: "absolute",
+    bottom: 15,
+    zIndex: 3
+  },
+
+  tabBar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: screenWidth * 0.9,
+    height: 65
+  },
+
+  tabStyle: {
+    backgroundColor: 'transparent',
+    borderTopColor: "rgba(255, 255, 255, 0)",
+    width: screenWidth * 0.8,
+  },
+
+  tabView: {
+    position: 'absolute',
+    bottom: 0,
+    width: screenWidth,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center'
+  }
+});
