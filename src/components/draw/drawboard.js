@@ -12,6 +12,7 @@ import {
 import RNSketchCanvas from "@terrylinla/react-native-sketch-canvas";
 import { inject, observer } from "mobx-react";
 import DialogInput from "react-native-dialog-input";
+import ViewShot from "react-native-view-shot";
 
 import DrawBoard_IMG from "../../assets/images/DrawStory/drawBoard.png";
 import Redo from "../../assets/images/DrawStory/btn_clean.png";
@@ -20,43 +21,66 @@ import Eraser from "../../assets/images/DrawStory/btn_eraser.png";
 import Plus from "../../assets/images/DrawStory/btn_penPlus.png";
 import Delete from "../../assets/images/StoryBox/Btn_delete.png";
 import Camera from "../../assets/images/DrawStory/btn_camera.png";
-import ViewShot from "react-native-view-shot";
 
-import Hide from "../../assets/images/DrawStory/hide.png";
-import Pink from "../../assets/images/DrawStory/Pink.png";
-import PinkSelect from "../../assets/images/DrawStory/Pink_selected.png";
+import c6BCCF7 from "../../assets/images/DrawStory/color/btn_page03_Aqua_blue.png";
+import s6BCCF7 from "../../assets/images/DrawStory/color/btn_page03_Aqua_blue_selected.png";
+import c000000 from "../../assets/images/DrawStory/color/btn_page03_black.png";
+import s000000 from "../../assets/images/DrawStory/color/btn_page03_black_selected.png";
+import c2367C0 from "../../assets/images/DrawStory/color/btn_page03_blue.png";
+import s2367C0 from "../../assets/images/DrawStory/color/btn_page03_blue_selected.png";
+import c84574F from "../../assets/images/DrawStory/color/btn_page03_Brown.png";
+import s84574F from "../../assets/images/DrawStory/color/btn_page03_Brown_selected.png";
+import c49C37C from "../../assets/images/DrawStory/color/btn_page03_green.png";
+import s49C37C from "../../assets/images/DrawStory/color/btn_page03_green_selected.png";
+import cFF7D1C from "../../assets/images/DrawStory/color/btn_page03_orange.png";
+import sFF7D1C from "../../assets/images/DrawStory/color/btn_page03_orange_selected.png";
+import cFF75B5 from "../../assets/images/DrawStory/color/btn_page03_Pink.png";
+import sFF75B5 from "../../assets/images/DrawStory/color/btn_page03_Pink_selected.png";
+import c9323A1 from "../../assets/images/DrawStory/color/btn_page03_purple.png";
+import s9323A1 from "../../assets/images/DrawStory/color/btn_page03_purple_selected.png";
+import cFF403F from "../../assets/images/DrawStory/color/btn_page03_Red.png";
+import sFF403F from "../../assets/images/DrawStory/color/btn_page03_Red_selected.png";
+import cFFD298 from "../../assets/images/DrawStory/color/btn_page03_skin_color.png";
+import sFFD298 from "../../assets/images/DrawStory/color/btn_page03_skin_color_selected.png";
+import cFFFFFF from "../../assets/images/DrawStory/color/btn_page03_white.png";
+import sFFFFFF from "../../assets/images/DrawStory/color/btn_page03_white_selected.png";
+import cFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow.png";
+import sFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow_selected.png";
+
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76;
 const BOARD_HEIGHT = screenHeight * 0.7;
+const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
-const ICON_SIZE = 48;
+const ICON_SIZE = 70;
 
 const DRAW_BOARD_WIDTH = BOARD_WIDTH * 0.98;
 const DRAW_BOARD_HEIGHT = BOARD_HEIGHT * 0.98;
-const DRAW_PANE_SIZE = 400;
+const DRAW_PANE_SIZE = 500;
+const DRAW_PANE_TOP = 60;
+const DRAW_PANE_MARGIN_BOTTOM = 0;
 
 @inject("rootStore")
 @observer
 export default class DrawBoard extends Component {
   colorList = [
-    { color: "rgba(255, 255, 255, 0)", img: Pink, select: PinkSelect },
-    { color: "#FF75B5", img: Pink, select: PinkSelect },
-    { color: "#FF403F", img: Pink, select: PinkSelect },
-    { color: "#FF7D1C", img: Pink, select: PinkSelect },
-    { color: "#FFFF57", img: Pink, select: PinkSelect },
-    { color: "#49C37C", img: Pink, select: PinkSelect },
-    { color: "#6BCCF7", img: Pink, select: PinkSelect },
-    { color: "#2367C0", img: Pink, select: PinkSelect },
-    { color: "#9323A1", img: Pink, select: PinkSelect },
-    { color: "#FFD298", img: Pink, select: PinkSelect },
-    { color: "#84574F", img: Pink, select: PinkSelect },
-    { color: "#FFFFFF", img: Pink, select: PinkSelect },
-    { color: "#000000", img: Pink, select: PinkSelect }
+    { color: "#FF75B5", img: cFF75B5, select: sFF75B5 },
+    { color: "#FF403F", img: cFF403F, select: sFF403F },
+    { color: "#FF7D1C", img: cFF7D1C, select: sFF7D1C },
+    { color: "#FFFF57", img: cFFFF57, select: sFFFF57 },
+    { color: "#49C37C", img: c49C37C, select: s49C37C },
+    { color: "#6BCCF7", img: c6BCCF7, select: s6BCCF7 },
+    { color: "#2367C0", img: c2367C0, select: s2367C0 },
+    { color: "#9323A1", img: c9323A1, select: s9323A1 },
+    { color: "#FFD298", img: cFFD298, select: sFFD298 },
+    { color: "#84574F", img: c84574F, select: s84574F },
+    { color: "#FFFFFF", img: cFFFFFF, select: sFFFFFF },
+    { color: "#000000", img: c000000, select: s000000 }
   ];
-  colorImgList = [1, 2, 3];
 
   state = {
     isDialogVisible: false
@@ -70,14 +94,9 @@ export default class DrawBoard extends Component {
 
   render() {
     return (
-      <ImageBackground
-        source={DrawBoard_IMG}
-        resizeMode="contain"
-        style={[styles.drawBoard, { right: this.getRight() }]}
-      >
+      <ImageBackground source={DrawBoard_IMG} resizeMode="contain" style={styles.drawBoard} >
         {/* draw pane size */}
-        <View
-          style={{
+        <View style={{
             position: "absolute",
             width: DRAW_BOARD_WIDTH,
             height: DRAW_BOARD_HEIGHT,
@@ -86,159 +105,63 @@ export default class DrawBoard extends Component {
           }}
         >
           {/* pane style */}
-          <View
-            style={[
-              styles.drawPane,
-              {
-                backgroundColor: "#FFFFFF",
-                position: "absolute",
-                left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-                top: 100
-              }
-            ]}
-          />
+          <View style={[ styles.drawPane, styles.drawPaneBG ]}/>
 
           {/* snapshot */}
           <ViewShot ref="viewShot" options={{ format: "png" }}>
             {/* import image */}
-            <View
-              style={[
-                styles.drawPane,
-                {
-                  position: "absolute",
-                  left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-                  top: 100
-                }
-              ]}
-            >
+            <View style={[ styles.drawPane, styles.imagePane ]}>
               {this.genImage(this.toolStore.drawItem)}
             </View>
 
             {/* target */}
-            <View
-              style={[
-                styles.drawPane,
-                {
-                  marginTop: ICON_SIZE,
-                  marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2
-                }
-              ]}
-            />
+            <View style={[ styles.drawPane, styles.photoPane]}/>
 
             <RNSketchCanvas
-              containerStyle={{
-                position: "absolute",
-                width: DRAW_BOARD_WIDTH,
-                height: DRAW_BOARD_HEIGHT,
-                padding: 10
-              }}
-              canvasStyle={[
-                styles.drawPane,
-                {
-                  left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
-                  top: 100,
-                  marginBottom: 100
-                }
-              ]}
+              containerStyle={ styles.drawContaniner }
+              canvasStyle={[ styles.drawPane, styles.drawCanvas ]}
               defaultStrokeIndex={0}
               defaultStrokeWidth={6}
               strokeColors={this.colorList}
-              strokeComponent={color => (
-                <ImageBackground
-                  source={Pink}
-                  style={{
-                    width: 70,
-                    height: 70,
-                    marginTop: 100,
-                    marginLeft: -3
-                  }}
-                >
-                  <View
-                    style={[
-                      { backgroundColor: color, opacity: 1 },
-                      styles.strokeColorButton
-                    ]}
-                  />
+              
+              strokeComponent={color => {
+                let item = this.colorList.filter(ele => ele.color === color)[0]
+                return (
+                <ImageBackground source={item.img} style={ styles.colorIcon }>
+                  <View style={{ backgroundColor: color, opacity: 1 }} />
+                </ImageBackground>
+              )
+            }}
+              strokeSelectedComponent={(color, index, changed) => (
+                <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
+                  <View style={{ backgroundColor: color, opacity: 1 }} />
                 </ImageBackground>
               )}
-              strokeSelectedComponent={(color, index, changed) => {
-                return (
-                  <ImageBackground
-                    source={PinkSelect}
-                    style={{
-                      width: 70,
-                      height: 70,
-                      marginTop: 100,
-                      marginLeft: -3
-                    }}
-                  >
-                    <View
-                      style={[
-                        { backgroundColor: color, opacity: 1 },
-                        styles.strokeColorButton
-                      ]}
-                    />
-                  </ImageBackground>
-                );
-              }}
               undoComponent={
                 <Image
-                  style={[
-                    styles.icon,
-                    {
-                      position: "absolute",
-                      right: DRAW_BOARD_WIDTH * 0.07,
-                      top: 150,
-                      width: 58,
-                      height: 63
-                    }
-                  ]}
+                  style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 100 } ]}
                   source={Reback}
                 />
               }
               clearComponent={
                 <Image
-                  style={[
-                    styles.icon,
-                    {
-                      position: "absolute",
-                      right: DRAW_BOARD_WIDTH * 0.07,
-                      top: 250,
-                      width: 58,
-                      height: 63
-                    }
-                  ]}
+                  style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 200 } ]}
                   source={Redo}
                 />
               }
+              onClearPressed={() => {
+                this.toolStore.drawItem = {}
+              }}
               eraseComponent={
                 <Image
-                  style={[
-                    styles.icon,
-                    {
-                      position: "absolute",
-                      left: DRAW_BOARD_WIDTH * 0.07,
-                      top: 130,
-                      width: 70,
-                      height: 73
-                    }
-                  ]}
+                  style={[ styles.icon, { position: "absolute", left: DRAW_BOARD_WIDTH * 0.05, top: 100 } ]}
                   source={Eraser}
                 />
               }
               strokeWidthComponent={w => {
                 return (
                   <Image
-                    style={[
-                      styles.icon,
-                      {
-                        position: "absolute",
-                        left: DRAW_BOARD_WIDTH * -0.9,
-                        top: 230,
-                        width: 70,
-                        height: 75
-                      }
-                    ]}
+                    style={[ styles.icon, { position: "absolute", left: DRAW_BOARD_WIDTH * -0.92, top: 200 } ]}
                     source={Plus}
                   />
                 );
@@ -296,56 +219,70 @@ export default class DrawBoard extends Component {
       return <Image style={styles.drawPane} source={JSON.parse(ele.image)} />;
     }
   }
-  getRight() {
-    if (this.toolStore.open !== "")
-      return -1 * (TOOL_PANE_WIDTH - BOARD_POS_BASIC);
-    else {
-      if (this.storyStore.isRecord) return screenWidth / 2 - BOARD_WIDTH / 2;
-      // be center
-      else return BOARD_POS_BASIC;
-    }
-  }
 }
 
 const styles = StyleSheet.create({
   drawBoard: {
     width: BOARD_WIDTH,
-    height: 920,
+    height: screenHeight,
+    right: BOARD_RIGHT,
     position: "absolute",
     overflow: "hidden"
   },
 
   drawPane: {
-    height: 400,
-    width: 400
+    height: DRAW_PANE_SIZE,
+    width: DRAW_PANE_SIZE,
   },
 
+  drawPaneBG: {
+    backgroundColor: "#FFFFFF",
+    position: "absolute",
+    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
+    top: DRAW_PANE_TOP
+  },
+
+  imagePane: {
+    position: "absolute",
+    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
+    top: DRAW_PANE_TOP
+  },
+
+  photoPnae: {
+    marginTop: DRAW_PANE_TOP,
+    marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2
+  },
+
+
+  drawContaniner: {
+    position: "absolute",
+    width: DRAW_BOARD_WIDTH,
+    height: DRAW_BOARD_HEIGHT,
+    padding: 10
+  },
+
+  drawCanvas: {
+    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
+    top: DRAW_PANE_TOP,
+    marginBottom: DRAW_PANE_MARGIN_BOTTOM
+  },
+
+
   icon: {
-    height: ICON_SIZE,
+    height: ICON_SIZE + 5,
     width: ICON_SIZE
   },
 
   CameraIcon: {
-    marginTop: 20,
-    width: 100,
-    height: 60,
-    marginBottom: 20
+    marginTop: 0,
+    width: ICON_SIZE + 18,
+    height: ICON_SIZE - 20,
   },
 
-  strokeColorButton: {
-    height: 0,
-    flexDirection: "column"
-  },
-
-  strokeWidthButton: {
-    marginHorizontal: 2.5,
-    marginVertical: 8,
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#39579A",
-    right: 575
+  colorIcon: {
+    width: ICON_SIZE,
+    height: ICON_SIZE,
+    marginTop: 50,
+    marginLeft: -3
   }
 });
