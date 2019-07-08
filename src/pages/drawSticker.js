@@ -34,8 +34,8 @@ export default class DrawSticker extends Component {
   render() {
     return (
       <ImageBackground source={DrawStory_BG} style={{ flex: 1 }}>
-        <ToolBar select="draw" />
         <DrawBoard />
+        <ToolBar select="draw" />
       </ImageBackground>
     );
   }
