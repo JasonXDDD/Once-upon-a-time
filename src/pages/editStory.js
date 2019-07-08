@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Platform, ImageBackground, Dimensions } from "react-native";
 import { inject, observer } from "mobx-react";
 
-import EditStory_BG from "../assets/images/EditStory/BG.jpg";
+import EditStory_BG from "../assets/images/EditStory/BG.png";
 import RecordStory_BG from "../assets/images/RecordStory/BG.png";
 import Redo from "../assets/images/EditStory/btn_redo.png";
 import Save from "../assets/images/EditStory/btn_save.png";
