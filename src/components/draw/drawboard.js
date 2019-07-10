@@ -62,7 +62,7 @@ const DRAW_BOARD_WIDTH = BOARD_WIDTH * 0.98;
 const DRAW_BOARD_HEIGHT = BOARD_HEIGHT * 0.98;
 const DRAW_PANE_SIZE = 500;
 const DRAW_PANE_TOP = 60;
-const DRAW_PANE_MARGIN_BOTTOM = 0;
+const DRAW_PANE_MARGIN_BOTTOM = 50;
 
 @inject("rootStore")
 @observer
@@ -128,11 +128,11 @@ export default class DrawBoard extends Component {
               strokeComponent={color => {
                 let item = this.colorList.filter(ele => ele.color === color)[0]
                 return (
-                <ImageBackground source={item.img} style={ styles.colorIcon }>
-                  <View style={{ backgroundColor: color, opacity: 1 }} />
-                </ImageBackground>
-              )
-            }}
+                  <ImageBackground source={item.img} style={ styles.colorIcon }>
+                    <View style={{ backgroundColor: color, opacity: 1 }} />
+                  </ImageBackground>
+                )
+              }}
               strokeSelectedComponent={(color, index, changed) => {
                 if(changed) this.setState({selectColor: color})
                 return (
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
 
   drawCanvas: {
     left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
-    top: DRAW_PANE_TOP,
+    top: DRAW_PANE_TOP -10,
     marginBottom: DRAW_PANE_MARGIN_BOTTOM
   },
 
@@ -297,7 +297,6 @@ const styles = StyleSheet.create({
   colorIcon: {
     width: ICON_SIZE,
     height: ICON_SIZE,
-    marginTop: 50,
     marginLeft: -3
   },
 
