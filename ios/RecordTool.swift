@@ -22,74 +22,47 @@ extension UIView {
 }
 
 class RecordTool: UIView, RPPreviewViewControllerDelegate {
-  let recorder = RPScreenRecorder.shared()
+  
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    if #available(iOS 10.0, *) {
-      self.addSubview(start)
-    }
-    self.addSubview(stop)
   }
-  
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
-  lazy var start: UIButton = {
-    let b = UIButton.init(type: UIButton.ButtonType.system)
-    b.setTitle("Start", for: .normal)
-    b.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-    b.frame = CGRect(x: 0, y: 0, width: 80, height: 30)
-    b.addTarget(
-      self,
-      action: #selector(startRecording),
-      for: .touchUpInside
-    )
-    return b
-  }()
-  
-  
-  lazy var stop: UIButton = {
-    let b = UIButton.init(type: UIButton.ButtonType.system)
-    b.setTitle("Stop", for: .normal)
-    b.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-    b.frame = CGRect(x: 80, y: 0, width: 80, height: 30)
-    b.addTarget(
-      self,
-      action:  #selector(stopRecording),
-      for: .touchUpInside
-    )
-    return b
-  }()
+  private var isRecording = false
+//  let recorder = RPScreenRecorder.shared()
   
   
   @objc func startRecording() {
-    
-    guard recorder.isAvailable else {
+    guard RPScreenRecorder.shared().isAvailable else {
       print("Recording is not available at this time.")
       return
     }
     
-    recorder.isMicrophoneEnabled = true
     if #available(iOS 10.0, *) {
-      recorder.startRecording{ [unowned self] (error) in
+      RPScreenRecorder.shared().isMicrophoneEnabled = true
+      RPScreenRecorder.shared().startRecording{ [unowned self] (error) in
         guard error == nil else {
-          print("There was an error starting the recording.", error)
+          print("There was an error starting the recording.")
           return
         }
         print("Started Recording Successfully")
+        print(RPScreenRecorder.shared().isMicrophoneEnabled)
+        self.isRecording = true
       }
-    } else {
+    }
+    
+    else {
       // Fallback on earlier versions
     }
   }
   
   
   @objc func stopRecording() {
-    recorder.stopRecording { [unowned self] (preview, error) in
+    RPScreenRecorder.shared().stopRecording { [unowned self] (preview, error) in
       print("Stopped recording")
       
       guard preview != nil else {
@@ -98,15 +71,15 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
       }
       
       DispatchQueue.main.async{
-        let alert = UIAlertController(title: "Recording Finished", message: "Would you like to edit or delete your recording?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "錄影成功", message: "你想要儲存還是刪除呢?", preferredStyle: .alert)
         
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction) in
-          self.recorder.discardRecording(handler: { () -> Void in
+        let deleteAction = UIAlertAction(title: "刪除", style: .destructive, handler: { (action: UIAlertAction) in
+          RPScreenRecorder.shared().discardRecording(handler: { () -> Void in
             print("Recording suffessfully deleted.")
           })
         })
         
-        let editAction = UIAlertAction(title: "Edit", style: .default, handler: { (action: UIAlertAction) -> Void in
+        let editAction = UIAlertAction(title: "修改", style: .default, handler: { (action: UIAlertAction) -> Void in
           
           if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             preview?.modalPresentationStyle = UIModalPresentationStyle.popover
@@ -114,8 +87,10 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
             preview?.popoverPresentationController?.sourceView = self
           }
           
-          //          preview?.previewControllerDelegate = self
+          preview?.previewControllerDelegate = self
+          
           self.findViewController()!.present(preview!, animated: true, completion: nil)
+          self.isRecording = false
           
         })
         
@@ -126,5 +101,8 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
     }
   }
   
+  @objc func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+    self.findViewController()!.dismiss(animated: true)
+  }
 }
 

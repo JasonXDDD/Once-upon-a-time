@@ -17,4 +17,20 @@ class RecordToolManager: RCTViewManager {
     return true
   }
   
+  @objc func startRecordFromManager(_ node: NSNumber) {
+    
+    DispatchQueue.main.async {
+      let component = self.bridge.uiManager.view( forReactTag: node ) as! RecordTool
+      component.startRecording()
+    }
+  }
+  
+  @objc func stopRecordFromManager(_ node: NSNumber) {
+    
+    DispatchQueue.main.async {
+      let component = self.bridge.uiManager.view( forReactTag: node ) as! RecordTool
+      component.stopRecording()
+    }
+  }
+  
 }
