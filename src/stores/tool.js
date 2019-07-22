@@ -91,17 +91,15 @@ export default class ToolStore {
 
   @action
   toggleOpen(type) {
-    if (this.open === type) {
+    if (this.open === type) 
       this.open = "";
-      return;
-    }
+    else
+      this.open = type;
+
 
     console.log("hello " + type + this.open);
-    this.open = type;
-    this.sceneBtn = this.open === type ? BtnSceneSelected : BtnSceneUnselected;
-    this.characterBtn =
-      this.open === type ? BtnCharacterSelected : BtnCharacterUnselected;
-    this.stickerBtn =
-      this.open === type ? BtnStickerSelected : BtnStickerUnselected;
+    this.sceneBtn =     this.open === 'scene'     ? BtnSceneSelected : BtnSceneUnselected;
+    this.characterBtn = this.open === 'character' ? BtnCharacterSelected : BtnCharacterUnselected;
+    this.stickerBtn =   this.open === 'sticker'   ? BtnStickerSelected : BtnStickerUnselected;
   }
 }
