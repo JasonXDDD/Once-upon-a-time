@@ -79,7 +79,7 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
           })
         })
         
-        let editAction = UIAlertAction(title: "修改", style: .default, handler: { (action: UIAlertAction) -> Void in
+        let editAction = UIAlertAction(title: "儲存", style: .default, handler: { (action: UIAlertAction) -> Void in
           
           if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             preview?.modalPresentationStyle = UIModalPresentationStyle.popover
