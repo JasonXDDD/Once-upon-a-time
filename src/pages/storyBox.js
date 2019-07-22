@@ -4,6 +4,7 @@ import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, FlatList, Cam
 import RNFS from 'react-native-fs';
 
 import StoryBox_BG from '../assets/images/StoryBox/BG.png'
+import BoxTool from '../components/box/boxTool';
 
 export default class StoryBox extends React.Component {
 	state = {
@@ -38,38 +39,40 @@ export default class StoryBox extends React.Component {
 
 			<ImageBackground source={StoryBox_BG} style={{ flex: 1, justifyContent: 'center' }}>
 			
-			<View style={{paddingHorizontal: 100}}>
-				<FlatList
-					horizontal={true}
-					data={this.state.images}
-					keyExtractor={(item, id) => JSON.stringify(item)}
-					renderItem={({item}) => (
-						
-						<TouchableOpacity style={{
-							marginHorizontal: 20, 
-							justifyContent: "center",
-						}}>
-							<Text>{item.key}</Text>
-							<Image style={{ 
-								borderRadius: 10, 
-								width: 600,  
-								height: 395,
-								borderColor: "#bebebe",
-								borderWidth: 1 
-							}} source={{uri: item.image}}/>
-						</TouchableOpacity>
+				<View style={{paddingHorizontal: 100}}>
+					<FlatList
+						horizontal={true}
+						data={this.state.images}
+						keyExtractor={(item, id) => JSON.stringify(item)}
+						renderItem={({item}) => (
 							
-					)}
-				/>
-			</View>
+							<TouchableOpacity style={{
+								marginHorizontal: 20, 
+								justifyContent: "center",
+							}}>
+								<Text>{item.key}</Text>
+								<Image style={{ 
+									borderRadius: 10, 
+									width: 600,  
+									height: 395,
+									borderColor: "#bebebe",
+									borderWidth: 1 
+								}} source={{uri: item.image}}/>
+							</TouchableOpacity>
+								
+						)}
+					/>
+				</View>
 
 
-			<TouchableOpacity style={{alignItems: "center", marginTop: 50}} onPress={() => { 
-				this.getVedio() 
-			}}>
-				<Text> Reload </Text>
-			</TouchableOpacity>
+				<TouchableOpacity style={{alignItems: "center", marginTop: 50}} onPress={() => { 
+					this.getVedio() 
+				}}>
+					<Text> Reload </Text>
+				</TouchableOpacity>
 
+
+				<BoxTool></BoxTool>
 			</ImageBackground>
 			
     );
