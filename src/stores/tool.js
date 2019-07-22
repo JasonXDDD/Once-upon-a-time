@@ -48,17 +48,17 @@ export default class ToolStore {
       image: Outside
     },
     {
-      id: "付費解鎖",
+      id: "付費解鎖1",
       image: sLock01,
       isLock: true
     },
     {
-      id: "付費解鎖",
+      id: "付費解鎖2",
       image: sLock02,
       isLock: true
     },
     {
-      id: "付費解鎖",
+      id: "付費解鎖3",
       image: sLock03,
       isLock: true
     }
