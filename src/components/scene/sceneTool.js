@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import { inject, observer } from "mobx-react";
 
-import Save from "../../assets/images/EditStory/btn_save.png";
+import Movie_Selected from "../../assets/images/EditStory/btn_movie_Selected.png";
+import Movie_Unselected from "../../assets/images/EditStory/btn_movie_Unselected.png";
 import BG_Scene from "../../assets/images/EditStory/BG_ScenesBar.png";
 import Btn_NumberBackground from "../../assets/images/EditStory/Btn_SceneNumberBackground.png";
 import Btn_NumberBackground_Selected from "../../assets/images/EditStory/Btn_SceneNumberBackground_selected.png";
@@ -71,7 +72,7 @@ export default class SceneTool extends Component {
             this.storyStore.openScenePane = !this.storyStore.openScenePane;
           }}
         >
-          <Image style={styles.sceneIcon} source={Save} />
+          <Image style={styles.sceneIcon} source={this.storyStore.openScenePane? Movie_Selected: Movie_Unselected} />
         </TouchableOpacity>
 
         <View
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
 
   sceneIcon: {
     width: ICON_SIZE * 1.1,
-    height: ICON_SIZE * 1.1
+    height: ICON_SIZE * 1.15
   },
 
   toolIcon: {

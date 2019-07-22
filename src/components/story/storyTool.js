@@ -3,14 +3,13 @@ import { View, Image, TouchableOpacity, Dimensions, StyleSheet } from "react-nat
 import { inject, observer } from "mobx-react";
 
 import Redo from "../../assets/images/EditStory/btn_redo.png";
-import Save from "../../assets/images/EditStory/btn_save.png";
 
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76
 const BOARD_HEIGHT = screenHeight * 0.7
-const ICON_SIZE = 40;
+const ICON_SIZE = 50;
 const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
 const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 
@@ -41,12 +40,6 @@ export default class StoryTool extends Component {
           <Image style={styles.toolIcon} source={Redo} />
         </TouchableOpacity>
 
-        {/* save, no use */}
-        {/*
-          <TouchableOpacity>
-          <Image style={styles.toolIcon} source={Save}/>
-        </TouchableOpacity>
-        */}
       </View>
     );
   }

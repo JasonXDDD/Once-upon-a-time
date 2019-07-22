@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { View, StyleSheet, Text, Dimensions, Image } from "react-native";
 import { inject, observer } from "mobx-react";
 import StoryItem from "./storyItem";
+
+import Teaching_BG from "../../assets/images/EditStory/Teaching.png";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -29,6 +31,8 @@ export default class StoryBoard extends Component {
           { right: BOARD_RIGHT, top: BOARD_TOP }
         ]}
       >
+        <Image source={Teaching_BG} style={[styles.background]} />
+
         {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map(
           (ele, id) => {
             return <StoryItem key={ele.key} select={ele} idofarray={id} />;
@@ -50,5 +54,11 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 1,
     borderRadius: 10,
+  },
+
+  background: {
+    width: BOARD_WIDTH,
+    height: BOARD_HEIGHT,
+    overflow: 'hidden',
   }
 });
