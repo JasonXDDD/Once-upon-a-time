@@ -38,11 +38,13 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>XDD</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>XD</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
