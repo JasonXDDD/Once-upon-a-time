@@ -68,23 +68,23 @@ const DRAW_PANE_MARGIN_BOTTOM = 50;
 @observer
 export default class DrawBoard extends Component {
   colorList = [
-    { color: "#FF75B5", img: cFF75B5, select: sFF75B5 },
-    { color: "#FF403F", img: cFF403F, select: sFF403F },
-    { color: "#FF7D1C", img: cFF7D1C, select: sFF7D1C },
-    { color: "#FFFF57", img: cFFFF57, select: sFFFF57 },
-    { color: "#49C37C", img: c49C37C, select: s49C37C },
-    { color: "#6BCCF7", img: c6BCCF7, select: s6BCCF7 },
-    { color: "#2367C0", img: c2367C0, select: s2367C0 },
-    { color: "#9323A1", img: c9323A1, select: s9323A1 },
-    { color: "#FFD298", img: cFFD298, select: sFFD298 },
-    { color: "#84574F", img: c84574F, select: s84574F },
-    { color: "#FFFFFF", img: cFFFFFF, select: sFFFFFF },
-    { color: "#000000", img: c000000, select: s000000 }
+    { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5 },
+    { color: "#FF403FFF", img: cFF403F, select: sFF403F },
+    { color: "#FF7D1CFF", img: cFF7D1C, select: sFF7D1C },
+    { color: "#FFFF57FF", img: cFFFF57, select: sFFFF57 },
+    { color: "#49C37CFF", img: c49C37C, select: s49C37C },
+    { color: "#6BCCF7FF", img: c6BCCF7, select: s6BCCF7 },
+    { color: "#2367C0FF", img: c2367C0, select: s2367C0 },
+    { color: "#9323A1FF", img: c9323A1, select: s9323A1 },
+    { color: "#FFD298FF", img: cFFD298, select: sFFD298 },
+    { color: "#84574FFF", img: c84574F, select: s84574F },
+    { color: "#FFFFFFFF", img: cFFFFFF, select: sFFFFFF },
+    { color: "#000000FF", img: c000000, select: s000000 }
   ];
 
   state = {
     isDialogVisible: false,
-    selectColor: '#FF75B5'
+    selectColor: '#FF75B5FF'
   };
 
   constructor(props) {
