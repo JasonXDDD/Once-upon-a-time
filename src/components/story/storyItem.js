@@ -69,7 +69,7 @@ export default class StoryItem extends React.Component {
         >
           <Image
             source={JSON.parse(this.item.image)}
-            style={this.item.category != 'scene' ? {} : styles.background}
+            style={[styles.basicSize, this.item.category != 'scene' ? {} : styles.background]}
           />
         </TouchableHighlight>
       </Gestures>
@@ -78,6 +78,11 @@ export default class StoryItem extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  basicSize: {
+    width: 200,
+    height: 200
+  },
+
   background: {
     width: BOARD_WIDTH,
     height: BOARD_HEIGHT,

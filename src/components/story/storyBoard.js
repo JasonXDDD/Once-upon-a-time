@@ -1,62 +1,64 @@
-import React, { Component } from 'react'
-import { View, StyleSheet, Text, Dimensions } from 'react-native'
-import { inject, observer } from "mobx-react"
-import StoryItem from './storyItem';
+import React, { Component } from "react";
+import { View, StyleSheet, Text, Dimensions, Image } from "react-native";
+import { inject, observer } from "mobx-react";
+import StoryItem from "./storyItem";
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+import Teaching_BG from "../../assets/images/EditStory/Teaching.png";
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76;
 const BOARD_HEIGHT = screenHeight * 0.7;
+const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
 
-@inject('rootStore')
+@inject("rootStore")
 @observer
 export default class StoryBoard extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.storyStore = props.rootStore.storyStore;
     this.toolStore = props.rootStore.toolStore;
   }
 
-  render(){
-    return (   
-      <View style={[styles.storyBoard, {right: this.getRight(), top: this.getTop() }]}>
-        {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map((ele, id)=>{
-          return (
-            <StoryItem key={ele.key} select={ele} idofarray={id}></StoryItem>
-          )
-        })}
+  render() {
+    return (
+      <View
+        style={[
+          styles.storyBoard,
+          { right: BOARD_RIGHT, top: BOARD_TOP }
+        ]}
+      >
+        <Image source={Teaching_BG} style={[styles.background]} />
+
+        {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map(
+          (ele, id) => {
+            return <StoryItem key={ele.key} select={ele} idofarray={id} />;
+          }
+        )}
       </View>
-    )
+    );
   }
 
-  // deal with position of any status
-  getRight(){
-    if(this.toolStore.open !== '') return -1 * (TOOL_PANE_WIDTH - BOARD_POS_BASIC)
-    else {
-      if(this.storyStore.isRecord) return (screenWidth/2) - (BOARD_WIDTH/2) // be center
-      else return BOARD_POS_BASIC
-    }
-  }
-
-  getTop(){
-    if(this.storyStore.isRecord) 
-      // be center - bottom offset
-      return (screenHeight/2) - (BOARD_HEIGHT/2) - (screenHeight*0.06)
-    else return BOARD_POS_BASIC
-  }
 }
 
 const styles = StyleSheet.create({
   storyBoard: {
     width: BOARD_WIDTH,
     height: BOARD_HEIGHT,
-    position: 'absolute',
-    backgroundColor: '#f6f6f6',
-    borderColor: '#bebebe',
-    overflow: 'hidden',
+    position: "absolute",
+    backgroundColor: "#f6f6f6",
+    borderColor: "#bebebe",
+    overflow: "hidden",
     borderWidth: 1,
     borderRadius: 10,
+  },
+
+  background: {
+    width: BOARD_WIDTH,
+    height: BOARD_HEIGHT,
+    overflow: 'hidden',
   }
-})
+});
