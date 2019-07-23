@@ -47,6 +47,7 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
       RPScreenRecorder.shared().startRecording{ [unowned self] (error) in
         guard error == nil else {
           print("There was an error starting the recording.")
+          print(error)
           return
         }
         print("Started Recording Successfully")

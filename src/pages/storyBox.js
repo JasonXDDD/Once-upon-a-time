@@ -32,13 +32,6 @@ export default class StoryBox extends React.Component {
     this.setState({modalVisible: visible});
 	}
 
-	getBorder(item){
-		console.log(this.state.selectVideo. item)
-		if(this.state.selectVideo === item)
-			return 8
-		else 
-			return 0
-	}
 	async getVideo(){
 		let image = await this.getCameraRoll()
 		let movie = await this.getFS()
@@ -108,7 +101,6 @@ export default class StoryBox extends React.Component {
 			<ImageBackground source={StoryBox_BG} style={{ flex: 1, justifyContent: 'center' }}>
 
 				{/*video list*/}
-
 				<View style={{paddingHorizontal: 100, marginBottom: 200}}>
 					<FlatList
 						horizontal={true}
