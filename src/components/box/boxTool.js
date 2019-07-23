@@ -52,7 +52,9 @@ export default class BoxTool extends Component {
         <TouchableOpacity
           onPress={() => {
             Share.open({
-              url: this.props.selectVideo.video
+              url: "file://" + this.props.selectVideo.video,
+              type: 'video/mp4',
+              message: "大家好，這是我做的新故事喔！"
             })
             .then((res) => { console.log(res) })
             .catch((err) => { err && console.log(err); });
