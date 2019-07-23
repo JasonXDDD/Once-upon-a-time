@@ -1,62 +1,104 @@
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, TouchableOpacity, FlatList, CameraRoll, ImageBackground} from 'react-native';
+import {Platform, Dimensions, StyleSheet, Text, View, Image, Modal, TouchableOpacity, TouchableHighlight, FlatList, CameraRoll, ImageBackground} from 'react-native';
 import RNFS from 'react-native-fs';
+import VideoPlayer from 'react-native-video-controls';
+import Video from 'react-native-video';
+import moment from 'moment';
 
 import StoryBox_BG from '../assets/images/StoryBox/BG.png'
 import BoxTool from '../components/box/boxTool';
 
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+
 export default class StoryBox extends React.Component {
 	state = {
-    images: [],
-  };
+		images: [],
+		modalVisible: false,
+		selectVideo: ''
+	};
+	
+	constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
-		this.getVedio()
-		this.getFS()
+		this.getVideo()
 	}
 
-	getFS(){
-		RNFS.readDir(RNFS.LibraryDirectoryPath + '/Preferences') // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
-		.then((result) => {
-			console.log('GOT RESULT', result);
+	setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+	}
 
-			// stat the first file
-			return Promise.all([RNFS.stat(result[0].path), result[0].path]);
+	getBorder(item){
+		console.log(this.state.selectVideo. item)
+		if(this.state.selectVideo === item)
+			return 8
+		else 
+			return 0
+	}
+	async getVideo(){
+		let image = await this.getCameraRoll()
+		let movie = await this.getFS()
+		let ans = []
+
+		image.forEach(item => {
+			let tmp = movie.filter(ele => {
+				return ele.time === item.time
+			})
+
+			if(tmp.length){
+				ans.push({
+					name: tmp[0].name,
+					image: item.path,
+					video: tmp[0].path,
+					time: moment(item.time * 1000).format('YYYY年 MM月 DD日 HH:mm')
+				})
+			}
+		})
+
+		console.log(ans);
+		console.log(image.length, movie.length, ans.length)
+
+		this.setState({images: ans})
+	}
+
+	async getFS(){
+		return await RNFS.readDir('//private/var/mobile/Media/DCIM/100APPLE')
+		.then((result) => {
+			return Promise.all(result.map(ele => {
+				return {
+					name: ele.name,
+					path: ele.path,
+					time: Math.floor(new Date(ele.ctime).valueOf()/1000)
+				}
+			}));
 		})
 		.then((statResult) => {
-			if (statResult[0].isFile()) {
-				// if we have a file, read it
-				return RNFS.readFile(statResult[1], 'utf8');
-			}
-
-			return 'no file';
-		})
-		.then((contents) => {
-			// log the file contents
-			console.log(contents);
+			let arr = [...new Set(statResult.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
+			return arr;
 		})
 		.catch((err) => {
 			console.log(err.message, err.code);
 		});
 	}
 	
-	getVedio(){
-		CameraRoll.getPhotos({
+	async getCameraRoll(){
+		return await CameraRoll.getPhotos({
       first: 13,
       groupTypes: "All",
       assetType: "Videos",
     })
     .then((data) => {
-			console.log(data.edges);
 			let format = data.edges.map(ele => ({
-				key: ele.node.timestamp,
-				image: ele.node.image.uri
+				name: ele.node.timestamp,
+				path: ele.node.image.uri,
+				time: ele.node.timestamp
 			}));
 			let arr = [...new Set(format.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
-
-			this.setState({ images: arr })
-			
+			return arr;
 		});
 	}
 
@@ -64,8 +106,10 @@ export default class StoryBox extends React.Component {
     return (
 
 			<ImageBackground source={StoryBox_BG} style={{ flex: 1, justifyContent: 'center' }}>
-			
-				<View style={{paddingHorizontal: 100}}>
+
+				{/*video list*/}
+
+				<View style={{paddingHorizontal: 100, marginBottom: 200}}>
 					<FlatList
 						horizontal={true}
 						data={this.state.images}
@@ -75,32 +119,90 @@ export default class StoryBox extends React.Component {
 							<TouchableOpacity style={{
 								marginHorizontal: 20, 
 								justifyContent: "center",
+							}}
+							onPress={() => {
+								this.setState({selectVideo: item})
+								this.setModalVisible(true)
+							}}
+							onLongPress={() => {
+								this.setState({selectVideo: item})
 							}}>
-								<Text>{item.key}</Text>
-								<Image style={{ 
-									borderRadius: 10, 
-									width: 600,  
-									height: 395,
-									borderColor: "#bebebe",
-									borderWidth: 1 
-								}} source={{uri: item.image}}/>
+								<Image source={{uri: item.image}} style={[styles.videoItem]}></Image>
+								<View style={styles.videoTextPane}>
+									<Text style={styles.videoText}>{item.time}</Text>
+								</View>
 							</TouchableOpacity>
-								
+
 						)}
 					/>
 				</View>
+							
+				{/* movie modal */}
+				<Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}>
+					
+					<VideoPlayer 
+						source={{uri: this.state.selectVideo.video}}
+						onBack={() => {
+							this.setModalVisible(!this.state.modalVisible);
+						}}/> 
+
+        </Modal>
 
 
-				<TouchableOpacity style={{alignItems: "center", marginTop: 50}} onPress={() => { 
-					this.getVedio() 
+				{/* tool */}
+				<TouchableOpacity 
+				style={{alignItems: "flex-end", marginTop: 0}} 
+				onPress={() => { 
+					this.getVideo() 
 				}}>
 					<Text> Reload </Text>
 				</TouchableOpacity>
 
-
-				<BoxTool></BoxTool>
+				<BoxTool selectVideo={this.state.selectVideo}></BoxTool>
 			</ImageBackground>
 			
     );
   }
 }
+
+const styles = StyleSheet.create({
+	videoSelect: {
+		borderWidth: 8,
+		borderColor: '#aabbcc'
+	},
+
+	videoItem: {
+		borderRadius: 10, 
+		width: 600,  
+		height: 395,
+		borderColor: "#bebebe",
+		borderWidth: 1 
+	},
+
+	videoTextPane: {
+		width: 600,
+		backgroundColor: '#000000AA',
+		paddingVertical: 15,
+		marginTop: -55,
+
+		borderBottomRightRadius: 10,
+		borderBottomLeftRadius: 10,
+	},
+
+	videoText: {
+		fontSize: 20,
+		color: '#FFFFFF',
+		textAlign: 'center',
+	},
+
+	backgroundVideo: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+		width: screenWidth,
+		height: screenHeight
+  },
+});
