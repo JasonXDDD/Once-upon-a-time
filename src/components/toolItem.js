@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, Text, Image, Alert, TouchableOpacity, StyleSheet } from 'react-native'
 import { observer, inject } from 'mobx-react'
 import StoryItem from './story/storyItem'
 
@@ -18,7 +18,7 @@ export default class ToolItem extends Component {
 
   render() {
     return (
-      <View style={{ marginTop: 10 }}>
+      <ScrollView style={{ marginTop: 10, marginBottom: 60 }}>
         {this.toolStore[this.type].map(ele => {
           
           return (
@@ -31,16 +31,21 @@ export default class ToolItem extends Component {
                 else if(this.props.select === 'draw')
                   this.addDrawItem(ele)
               }}>
-              <Image style={{ width: 78, height: 78 }} source={JSON.parse(ele.image)} />
-              <Text style={{ color: 'white' }}>{ele.id}</Text>
+              <Image style={{ width: 100, height: 80 }} source={JSON.parse(ele.image)} />
+              <Text style={{ marginTop: 5, color: this.type === 'character'? 'black': 'white' }}>{ele.id}</Text>
             </TouchableOpacity>
           )
         })}
-      </View>
+      </ScrollView>
     )
   }
 
   addDrawItem(element){
+    if(element.isLock) {
+      this.unlockMessage()
+      return
+    }
+
     let data = {
       image: element.image,
       name: element.id,
@@ -60,6 +65,11 @@ export default class ToolItem extends Component {
 
     this.count ++;
 
+    if(element.isLock) {
+      this.unlockMessage()
+      return
+    }
+
     // deal with scene item, It must be first item (under all characters) & only one
     if (type === 'scene') {
       if (
@@ -71,6 +81,25 @@ export default class ToolItem extends Component {
     } else this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.push(data)
   }
 
+  unlockMessage(){
+    Alert.alert(
+      '是否要付費解鎖',
+      '',
+      [
+        {
+          text: '確定',
+          onPress: () => {
+          }
+        },
+        {
+          text: '取消',
+          onPress: () => {
+          }
+        }
+      ],
+      { cancelable: false }
+    )
+  }
   
 }
 

@@ -1,243 +1,307 @@
+import React, { Component } from "react";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  ImageBackground,
+  TouchableOpacity
+} from "react-native";
+import RNSketchCanvas from "@terrylinla/react-native-sketch-canvas";
+import { inject, observer } from "mobx-react";
+import DialogInput from "react-native-dialog-input";
+import ViewShot from "react-native-view-shot";
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image, Dimensions, ImageBackground, TouchableOpacity} from 'react-native';
-import RNSketchCanvas from '@terrylinla/react-native-sketch-canvas'
-import { inject, observer } from "mobx-react"
-import DialogInput from 'react-native-dialog-input'
+import DrawBoard_IMG from "../../assets/images/DrawStory/drawBoard.png";
+import Redo from "../../assets/images/DrawStory/btn_clean.png";
+import Reback from "../../assets/images/DrawStory/btn_reback.png";
+import Eraser from "../../assets/images/DrawStory/btn_eraser.png";
+import Plus from "../../assets/images/DrawStory/btn_penPlus.png";
+import Delete from "../../assets/images/StoryBox/Btn_delete.png";
+import Camera from "../../assets/images/DrawStory/btn_camera.png";
 
-import DrawBoard_IMG from '../../assets/images/DrawStory/drawBoard.png'
-import Redo from '../../assets/images/EditStory/btn_redo.png'
-import Reback from '../../assets/images/DrawStory/btn_reback.png'
-import Eraser from '../../assets/images/DrawStory/btn_eraser.png'
-import Plus from '../../assets/images/DrawStory/btn_penPlus.png'
-import Delete from '../../assets/images/StoryBox/Btn_delete.png'
-import Camera from '../../assets/images/DrawStory/btn_camera.png'
-import ViewShot from 'react-native-view-shot';
+import c6BCCF7 from "../../assets/images/DrawStory/color/btn_page03_Aqua_blue.png";
+import s6BCCF7 from "../../assets/images/DrawStory/color/btn_page03_Aqua_blue_selected.png";
+import c000000 from "../../assets/images/DrawStory/color/btn_page03_black.png";
+import s000000 from "../../assets/images/DrawStory/color/btn_page03_black_selected.png";
+import c2367C0 from "../../assets/images/DrawStory/color/btn_page03_blue.png";
+import s2367C0 from "../../assets/images/DrawStory/color/btn_page03_blue_selected.png";
+import c84574F from "../../assets/images/DrawStory/color/btn_page03_Brown.png";
+import s84574F from "../../assets/images/DrawStory/color/btn_page03_Brown_selected.png";
+import c49C37C from "../../assets/images/DrawStory/color/btn_page03_green.png";
+import s49C37C from "../../assets/images/DrawStory/color/btn_page03_green_selected.png";
+import cFF7D1C from "../../assets/images/DrawStory/color/btn_page03_orange.png";
+import sFF7D1C from "../../assets/images/DrawStory/color/btn_page03_orange_selected.png";
+import cFF75B5 from "../../assets/images/DrawStory/color/btn_page03_Pink.png";
+import sFF75B5 from "../../assets/images/DrawStory/color/btn_page03_Pink_selected.png";
+import c9323A1 from "../../assets/images/DrawStory/color/btn_page03_purple.png";
+import s9323A1 from "../../assets/images/DrawStory/color/btn_page03_purple_selected.png";
+import cFF403F from "../../assets/images/DrawStory/color/btn_page03_Red.png";
+import sFF403F from "../../assets/images/DrawStory/color/btn_page03_Red_selected.png";
+import cFFD298 from "../../assets/images/DrawStory/color/btn_page03_skin_color.png";
+import sFFD298 from "../../assets/images/DrawStory/color/btn_page03_skin_color_selected.png";
+import cFFFFFF from "../../assets/images/DrawStory/color/btn_page03_white.png";
+import sFFFFFF from "../../assets/images/DrawStory/color/btn_page03_white_selected.png";
+import cFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow.png";
+import sFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow_selected.png";
 
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76;
 const BOARD_HEIGHT = screenHeight * 0.7;
+const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
-const ICON_SIZE = 48;
-
+const ICON_SIZE = 70;
 
 const DRAW_BOARD_WIDTH = BOARD_WIDTH * 0.98;
 const DRAW_BOARD_HEIGHT = BOARD_HEIGHT * 0.98;
-const DRAW_PANE_SIZE = 400;
+const DRAW_PANE_SIZE = 500;
+const DRAW_PANE_TOP = 60;
+const DRAW_PANE_MARGIN_BOTTOM = 50;
 
-
-
-@inject('rootStore')
+@inject("rootStore")
 @observer
 export default class DrawBoard extends Component {
   colorList = [
-    { color: '#FF75B5' },
-    { color: '#FF403F' },
-    { color: '#FF7D1C' },
-    { color: '#FFFF57' },
-    { color: '#49C37C' },
-    { color: '#6BCCF7' },
-    { color: '#2367C0' },
-    { color: '#9323A1' },
-    { color: '#FFD298' },
-    { color: '#84574F' },
-    { color: '#FFFFFF' },
-    { color: '#000000' }
-  ]
-  
-  state = {
-    isDialogVisible: false
-  }
+    { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5 },
+    { color: "#FF403FFF", img: cFF403F, select: sFF403F },
+    { color: "#FF7D1CFF", img: cFF7D1C, select: sFF7D1C },
+    { color: "#FFFF57FF", img: cFFFF57, select: sFFFF57 },
+    { color: "#49C37CFF", img: c49C37C, select: s49C37C },
+    { color: "#6BCCF7FF", img: c6BCCF7, select: s6BCCF7 },
+    { color: "#2367C0FF", img: c2367C0, select: s2367C0 },
+    { color: "#9323A1FF", img: c9323A1, select: s9323A1 },
+    { color: "#FFD298FF", img: cFFD298, select: sFFD298 },
+    { color: "#84574FFF", img: c84574F, select: s84574F },
+    { color: "#FFFFFFFF", img: cFFFFFF, select: sFFFFFF },
+    { color: "#000000FF", img: c000000, select: s000000 }
+  ];
 
-  constructor(props){
+  state = {
+    isDialogVisible: false,
+    selectColor: '#FF75B5FF'
+  };
+
+  constructor(props) {
     super(props);
     this.storyStore = props.rootStore.storyStore;
     this.toolStore = props.rootStore.toolStore;
-	}
-	
-	render() {
-		return (
-      <ImageBackground source={DrawBoard_IMG} resizeMode='contain' style={[styles.drawBoard, {right: this.getRight()}]}>
-        
+  }
 
+  render() {
+    return (
+      <ImageBackground source={DrawBoard_IMG} resizeMode="contain" style={styles.drawBoard} >
         {/* draw pane size */}
         <View style={{
-          position: 'absolute',
-          width: DRAW_BOARD_WIDTH,
-          height: DRAW_BOARD_HEIGHT,
-          top: BOARD_HEIGHT * 0.07,
-          left: BOARD_WIDTH * 0.01
-        }}>
-
+            position: "absolute",
+            width: DRAW_BOARD_WIDTH,
+            height: DRAW_BOARD_HEIGHT,
+            top: BOARD_HEIGHT * 0.07,
+            left: BOARD_WIDTH * 0.01
+          }}
+        >
           {/* pane style */}
-          <View style={[styles.drawPane, {
-            backgroundColor: '#FFFFFF',
-            position: 'absolute',
-            left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-            top: ICON_SIZE
-          }]}>
-          </View>
-
+          <View style={[ styles.drawPane, styles.drawPaneBG ]}/>
 
           {/* snapshot */}
           <ViewShot ref="viewShot" options={{ format: "png" }}>
-
             {/* import image */}
-            <View style={[styles.drawPane, {
-              position: 'absolute',
-              left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-              top: ICON_SIZE
-
-            }]}>
-              { this.genImage(this.toolStore.drawItem) }
+            <View style={[ styles.drawPane, styles.imagePane ]}>
+              {this.genImage(this.toolStore.drawItem)}
             </View>
 
             {/* target */}
-            <View style={[styles.drawPane, {
-              marginTop: ICON_SIZE,
-              marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-            }]}></View>
-            
+            <View style={[ styles.drawPane, styles.photoPane]}/>
 
             <RNSketchCanvas
-              containerStyle={{ 
-                position: 'absolute',
-                width: DRAW_BOARD_WIDTH,
-                height: DRAW_BOARD_HEIGHT,
-                padding: 10
-              }}
-              canvasStyle={[styles.drawPane, { 
-                left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
-                top: 38,
-                marginBottom: 100
-              }]}
+              containerStyle={ styles.drawContaniner }
+              canvasStyle={[ styles.drawPane, styles.drawCanvas ]}
               defaultStrokeIndex={0}
               defaultStrokeWidth={6}
               strokeColors={this.colorList}
               
-              strokeComponent={color => (
-                <View style={[{ backgroundColor: color, opacity: 0.5 }, styles.strokeColorButton]} />
-              )}
-              strokeSelectedComponent={(color, index, changed) => {
+              strokeComponent={color => {
+                let item = this.colorList.filter(ele => ele.color === color)[0]
                 return (
-                  <View style={[{ backgroundColor: color, opacity: 1 }, styles.strokeColorButton]} />
+                  <ImageBackground source={item.img} style={ styles.colorIcon }>
+                    <View style={{ backgroundColor: color, opacity: 1 }} />
+                  </ImageBackground>
                 )
               }}
-              
+              strokeSelectedComponent={(color, index, changed) => {
+                if(changed) this.setState({selectColor: color})
+                return (
+                  <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
+                    <View style={{ backgroundColor: color, opacity: 1 }} />
+                  </ImageBackground>
+                )
+              }}
               undoComponent={
-                <Image style={[ styles.icon, { position: 'absolute', right: DRAW_BOARD_WIDTH * 0.07, top: 60 }]} source={Reback}/>
+                <Image
+                  style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 100 } ]}
+                  source={Reback}
+                />
               }
               clearComponent={
-                <Image style={[ styles.icon, { position: 'absolute', right: DRAW_BOARD_WIDTH * 0.07, top: 120 }]} source={Redo}/>
+                <Image
+                  style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 200 } ]}
+                  source={Redo}
+                />
               }
+              onClearPressed={() => {
+                this.toolStore.drawItem = {}
+              }}
               eraseComponent={
-                <Image style={[ styles.icon, { position: 'absolute', left: DRAW_BOARD_WIDTH * 0.07, top: 60 }]} source={Eraser}/>
+                <Image
+                  style={[ styles.icon, { position: "absolute", left: DRAW_BOARD_WIDTH * 0.05, top: 100 } ]}
+                  source={Eraser}
+                />
               }
-              strokeWidthComponent={(w) => {
+              strokeWidthComponent={w => {
                 return (
-                  <Image style={[ styles.icon, { position: 'absolute', left: DRAW_BOARD_WIDTH * -0.9, top: 120 }]} source={Plus}/>
-                )
-              }}>
-              
+                  <View style={{ position: "absolute", left: DRAW_BOARD_WIDTH * -0.92, top: 200 }}>
+                    <Image style={[ styles.icon ]} source={Plus} />
 
-            </RNSketchCanvas>
+                    <View style={[styles.strokeWidthButton, { backgroundColor: this.state.selectColor }]}>
+                      <View  style={{
+                        backgroundColor: 'white', marginBottom: 1,
+                        width: Math.sqrt(w / 3) * 10, height: Math.sqrt(w / 3) * 10, borderRadius: Math.sqrt(w / 3) * 10 / 2
+                      }} />
+                    </View>
+                  </View>
+                );
+              }}
+            />
           </ViewShot>
 
-
-          <TouchableOpacity 
-            onPress={()=> {
-              this.setState({isDialogVisible: true})  
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({ isDialogVisible: true });
             }}
             style={{
-              position: 'absolute',
-              left: '46%',
-            }}>
-            <Image source={Camera} style={[styles.icon]}/>
-            </TouchableOpacity>
+              position: "absolute",
+              left: "46%"
+            }}
+          >
+            <Image source={Camera} style={[styles.CameraIcon]} />
+          </TouchableOpacity>
         </View>
 
-        <DialogInput isDialogVisible={this.state.isDialogVisible}
+        <DialogInput
+          isDialogVisible={this.state.isDialogVisible}
           title={"他叫什麼名字？"}
           message={"請給他一個名字吧"}
-          hintInput ={"名字"}
-          submitInput={ (inputText) => {
-            this.snapshot(inputText)
-            this.setState({isDialogVisible: false})
+          hintInput={"名字"}
+          submitInput={inputText => {
+            this.snapshot(inputText);
+            this.setState({ isDialogVisible: false });
           }}
-          closeDialog={ () => {
-            this.setState({isDialogVisible: false})            
-          }}>
-        </DialogInput>
-
-
-      </ImageBackground>	
-		);
+          closeDialog={() => {
+            this.setState({ isDialogVisible: false });
+          }}
+        />
+      </ImageBackground>
+    );
   }
-  
-  snapshot(name){
-    this.refs['viewShot'].capture().then(uri => {
+
+  updateColor(color){
+    this.setState({selectColor: color})
+  }
+
+  snapshot(name) {
+    this.refs["viewShot"].capture().then(uri => {
       this.toolStore.sticker.push({
         id: name,
         image: JSON.stringify({
-          uri: uri, 
-          width: DRAW_PANE_SIZE, 
+          uri: uri,
+          width: DRAW_PANE_SIZE,
           height: DRAW_PANE_SIZE
         })
-      })
+      });
 
-      this.toolStore.open = 'sticker'
+      this.toolStore.open = "sticker";
     });
   }
 
-  genImage(ele){
-    if(ele.image){
-      return (
-        <Image style={styles.drawPane} source={JSON.parse(ele.image)}></Image>
-      )
-    }
-  }
-	getRight(){
-    if(this.toolStore.open !== '') return -1 * (TOOL_PANE_WIDTH - BOARD_POS_BASIC)
-    else {
-      if(this.storyStore.isRecord) return (screenWidth/2) - (BOARD_WIDTH/2) // be center
-      else return BOARD_POS_BASIC
+  genImage(ele) {
+    if (ele.image) {
+      return <Image style={styles.drawPane} source={JSON.parse(ele.image)} />;
     }
   }
 }
 
-
 const styles = StyleSheet.create({
-	drawBoard: {
+  drawBoard: {
     width: BOARD_WIDTH,
     height: screenHeight,
-    position: 'absolute',
-    overflow: 'hidden',
+    right: BOARD_RIGHT,
+    position: "absolute",
+    overflow: "hidden"
   },
-  
 
   drawPane: {
-    height: 400,
-    width: 400
+    height: DRAW_PANE_SIZE,
+    width: DRAW_PANE_SIZE,
   },
 
+  drawPaneBG: {
+    backgroundColor: "#FFFFFF",
+    position: "absolute",
+    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
+    top: DRAW_PANE_TOP,
+    borderRadius: 10
+  },
+
+  imagePane: {
+    position: "absolute",
+    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
+    top: DRAW_PANE_TOP
+  },
+
+  photoPnae: {
+    marginTop: DRAW_PANE_TOP,
+    marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2
+  },
+
+
+  drawContaniner: {
+    position: "absolute",
+    width: DRAW_BOARD_WIDTH,
+    height: DRAW_BOARD_HEIGHT,
+    padding: 10
+  },
+
+  drawCanvas: {
+    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
+    top: DRAW_PANE_TOP -10,
+    marginBottom: DRAW_PANE_MARGIN_BOTTOM
+  },
+
+
   icon: {
-    height: ICON_SIZE,
+    height: ICON_SIZE + 5,
     width: ICON_SIZE
   },
-	
-  strokeColorButton: {
-    marginHorizontal: 2.5, 
-    marginVertical: 8, 
-    width: 30, 
-    height: 30, 
-    borderRadius: 15,
-    flexDirection: 'column'
+
+  CameraIcon: {
+    marginTop: 0,
+    width: ICON_SIZE + 18,
+    height: ICON_SIZE - 20,
+  },
+
+  colorIcon: {
+    width: ICON_SIZE,
+    height: ICON_SIZE,
+    marginLeft: -3
   },
 
   strokeWidthButton: {
-    marginHorizontal: 2.5, marginVertical: 8, width: 30, height: 30, borderRadius: 15,
-    justifyContent: 'center', alignItems: 'center', backgroundColor: '#39579A', right: 575,
+    marginHorizontal: 10, marginVertical: 10, width: 30, height: 30, borderRadius: 15,
+    justifyContent: 'center', alignItems: 'center'
   },
 });
