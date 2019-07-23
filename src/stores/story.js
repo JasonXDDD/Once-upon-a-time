@@ -4,6 +4,9 @@ import { observable, action } from "mobx";
 export default class StoryStore {
 	@observable isRecord = false;
 	@observable onLive = false;
+
+	@observable count = 0;
+	@observable countdownid = {};
 	
 	@observable story = [];
 	@observable selectSceneIndex = 0;

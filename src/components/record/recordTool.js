@@ -19,13 +19,26 @@ export default class RecordTool extends Component {
     this.navigation = props.navigation
   }
 
+
+
+  countDown(){ 
+    if (this.storyStore.count == 0){
+      clearInterval(this.storyStore.countdownid)
+
+      this.storyStore.onLive = true
+      this.onStartRecord()
+    }
+    else
+      this.storyStore.count --;
+  }
+
   render() {
     return (
       <View style={[styles.recordTool, { display: !this.storyStore.isRecord ? "none" : "flex" }]}>
         <TouchableOpacity style={{display: this.storyStore.onLive === false? 'flex': 'none'}} 
           onPress={() => {
-            this.storyStore.onLive = true
-            this.onStartRecord()
+            this.storyStore.count = 3
+            this.storyStore.countdownid = setInterval(() => {this.countDown()}, 1000)
           }}>
           <Image style={styles.recordIcon} source={Btn_Start}></Image>
         </TouchableOpacity>
