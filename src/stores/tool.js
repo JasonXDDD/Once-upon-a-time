@@ -24,7 +24,8 @@ import Grandma from "../assets/images/character/grandma.png";
 import Wolf from "../assets/images/character/wolf.png";
 import cLock01 from "../assets/images/character/lock01.png";
 
-import Simpson from "../assets/images/simpson.png";
+import stickerSample from "../assets/images/sticker-sample.png";
+
 
 export default class ToolStore {
   @observable sceneBtn = BtnSceneUnselected;
@@ -105,6 +106,10 @@ export default class ToolStore {
   ];
 
   @observable sticker = [
+    {
+      id: "小恐龍",
+      image: stickerSample
+    }
   ];
 
   @observable drawItem = {};

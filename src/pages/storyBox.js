@@ -7,8 +7,7 @@ import Video from 'react-native-video';
 import moment from 'moment';
 
 import StoryBox_BG from '../assets/images/StoryBox/BG.png'
-import BoxTool from '../components/box/boxTool';
-
+import BoxTool from '../components/box/boxTool'
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -35,7 +34,12 @@ export default class StoryBox extends React.Component {
 	async getVideo(){
 		let image = await this.getCameraRoll()
 		let movie = await this.getFS()
-		let ans = []
+		let ans = [{
+			name: 'Sample',
+			image: 'https://i.imgur.com/rHcCdWb.png',
+			video: 'https://videos2.sendvid.com/e8/25/vsxjd0ex.mp4?validfrom=1564139081&validto=1564146281&rate=200k&burst=1000k&ip=36.231.141.172&hash=6CjAceG%2FplCCAUgVbjJMAtTll88%3D',
+			time: 'SAMPLE 2019年 07月 16日 17:45'
+		}]
 
 		image.forEach(item => {
 			let tmp = movie.filter(ele => {
