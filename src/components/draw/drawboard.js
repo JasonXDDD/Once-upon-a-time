@@ -50,17 +50,17 @@ import sFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow_selec
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76;
-const BOARD_HEIGHT = screenHeight * 0.7;
+const BOARD_WIDTH = screenHeight * 1590 / 1536;
+const BOARD_HEIGHT = screenHeight;
 const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
 const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
 const ICON_SIZE = 70;
 
-const DRAW_BOARD_WIDTH = BOARD_WIDTH * 0.98;
-const DRAW_BOARD_HEIGHT = BOARD_HEIGHT * 0.98;
-const DRAW_PANE_SIZE = 500;
+const DRAW_BOARD_WIDTH = BOARD_WIDTH;
+const DRAW_BOARD_HEIGHT = (BOARD_WIDTH) * 38 / 55;
+const DRAW_PANE_SIZE = DRAW_BOARD_HEIGHT * 0.83;
 const DRAW_PANE_TOP = 60;
 const DRAW_PANE_MARGIN_BOTTOM = 50;
 
@@ -101,8 +101,8 @@ export default class DrawBoard extends Component {
             position: "absolute",
             width: DRAW_BOARD_WIDTH,
             height: DRAW_BOARD_HEIGHT,
-            top: BOARD_HEIGHT * 0.07,
-            left: BOARD_WIDTH * 0.01
+            top: BOARD_HEIGHT * 0.035,
+            left: 0
           }}
         >
           {/* pane style */}
@@ -185,7 +185,8 @@ export default class DrawBoard extends Component {
             }}
             style={{
               position: "absolute",
-              left: "46%"
+              left: "45%",
+              top: 5
             }}
           >
             <Image source={Camera} style={[styles.CameraIcon]} />
@@ -238,10 +239,10 @@ export default class DrawBoard extends Component {
 const styles = StyleSheet.create({
   drawBoard: {
     width: BOARD_WIDTH,
-    height: screenHeight,
+    height: BOARD_HEIGHT,
     right: BOARD_RIGHT,
     position: "absolute",
-    overflow: "hidden"
+    overflow: "hidden",
   },
 
   drawPane: {

@@ -98,31 +98,30 @@ const styles = StyleSheet.create({
   icon: {
     width: 150,
     height: 80,
-    position: "absolute",
-    bottom: 15,
-    zIndex: 3
   },
 
   tabBar: {
     position: 'absolute',
     bottom: 0,
     left: 0,
-    width: screenWidth * 0.9,
-    height: 65
+    width: (screenWidth * 0.95),
+    height: (screenWidth * 0.95) * 115 / 1897
   },
 
   tabStyle: {
     backgroundColor: 'transparent',
     borderTopColor: "rgba(255, 255, 255, 0)",
     width: screenWidth * 0.8,
+    bottom: 40
   },
 
   tabView: {
     position: 'absolute',
-    bottom: 0,
     width: screenWidth,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    bottom: 0
+    
   }
 });

@@ -10,7 +10,7 @@ const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76;
 const BOARD_HEIGHT = screenHeight * 0.7;
 const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
-const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.05;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
 
