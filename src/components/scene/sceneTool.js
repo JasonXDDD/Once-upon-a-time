@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
 
   sceneBar: {
     width: BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60,
-    height: ICON_SIZE + 20,
+    height: (BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60) * 57 / 630,
     flexDirection: "row",
     alignItems: "center"
   },
@@ -166,16 +166,16 @@ const styles = StyleSheet.create({
   },
 
   toolNumber: {
-    left: ICON_SIZE * 60 / 100 - 6,
+    left: (ICON_SIZE * 0.9) * 60 / 100 - 6,
     position: "absolute",
-    top: ICON_SIZE / 2 - 12,
+    top: (ICON_SIZE * 0.9) / 2 - 12,
     fontSize: 20,
     color: "#ef9d17",
     fontWeight: "bold"
   },
 
   NumberBackground: {
-    width: ICON_SIZE * 60 / 50,
-    height: ICON_SIZE
+    width: (ICON_SIZE * 0.9) * 60 / 50,
+    height: ICON_SIZE * 0.9
   }
 });
