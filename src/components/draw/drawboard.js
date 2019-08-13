@@ -109,7 +109,7 @@ export default class DrawBoard extends Component {
           <View style={[ styles.drawPane, styles.drawPaneBG ]}/>
 
           {/* snapshot */}
-          <ViewShot ref="viewShot" options={{ format: "png" }}>
+          <ViewShot ref="viewShot" options={{ format: "png", result: "data-uri" }}>
             {/* import image */}
             <View style={[ styles.drawPane, styles.imagePane ]}>
               {this.genImage(this.toolStore.drawItem)}
@@ -216,6 +216,7 @@ export default class DrawBoard extends Component {
 
   snapshot(name) {
     this.refs["viewShot"].capture().then(uri => {
+      
       this.toolStore.sticker.push({
         id: name,
         image: JSON.stringify({
@@ -264,7 +265,8 @@ const styles = StyleSheet.create({
     top: DRAW_PANE_TOP
   },
 
-  photoPnae: {
+  photoPane: {
+    // backgroundColor: "#AABBCC55",
     marginTop: DRAW_PANE_TOP,
     marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2
   },
