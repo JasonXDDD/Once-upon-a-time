@@ -31,7 +31,7 @@ export default class ToolItem extends Component {
                 else if(this.props.select === 'draw')
                   this.addDrawItem(ele)
               }}>
-              <Image style={{ width: 100, height: 80 }} source={JSON.parse(ele.image)} />
+              <Image style={{ width: 100, height: 100 }} source={JSON.parse(ele.image)} />
               <Text style={{ marginTop: 5, color: this.type === 'character'? 'black': 'white' }}>{ele.id}</Text>
             </TouchableOpacity>
           )
