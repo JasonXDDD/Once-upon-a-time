@@ -9,7 +9,7 @@ const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76
 const BOARD_HEIGHT = screenHeight * 0.7
-const ICON_SIZE = 50;
+const ICON_SIZE = 60;
 const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
 const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
 

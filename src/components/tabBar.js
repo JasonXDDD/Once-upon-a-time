@@ -96,8 +96,8 @@ export default TabBar;
 
 const styles = StyleSheet.create({
   icon: {
-    width: 150,
-    height: 80,
+    width: 150 * 1.2,
+    height: 80 * 1.2,
   },
 
   tabBar: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderTopColor: "rgba(255, 255, 255, 0)",
     width: screenWidth * 0.8,
-    bottom: 40
+    bottom: 50
   },
 
   tabView: {

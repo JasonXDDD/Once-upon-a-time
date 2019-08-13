@@ -8,7 +8,7 @@ import ToolBar_Tap from "../assets/images/img_Topmenu.png";
 
 const TOOL_PANE_WIDTH = 135;
 const TOOL_PANE_OFFSET = 25;
-const ICON_SIZE = 50;
+const ICON_SIZE = 60;
 @inject("rootStore")
 @observer
 export default class ToolBar extends Component {
