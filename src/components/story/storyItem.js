@@ -20,6 +20,11 @@ const BOARD_HEIGHT = screenHeight * 0.7;
 export default class StoryItem extends React.Component {
   initStyle;
 
+  state = {
+    imageTmp: ""
+  };
+
+
   constructor(props) {
     super(props);
     this.storyStore = props.rootStore.storyStore;
@@ -46,7 +51,11 @@ export default class StoryItem extends React.Component {
       { cancelable: false }
     );
   }
-
+  
+  componentDidMount() {
+    this.setState({imageTmp: JSON.parse(this.item.image)})    
+  }
+  
   render() {
     this.initStyle = JSON.parse(this.item.style);
     if (!this.initStyle["position"]) this.initStyle["position"] = "absolute";
@@ -59,6 +68,11 @@ export default class StoryItem extends React.Component {
         style={{ ...this.initStyle }}
         onEnd={(event, styles) => {
           this.item.style = JSON.stringify(styles);
+          this.setState({imageTmp: JSON.parse(this.item.image)})
+        }}
+        onChange={(event, styles) => {
+          if(this.item.animate) 
+            this.setState({imageTmp: this.item.animate})
         }}
       >
         <TouchableHighlight
@@ -68,7 +82,7 @@ export default class StoryItem extends React.Component {
           underlayColor="rgba(255, 255, 255, 0)"
         >
           <Image
-            source={JSON.parse(this.item.image)}
+            source={this.state.imageTmp? this.state.imageTmp: JSON.parse(this.item.image)}
             style={[
               styles.basicSize,
               this.item.category != "scene" ? {} : styles.background
