@@ -16,6 +16,8 @@ import sLock03 from "../assets/images/scene/lock03.png";
 
 import BigMonster from "../assets/images/character/BigMonster.png";
 import SmallMoster from "../assets/images/character/smallMoster.png";
+import BigMonsterAnimate from "../assets/images/character/BigMonsterAnimate.gif";
+import SmallMosterAnimate from "../assets/images/character/smallMosterAnimate.gif";
 import Sun from "../assets/images/character/Sun.png";
 import Redhat from "../assets/images/character/redhat.png";
 import Hunter from "../assets/images/character/hunter.png";
@@ -38,29 +40,38 @@ export default class ToolStore {
   @observable scene = [
     {
       id: "叢林",
-      image: Forest
+      image: Forest,
+      animate: null,
+      isLock: false
     },
     {
       id: "房間",
-      image: Room
+      image: Room,
+      animate: null,
+      isLock: false
     },
     {
       id: "奶奶家",
-      image: Outside
+      image: Outside,
+      animate: null,
+      isLock: false
     },
     {
       id: "付費解鎖1",
       image: sLock01,
+      animate: null,
       isLock: true
     },
     {
       id: "付費解鎖2",
       image: sLock02,
+      animate: null,
       isLock: true
     },
     {
       id: "付費解鎖3",
       image: sLock03,
+      animate: null,
       isLock: true
     }
   ];
@@ -68,39 +79,56 @@ export default class ToolStore {
   @observable character = [
     {
       id: "太陽",
-      image: Sun
+      image: Sun,
+      animate: null,
+      isLock: false
     },
     {
-      id: "大從",
-      image: BigMonster
+      id: "從從",
+      image: BigMonster,
+      animate: BigMonsterAnimate,
+      isLock: false
     },
     {
-      id: "小前",
-      image: SmallMoster
+      id: "前前",
+      image: SmallMoster,
+      animate: SmallMosterAnimate,
+      isLock: false
     },
     {
       id: "蜜蜂",
-      image: Bee
+      image: Bee,
+      animate: null,
+      isLock: false
     },
     {
       id: "小紅帽",
-      image: Redhat
+      image: Redhat,
+      animate: null,
+      isLock: false
     },
     {
       id: "獵人",
-      image: Hunter
+      image: Hunter,
+      animate: null,
+      isLock: false
     },
     {
       id: "阿嬤",
-      image: Grandma
+      image: Grandma,
+      animate: null,
+      isLock: false
     },
     {
       id: "狼",
-      image: Wolf
+      image: Wolf,
+      animate: null,
+      isLock: false
     },
     {
       id: "付費解鎖",
       image: cLock01,
+      animate: null,
       isLock: true
     }
   ];
@@ -108,7 +136,9 @@ export default class ToolStore {
   @observable sticker = [
     {
       id: "小恐龍",
-      image: stickerSample
+      image: stickerSample,
+      animate: null,
+      isLock: false
     }
   ];
 

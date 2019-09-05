@@ -45,8 +45,8 @@ export default class RecordTool extends Component {
 
         <TouchableOpacity style={{display: this.storyStore.onLive === true? 'flex': 'none'}} 
           onPress={() => {
-            this.storyStore.onLive = false
             this.onStopRecord()
+            this.storyStore.onLive = false
             this.storyStore.isRecord = false;
             this.showBar();
           }}>
@@ -76,6 +76,7 @@ export default class RecordTool extends Component {
   }
 
   onStopRecord() {
+    console.log("Stopped")
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.swiftRecordToolRef),
       UIManager.getViewManagerConfig('RecordTool').Commands.stopRecordFromManager,
