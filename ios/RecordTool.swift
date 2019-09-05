@@ -33,25 +33,25 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
   }
   
   private var isRecording = false
-//  let recorder = RPScreenRecorder.shared()
+  let recorder = RPScreenRecorder.shared()
   
   
   @objc func startRecording() {
-    guard RPScreenRecorder.shared().isAvailable else {
+    guard recorder.isAvailable else {
       print("Recording is not available at this time.")
       return
     }
     
     if #available(iOS 10.0, *) {
-      RPScreenRecorder.shared().isMicrophoneEnabled = true
-      RPScreenRecorder.shared().startRecording{ [unowned self] (error) in
+      recorder.isMicrophoneEnabled = true
+      recorder.startRecording{ [unowned self] (error) in
         guard error == nil else {
           print("There was an error starting the recording.")
           print(error)
           return
         }
         print("Started Recording Successfully")
-        print(RPScreenRecorder.shared().isMicrophoneEnabled)
+        print(self.recorder.isMicrophoneEnabled)
         self.isRecording = true
       }
     }
@@ -63,7 +63,7 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
   
   
   @objc func stopRecording() {
-    RPScreenRecorder.shared().stopRecording { [unowned self] (preview, error) in
+    recorder.stopRecording { [unowned self] (preview, error) in
       print("Stopped recording")
       
       guard preview != nil else {
@@ -71,11 +71,11 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
         return
       }
       
-      DispatchQueue.main.async{
+      DispatchQueue.main.async {
         let alert = UIAlertController(title: "錄影成功", message: "你想要儲存還是刪除呢?", preferredStyle: .alert)
         
         let deleteAction = UIAlertAction(title: "刪除", style: .destructive, handler: { (action: UIAlertAction) in
-          RPScreenRecorder.shared().discardRecording(handler: { () -> Void in
+          self.recorder.discardRecording(handler: { () -> Void in
             print("Recording suffessfully deleted.")
           })
         })
@@ -98,8 +98,10 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
         alert.addAction(editAction)
         alert.addAction(deleteAction)
         self.findViewController()!.present(alert, animated: true, completion: nil)
+        
       }
     }
+    
   }
   
   @objc func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
