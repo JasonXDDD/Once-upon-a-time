@@ -5,6 +5,13 @@ import { observable } from "mobx";
 import ToolItem from "./toolItem";
 
 import ToolBar_Tap from "../assets/images/img_Topmenu.png";
+import Sound from 'react-native-sound';
+
+
+import buttonCllick from "../assets/sound/button_pop.wav"
+const buttonMusic = new Sound(buttonCllick, (error)=> {
+  if(error) Alert.alert("失敗")
+})
 
 const TOOL_PANE_WIDTH = 135;
 const TOOL_PANE_OFFSET = 25;
@@ -65,6 +72,7 @@ export default class ToolBar extends Component {
               {/* tool icon */}
               <TouchableOpacity
                 onPress={() => {
+                  buttonMusic.play()
                   this.toolStore.toggleOpen(ele.type);
                 }}
                 style={[

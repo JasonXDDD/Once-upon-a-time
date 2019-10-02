@@ -18,9 +18,17 @@ import DrawStorySelected from "../assets/images/TabBar/DrawStory_Selected.png";
 import DrawStoryUnselected from "../assets/images/TabBar/DrawStory_Unselected.png";
 import StoryBoxSelected from "../assets/images/TabBar/StoryBox_Selected.png";
 import StoryBoxUnselected from "../assets/images/TabBar/StoryBox_Unselected.png";
+import Sound from 'react-native-sound';
 
+
+import buttonCllick from "../assets/sound/button.mp3"
+const buttonMusic = new Sound(buttonCllick, (error)=> {
+  if(error) Alert.alert("失敗")
+})
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
+
+
 
 const TabMap = {
   EditStory: {
@@ -35,13 +43,19 @@ const TabMap = {
         tabBarLabel: "   ",
         tabBarVisible: showTabBar,
         animationEnabled: true,
-        tabBarIcon: ({ focused }) => (
-          <Image
-            focused={focused}
-            style={[styles.icon]}
-            source={focused ? EditStorySelected : EditStoryUnselected}
-          />
-        )
+        tabBarIcon: ({ focused }) => {
+          if(focused) {
+            buttonMusic.setVolume(0.5)
+            buttonMusic.play()
+          }
+          return (
+            <Image
+              focused={focused}
+              style={[styles.icon]}
+              source={focused ? EditStorySelected : EditStoryUnselected}
+            />
+          )
+        }
       };
     }
   },
@@ -50,13 +64,19 @@ const TabMap = {
     screen: StoryBox,
     navigationOptions: {
       tabBarLabel: "   ", 
-      tabBarIcon: ({ focused }) => (
-        <Image
-          focused={focused}
-          style={[styles.icon]}
-          source={focused ? StoryBoxSelected : StoryBoxUnselected}
-        />
-      )
+      tabBarIcon: ({ focused }) => {
+        if(focused) {
+          buttonMusic.setVolume(0.5)
+          buttonMusic.play()
+        }
+        return (
+          <Image
+            focused={focused}
+            style={[styles.icon]}
+            source={focused ? StoryBoxSelected : StoryBoxUnselected}
+          />
+        )
+      }
     }
   },
 
@@ -64,20 +84,26 @@ const TabMap = {
     screen: DrawSticker,
     navigationOptions: {
       tabBarLabel: "   ",
-      tabBarIcon: ({ focused }) => (
-        <Image
-          focused={focused}
-          style={[styles.icon]}
-          source={focused ? DrawStorySelected : DrawStoryUnselected}
-        />
-      )
+      tabBarIcon: ({ focused }) => {
+        if(focused) {
+          buttonMusic.setVolume(0.5)
+          buttonMusic.play()
+        }
+        return (
+          <Image
+            focused={focused}
+            style={[styles.icon]}
+            source={focused ? DrawStorySelected : DrawStoryUnselected}
+          />
+        )
+      }
     }
   }
 };
 
 
 const TabBarComponent = (props) => (
-  <BottomTabBar {...props} />  
+  <BottomTabBar {...props}/>  
 );
 
 const TabNavigator = createBottomTabNavigator(TabMap, {

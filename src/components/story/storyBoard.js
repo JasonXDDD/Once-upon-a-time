@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text, Dimensions, Image } from "react-native";
 import { inject, observer } from "mobx-react";
 import StoryItem from "./storyItem";
+import { RNCamera } from 'react-native-camera';
 
 import Teaching_BG from "../../assets/images/EditStory/Teaching.png";
 
@@ -32,6 +33,30 @@ export default class StoryBoard extends Component {
         ]}
       >
         <Image source={Teaching_BG} style={[styles.background]} />
+        
+        <RNCamera
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style={styles.preview}
+          type={RNCamera.Constants.Type.back}
+          flashMode={RNCamera.Constants.FlashMode.on}
+          androidCameraPermissionOptions={{
+            title: 'Permission to use camera',
+            message: 'We need your permission to use your camera',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+          androidRecordAudioPermissionOptions={{
+            title: 'Permission to use audio recording',
+            message: 'We need your permission to use your audio',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+          onGoogleVisionBarcodesDetected={({ barcodes }) => {
+            console.log(barcodes);
+          }}
+        />
 
         {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map(
           (ele, id) => {
