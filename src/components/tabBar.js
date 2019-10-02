@@ -41,7 +41,7 @@ const TabMap = {
         animationEnabled: true,
         tabBarIcon: ({ focused }) => {
           if(focused) {
-            store.soundStore.playMusic(tabPlayer, 0.5, 1)            
+            store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)            
           }
           return (
             <Image
@@ -61,7 +61,7 @@ const TabMap = {
       tabBarLabel: "   ", 
       tabBarIcon: ({ focused }) => {
         if(focused) {
-          store.soundStore.playMusic(tabPlayer, 0.5, 1)          
+          store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)          
         }
         return (
           <Image
@@ -80,7 +80,7 @@ const TabMap = {
       tabBarLabel: "   ",
       tabBarIcon: ({ focused }) => {
         if(focused) {
-          store.soundStore.playMusic(tabPlayer, 0.5, 1)          
+          store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)          
         }
         return (
           <Image
