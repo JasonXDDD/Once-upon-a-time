@@ -67,20 +67,22 @@ const DRAW_PANE_MARGIN_BOTTOM = 50;
 @inject("rootStore")
 @observer
 export default class DrawBoard extends Component {
+  timeOut;
   colorPlayer;
+  
   colorList = [
-    { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5 },
-    { color: "#FF403FFF", img: cFF403F, select: sFF403F },
-    { color: "#FF7D1CFF", img: cFF7D1C, select: sFF7D1C },
-    { color: "#FFFF57FF", img: cFFFF57, select: sFFFF57 },
-    { color: "#49C37CFF", img: c49C37C, select: s49C37C },
-    { color: "#6BCCF7FF", img: c6BCCF7, select: s6BCCF7 },
-    { color: "#2367C0FF", img: c2367C0, select: s2367C0 },
-    { color: "#9323A1FF", img: c9323A1, select: s9323A1 },
-    { color: "#FFD298FF", img: cFFD298, select: sFFD298 },
-    { color: "#84574FFF", img: c84574F, select: s84574F },
-    { color: "#FFFFFFFF", img: cFFFFFF, select: sFFFFFF },
-    { color: "#000000FF", img: c000000, select: s000000 }
+    { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5, sound: 'piano_g3', player: {} },
+    { color: "#FF403FFF", img: cFF403F, select: sFF403F, sound: 'piano_a3', player: {} },
+    { color: "#FF7D1CFF", img: cFF7D1C, select: sFF7D1C, sound: 'piano_b3', player: {} },
+    { color: "#FFFF57FF", img: cFFFF57, select: sFFFF57, sound: 'piano_c4', player: {} },
+    { color: "#49C37CFF", img: c49C37C, select: s49C37C, sound: 'piano_d4', player: {} },
+    { color: "#6BCCF7FF", img: c6BCCF7, select: s6BCCF7, sound: 'piano_e4', player: {} },
+    { color: "#2367C0FF", img: c2367C0, select: s2367C0, sound: 'piano_f4', player: {} },
+    { color: "#9323A1FF", img: c9323A1, select: s9323A1, sound: 'piano_g4', player: {} },
+    { color: "#FFD298FF", img: cFFD298, select: sFFD298, sound: 'piano_a4', player: {} },
+    { color: "#84574FFF", img: c84574F, select: s84574F, sound: 'piano_b4', player: {} },
+    { color: "#FFFFFFFF", img: cFFFFFF, select: sFFFFFF, sound: 'piano_c5', player: {} },
+    { color: "#000000FF", img: c000000, select: s000000, sound: 'piano_d5', player: {} },
   ];
 
   state = {
@@ -96,7 +98,10 @@ export default class DrawBoard extends Component {
   }
 
   componentWillMount(){
-    this.colorPlayer = this.soundStore.genMusic('draw_color')
+    let self = this
+    this.colorList.forEach(ele => {
+      ele.player = self.soundStore.genMusic(ele.sound)
+    })
   }
 
   render() {
@@ -142,8 +147,9 @@ export default class DrawBoard extends Component {
               strokeSelectedComponent={(color, index, changed) => {
                 if(changed) {
                   this.setState({selectColor: color})
-                  this.soundStore.playMusic(this.colorPlayer, 3, 0)
                 }
+                this.soundStore.playSoundEffect(this.colorList[index].player, 1, 0)
+                
                 return (
                   <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
                     <View style={{ backgroundColor: color, opacity: 1 }} />

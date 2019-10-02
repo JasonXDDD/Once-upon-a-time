@@ -72,7 +72,7 @@ export default class ToolBar extends Component {
               {/* tool icon */}
               <TouchableOpacity
                 onPress={() => {
-                  this.soundStore.playMusic(this.toolPlayer, 3, 0)
+                  this.soundStore.playSoundEffect(this.toolPlayer, 3, 0)
                   this.toolStore.toggleOpen(ele.type);
                 }}
                 style={[
