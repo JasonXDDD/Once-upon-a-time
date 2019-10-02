@@ -5,13 +5,6 @@ import { observable } from "mobx";
 import ToolItem from "./toolItem";
 
 import ToolBar_Tap from "../assets/images/img_Topmenu.png";
-import Sound from 'react-native-sound';
-
-
-import buttonCllick from "../assets/sound/button_pop.wav"
-const buttonMusic = new Sound(buttonCllick, (error)=> {
-  if(error) Alert.alert("失敗")
-})
 
 const TOOL_PANE_WIDTH = 135;
 const TOOL_PANE_OFFSET = 25;
@@ -19,6 +12,8 @@ const ICON_SIZE = 60;
 @inject("rootStore")
 @observer
 export default class ToolBar extends Component {
+
+  toolPlayer;
   toolList = [
     {
       type: "scene",
@@ -43,6 +38,11 @@ export default class ToolBar extends Component {
     super(props);
     this.toolStore = props.rootStore.toolStore;
     this.storyStore = props.rootStore.storyStore;
+    this.soundStore = props.rootStore.soundStore;
+  }
+
+  componentWillMount(){
+    this.toolPlayer = this.soundStore.genMusic('tool')
   }
 
   render() {
@@ -72,7 +72,7 @@ export default class ToolBar extends Component {
               {/* tool icon */}
               <TouchableOpacity
                 onPress={() => {
-                  buttonMusic.play()
+                  this.soundStore.playMusic(this.toolPlayer, 3, 0)
                   this.toolStore.toggleOpen(ele.type);
                 }}
                 style={[
