@@ -18,13 +18,9 @@ import DrawStorySelected from "../assets/images/TabBar/DrawStory_Selected.png";
 import DrawStoryUnselected from "../assets/images/TabBar/DrawStory_Unselected.png";
 import StoryBoxSelected from "../assets/images/TabBar/StoryBox_Selected.png";
 import StoryBoxUnselected from "../assets/images/TabBar/StoryBox_Unselected.png";
-import Sound from 'react-native-sound';
+import * as store from "../stores/index";
 
-
-import buttonCllick from "../assets/sound/button.mp3"
-const buttonMusic = new Sound(buttonCllick, (error)=> {
-  if(error) Alert.alert("失敗")
-})
+const tabPlayer = store.soundStore.genMusic('tab')
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
@@ -45,8 +41,7 @@ const TabMap = {
         animationEnabled: true,
         tabBarIcon: ({ focused }) => {
           if(focused) {
-            buttonMusic.setVolume(0.5)
-            buttonMusic.play()
+            store.soundStore.playMusic(tabPlayer, 0.5, 1)            
           }
           return (
             <Image
@@ -66,8 +61,7 @@ const TabMap = {
       tabBarLabel: "   ", 
       tabBarIcon: ({ focused }) => {
         if(focused) {
-          buttonMusic.setVolume(0.5)
-          buttonMusic.play()
+          store.soundStore.playMusic(tabPlayer, 0.5, 1)          
         }
         return (
           <Image
@@ -86,8 +80,7 @@ const TabMap = {
       tabBarLabel: "   ",
       tabBarIcon: ({ focused }) => {
         if(focused) {
-          buttonMusic.setVolume(0.5)
-          buttonMusic.play()
+          store.soundStore.playMusic(tabPlayer, 0.5, 1)          
         }
         return (
           <Image
@@ -138,7 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderTopColor: "rgba(255, 255, 255, 0)",
     width: screenWidth * 0.8,
-    bottom: 50
+    bottom: 40
   },
 
   tabView: {

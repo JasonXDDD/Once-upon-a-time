@@ -67,6 +67,7 @@ const DRAW_PANE_MARGIN_BOTTOM = 50;
 @inject("rootStore")
 @observer
 export default class DrawBoard extends Component {
+  colorPlayer;
   colorList = [
     { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5 },
     { color: "#FF403FFF", img: cFF403F, select: sFF403F },
@@ -91,6 +92,11 @@ export default class DrawBoard extends Component {
     super(props);
     this.storyStore = props.rootStore.storyStore;
     this.toolStore = props.rootStore.toolStore;
+    this.soundStore = props.rootStore.soundStore;
+  }
+
+  componentWillMount(){
+    this.colorPlayer = this.soundStore.genMusic('draw_color')
   }
 
   render() {
@@ -134,7 +140,10 @@ export default class DrawBoard extends Component {
                 )
               }}
               strokeSelectedComponent={(color, index, changed) => {
-                if(changed) this.setState({selectColor: color})
+                if(changed) {
+                  this.setState({selectColor: color})
+                  this.soundStore.playMusic(this.colorPlayer, 3, 0)
+                }
                 return (
                   <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
                     <View style={{ backgroundColor: color, opacity: 1 }} />

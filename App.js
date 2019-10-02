@@ -7,11 +7,7 @@ import { Provider as ProviderAntd } from "@ant-design/react-native";
 import * as store from "./src/stores/index";
 import Sound from 'react-native-sound';
 
-
-import backGroundMusic from "./src/assets/sound/Rainbow_Forest.mp3"
-const bgmPlayer = new Sound(backGroundMusic, (error)=> {
-  if(error) Alert.alert("失敗")
-})
+const bgmPlayer = store.soundStore.genMusic('bgm')
 
 @observer
 export default class App extends Component<Props> {  
@@ -21,17 +17,8 @@ export default class App extends Component<Props> {
   };
 
   componentDidMount(){
-    this.playBGM()
-  }
-
-  playBGM(){
     setTimeout(() => {
-      bgmPlayer.setVolume(0.5);
-      bgmPlayer.setNumberOfLoops(-1);
-      bgmPlayer.play((success) => {
-        console.log("play")
-        console.log(success)
-      })
+      store.soundStore.playMusic(bgmPlayer, 0.4, -1)
     }, 1000)
   }
   
