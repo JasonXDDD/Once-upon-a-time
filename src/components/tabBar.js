@@ -39,10 +39,11 @@ const TabMap = {
         tabBarLabel: "   ",
         tabBarVisible: showTabBar,
         animationEnabled: true,
+        tabBarOnPress: ({ navigation, defaultHandler }) => {
+          store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)
+          defaultHandler()  
+        },
         tabBarIcon: ({ focused }) => {
-          if(focused) {
-            store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)            
-          }
           return (
             <Image
               focused={focused}
@@ -59,10 +60,11 @@ const TabMap = {
     screen: StoryBox,
     navigationOptions: {
       tabBarLabel: "   ", 
+      tabBarOnPress: ({ navigation, defaultHandler }) => {
+        store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)
+        defaultHandler()
+      },
       tabBarIcon: ({ focused }) => {
-        if(focused) {
-          store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)          
-        }
         return (
           <Image
             focused={focused}
@@ -78,10 +80,11 @@ const TabMap = {
     screen: DrawSticker,
     navigationOptions: {
       tabBarLabel: "   ",
+      tabBarOnPress: ({ navigation, defaultHandler }) => {
+        store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)
+        defaultHandler()
+      },
       tabBarIcon: ({ focused }) => {
-        if(focused) {
-          store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)          
-        }
         return (
           <Image
             focused={focused}

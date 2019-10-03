@@ -87,7 +87,8 @@ export default class DrawBoard extends Component {
 
   state = {
     isDialogVisible: false,
-    selectColor: '#FF75B5FF'
+    selectColor: '#FF75B5FF',
+    selectStrockeToVoice: 0.6
   };
 
   constructor(props) {
@@ -148,7 +149,7 @@ export default class DrawBoard extends Component {
                 if(changed) {
                   this.setState({selectColor: color})
                 }
-                this.soundStore.playSoundEffect(this.colorList[index].player, 1, 0)
+                this.soundStore.playSoundEffect(this.colorList[index].player, this.state.selectStrockeToVoice, 0)
                 
                 return (
                   <ImageBackground source={this.colorList[index].select} style={ styles.selectColorIcon }>
@@ -177,7 +178,10 @@ export default class DrawBoard extends Component {
                   source={Eraser}
                 />
               }
-              strokeWidthComponent={w => {
+              strokeWidthComponent={(w) => {
+                if(w/10 != this.state.selectStrockeToVoice)
+                  this.setState({selectStrockeToVoice: w/10 })
+                
                 return (
                   <View style={{ position: "absolute", left: DRAW_BOARD_WIDTH * -0.92, top: 200 }}>
                     <Image style={[ styles.icon ]} source={Plus} />
@@ -225,6 +229,8 @@ export default class DrawBoard extends Component {
     );
   }
 
+  updateStrokeToVoice(w){
+  }
   updateColor(color){
     this.setState({selectColor: color})
   }
@@ -313,13 +319,13 @@ const styles = StyleSheet.create({
   },
 
   colorIcon: {
-    width: ICON_SIZE,
+    width: ICON_SIZE - 3,
     height: ICON_SIZE,
     marginLeft: -3,
   },
 
   selectColorIcon: {
-    width: ICON_SIZE * 1.2,
+    width: (ICON_SIZE - 3) * 1.2,
     height: ICON_SIZE * 1.2,
     marginLeft: -3
   },
