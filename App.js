@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, Image, Alert, TouchableOpacity, Text } from "react-native";
+import { Platform, Image, Alert, TouchableOpacity, Text, StyleSheet } from "react-native";
 import TabBar from "./src/components/tabBar";
 import { SafeAreaView } from "react-navigation";
 import { Provider, observer } from "mobx-react";
@@ -11,6 +11,9 @@ const bgmPlayer = store.soundStore.genMusic('bgm')
 
 @observer
 export default class App extends Component<Props> {  
+  state = {
+    isBgm: true
+  }
 
   constructor(props) {
     super(props)
@@ -21,6 +24,18 @@ export default class App extends Component<Props> {
       store.soundStore.playMusic(bgmPlayer, 0.4, -1)
     }, 1000)
   }
+
+  switchBGM(){
+    if(this.state.isBgm){
+      bgmPlayer.stop()
+      this.setState({isBgm: false})
+    }
+
+    else {
+      store.soundStore.playMusic(bgmPlayer, 0.4, -1)
+      this.setState({isBgm: true})
+    }
+  }
   
   render() {
     return (
@@ -28,6 +43,11 @@ export default class App extends Component<Props> {
         <ProviderAntd>
           <SafeAreaView style={{ flex: 1 }} forceInset={{ top: "always", bottom: "always" }}>
             <TabBar />
+            <TouchableOpacity style={styles.bgmButton} onPress={() => {
+              this.switchBGM()
+            }}>
+              <Text>{this.state.isBgm? 'Close BGM': 'Open BGM'}</Text>
+            </TouchableOpacity>
           </SafeAreaView>
         </ProviderAntd>
       </Provider>
@@ -37,3 +57,12 @@ export default class App extends Component<Props> {
 
 
 console.disableYellowBox = true;
+
+const styles = StyleSheet.create({
+  bgmButton: {
+    position: "absolute",
+    overflow: "hidden",
+    top: 50,
+    right: 50
+  },
+})
