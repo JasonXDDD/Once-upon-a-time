@@ -46,7 +46,7 @@ const TabMap = {
           return (
             <Image
               focused={focused}
-              style={[styles.icon]}
+              style={focused ? styles.selectIcon : styles.icon}
               source={focused ? EditStorySelected : EditStoryUnselected}
             />
           )
@@ -66,7 +66,7 @@ const TabMap = {
         return (
           <Image
             focused={focused}
-            style={[styles.icon]}
+            style={focused ? styles.selectIcon : styles.icon}
             source={focused ? StoryBoxSelected : StoryBoxUnselected}
           />
         )
@@ -85,7 +85,7 @@ const TabMap = {
         return (
           <Image
             focused={focused}
-            style={[styles.icon]}
+            style={focused ? styles.selectIcon : styles.icon}
             source={focused ? DrawStorySelected : DrawStoryUnselected}
           />
         )
@@ -115,8 +115,13 @@ export default TabBar;
 
 const styles = StyleSheet.create({
   icon: {
-    width: 150 * 1.2,
-    height: 80 * 1.2,
+    width: 150 * 1.1,
+    height: 80 * 1.1,
+  },
+
+  selectIcon: {
+    width: 150 * 1.3,
+    height: 80 * 1.3,
   },
 
   tabBar: {

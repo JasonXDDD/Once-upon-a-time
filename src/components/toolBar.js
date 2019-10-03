@@ -14,6 +14,10 @@ const ICON_SIZE = 60;
 export default class ToolBar extends Component {
 
   toolPlayer;
+  state = {
+    selectIndex: -1
+  }
+
   toolList = [
     {
       type: "scene",
@@ -51,7 +55,7 @@ export default class ToolBar extends Component {
         { display: this.storyStore.isRecord ? "none" : "flex" }
       ]} >
         
-        {this.toolList.map(ele => {
+        {this.toolList.map((ele, index) => {
           return (
             <View key={ele.type}>
               {/* tool pane */}
@@ -74,18 +78,20 @@ export default class ToolBar extends Component {
                 onPress={() => {
                   this.soundStore.playSoundEffect(this.toolPlayer, 3, 0)
                   this.toolStore.toggleOpen(ele.type);
+                  if(this.state.selectIndex === index) this.setState({ selectIndex: -1 })
+                  else this.setState({ selectIndex: index })
                 }}
                 style={[
                   styles.toolIcon,
                   {
-                    top: ele.top,
+                    top: this.state.selectIndex < index && this.state.selectIndex != -1 ? ele.top + 10: ele.top,
                     left: this.toolStore.open !== "" ? TOOL_PANE_WIDTH : 0
                   }
                 ]}
               >
                 <Image
                   source={this.toolStore[ele.type + "Btn"]}
-                  style={styles.icon}
+                  style={this.toolStore.open === ele.type? styles.selectIcon: styles.icon}
                 />
               </TouchableOpacity>
             </View>
@@ -109,6 +115,12 @@ const styles = StyleSheet.create({
     position: "relative",
     width: ICON_SIZE,
     height: ICON_SIZE
+  },
+
+  selectIcon: {
+    position: "relative",
+    width: ICON_SIZE * 1.2,
+    height: ICON_SIZE * 1.2
   },
 
   toolPane: {

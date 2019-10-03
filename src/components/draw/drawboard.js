@@ -151,7 +151,7 @@ export default class DrawBoard extends Component {
                 this.soundStore.playSoundEffect(this.colorList[index].player, 1, 0)
                 
                 return (
-                  <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
+                  <ImageBackground source={this.colorList[index].select} style={ styles.selectColorIcon }>
                     <View style={{ backgroundColor: color, opacity: 1 }} />
                   </ImageBackground>
                 )
@@ -315,6 +315,12 @@ const styles = StyleSheet.create({
   colorIcon: {
     width: ICON_SIZE,
     height: ICON_SIZE,
+    marginLeft: -3,
+  },
+
+  selectColorIcon: {
+    width: ICON_SIZE * 1.2,
+    height: ICON_SIZE * 1.2,
     marginLeft: -3
   },
 
