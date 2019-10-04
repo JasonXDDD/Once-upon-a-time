@@ -34,6 +34,7 @@ export default class ToolStore {
   @observable characterBtn = BtnCharacterUnselected;
   @observable stickerBtn = BtnStickerUnselected;
   @observable open = "";
+  @observable selectIndex = -1;
 
   @observable scenePane = -135;
 

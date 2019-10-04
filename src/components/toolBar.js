@@ -14,9 +14,6 @@ const ICON_SIZE = 60;
 export default class ToolBar extends Component {
 
   toolPlayer;
-  state = {
-    selectIndex: -1
-  }
 
   toolList = [
     {
@@ -78,13 +75,14 @@ export default class ToolBar extends Component {
                 onPress={() => {
                   this.soundStore.playSoundEffect(this.toolPlayer, 3, 0)
                   this.toolStore.toggleOpen(ele.type);
-                  if(this.state.selectIndex === index) this.setState({ selectIndex: -1 })
-                  else this.setState({ selectIndex: index })
+                  if(this.toolStore.selectIndex === index) 
+                    this.toolStore.selectIndex = -1
+                  else this.toolStore.selectIndex = index
                 }}
                 style={[
                   styles.toolIcon,
                   {
-                    top: this.state.selectIndex < index && this.state.selectIndex != -1 ? ele.top + 10: ele.top,
+                    top: this.toolStore.selectIndex < index && this.toolStore.selectIndex != -1 ? ele.top + 10: ele.top,
                     left: this.toolStore.open !== "" ? TOOL_PANE_WIDTH : 0
                   }
                 ]}
