@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
 import ToolItem from "./toolItem";
+import * as Animatable from 'react-native-animatable';
 
 import ToolBar_Tap from "../assets/images/img_Topmenu.png";
 
@@ -19,19 +20,22 @@ export default class ToolBar extends Component {
     {
       type: "scene",
       color: "#f68a50",
-      top: (ICON_SIZE + 10) * 0 + TOOL_PANE_OFFSET
+      top: (ICON_SIZE + 10) * 0 + TOOL_PANE_OFFSET,
+      animated: false
     },
 
     {
       type: "character",
       color: "#fec64c",
-      top: (ICON_SIZE + 10) * 1 + TOOL_PANE_OFFSET
+      top: (ICON_SIZE + 10) * 1 + TOOL_PANE_OFFSET,
+      animated: false
     },
 
     {
       type: "sticker",
       color: "#3e97a5",
-      top: (ICON_SIZE + 10) * 2 + TOOL_PANE_OFFSET
+      top: (ICON_SIZE + 10) * 2 + TOOL_PANE_OFFSET,
+      animated: false
     }
   ];
 
@@ -75,6 +79,7 @@ export default class ToolBar extends Component {
                 onPress={() => {
                   this.soundStore.playSoundEffect(this.toolPlayer, 3, 0)
                   this.toolStore.toggleOpen(ele.type);
+                  this.toolStore.isAnimate[index] = true
                   if(this.toolStore.selectIndex === index) 
                     this.toolStore.selectIndex = -1
                   else this.toolStore.selectIndex = index
@@ -87,7 +92,12 @@ export default class ToolBar extends Component {
                   }
                 ]}
               >
-                <Image
+                <Animatable.Image
+                  animation={this.toolStore.isAnimate[index]? "rubberBand": ""}
+                  duration={500}
+                  onAnimationEnd={() => {
+                    this.toolStore.isAnimate[index] = false
+                  }}
                   source={this.toolStore[ele.type + "Btn"]}
                   style={this.toolStore.open === ele.type? styles.selectIcon: styles.icon}
                 />
@@ -130,6 +140,6 @@ const styles = StyleSheet.create({
   toolIcon: {
     textAlign: "center",
     position: "absolute",
-    left: 0
+    left: 0,
   }
 });

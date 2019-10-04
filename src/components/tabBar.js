@@ -19,6 +19,7 @@ import DrawStoryUnselected from "../assets/images/TabBar/DrawStory_Unselected.pn
 import StoryBoxSelected from "../assets/images/TabBar/StoryBox_Selected.png";
 import StoryBoxUnselected from "../assets/images/TabBar/StoryBox_Unselected.png";
 import * as store from "../stores/index";
+import * as Animatable from 'react-native-animatable';
 
 const tabPlayer = store.soundStore.genMusic('tab')
 const screenWidth = Dimensions.get("window").width;
@@ -45,7 +46,13 @@ const TabMap = {
         },
         tabBarIcon: ({ focused }) => {
           return (
-            <Image
+            <Animatable.Image
+              animation={focused? "bounce": ""}
+              iterationCount="infinite"
+              iterationDelay={1000}
+              direction="alternate"
+              easing="ease-out"
+
               focused={focused}
               style={focused ? styles.selectIcon : styles.icon}
               source={focused ? EditStorySelected : EditStoryUnselected}
@@ -66,7 +73,13 @@ const TabMap = {
       },
       tabBarIcon: ({ focused }) => {
         return (
-          <Image
+          <Animatable.Image
+            animation={focused? "bounce": ""}
+            iterationCount="infinite"
+            iterationDelay={1000}
+            direction="alternate"
+            easing="ease-out"
+
             focused={focused}
             style={focused ? styles.selectIcon : styles.icon}
             source={focused ? StoryBoxSelected : StoryBoxUnselected}
@@ -86,7 +99,13 @@ const TabMap = {
       },
       tabBarIcon: ({ focused }) => {
         return (
-          <Image
+          <Animatable.Image
+            animation={focused? "bounce": ""}
+            iterationCount="infinite"
+            iterationDelay={1000}
+            direction="alternate"
+            easing="ease-out"
+
             focused={focused}
             style={focused ? styles.selectIcon : styles.icon}
             source={focused ? DrawStorySelected : DrawStoryUnselected}
