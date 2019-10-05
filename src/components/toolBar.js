@@ -94,7 +94,7 @@ export default class ToolBar extends Component {
               >
                 <Animatable.Image
                   animation={this.toolStore.isAnimate[index]? "rubberBand": ""}
-                  duration={500}
+                  duration={700}
                   onAnimationEnd={() => {
                     this.toolStore.isAnimate[index] = false
                   }}
