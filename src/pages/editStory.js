@@ -14,6 +14,7 @@ import StoryToolRecord from "../components/story/storyToolRecord";
 import GoBack from "../components/record/goBack";
 import RecordTool from "../components/record/recordTool";
 import SceneTool from "../components/scene/sceneTool";
+import { observe } from "mobx";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -30,6 +31,13 @@ export default class EditStory extends React.Component {
     this.storyStore = props.rootStore.storyStore;
   }
 
+  componentDidMount(){
+    //set when siri change route
+    observe(this.storyStore, 'shortcutInfo',(change)=> {
+      if(JSON.parse(change.newValue).say === 'story')
+        this.props.navigation.navigate('StoryBox')
+    })
+  }
   render() {
     return (
       <ImageBackground

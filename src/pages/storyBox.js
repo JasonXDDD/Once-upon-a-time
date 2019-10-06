@@ -1,17 +1,22 @@
 
 import React, {Component} from 'react';
-import {Platform, Dimensions, StyleSheet, Text, View, Image, Modal, TouchableOpacity, TouchableHighlight, FlatList, CameraRoll, ImageBackground} from 'react-native';
+import {Platform, Dimensions, StyleSheet, Alert, Text, View, Image, Modal, TouchableOpacity, TouchableHighlight, FlatList, CameraRoll, ImageBackground} from 'react-native';
 import RNFS from 'react-native-fs';
 import VideoPlayer from 'react-native-video-controls';
 import Video from 'react-native-video';
 import moment from 'moment';
+import { inject, observer } from "mobx-react";
 
 import StoryBox_BG from '../assets/images/StoryBox/BG.png'
 import BoxTool from '../components/box/boxTool'
+import { observe } from 'mobx';
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
+
+@inject("rootStore")
+@observer
 export default class StoryBox extends React.Component {
 	state = {
 		images: [],
@@ -20,11 +25,28 @@ export default class StoryBox extends React.Component {
 	};
 	
 	constructor(props) {
-    super(props);
-  }
+		super(props);
+    this.storyStore = props.rootStore.storyStore;
+	}
 
-  componentDidMount() {
-		this.getVideo()
+  async componentDidMount() {
+		await this.getVideo()
+
+		//set when siri change route
+		if(this.storyStore.shortcutInfo != null){
+			setTimeout(() => {
+				this.setState({selectVideo: this.state.images[1]})
+				this.setModalVisible(true)
+			}, 1000)
+		}
+    observe(this.storyStore, 'shortcutInfo',(change)=> {
+      if(JSON.parse(change.newValue).say === 'story'){
+        setTimeout(() => {
+					this.setState({selectVideo: this.state.images[1]})
+					this.setModalVisible(true)
+				}, 1000)
+			}
+    })
 	}
 
 	setModalVisible(visible) {
@@ -56,8 +78,8 @@ export default class StoryBox extends React.Component {
 			}
 		})
 
-		console.log(ans);
-		console.log(image.length, movie.length, ans.length)
+		// console.log(ans);
+		// console.log(image.length, movie.length, ans.length)
 
 		this.setState({images: ans})
 	}
