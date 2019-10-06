@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { inject, observer } from "mobx-react";
 import Gestures from "react-native-easy-gestures";
+import { RNCamera } from 'react-native-camera';
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -55,10 +56,39 @@ export default class StoryItem extends React.Component {
   componentDidMount() {
     this.setState({imageTmp: JSON.parse(this.item.image)})    
   }
+
+  genItemCamera(){
+    return (
+      <RNCamera
+        ref={ref => {
+          this.camera = ref;
+        }}
+        style={[
+          styles.basicSize,
+          this.item.category != "scene" ? {} : styles.background
+        ]}
+        type={RNCamera.Constants.Type.back}
+        flashMode={RNCamera.Constants.FlashMode.on}
+      />
+    )
+  }
+
+  genItemImage(){
+    return (
+      <Image
+        source={this.state.imageTmp? this.state.imageTmp: JSON.parse(this.item.image)}
+        style={[
+          styles.basicSize,
+          this.item.category != "scene" ? {} : styles.background
+        ]}
+      />
+    )
+  }
   
   render() {
     this.initStyle = JSON.parse(this.item.style);
     if (!this.initStyle["position"]) this.initStyle["position"] = "absolute";
+    let itemData = (this.item.category === "scene" && this.item.name === "相機")? this.genItemCamera(): this.genItemImage()
 
     return (
       <Gestures
@@ -81,13 +111,11 @@ export default class StoryItem extends React.Component {
           }}
           underlayColor="rgba(255, 255, 255, 0)"
         >
-          <Image
-            source={this.state.imageTmp? this.state.imageTmp: JSON.parse(this.item.image)}
-            style={[
-              styles.basicSize,
-              this.item.category != "scene" ? {} : styles.background
-            ]}
-          />
+        {itemData}
+          
+
+          
+
         </TouchableHighlight>
       </Gestures>
     );
