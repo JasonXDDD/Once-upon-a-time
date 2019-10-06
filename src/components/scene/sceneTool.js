@@ -13,7 +13,8 @@ import { inject, observer } from "mobx-react";
 
 import Movie_Selected from "../../assets/images/EditStory/btn_movie_Selected.png";
 import Movie_Unselected from "../../assets/images/EditStory/btn_movie_Unselected.png";
-import BG_Scene from "../../assets/images/EditStory/BG_ScenesBar.png";
+import BG_Scene_V from "../../assets/images/EditStory/BG_ScenesBar_v.png";
+import BG_Scene_H from "../../assets/images/EditStory/BG_ScenesBar_h.png";
 import Btn_NumberBackground from "../../assets/images/EditStory/Btn_SceneNumberBackground.png";
 import Btn_NumberBackground_Selected from "../../assets/images/EditStory/Btn_SceneNumberBackground_selected.png";
 import Btn_AddScene from "../../assets/images/EditStory/Btn_AddScene.png";
@@ -64,7 +65,12 @@ export default class SceneTool extends Component {
 
   render() {
     return (
-      <View style={[styles.sceneTool]}>
+      <View style={[
+        styles.sceneTool, {
+        top: this.storyStore.isRecord? BOARD_TOP + BOARD_HEIGHT - ICON_SIZE - 20: BOARD_TOP + 10,
+        right: this.storyStore.isRecord? BOARD_RIGHT + BOARD_WIDTH - ICON_SIZE - 20: BOARD_RIGHT - ICON_SIZE - 30,
+        flexDirection: this.storyStore.isRecord? "row": "column",
+      }]}>
         {/* scene board */}
         <TouchableOpacity
           style={{ display: this.storyStore.isRecord ? "none" : "flex" }}
@@ -79,15 +85,24 @@ export default class SceneTool extends Component {
           style={[
             styles.scenePane,
             { display: this.storyStore.openScenePane ? "flex" : "none" },
+            { flexDirection: this.storyStore.isRecord? "row": "column" },
             this.storyStore.isRecord ? styles.sceneRecordPane : {}
           ]}
         >
-          <ImageBackground source={BG_Scene} style={[styles.sceneBar]}>
+          <ImageBackground source={this.storyStore.isRecord? BG_Scene_H: BG_Scene_V} 
+            style={[
+              styles.sceneBar,
+              {
+                height: this.storyStore.isRecord? (BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60) * 57 / 630: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
+                width: this.storyStore.isRecord?   BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 57 / 630,
+                flexDirection: this.storyStore.isRecord? "row": "column"
+              }
+            ]}>
             {this.storyStore.storyScene.map((ele, id) => {
               return (
                 <TouchableOpacity
                   key={id}
-                  style={{ marginVertical: 10, top: 70 }}
+                  style={this.storyStore.isRecord? styles.sceneItemRecord: styles.sceneItem}
                   onPress={() => {
                     this.storyStore.selectSceneIndex = id;
                   }}
@@ -126,9 +141,6 @@ export default class SceneTool extends Component {
 
 const styles = StyleSheet.create({
   sceneTool: {
-    top: BOARD_TOP + 10,
-    right: BOARD_RIGHT - ICON_SIZE - 30,
-    flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
     position: "absolute",
@@ -137,7 +149,6 @@ const styles = StyleSheet.create({
   },
 
   scenePane: {
-    flexDirection: "column",
     alignItems: "center"
   },
 
@@ -149,9 +160,6 @@ const styles = StyleSheet.create({
   },
 
   sceneBar: {
-    height: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
-    width: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 57 / 630,
-    flexDirection: "column",
     alignItems: "center"
   },
 
@@ -159,6 +167,9 @@ const styles = StyleSheet.create({
     width: ICON_SIZE * 1.1,
     height: ICON_SIZE * 1.15
   },
+
+  sceneItemRecord: {  marginHorizontal: 20, left: 150 },
+  sceneItem: { marginVertical: 10, top: 70 },
 
   toolIcon: {
     width: ICON_SIZE,
