@@ -28,10 +28,13 @@ export default class ToolItem extends Component {
               key={ele.id}
               onPress={() => {
                 ele.isAnimate = true
-                if(this.props.select === 'edit')
-                  this.addStoryItem(ele, this.type)
-                else if(this.props.select === 'draw')
-                  this.addDrawItem(ele)
+                setTimeout(() => {
+                  if(this.props.select === 'edit')
+                    this.addStoryItem(ele, this.type)
+                  else if(this.props.select === 'draw')
+                    this.addDrawItem(ele)
+                }, 200)
+                
               }}>
               <Animatable.Image 
                 animation={ele.isAnimate? "bounceOutRight": ""}
