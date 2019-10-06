@@ -20,6 +20,7 @@ const BOARD_HEIGHT = screenHeight * 0.7;
 @observer
 export default class StoryItem extends React.Component {
   initStyle;
+  initPlayer;
 
   state = {
     imageTmp: ""
@@ -29,6 +30,7 @@ export default class StoryItem extends React.Component {
   constructor(props) {
     super(props);
     this.storyStore = props.rootStore.storyStore;
+    this.soundStore = props.rootStore.soundStore;
     this.item = props.select;
     this.id = props.idofarray;
   }
@@ -55,6 +57,9 @@ export default class StoryItem extends React.Component {
   
   componentDidMount() {
     this.setState({imageTmp: JSON.parse(this.item.image)})    
+    if(this.item.sound){
+      this.initPlayer = this.soundStore.genMusicBySound(this.item.sound)
+    }
   }
 
   genItemCamera(){
@@ -89,7 +94,11 @@ export default class StoryItem extends React.Component {
     this.initStyle = JSON.parse(this.item.style);
     if (!this.initStyle["position"]) this.initStyle["position"] = "absolute";
     let itemData = (this.item.category === "scene" && this.item.name === "相機")? this.genItemCamera(): this.genItemImage()
-
+    if(this.item.sound && this.storyStore.isRecord){
+      setTimeout(() => {
+        this.soundStore.playSoundEffect(this.initPlayer, 0.3, 1)
+      }, 500)
+    }
     return (
       <Gestures
         draggable={this.item.category != "scene" ? true : false}
