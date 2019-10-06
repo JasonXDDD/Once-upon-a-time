@@ -16,12 +16,12 @@ export default class StoryStore {
 		{story: []}
 	];
 
-	@observable openScenePane = true;
+	@observable openScenePane = false;
 
 	//for sirikit
 	@observable shortcutInfo = null;
 	@observable shortcutActivityType = null;
-	
+
 
 	@action
 	removeItem(key){

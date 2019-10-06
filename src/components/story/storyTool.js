@@ -11,7 +11,7 @@ const BOARD_WIDTH = screenWidth * 0.76
 const BOARD_HEIGHT = screenHeight * 0.7
 const ICON_SIZE = 60;
 const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
-const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
 
 @inject("rootStore")
 @observer

@@ -8,7 +8,7 @@ import * as Animatable from 'react-native-animatable';
 import ToolBar_Tap from "../assets/images/img_Topmenu.png";
 
 const TOOL_PANE_WIDTH = 135;
-const TOOL_PANE_OFFSET = 25;
+const TOOL_PANE_OFFSET = 60;
 const ICON_SIZE = 60;
 @inject("rootStore")
 @observer
