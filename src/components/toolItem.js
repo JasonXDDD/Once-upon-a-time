@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ScrollView, Text, Image, Alert, TouchableOpacity, StyleSheet } from 'react-native'
 import { observer, inject } from 'mobx-react'
 import StoryItem from './story/storyItem'
+import * as Animatable from 'react-native-animatable';
 
 @inject('rootStore')
 @observer
@@ -26,13 +27,22 @@ export default class ToolItem extends Component {
               style={styles.toolImage}
               key={ele.id}
               onPress={() => {
+                ele.isAnimate = true
                 if(this.props.select === 'edit')
                   this.addStoryItem(ele, this.type)
                 else if(this.props.select === 'draw')
                   this.addDrawItem(ele)
               }}>
-              <Image style={{ width: 100, height: 100 }} source={ele.animate? ele.animate: JSON.parse(ele.image)} />
-              <Text style={{ marginTop: 5, color: this.type === 'character'? 'black': 'white' }}>{ele.id}</Text>
+              <Animatable.Image 
+                animation={ele.isAnimate? "bounceOutRight": ""}
+                duration={1000}
+                onAnimationEnd={() => {
+                  ele.isAnimate = false
+                }}
+                style={{ width: 100, height: 100 }} 
+                source={ele.animate? ele.animate: JSON.parse(ele.image)} />
+              
+                <Text style={{ marginTop: 5, color: this.type === 'character'? 'black': 'white' }}>{ele.id}</Text>
             </TouchableOpacity>
           )
         })}
@@ -62,6 +72,7 @@ export default class ToolItem extends Component {
       name: element.id,
       key: element.id + this.count,
       style: "{}",
+      sound: element.sound
     }
 
     this.count ++;

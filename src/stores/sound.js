@@ -48,6 +48,11 @@ export default class SoundStore {
       if(error) Alert.alert("音樂播放失敗")
     })
   }
+  genMusicBySound(sound){
+    return new Sound(sound, error => {
+      if(error) Alert.alert("音樂播放失敗")
+    })
+  }
 
   @action
   playMusic(player, vol, loop){

@@ -28,6 +28,7 @@ import cLock01 from "../assets/images/character/lock01.png";
 
 import stickerSample from "../assets/images/sticker-sample.png";
 
+import ForestSound from "../assets/sound/scene/summer_hill1.m4a";
 
 export default class ToolStore {
   @observable sceneBtn = BtnSceneUnselected;
@@ -44,43 +45,57 @@ export default class ToolStore {
       id: "叢林",
       image: Forest,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: ForestSound,
+      isAnimate: false
     },
     {
       id: "房間",
       image: Room,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "奶奶家",
       image: Outside,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "相機",
       image: Outside,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "付費解鎖1",
       image: sLock01,
       animate: null,
-      isLock: true
+      isLock: true,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "付費解鎖2",
       image: sLock02,
       animate: null,
-      isLock: true
+      isLock: true,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "付費解鎖3",
       image: sLock03,
       animate: null,
-      isLock: true
+      isLock: true,
+      sound: null,
+      isAnimate: false
     }
   ];
 
@@ -89,55 +104,73 @@ export default class ToolStore {
       id: "太陽",
       image: Sun,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "從從",
       image: BigMonster,
       animate: BigMonsterAnimate,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "前前",
       image: SmallMoster,
       animate: SmallMosterAnimate,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "蜜蜂",
       image: Bee,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "小紅帽",
       image: Redhat,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "獵人",
       image: Hunter,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "阿嬤",
       image: Grandma,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "狼",
       image: Wolf,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     },
     {
       id: "付費解鎖",
       image: cLock01,
       animate: null,
-      isLock: true
+      isLock: true,
+      sound: null,
+      isAnimate: false
     }
   ];
 
@@ -146,7 +179,9 @@ export default class ToolStore {
       id: "小恐龍",
       image: stickerSample,
       animate: null,
-      isLock: false
+      isLock: false,
+      sound: null,
+      isAnimate: false
     }
   ];
 
