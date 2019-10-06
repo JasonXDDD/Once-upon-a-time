@@ -16,7 +16,7 @@ export default class StoryStore {
 		{story: []}
 	];
 
-	@observable openScenePane = false;
+	@observable openScenePane = true;
 
 
 
