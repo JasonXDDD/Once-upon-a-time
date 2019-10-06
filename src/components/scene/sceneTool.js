@@ -87,7 +87,7 @@ export default class SceneTool extends Component {
               return (
                 <TouchableOpacity
                   key={id}
-                  style={{ marginHorizontal: 10, left: 100 }}
+                  style={{ marginVertical: 10, top: 70 }}
                   onPress={() => {
                     this.storyStore.selectSceneIndex = id;
                   }}
@@ -109,7 +109,7 @@ export default class SceneTool extends Component {
           <TouchableOpacity
             style={{ display: this.storyStore.isRecord ? "none" : "flex" }}
             onPress={() => {
-              if (this.storyStore.storyScene.length < 7) {
+              if (this.storyStore.storyScene.length < 5) {
                 this.storyStore.storyScene.push({ story: [] });
                 this.storyStore.selectSceneIndex =
                   this.storyStore.storyScene.length - 1;
@@ -126,9 +126,9 @@ export default class SceneTool extends Component {
 
 const styles = StyleSheet.create({
   sceneTool: {
-    top: BOARD_TOP + BOARD_HEIGHT - ICON_SIZE - 20,
-    right: BOARD_RIGHT + BOARD_WIDTH - ICON_SIZE - 20,
-    flexDirection: "row",
+    top: BOARD_TOP + 10,
+    right: BOARD_RIGHT - ICON_SIZE - 30,
+    flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
     position: "absolute",
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
 
   scenePane: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center"
   },
 
@@ -149,9 +149,9 @@ const styles = StyleSheet.create({
   },
 
   sceneBar: {
-    width: BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60,
-    height: (BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60) * 57 / 630,
-    flexDirection: "row",
+    height: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
+    width: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 57 / 630,
+    flexDirection: "column",
     alignItems: "center"
   },
 
