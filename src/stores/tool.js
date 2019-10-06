@@ -59,6 +59,12 @@ export default class ToolStore {
       isLock: false
     },
     {
+      id: "相機",
+      image: Outside,
+      animate: null,
+      isLock: false
+    },
+    {
       id: "付費解鎖1",
       image: sLock01,
       animate: null,
