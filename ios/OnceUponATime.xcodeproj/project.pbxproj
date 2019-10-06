@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
@@ -72,6 +73,7 @@
 		EBDFB8BB6A0E49D8BE19143E /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD3D8E6B5424443870490E9 /* libRNCamera.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
+		F399056FF4D3450DA54D7A04 /* libRNSiriShortcuts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5EBA44D2C94D089C599A4A /* libRNSiriShortcuts.a */; };
 		F5563270447A4D608C5963F6 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C9DA52090A6A4D8AA10A1EBD /* FontAwesome5_Brands.ttf */; };
 /* End PBXBuildFile section */
 
@@ -426,6 +428,13 @@
 			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
 			remoteInfo = RNSound;
 		};
+		78D2887A234A5DE600F8A682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 912967EDC90E48A184EE6056 /* RNSiriShortcuts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSiriShortcuts;
+		};
 		832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
@@ -491,6 +500,7 @@
 		513342106F0B4C319583421D /* libRNViewShot.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNViewShot.a; sourceTree = "<group>"; };
 		53237FC714674F77BB69FBFD /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; };
 		5BF59A5FBE9C487D9F34D93F /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		5E5EBA44D2C94D089C599A4A /* libRNSiriShortcuts.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSiriShortcuts.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		61E5B9A75F8D4EFD9779A3AF /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		65F15AD11DE445428F258BD9 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -512,6 +522,7 @@
 		8DFA16549AC94773A68A2D26 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		8FD5E3E94DE74399B424A66E /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		90B83F4262C34C6AAA02FBC8 /* antoutline.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = antoutline.ttf; path = "../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf"; sourceTree = "<group>"; };
+		912967EDC90E48A184EE6056 /* RNSiriShortcuts.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSiriShortcuts.xcodeproj; path = "../node_modules/react-native-siri-shortcut/ios/RNSiriShortcuts.xcodeproj"; sourceTree = "<group>"; };
 		92901BE69E554280A3450ACD /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		95E1A128C1C94CF2BFE1A392 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		9AD3D8E6B5424443870490E9 /* libRNCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCamera.a; sourceTree = "<group>"; };
@@ -576,6 +587,7 @@
 				ABBF100899444065BC8BB845 /* libRNShare.a in Frameworks */,
 				EBDFB8BB6A0E49D8BE19143E /* libRNCamera.a in Frameworks */,
 				A818B02D65EF4957B3705006 /* libRNSound.a in Frameworks */,
+				F399056FF4D3450DA54D7A04 /* libRNSiriShortcuts.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +814,7 @@
 				D646FE7F4A7C481CBCEB51F1 /* libRNShare.a */,
 				9AD3D8E6B5424443870490E9 /* libRNCamera.a */,
 				CB520891B6934510AA4B9081 /* libRNSound.a */,
+				5E5EBA44D2C94D089C599A4A /* libRNSiriShortcuts.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -908,6 +921,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		78D28877234A5DE500F8A682 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78D2887B234A5DE600F8A682 /* libRNSiriShortcuts.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,6 +954,7 @@
 				61E5B9A75F8D4EFD9779A3AF /* RNShare.xcodeproj */,
 				F6E8305271344818ADD97EC3 /* RNCamera.xcodeproj */,
 				7E302FB2EDAC4D50BD759EE0 /* RNSound.xcodeproj */,
+				912967EDC90E48A184EE6056 /* RNSiriShortcuts.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1173,6 +1195,10 @@
 				{
 					ProductGroup = 78AD22F122E71202007C8B60 /* Products */;
 					ProjectRef = 61E5B9A75F8D4EFD9779A3AF /* RNShare.xcodeproj */;
+				},
+				{
+					ProductGroup = 78D28877234A5DE500F8A682 /* Products */;
+					ProjectRef = 912967EDC90E48A184EE6056 /* RNSiriShortcuts.xcodeproj */;
 				},
 				{
 					ProductGroup = 788E423F22A2F99E00EA68CC /* Products */;
@@ -1538,6 +1564,13 @@
 			remoteRef = 78D2878C2344632400F8A682 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		78D2887B234A5DE600F8A682 /* libRNSiriShortcuts.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSiriShortcuts.a;
+			remoteRef = 78D2887A234A5DE600F8A682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		832341B51AAA6A8300B99B32 /* libRCTText.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1726,12 +1759,14 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = OnceUponATimeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1780,12 +1815,14 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = OnceUponATimeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1838,16 +1875,18 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = OnceUponATime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
+				MARKETING_VERSION = 2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "-";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jasonxddd;
 				PRODUCT_NAME = OnceUponATime;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OnceUponATime-Bridging-Header.h";
@@ -1882,16 +1921,18 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = OnceUponATime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)";
+				MARKETING_VERSION = 2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "-";
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jasonxddd;
 				PRODUCT_NAME = OnceUponATime;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OnceUponATime-Bridging-Header.h";
@@ -1928,11 +1969,13 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1989,11 +2032,13 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2049,11 +2094,13 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2109,11 +2156,13 @@
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
+					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

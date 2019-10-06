@@ -1,4 +1,4 @@
-import { observable, action } from "mobx";
+import { observable, action, observe } from "mobx";
 
 
 export default class StoryStore {
@@ -18,7 +18,10 @@ export default class StoryStore {
 
 	@observable openScenePane = true;
 
-
+	//for sirikit
+	@observable shortcutInfo = null;
+	@observable shortcutActivityType = null;
+	
 
 	@action
 	removeItem(key){
