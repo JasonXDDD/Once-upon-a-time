@@ -41,6 +41,9 @@ export default class SoundStore {
     piano_d5: d5
   };
 
+  @observable bgmPlayer = this.genMusic('bgm')
+  @observable isBgm = true
+  
   prePlayer;
 	@action
 	genMusic(key){

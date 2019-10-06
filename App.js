@@ -7,13 +7,8 @@ import { Provider as ProviderAntd } from "@ant-design/react-native";
 import * as store from "./src/stores/index";
 import Sound from 'react-native-sound';
 
-const bgmPlayer = store.soundStore.genMusic('bgm')
-
 @observer
 export default class App extends Component<Props> {  
-  state = {
-    isBgm: true
-  }
 
   constructor(props) {
     super(props)
@@ -21,19 +16,19 @@ export default class App extends Component<Props> {
 
   componentDidMount(){
     setTimeout(() => {
-      store.soundStore.playMusic(bgmPlayer, 0.4, -1)
+      store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
     }, 1000)
   }
 
   switchBGM(){
-    if(this.state.isBgm){
-      bgmPlayer.stop()
-      this.setState({isBgm: false})
+    if(store.soundStore.isBgm){
+      store.soundStore.bgmPlayer.stop()
+      store.soundStore.isBgm = false
     }
 
     else {
-      store.soundStore.playMusic(bgmPlayer, 0.4, -1)
-      this.setState({isBgm: true})
+      store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
+      store.soundStore.isBgm = true
     }
   }
   
@@ -46,7 +41,7 @@ export default class App extends Component<Props> {
             <TouchableOpacity style={styles.bgmButton} onPress={() => {
               this.switchBGM()
             }}>
-              <Text>{this.state.isBgm? 'Close BGM': 'Open BGM'}</Text>
+              <Text>{store.soundStore.isBgm? 'Close BGM': 'Open BGM'}</Text>
             </TouchableOpacity>
           </SafeAreaView>
         </ProviderAntd>

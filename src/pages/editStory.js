@@ -48,7 +48,6 @@ export default class EditStory extends React.Component {
         <StoryToolRecord navigation={this.props.navigation} />
 
         {/* when record */}
-        <GoBack navigation={this.props.navigation} />
         <RecordTool navigation={this.props.navigation} />
 
         <Text style={[styles.countText, { display: this.storyStore.count == 0? 'none': 'flex' }]}>{this.storyStore.count}</Text>

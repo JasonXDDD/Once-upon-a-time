@@ -22,6 +22,7 @@ export default class StoryToolRecord extends Component {
     super(props);
     this.storyStore = props.rootStore.storyStore;
     this.toolStore = props.rootStore.toolStore;
+    this.soundStore = props.rootStore.soundStore;
     this.navigation = props.navigation;
   }
 
@@ -47,6 +48,10 @@ export default class StoryToolRecord extends Component {
             this.storyStore.isRecord = true;
             this.toolStore.open = "";
             this.hideBar();
+            if(this.soundStore.isBgm){
+              this.soundStore.bgmPlayer.stop()
+              this.soundStore.isBgm = false
+            }
           }}
         >
           <Image style={styles.toolIcon} source={Btn_Recording} />

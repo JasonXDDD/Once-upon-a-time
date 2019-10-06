@@ -6,6 +6,7 @@ import { NavigationActions } from "react-navigation";
 import Btn_Recording from '../../assets/images/RecordStory/Btn_Recording.png'
 import Btn_Start from '../../assets/images/RecordStory/Btn_Start.png'
 import Btn_Stop from '../../assets/images/RecordStory/Btn_Stop.png'
+import { observe } from 'mobx';
 
 const SwiftRecordTool = requireNativeComponent('RecordTool')
 const ICON_SIZE = 50;
@@ -16,10 +17,14 @@ export default class RecordTool extends Component {
   constructor(props) {
     super(props)
     this.storyStore = props.rootStore.storyStore
+    this.soundStore = props.rootStore.soundStore
     this.navigation = props.navigation
   }
 
-
+  start(){
+    this.storyStore.count = 3
+    this.storyStore.countdownid = setInterval(() => {this.countDown()}, 1000)
+  }
 
   countDown(){ 
     if (this.storyStore.count == 0){
@@ -32,14 +37,16 @@ export default class RecordTool extends Component {
       this.storyStore.count --;
   }
 
+  componentDidMount(){
+    observe(this.storyStore, 'isRecord',(change)=> {
+      if(change.newValue)
+        this.start()
+    })
+  }
   render() {
     return (
       <View style={[styles.recordTool, { display: !this.storyStore.isRecord ? "none" : "flex" }]}>
-        <TouchableOpacity style={{display: this.storyStore.onLive === false? 'flex': 'none'}} 
-          onPress={() => {
-            this.storyStore.count = 3
-            this.storyStore.countdownid = setInterval(() => {this.countDown()}, 1000)
-          }}>
+        <TouchableOpacity style={{display: this.storyStore.onLive === false? 'flex': 'none'}}>
           <Image style={styles.recordIcon} source={Btn_Start}></Image>
         </TouchableOpacity>
 
@@ -49,6 +56,9 @@ export default class RecordTool extends Component {
             this.storyStore.onLive = false
             this.storyStore.isRecord = false;
             this.showBar();
+
+            this.soundStore.playMusic(this.soundStore.bgmPlayer, 0.4, -1)
+            this.soundStore.isBgm = true
           }}>
           <Image style={styles.recordIcon} source={Btn_Stop}></Image>
         </TouchableOpacity>
