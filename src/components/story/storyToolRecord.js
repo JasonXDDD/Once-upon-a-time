@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
 
   toolIcon: {
-    marginTop: 10,
+    marginTop: 25,
     width: ICON_SIZE / 50 * 80,
     height: ICON_SIZE,
     marginHorizontal: 5
