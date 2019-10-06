@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderTopColor: "rgba(255, 255, 255, 0)",
     width: screenWidth * 0.8,
-    bottom: 40
+    bottom: 30
   },
 
   tabView: {
