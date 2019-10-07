@@ -59,7 +59,7 @@ export default class StoryBox extends React.Component {
 		let ans = [{
 			name: 'Sample',
 			image: 'https://i.imgur.com/rHcCdWb.png',
-			video: 'https://videos2.sendvid.com/e8/25/vsxjd0ex.mp4?validfrom=1564139081&validto=1564146281&rate=200k&burst=1000k&ip=36.231.141.172&hash=6CjAceG%2FplCCAUgVbjJMAtTll88%3D',
+			video: 'http://cdn-b-east.streamable.com/video/mp4-mobile/jutsg.mp4?token=8WCMXM-enmW3EMLP7oUaxA&expires=1570431300',
 			time: 'SAMPLE 2019年 07月 16日 17:45'
 		}]
 
