@@ -55,6 +55,7 @@
 		7CEE67FE7F8141658432BB25 /* antfill.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8350BFDDE25F4B20ADEB26CE /* antfill.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		88470CF8A9294AD6B79C2EDF /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 026A3E0E57B041159BBF076E /* libRNFS.a */; };
+		8F10BCF6CAD045C9A1397150 /* libRNCCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FA77EC71A6477EB8F5BF2A /* libRNCCameraRoll.a */; };
 		9128C483091340E3A9B79E1C /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00CFBBB74043492784DDEEDB /* Feather.ttf */; };
 		9BF98992FF8245429848124F /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28936062E6A24870B4C8B50E /* Fontisto.ttf */; };
 		9EFDA6126CC847F9875CBF87 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 197C456E090C4AC084B9AF35 /* FontAwesome5_Regular.ttf */; };
@@ -435,6 +436,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNSiriShortcuts;
 		};
+		78D288CA234B145D00F8A682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18F332E102EF4D1488E3BAA7 /* RNCCameraRoll.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
+			remoteInfo = RNCCameraRoll;
+		};
 		832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
@@ -461,6 +469,7 @@
 		00E356EE1AD99517003FC87E /* OnceUponATimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnceUponATimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* OnceUponATimeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnceUponATimeTests.m; sourceTree = "<group>"; };
+		01FA77EC71A6477EB8F5BF2A /* libRNCCameraRoll.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCCameraRoll.a; sourceTree = "<group>"; };
 		026A3E0E57B041159BBF076E /* libRNFS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFS.a; sourceTree = "<group>"; };
 		05154310078543BBA8F42A4D /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		06915F12950B4F56A7D677D8 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -477,6 +486,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OnceUponATime/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		17234F02A1894CA3A9910A07 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		18F332E102EF4D1488E3BAA7 /* RNCCameraRoll.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCCameraRoll.xcodeproj; path = "../node_modules/@react-native-community/cameraroll/ios/RNCCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		197C456E090C4AC084B9AF35 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		1CDFBFCE86B04E28A1A4CC38 /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; };
 		24C71D99EF5D41289D721694 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -588,6 +598,7 @@
 				EBDFB8BB6A0E49D8BE19143E /* libRNCamera.a in Frameworks */,
 				A818B02D65EF4957B3705006 /* libRNSound.a in Frameworks */,
 				F399056FF4D3450DA54D7A04 /* libRNSiriShortcuts.a in Frameworks */,
+				8F10BCF6CAD045C9A1397150 /* libRNCCameraRoll.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,6 +826,7 @@
 				9AD3D8E6B5424443870490E9 /* libRNCamera.a */,
 				CB520891B6934510AA4B9081 /* libRNSound.a */,
 				5E5EBA44D2C94D089C599A4A /* libRNSiriShortcuts.a */,
+				01FA77EC71A6477EB8F5BF2A /* libRNCCameraRoll.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -929,6 +941,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		78D288C7234B145D00F8A682 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78D288CB234B145D00F8A682 /* libRNCCameraRoll.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -955,6 +975,7 @@
 				F6E8305271344818ADD97EC3 /* RNCamera.xcodeproj */,
 				7E302FB2EDAC4D50BD759EE0 /* RNSound.xcodeproj */,
 				912967EDC90E48A184EE6056 /* RNSiriShortcuts.xcodeproj */,
+				18F332E102EF4D1488E3BAA7 /* RNCCameraRoll.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1179,6 +1200,10 @@
 				{
 					ProductGroup = 781492432321174C000EE36C /* Products */;
 					ProjectRef = F6E8305271344818ADD97EC3 /* RNCamera.xcodeproj */;
+				},
+				{
+					ProductGroup = 78D288C7234B145D00F8A682 /* Products */;
+					ProjectRef = 18F332E102EF4D1488E3BAA7 /* RNCCameraRoll.xcodeproj */;
 				},
 				{
 					ProductGroup = 788E424422A2F99E00EA68CC /* Products */;
@@ -1571,6 +1596,13 @@
 			remoteRef = 78D2887A234A5DE600F8A682 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		78D288CB234B145D00F8A682 /* libRNCCameraRoll.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCCameraRoll.a;
+			remoteRef = 78D288CA234B145D00F8A682 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		832341B51AAA6A8300B99B32 /* libRCTText.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1760,12 +1792,14 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = OnceUponATimeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1816,12 +1850,14 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = OnceUponATimeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1876,6 +1912,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = OnceUponATime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
@@ -1922,6 +1959,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = OnceUponATime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited) @executable_path/Frameworks";
@@ -1970,11 +2008,13 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2033,11 +2073,13 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2095,11 +2137,13 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -2157,11 +2201,13 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 					"$(SRCROOT)/../node_modules/react-native-siri-shortcut/ios",
+					"$(SRCROOT)/../node_modules/@react-native-community/cameraroll/ios",
 				);
 				INFOPLIST_FILE = "OnceUponATime-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
