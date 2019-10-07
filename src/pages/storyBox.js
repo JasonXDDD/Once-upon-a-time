@@ -36,14 +36,13 @@ export default class StoryBox extends React.Component {
 		//set when siri change route
 		if(this.storyStore.shortcutInfo != null){
 			setTimeout(() => {
-				this.setState({selectVideo: this.state.images[1]})
-				this.setModalVisible(true)
+				this.playVideo(this.state.images[0])
 			}, 1000)
 		}
     observe(this.storyStore, 'shortcutInfo',(change)=> {
       if(JSON.parse(change.newValue).say === 'story'){
         setTimeout(() => {
-					this.playVideo(this.state.images[1])
+					this.playVideo(this.state.images[0])
 				}, 1000)
 			}
     })
