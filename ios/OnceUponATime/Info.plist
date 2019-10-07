@@ -41,6 +41,8 @@
 	<string>Camera XD</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMainNibFile~ipad</key>
+	<string>LaunchScreen</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>XDD</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
