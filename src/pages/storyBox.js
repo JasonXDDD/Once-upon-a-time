@@ -27,6 +27,7 @@ export default class StoryBox extends React.Component {
 	constructor(props) {
 		super(props);
     this.storyStore = props.rootStore.storyStore;
+    this.soundStore = props.rootStore.soundStore;
 	}
 
   async componentDidMount() {
@@ -42,11 +43,20 @@ export default class StoryBox extends React.Component {
     observe(this.storyStore, 'shortcutInfo',(change)=> {
       if(JSON.parse(change.newValue).say === 'story'){
         setTimeout(() => {
-					this.setState({selectVideo: this.state.images[1]})
-					this.setModalVisible(true)
+					this.playVideo(this.state.images[1])
 				}, 1000)
 			}
     })
+	}
+
+	playVideo(data){
+		this.setState({selectVideo: data})
+		this.setModalVisible(true)
+
+		if(this.soundStore.isBgm){
+			this.soundStore.bgmPlayer.stop()
+			this.soundStore.isBgm = false
+		}
 	}
 
 	setModalVisible(visible) {
@@ -139,8 +149,7 @@ export default class StoryBox extends React.Component {
 								justifyContent: "center",
 							}}
 							onPress={() => {
-								this.setState({selectVideo: item})
-								this.setModalVisible(true)
+								this.playVideo(item)
 							}}
 							onLongPress={() => {
 								this.setState({selectVideo: item})
@@ -165,6 +174,10 @@ export default class StoryBox extends React.Component {
 						source={{uri: this.state.selectVideo.video}}
 						onBack={() => {
 							this.setModalVisible(!this.state.modalVisible);
+							
+							//play bgm
+							this.soundStore.playMusic(this.soundStore.bgmPlayer, 0.4, -1)
+            	this.soundStore.isBgm = true
 						}}/> 
 
         </Modal>

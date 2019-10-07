@@ -95,8 +95,9 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
           
         })
         
-        alert.addAction(editAction)
         alert.addAction(deleteAction)
+        alert.addAction(editAction)
+    
         self.findViewController()!.present(alert, animated: true, completion: nil)
         
       }

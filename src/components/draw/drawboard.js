@@ -217,6 +217,9 @@ export default class DrawBoard extends Component {
           title={"他叫什麼名字？"}
           message={"請給他一個名字吧"}
           hintInput={"名字"}
+          cancelText={"取消"}
+          submitText={"儲存"}
+          dialogStyle={{top: 180, position: 'absolute'}}
           submitInput={inputText => {
             this.snapshot(inputText);
             this.setState({ isDialogVisible: false });
