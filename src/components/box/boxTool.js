@@ -3,6 +3,8 @@ import { View, Image, Text, TouchableOpacity, StyleSheet, Dimensions } from 'rea
 import { inject, observer } from 'mobx-react'
 import Share from 'react-native-share';
 import RNFS from 'react-native-fs';
+import { SiriShortcutsEvent, donateShortcut, suggestShortcuts, clearAllShortcuts, clearShortcutsWithIdentifiers, presentShortcut } from "react-native-siri-shortcut";
+import AddToSiriButton, { SiriButtonStyles, supportsSiriButton } from "react-native-siri-shortcut/AddToSiriButton";
 
 import Btn_Share from '../../assets/images/StoryBox/Btn_share.png'
 import Btn_Delete from '../../assets/images/StoryBox/Btn_delete.png'
@@ -17,6 +19,20 @@ const shareOptions = {
   social: Share.Social.EMAIL
 };
 
+
+const opts1: ShortcutOptions = {
+  activityType: "io.github.jasonxddd.sayHello",
+  title: "從前從前說故事",
+  description: "拉拉",
+  userInfo: { say: 'story' },
+  keywords: ["故事", "從前"],
+  persistentIdentifier: "io.github.jasonxddd.sayHello",
+  isEligibleForSearch: true,
+  isEligibleForPrediction: true,
+  suggestedInvocationPhrase: "講故事給我聽",
+  needsSave: true,
+};
+
 @inject('rootStore')
 @observer
 export default class BoxTool extends Component {
@@ -24,6 +40,15 @@ export default class BoxTool extends Component {
     super(props)
     this.storyStore = props.rootStore.storyStore
     this.navigation = props.navigation
+  }
+
+  componentDidMount(){
+    // set sirikit listener
+    SiriShortcutsEvent.addListener("SiriShortcutListener", ({userInfo, activityType}) => {
+      store.storyStore.shortcutInfo = JSON.stringify(userInfo)
+      store.storyStore.shortcutActivityType = activityType
+    });
+    suggestShortcuts([opts1]);
   }
 
   deleteVideo(path){
@@ -41,6 +66,19 @@ export default class BoxTool extends Component {
     return (
       <View style={[styles.recordTool]}>
         <Text style={styles.selectText}>選擇： {this.props.selectVideo.time}</Text>
+
+        {supportsSiriButton && (
+          <AddToSiriButton
+            style={styles.siriButton}
+            buttonStyle={SiriButtonStyles.whiteOutline}
+            onPress={() => {
+              presentShortcut(opts1, ({ status }) => {
+                console.log(`I was ${status}`);
+              });
+            }}
+            shortcut={opts1}
+          />
+        )}
 
         <TouchableOpacity 
           onPress={() => {
@@ -87,5 +125,11 @@ const styles = StyleSheet.create({
     marginTop: -35,
     marginLeft: -50,
     fontSize: 20
+  },
+
+
+  siriButton: {
+    marginTop: 10,
+    marginHorizontal: 10
   }
 })
