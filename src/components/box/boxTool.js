@@ -8,6 +8,7 @@ import AddToSiriButton, { SiriButtonStyles, supportsSiriButton } from "react-nat
 
 import Btn_Share from '../../assets/images/StoryBox/Btn_share.png'
 import Btn_Delete from '../../assets/images/StoryBox/Btn_delete.png'
+import Btn_Reload from '../../assets/images/StoryBox/Btn_reload.png'
 
 const ICON_SIZE = 70;
 const screenWidth = Dimensions.get("window").width;
@@ -98,6 +99,13 @@ export default class BoxTool extends Component {
             .catch((err) => { err && console.log(err); });
           }}>
           <Image style={styles.recordIcon} source={Btn_Share}></Image>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          onPress={() => {
+            this.deleteVideo(this.props.selectVideo.video)
+          }}>
+          <Image style={styles.recordIcon} source={Btn_Reload}></Image>
         </TouchableOpacity>
 
       </View>

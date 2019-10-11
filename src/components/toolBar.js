@@ -36,6 +36,13 @@ export default class ToolBar extends Component {
       color: "#3e97a5",
       top: (ICON_SIZE + 10) * 2 + TOOL_PANE_OFFSET,
       animated: false
+    },
+
+    {
+      type: "music",
+      color: "#4078b2",
+      top: (ICON_SIZE + 10) * 3 + TOOL_PANE_OFFSET,
+      animated: false
     }
   ];
 

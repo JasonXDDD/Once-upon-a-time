@@ -150,15 +150,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    width: (screenWidth * 0.95),
-    height: (screenWidth * 0.95) * 115 / 1897
+    width: (screenWidth * 0.9),
+    height: (screenWidth * 0.9) * 115 / 1897
   },
 
   tabStyle: {
     backgroundColor: 'transparent',
     borderTopColor: "rgba(255, 255, 255, 0)",
     width: screenWidth * 0.8,
-    bottom: 30
+    bottom: 40
   },
 
   tabView: {

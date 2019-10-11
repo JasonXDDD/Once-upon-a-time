@@ -61,8 +61,8 @@ const ICON_SIZE = 70;
 const DRAW_BOARD_WIDTH = BOARD_WIDTH;
 const DRAW_BOARD_HEIGHT = (BOARD_WIDTH) * 38 / 55;
 const DRAW_PANE_SIZE = DRAW_BOARD_HEIGHT * 0.83;
-const DRAW_PANE_TOP = 60;
-const DRAW_PANE_MARGIN_BOTTOM = 50;
+const DRAW_PANE_TOP = 65;
+const DRAW_PANE_MARGIN_BOTTOM = 55;
 
 @inject("rootStore")
 @observer
@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
   },
 
   CameraIcon: {
-    marginTop: 0,
+    marginTop: 5,
     width: ICON_SIZE + 18,
     height: ICON_SIZE - 20,
   },
