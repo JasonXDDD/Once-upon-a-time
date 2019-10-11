@@ -67,7 +67,7 @@ export default class SceneTool extends Component {
     return (
       <View style={[
         styles.sceneTool, {
-        top: this.storyStore.isRecord? BOARD_TOP + BOARD_HEIGHT - ICON_SIZE - 20: BOARD_TOP + 10,
+        top: this.storyStore.isRecord? BOARD_TOP + BOARD_HEIGHT - ICON_SIZE - 20: BOARD_TOP - 10,
         right: this.storyStore.isRecord? BOARD_RIGHT + BOARD_WIDTH - ICON_SIZE - 20: BOARD_RIGHT - ICON_SIZE - 30,
         flexDirection: this.storyStore.isRecord? "row": "column",
       }]}>
@@ -93,8 +93,8 @@ export default class SceneTool extends Component {
             style={[
               styles.sceneBar,
               {
-                height: this.storyStore.isRecord? (BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60) * 57 / 630: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
-                width: this.storyStore.isRecord?   BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 57 / 630,
+                height: this.storyStore.isRecord? (BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60) * 120 / 850: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
+                width: this.storyStore.isRecord?   BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 120 / 850,
                 flexDirection: this.storyStore.isRecord? "row": "column"
               }
             ]}>
@@ -160,12 +160,13 @@ const styles = StyleSheet.create({
   },
 
   sceneBar: {
-    alignItems: "center"
+    alignItems: "center",
+    marginVertical: 15
   },
 
   sceneIcon: {
-    width: ICON_SIZE * 1.1,
-    height: ICON_SIZE * 1.15
+    width: ICON_SIZE + 10,
+    height: ICON_SIZE + 10
   },
 
   sceneItemRecord: {  marginHorizontal: 20, left: 150 },

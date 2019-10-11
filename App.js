@@ -1,11 +1,23 @@
 import React, { Component } from "react";
-import { Platform, Image, Alert, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Platform, Image, Alert, TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
 import TabBar from "./src/components/tabBar";
 import { SafeAreaView } from "react-navigation";
 import { Provider, observer } from "mobx-react";
 import { Provider as ProviderAntd } from "@ant-design/react-native";
 import * as store from "./src/stores/index";
 import Sound from 'react-native-sound';
+
+import BGM_Open from "./src/assets/images/bgm-open.png";
+import BGM_Close from "./src/assets/images/bgm-close.png";
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+const BOARD_WIDTH = screenWidth * 0.76;
+const BOARD_HEIGHT = screenHeight * 0.7;
+const ICON_SIZE = 60;
+const BOARD_POS_BASIC = 25;
+const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
 
 @observer
 export default class App extends Component<Props> {  
@@ -41,7 +53,7 @@ export default class App extends Component<Props> {
             <TouchableOpacity style={styles.bgmButton} onPress={() => {
               this.switchBGM()
             }}>
-              <Text>{store.soundStore.isBgm? 'Close BGM': 'Open BGM'}</Text>
+              <Image source={store.soundStore.isBgm? BGM_Open: BGM_Close} style={styles.bgmImage}></Image>
             </TouchableOpacity>
 
           </SafeAreaView>
@@ -58,7 +70,12 @@ const styles = StyleSheet.create({
   bgmButton: {
     position: "absolute",
     overflow: "hidden",
-    top: 50,
-    right: 50
+    bottom: 40,
+    right: BOARD_RIGHT - ICON_SIZE - 30
+  },
+
+  bgmImage: {
+    width: ICON_SIZE,
+    height: ICON_SIZE
   }
 })

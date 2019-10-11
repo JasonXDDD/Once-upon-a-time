@@ -6,10 +6,13 @@ import BtnCharacterUnselected from "../assets/images/EditStory/Btn_Character_Uns
 import BtnCharacterSelected from "../assets/images/EditStory/Btn_Character_Selected.png";
 import BtnStickerUnselected from "../assets/images/EditStory/Btn_Sticker_Unselected.png";
 import BtnStickerSelected from "../assets/images/EditStory/Btn_Sticker_Selected.png";
+import BtnMusicSelected from "../assets/images/EditStory/Btn_Music_Selected.png";
+import BtnMusicUnselected from "../assets/images/EditStory/Btn_Music_Unselected.png";
 
 import Forest from "../assets/images/scene/Forest.png";
 import Room from "../assets/images/scene/Room.png";
 import Outside from "../assets/images/scene/Outside.png";
+import Camera from "../assets/images/scene/Camera.png";
 import sLock01 from "../assets/images/scene/lock01.png";
 import sLock02 from "../assets/images/scene/lock02.png";
 import sLock03 from "../assets/images/scene/lock03.png";
@@ -34,6 +37,7 @@ export default class ToolStore {
   @observable sceneBtn = BtnSceneUnselected;
   @observable characterBtn = BtnCharacterUnselected;
   @observable stickerBtn = BtnStickerUnselected;
+  @observable musicBtn = BtnMusicUnselected;
   @observable open = "";
   @observable selectIndex = -1;
   @observable isAnimate = [false, false, false];
@@ -67,7 +71,7 @@ export default class ToolStore {
     },
     {
       id: "相機",
-      image: Outside,
+      image: Camera,
       animate: null,
       isLock: false,
       sound: null,
@@ -185,6 +189,10 @@ export default class ToolStore {
     }
   ];
 
+  @observable music = [
+    
+  ];
+
   @observable drawItem = {};
 
   @action
@@ -199,5 +207,6 @@ export default class ToolStore {
     this.sceneBtn =     this.open === 'scene'     ? BtnSceneSelected : BtnSceneUnselected;
     this.characterBtn = this.open === 'character' ? BtnCharacterSelected : BtnCharacterUnselected;
     this.stickerBtn =   this.open === 'sticker'   ? BtnStickerSelected : BtnStickerUnselected;
+    this.musicBtn =     this.open === 'music'     ? BtnMusicSelected : BtnMusicUnselected;
   }
 }
