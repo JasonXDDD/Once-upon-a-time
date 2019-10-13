@@ -30,8 +30,13 @@ import Wolf from "../assets/images/character/wolf.png";
 import cLock01 from "../assets/images/character/lock01.png";
 
 import stickerSample from "../assets/images/sticker-sample.png";
+import musicItem from "../assets/images/music-item.png";
 
-import ForestSound from "../assets/sound/scene/summer_hill1.m4a";
+import Happy from "../assets/sound/scene/Rainbow_Forest.mp3";
+import Desert from "../assets/sound/scene/Desert_Caravan.mp3";
+import War from "../assets/sound/scene/Eyes_of_Glory.mp3";
+import Suspense from "../assets/sound/scene/Carol_of_the_Bells.mp3";
+import Thunder from "../assets/sound/scene/Thunder_Crack.mp3";
 
 export default class ToolStore {
   @observable sceneBtn = BtnSceneUnselected;
@@ -50,7 +55,6 @@ export default class ToolStore {
       image: Forest,
       animate: null,
       isLock: false,
-      sound: ForestSound,
       isAnimate: false
     },
     {
@@ -58,7 +62,6 @@ export default class ToolStore {
       image: Room,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -66,7 +69,6 @@ export default class ToolStore {
       image: Outside,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -74,7 +76,6 @@ export default class ToolStore {
       image: Camera,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -82,7 +83,6 @@ export default class ToolStore {
       image: sLock01,
       animate: null,
       isLock: true,
-      sound: null,
       isAnimate: false
     },
     {
@@ -90,7 +90,6 @@ export default class ToolStore {
       image: sLock02,
       animate: null,
       isLock: true,
-      sound: null,
       isAnimate: false
     },
     {
@@ -98,7 +97,6 @@ export default class ToolStore {
       image: sLock03,
       animate: null,
       isLock: true,
-      sound: null,
       isAnimate: false
     }
   ];
@@ -109,7 +107,6 @@ export default class ToolStore {
       image: Sun,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -117,7 +114,6 @@ export default class ToolStore {
       image: BigMonster,
       animate: BigMonsterAnimate,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -125,7 +121,6 @@ export default class ToolStore {
       image: SmallMoster,
       animate: SmallMosterAnimate,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -133,7 +128,6 @@ export default class ToolStore {
       image: Bee,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -141,7 +135,6 @@ export default class ToolStore {
       image: Redhat,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -149,7 +142,6 @@ export default class ToolStore {
       image: Hunter,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -157,7 +149,6 @@ export default class ToolStore {
       image: Grandma,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -165,7 +156,6 @@ export default class ToolStore {
       image: Wolf,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     },
     {
@@ -173,7 +163,6 @@ export default class ToolStore {
       image: cLock01,
       animate: null,
       isLock: true,
-      sound: null,
       isAnimate: false
     }
   ];
@@ -184,13 +173,56 @@ export default class ToolStore {
       image: stickerSample,
       animate: null,
       isLock: false,
-      sound: null,
       isAnimate: false
     }
   ];
 
   @observable music = [
-    
+    {
+      id: "歡樂",
+      image: musicItem,
+      sound: Happy,
+      player: {},
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "沙漠",
+      image: musicItem,
+      sound: Desert,
+      player: {},
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "打仗",
+      image: musicItem,
+      sound: War,
+      player: {},
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "懸疑",
+      image: musicItem,
+      sound: Suspense,
+      player: {},
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "晴天霹靂",
+      image: musicItem,
+      sound: Thunder,
+      player: {},
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
   ];
 
   @observable drawItem = {};

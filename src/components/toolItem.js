@@ -21,6 +21,11 @@ export default class ToolItem extends Component {
 
   componentDidMount(){
     this.itemPlayer = this.soundStore.genMusic('tool_item')
+    if(this.type === 'music'){
+      this.toolStore[this.type].forEach(element => {
+        element.player = this.soundStore.genMusicBySound(element.sound)
+      });
+    }
   }
 
   render() {
@@ -33,19 +38,36 @@ export default class ToolItem extends Component {
               style={styles.toolImage}
               key={ele.id}
               onPress={() => {
+                this.toolStore[this.type].map(ele => ele.isAnimate = false)
                 ele.isAnimate = true
-                this.soundStore.playSoundEffect(this.itemPlayer, 3, 0)
+                
                 setTimeout(() => {
-                  if(this.props.select === 'edit')
-                    this.addStoryItem(ele, this.type)
-                  else if(this.props.select === 'draw')
-                    this.addDrawItem(ele)
+                  if(this.type === 'music'){
+                    // is music
+                    if(this.soundStore.isBgm){
+                      this.soundStore.bgmPlayer.stop()
+                      this.soundStore.isBgm = false
+                    }
+                    
+                    this.soundStore.playSoundEffect(ele.player, 0.8, 0)
+                  }
+                  else {
+                    
+                    this.soundStore.playSoundEffect(this.itemPlayer, 3, 0)
+                    // is image
+                    if(this.props.select === 'edit')
+                      this.addStoryItem(ele, this.type)
+                    else if(this.props.select === 'draw')
+                      this.addDrawItem(ele)
+                  }
+                  
                 }, 200)
                 
               }}>
               <Animatable.Image 
-                animation={ele.isAnimate? "bounceOutRight": ""}
-                duration={1000}
+                animation={ele.isAnimate? (this.type === 'music'? 'swing': "bounceOutRight"): ""}
+                duration={this.type === 'music'? 500: 1000}
+                iterationCount={this.type === 'music'? 'infinite': 1}
                 onAnimationEnd={() => {
                   ele.isAnimate = false
                 }}
