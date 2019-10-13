@@ -82,7 +82,7 @@ export default class SoundStore {
   }
 
   @action
-  playSoundEffect(player, vol, loop){
+  playSoundEffect(player, vol, loop, callback){
     //clear prev player for playing quickly
     if(this.prePlayer) this.prePlayer.stop()
     
@@ -93,5 +93,7 @@ export default class SoundStore {
     })
 
     this.prePlayer = player
+
+    if(callback) callback()
   }
 }
