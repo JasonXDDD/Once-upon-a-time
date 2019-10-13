@@ -46,8 +46,8 @@ export default class BoxTool extends Component {
   componentDidMount(){
     // set sirikit listener
     SiriShortcutsEvent.addListener("SiriShortcutListener", ({userInfo, activityType}) => {
-      store.storyStore.shortcutInfo = JSON.stringify(userInfo)
-      store.storyStore.shortcutActivityType = activityType
+      this.storyStore.shortcutInfo = JSON.stringify(userInfo)
+      this.storyStore.shortcutActivityType = activityType
     });
     suggestShortcuts([opts1]);
   }
