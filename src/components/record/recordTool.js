@@ -40,8 +40,8 @@ export default class RecordTool extends Component {
 
   componentDidMount(){
     observe(this.storyStore, 'isRecord',(change)=> {
-      // if(change.newValue)
-        // this.start()
+      if(change.newValue)
+        this.start()
     })
   }
   render() {
