@@ -34,7 +34,7 @@ export default class App extends Component<Props> {
 
     setTimeout(() => {
       store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
-    }, 1000)
+    }, 500)
   }
 
   switchBGM(){

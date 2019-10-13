@@ -1,8 +1,13 @@
 import { observable, action } from "mobx";
 import Sound from 'react-native-sound';
+import { Alert } from "react-native";
 
 import Background_Music from "../assets/sound/Rainbow_Forest.mp3";
-import TabBar_Click from "../assets/sound/button.mp3";
+import TabBar_Click from "../assets/sound/button-tab.mp3";
+import Button_Click from "../assets/sound/button-click.mp3";
+import Delete_Click from "../assets/sound/button-delete.mp3";
+import Pop_Click from "../assets/sound/button-pop.wav";
+import Long_Press_Click from "../assets/sound/button-long-press.mp3";
 import ToolBar_Click from "../assets/sound/bloop-noise.wav";
 import DrawColor_Click from "../assets/sound/bloop-noise.wav";
 import BGM_Open from "../assets/sound/bgm-open.wav";
@@ -28,6 +33,10 @@ export default class SoundStore {
     bgm: Background_Music,
     tab: TabBar_Click,
     tool: ToolBar_Click,
+    button: Button_Click,
+    delete: Delete_Click,
+    add: Pop_Click,
+    long_press: Long_Press_Click,
     draw_color: DrawColor_Click,
     piano_g3: g3,
     piano_a3: a3,

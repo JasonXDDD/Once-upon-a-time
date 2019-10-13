@@ -31,9 +31,20 @@ const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
 @inject("rootStore")
 @observer
 export default class SceneTool extends Component {
+  buttonPlayer;
+  addPlayer;
+  longPlayer;
+
   constructor(props) {
     super(props);
     this.storyStore = props.rootStore.storyStore;
+    this.soundStore = props.rootStore.soundStore;
+  }
+
+  componentDidMount(){
+    this.buttonPlayer = this.soundStore.genMusic('button')
+    this.addPlayer = this.soundStore.genMusic('add')
+    this.longPlayer = this.soundStore.genMusic('long_press')
   }
 
   deleteScene(id) {
@@ -76,6 +87,7 @@ export default class SceneTool extends Component {
           style={{ display: this.storyStore.isRecord ? "none" : "flex" }}
           onPress={() => {
             this.storyStore.openScenePane = !this.storyStore.openScenePane;
+            this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
           }}
         >
           <Image style={styles.sceneIcon} source={this.storyStore.openScenePane? Movie_Selected: Movie_Unselected} />
@@ -104,8 +116,13 @@ export default class SceneTool extends Component {
                   key={id}
                   style={this.storyStore.isRecord? styles.sceneItemRecord: styles.sceneItem}
                   onPress={() => {
+                    this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
                     this.storyStore.selectSceneIndex = id;
                   }}
+                  onPressIn={() => {
+                    this.soundStore.playSoundEffect(this.longPlayer, .8, 0)
+                  }}
+                  delayLongPress={1000}
                   onLongPress={() => {
                     this.storyStore.selectSceneIndex = id;
                     this.deleteScene(id);
@@ -125,6 +142,7 @@ export default class SceneTool extends Component {
             style={{ display: this.storyStore.isRecord ? "none" : "flex" }}
             onPress={() => {
               if (this.storyStore.storyScene.length < 5) {
+                this.soundStore.playSoundEffect(this.addPlayer, 1, 0)
                 this.storyStore.storyScene.push({ story: [] });
                 this.storyStore.selectSceneIndex =
                   this.storyStore.storyScene.length - 1;
