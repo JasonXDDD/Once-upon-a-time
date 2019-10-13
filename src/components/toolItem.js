@@ -10,6 +10,7 @@ export default class ToolItem extends Component {
   itemPlayer;
   // times of add item, be unique and only one for the item's key
   count = 0;
+  musicCount = 0;
   
   constructor(props) {
     super(props)
@@ -37,6 +38,11 @@ export default class ToolItem extends Component {
             <TouchableOpacity
               style={styles.toolImage}
               key={ele.id}
+              onLongPress={() => {
+                if(this.type === 'music')
+                  this.addMuusicItem(ele, this.type)
+              }}
+              
               onPress={() => {
                 this.toolStore[this.type].map(ele => ele.isAnimate = false)
                 ele.isAnimate = true
@@ -48,11 +54,9 @@ export default class ToolItem extends Component {
                       this.soundStore.bgmPlayer.stop()
                       this.soundStore.isBgm = false
                     }
-                    
                     this.soundStore.playSoundEffect(ele.player, 0.8, 0)
                   }
                   else {
-                    
                     this.soundStore.playSoundEffect(this.itemPlayer, 3, 0)
                     // is image
                     if(this.props.select === 'edit')
@@ -94,6 +98,25 @@ export default class ToolItem extends Component {
     }
 
     this.toolStore.drawItem = data;
+  }
+
+  addMuusicItem(element, type){
+    let data = {
+      image: element.image,
+      sound: element.sound,
+      category: type,
+      name: element.id,
+      key: element.id + this.musicCount,
+    }
+
+    this.musicCount ++;
+
+    if(element.isLock) {
+      this.unlockMessage()
+      return
+    }
+
+    this.storyStore.storyScene[this.storyStore.selectSceneIndex].music.push(data)
   }
 
   addStoryItem(element, type) {

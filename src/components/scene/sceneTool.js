@@ -144,7 +144,7 @@ export default class SceneTool extends Component {
             onPress={() => {
               if (this.storyStore.storyScene.length < 5) {
                 this.soundStore.playSoundEffect(this.addPlayer, 1, 0)
-                this.storyStore.storyScene.push({ story: [] });
+                this.storyStore.storyScene.push({ story: [], music: [] });
                 this.storyStore.selectSceneIndex =
                   this.storyStore.storyScene.length - 1;
               }
