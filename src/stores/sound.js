@@ -8,6 +8,7 @@ import Button_Click from "../assets/sound/button-click.mp3";
 import Delete_Click from "../assets/sound/button-delete.mp3";
 import Pop_Click from "../assets/sound/button-pop.wav";
 import Long_Press_Click from "../assets/sound/button-long-press.mp3";
+import Bubble from "../assets/sound/bubble.wav";
 import ToolBar_Click from "../assets/sound/bloop-noise.wav";
 import DrawColor_Click from "../assets/sound/bloop-noise.wav";
 import BGM_Open from "../assets/sound/bgm-open.wav";
@@ -33,6 +34,7 @@ export default class SoundStore {
     bgm: Background_Music,
     tab: TabBar_Click,
     tool: ToolBar_Click,
+    tool_item: Bubble,
     button: Button_Click,
     delete: Delete_Click,
     add: Pop_Click,
