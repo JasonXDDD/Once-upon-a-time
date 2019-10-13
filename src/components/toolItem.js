@@ -7,6 +7,7 @@ import * as Animatable from 'react-native-animatable';
 @inject('rootStore')
 @observer
 export default class ToolItem extends Component {
+  itemPlayer;
   // times of add item, be unique and only one for the item's key
   count = 0;
   
@@ -14,7 +15,12 @@ export default class ToolItem extends Component {
     super(props)
     this.toolStore = props.rootStore.toolStore
     this.storyStore = props.rootStore.storyStore
+    this.soundStore = props.rootStore.soundStore
     this.type = props.type
+  }
+
+  componentDidMount(){
+    this.itemPlayer = this.soundStore.genMusic('tool_item')
   }
 
   render() {
@@ -28,6 +34,7 @@ export default class ToolItem extends Component {
               key={ele.id}
               onPress={() => {
                 ele.isAnimate = true
+                this.soundStore.playSoundEffect(this.itemPlayer, 3, 0)
                 setTimeout(() => {
                   if(this.props.select === 'edit')
                     this.addStoryItem(ele, this.type)

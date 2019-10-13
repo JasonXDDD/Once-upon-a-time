@@ -59,7 +59,8 @@ export default class SceneTool extends Component {
               Alert.alert("最後一張囉！不能刪了")
             }
             else {
-              this.storyStore.selectSceneIndex = this.storyStore.selectSceneIndex - 1;
+              if(this.storyStore.selectSceneIndex > 0) 
+                this.storyStore.selectSceneIndex = this.storyStore.selectSceneIndex - 1;
               this.storyStore.storyScene.splice(id, 1);
             }
             
