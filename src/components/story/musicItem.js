@@ -62,7 +62,11 @@ export default class MusicItem extends React.Component {
   
   render() {
     return (
-      <TouchableOpacity style={{marginHorizontal: 5, marginBottom: 3}} 
+      <TouchableOpacity style={{
+        marginHorizontal: 5, 
+        marginBottom: 3,
+        marginTop: this.storyStore.isRecord? (this.storyStore.selectMusic === this.item.key? 20: 40): 0
+      }} 
         onLongPress={() => {
           this.deleteMusic(this.item)
         }}
@@ -71,9 +75,15 @@ export default class MusicItem extends React.Component {
             this.soundStore.bgmPlayer.stop()
             this.soundStore.isBgm = false
           }
-          this.soundStore.playSoundEffect(this.initPlayer, 0.8, 0)
+          if(this.storyStore.isRecord){
+            this.storyStore.selectMusic = this.item.key
+          }
+          this.soundStore.playSoundEffect(this.initPlayer, 0.5, 0)
         }}>
-        <Image source={this.item.image} style={{width: 50, height: 50}}></Image>
+        <Image source={this.item.image} style={{
+          width: this.storyStore.isRecord? 80: 50, 
+          height: this.storyStore.isRecord? 80: 50
+        }}></Image>
         <Text style={{marginTop: 5, alignSelf: 'center'}}>{this.item.name}</Text>
       </TouchableOpacity>
     );

@@ -57,7 +57,7 @@ export default class App extends Component<Props> {
         <ProviderAntd>
           <SafeAreaView style={{ flex: 1 }} forceInset={{ top: "never", bottom: "never" }}>
             <TabBar />
-            <TouchableOpacity style={styles.bgmButton} onPress={() => {
+            <TouchableOpacity style={[styles.bgmButton, {display: store.storyStore.isRecord? 'none': 'flex'}]} onPress={() => {
               store.soundStore.playSoundEffect(store.soundStore.isBgm? this.bgmClosePlayer:  this.bgmOpenPlayer, 0.5, 0)
               this.switchBGM()
             }}>

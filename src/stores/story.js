@@ -16,6 +16,8 @@ export default class StoryStore {
 		{story: [], music: []}
 	];
 
+	@observable selectMusic = '';
+
 	@observable openScenePane = true;
 
 	//for sirikit

@@ -36,7 +36,7 @@ export default class StoryBoard extends Component {
           }
         )}
 
-        <View style={{position: 'absolute', bottom: 0, flexDirection: 'row'}}>
+        <View style={[styles.musicBoard, {display: this.storyStore.isRecord? 'none': 'flex'}]}>
           {this.storyStore.storyScene[this.storyStore.selectSceneIndex].music.map(
             (ele, id) => {
               console.log(ele)
@@ -66,4 +66,10 @@ const styles = StyleSheet.create({
     height: BOARD_HEIGHT,
     overflow: 'hidden',
   },
+
+  musicBoard: {
+    position: 'absolute', 
+    bottom: 0, 
+    flexDirection: 'row'
+  }
 })
