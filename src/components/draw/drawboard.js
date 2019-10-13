@@ -68,7 +68,8 @@ const DRAW_PANE_MARGIN_BOTTOM = 55;
 @observer
 export default class DrawBoard extends Component {
   timeOut;
-  colorPlayer;
+  buttonPlayer;
+  deletePlayer;
   
   colorList = [
     { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5, sound: 'piano_g3', player: {} },
@@ -103,6 +104,9 @@ export default class DrawBoard extends Component {
     this.colorList.forEach(ele => {
       ele.player = self.soundStore.genMusic(ele.sound)
     })
+
+    this.buttonPlayer = this.soundStore.genMusic('button')
+    this.deletePlayer = this.soundStore.genMusic('delete')
   }
 
   render() {
@@ -163,6 +167,9 @@ export default class DrawBoard extends Component {
                   source={Reback}
                 />
               }
+              onUndoPressed={() => {
+                this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
+              }}
               clearComponent={
                 <Image
                   style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 200 } ]}
@@ -170,6 +177,7 @@ export default class DrawBoard extends Component {
                 />
               }
               onClearPressed={() => {
+                this.soundStore.playSoundEffect(this.deletePlayer, 1, 0)
                 this.toolStore.drawItem = {}
               }}
               eraseComponent={
