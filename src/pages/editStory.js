@@ -15,6 +15,7 @@ import GoBack from "../components/record/goBack";
 import RecordTool from "../components/record/recordTool";
 import SceneTool from "../components/scene/sceneTool";
 import { observe } from "mobx";
+import MusicBoard from "../components/record/musicBoard";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -56,6 +57,7 @@ export default class EditStory extends React.Component {
         <StoryToolRecord navigation={this.props.navigation} />
 
         {/* when record */}
+        <MusicBoard />
         <RecordTool navigation={this.props.navigation} />
 
         <Text style={[styles.countText, { display: this.storyStore.count == 0? 'none': 'flex' }]}>{this.storyStore.count}</Text>

@@ -77,11 +77,9 @@ export default class SceneTool extends Component {
 
   render() {
     return (
-      <View style={[
-        styles.sceneTool, {
-        top: this.storyStore.isRecord? BOARD_TOP + BOARD_HEIGHT - ICON_SIZE - 20: BOARD_TOP - 10,
-        right: this.storyStore.isRecord? BOARD_RIGHT + BOARD_WIDTH - ICON_SIZE - 20: BOARD_RIGHT - ICON_SIZE - 30,
-        flexDirection: this.storyStore.isRecord? "row": "column",
+      <View style={[styles.sceneTool, {
+        top: this.storyStore.isRecord? BOARD_TOP + 30: BOARD_TOP - 10,
+        right: this.storyStore.isRecord? BOARD_RIGHT - ICON_SIZE - 60: BOARD_RIGHT - ICON_SIZE - 30,
       }]}>
         {/* scene board */}
         <TouchableOpacity
@@ -98,24 +96,14 @@ export default class SceneTool extends Component {
           style={[
             styles.scenePane,
             { display: this.storyStore.openScenePane ? "flex" : "none" },
-            { flexDirection: this.storyStore.isRecord? "row": "column" },
-            this.storyStore.isRecord ? styles.sceneRecordPane : {}
           ]}
         >
-          <ImageBackground source={this.storyStore.isRecord? BG_Scene_H: BG_Scene_V} 
-            style={[
-              styles.sceneBar,
-              {
-                height: this.storyStore.isRecord? (BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60) * 120 / 850: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
-                width: this.storyStore.isRecord?   BOARD_POS_BASIC + BOARD_WIDTH - ICON_SIZE * 2 - 60: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 120 / 850,
-                flexDirection: this.storyStore.isRecord? "row": "column"
-              }
-            ]}>
+          <ImageBackground source={BG_Scene_V}  style={styles.sceneBar}>
             {this.storyStore.storyScene.map((ele, id) => {
               return (
                 <TouchableOpacity
                   key={id}
-                  style={this.storyStore.isRecord? styles.sceneItemRecord: styles.sceneItem}
+                  style={styles.sceneItem}
                   onPress={() => {
                     this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
                     this.storyStore.selectSceneIndex = id;
@@ -163,12 +151,14 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     position: "absolute",
+    flexDirection: "column",
     width: ICON_SIZE,
     height: ICON_SIZE
   },
 
   scenePane: {
-    alignItems: "center"
+    alignItems: "center",
+    flexDirection: "column"
   },
 
   sceneRecordPane: {
@@ -180,7 +170,10 @@ const styles = StyleSheet.create({
 
   sceneBar: {
     alignItems: "center",
-    marginVertical: 15
+    marginVertical: 15,
+    height: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
+    width: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 120 / 850,
+    flexDirection: "column"
   },
 
   sceneIcon: {
