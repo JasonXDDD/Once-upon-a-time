@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text, Dimensions, Image } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import StoryItem from './storyItem'
+import MusicItem from './musicItem'
 
 import Teaching_BG from '../../assets/images/EditStory/Teaching.png'
 
@@ -34,6 +35,15 @@ export default class StoryBoard extends Component {
             return <StoryItem key={ele.key} select={ele} idofarray={id} />
           }
         )}
+
+        <View style={{position: 'absolute', bottom: 0, flexDirection: 'row'}}>
+          {this.storyStore.storyScene[this.storyStore.selectSceneIndex].music.map(
+            (ele, id) => {
+              console.log(ele)
+              return <MusicItem key={ele.key} select={ele} idofarray={id} />
+            }
+          )}
+        </View>
       </View>
     )
   }

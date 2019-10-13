@@ -11,9 +11,9 @@ export default class StoryStore {
 	@observable story = [];
 	@observable selectSceneIndex = 0;
 	@observable storyScene = [
-		{story: []},
-		{story: []},
-		{story: []}
+		{story: [], music: []},
+		{story: [], music: []},
+		{story: [], music: []}
 	];
 
 	@observable openScenePane = true;
@@ -28,6 +28,15 @@ export default class StoryStore {
 		this.storyScene[this.selectSceneIndex].story.splice(
 			this.storyScene[this.selectSceneIndex].story.indexOf(
 				this.storyScene[this.selectSceneIndex].story.filter(ele => ele.key === key)
+			[0]), 
+		1)
+	}
+
+	@action
+	removeMusicItem(key){
+		this.storyScene[this.selectSceneIndex].music.splice(
+			this.storyScene[this.selectSceneIndex].music.indexOf(
+				this.storyScene[this.selectSceneIndex].music.filter(ele => ele.key === key)
 			[0]), 
 		1)
 	}
