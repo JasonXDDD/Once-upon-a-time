@@ -5,6 +5,8 @@ import Background_Music from "../assets/sound/Rainbow_Forest.mp3";
 import TabBar_Click from "../assets/sound/button.mp3";
 import ToolBar_Click from "../assets/sound/bloop-noise.wav";
 import DrawColor_Click from "../assets/sound/bloop-noise.wav";
+import BGM_Open from "../assets/sound/bgm-open.wav";
+import BGM_Close from "../assets/sound/bgm-close.wav";
 
 import g3 from "../assets/sound/piano/g3.wav";
 import a3 from "../assets/sound/piano/a3.wav";
@@ -38,7 +40,9 @@ export default class SoundStore {
     piano_a4: a4,
     piano_b4: b4,
     piano_c5: c5,
-    piano_d5: d5
+    piano_d5: d5,
+    bgm_open: BGM_Open,
+    bgm_close: BGM_Close
   };
 
   @observable bgmPlayer = this.genMusic('bgm')

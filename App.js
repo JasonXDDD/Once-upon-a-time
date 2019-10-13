@@ -21,12 +21,17 @@ const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
 
 @observer
 export default class App extends Component<Props> {  
+  bgmOpenPlayer;
+  bgmClosePlayer;
 
   constructor(props) {
     super(props)
   };
 
   componentDidMount(){
+    this.bgmOpenPlayer = store.soundStore.genMusic('bgm_open')
+    this.bgmClosePlayer = store.soundStore.genMusic('bgm_close')
+
     setTimeout(() => {
       store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
     }, 1000)
@@ -39,7 +44,9 @@ export default class App extends Component<Props> {
     }
 
     else {
-      store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
+      setTimeout(() => {
+        store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
+      }, 1000)
       store.soundStore.isBgm = true
     }
   }
@@ -51,6 +58,7 @@ export default class App extends Component<Props> {
           <SafeAreaView style={{ flex: 1 }} forceInset={{ top: "never", bottom: "never" }}>
             <TabBar />
             <TouchableOpacity style={styles.bgmButton} onPress={() => {
+              store.soundStore.playSoundEffect(store.soundStore.isBgm? this.bgmClosePlayer:  this.bgmOpenPlayer, 0.5, 0)
               this.switchBGM()
             }}>
               <Image source={store.soundStore.isBgm? BGM_Open: BGM_Close} style={styles.bgmImage}></Image>
