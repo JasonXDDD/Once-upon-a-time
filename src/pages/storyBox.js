@@ -18,6 +18,8 @@ const screenHeight = Dimensions.get("window").height;
 @inject("rootStore")
 @observer
 export default class StoryBox extends React.Component {
+	buttonPlayer;
+
 	state = {
 		modalVisible: false,
 	};
@@ -31,6 +33,7 @@ export default class StoryBox extends React.Component {
 
   async componentDidMount() {
 		await this.boxStore.getVideo()
+		this.buttonPlayer = this.soundStore.genMusic('box')
 
 		//set when siri change route
 		if(this.storyStore.shortcutInfo != null){
@@ -91,6 +94,7 @@ export default class StoryBox extends React.Component {
 				<Coverflow style={{paddingHorizontal: 100, marginBottom: 200}}
 					onChange={(index) => {
 						this.boxStore.selectVideo = this.boxStore.videoList[index]
+						this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
 					}}
 					onPress={(index) => {
 						this.playVideo(this.boxStore.videoList[index])

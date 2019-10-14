@@ -38,6 +38,7 @@ export default class SoundStore {
     button: Button_Click,
     delete: Delete_Click,
     add: Pop_Click,
+    box: Pop_Click,
     long_press: Long_Press_Click,
     draw_color: DrawColor_Click,
     piano_g3: g3,

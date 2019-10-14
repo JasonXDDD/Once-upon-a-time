@@ -24,7 +24,14 @@ export default class BoxStore {
 		let image = await this.getCameraRoll()
     let movie = await this.getFS()
     
-
+    //init
+    this.videoList = [{
+			name: 'Sample',
+			image: Sample_Image,
+			video: Sample_Video,
+			time: 'SAMPLE 2019年 07月 16日 17:45',
+    }]
+    
 		image.forEach(item => {
 			let tmp = movie.filter(ele => {
 				return ele.time === item.time
