@@ -83,16 +83,15 @@ class RecordTool: UIView, RPPreviewViewControllerDelegate {
         let editAction = UIAlertAction(title: "儲存", style: .default, handler: { (action: UIAlertAction) -> Void in
           
           if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
-            preview?.modalPresentationStyle = UIModalPresentationStyle.popover
-            preview?.popoverPresentationController?.sourceRect = CGRect.zero
-            preview?.popoverPresentationController?.sourceView = self
+            preview?.modalPresentationStyle = UIModalPresentationStyle.pageSheet
+//            preview?.popoverPresentationController?.sourceRect = CGRect.zero
+//            preview?.popoverPresentationController?.sourceView = self
           }
           
           preview?.previewControllerDelegate = self
           
           self.findViewController()!.present(preview!, animated: true, completion: nil)
           self.isRecording = false
-          
         })
         
         alert.addAction(deleteAction)
