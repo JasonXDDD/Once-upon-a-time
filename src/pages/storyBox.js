@@ -1,15 +1,15 @@
 
 import React, {Component} from 'react';
-import {Platform, Dimensions, StyleSheet, Alert, Text, View, Image, Modal, TouchableOpacity, TouchableHighlight, FlatList, CameraRoll, ImageBackground} from 'react-native';
-import RNFS from 'react-native-fs';
+import {Platform, Dimensions, StyleSheet, Alert, Text, View, Image, Modal, TouchableOpacity, TouchableHighlight, ImageBackground} from 'react-native';
 import VideoPlayer from 'react-native-video-controls';
 import Video from 'react-native-video';
-import moment from 'moment';
 import { inject, observer } from "mobx-react";
+import Coverflow from 'react-native-coverflow';
+import { observe } from 'mobx';
+
 
 import StoryBox_BG from '../assets/images/StoryBox/BG.png'
 import BoxTool from '../components/box/boxTool'
-import { observe } from 'mobx';
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -19,38 +19,38 @@ const screenHeight = Dimensions.get("window").height;
 @observer
 export default class StoryBox extends React.Component {
 	state = {
-		images: [],
 		modalVisible: false,
-		selectVideo: ''
 	};
 	
 	constructor(props) {
 		super(props);
     this.storyStore = props.rootStore.storyStore;
-    this.soundStore = props.rootStore.soundStore;
+		this.soundStore = props.rootStore.soundStore;
+		this.boxStore = props.rootStore.boxStore;
 	}
 
   async componentDidMount() {
-		await this.getVideo()
+		await this.boxStore.getVideo()
 
 		//set when siri change route
 		if(this.storyStore.shortcutInfo != null){
 			setTimeout(() => {
-				this.playVideo(this.state.images[0])
+				this.playVideo(this.boxStore.videoList[0])
 			}, 1000)
 		}
     observe(this.storyStore, 'shortcutInfo',(change)=> {
       if(JSON.parse(change.newValue).say === 'story'){
         setTimeout(() => {
-					this.playVideo(this.state.images[0])
+					this.playVideo(this.boxStore.videoList[0])
 				}, 1000)
 			}
     })
 	}
 
+
 	playVideo(data){
-		this.setState({selectVideo: data})
-		this.setModalVisible(true)
+		this.boxStore.selectVideo = data
+		this.setState({modalVisible: true});
 
 		if(this.soundStore.isBgm){
 			this.soundStore.bgmPlayer.stop()
@@ -58,76 +58,28 @@ export default class StoryBox extends React.Component {
 		}
 	}
 
-	setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-	}
 
-	async getVideo(){
-		let image = await this.getCameraRoll()
-		let movie = await this.getFS()
-		let ans = [{
-			name: 'Sample',
-			image: 'https://i.imgur.com/rHcCdWb.png',
-			video: 'http://cdn-b-east.streamable.com/video/mp4-mobile/jutsg.mp4?token=8WCMXM-enmW3EMLP7oUaxA&expires=1570431300',
-			time: 'SAMPLE 2019年 07月 16日 17:45'
-		}]
-
-		image.forEach(item => {
-			let tmp = movie.filter(ele => {
-				return ele.time === item.time
-			})
-
-			if(tmp.length){
-				ans.push({
-					name: tmp[0].name,
-					image: item.path,
-					video: tmp[0].path,
-					time: moment(item.time * 1000).format('YYYY年 MM月 DD日 HH:mm')
-				})
-			}
+	renderVideo(){
+		const res = []
+		this.boxStore.videoList.forEach(ele => {
+			res.push(
+				<View key={ele.time} style={{
+					marginHorizontal: 20, 
+					justifyContent: "center"
+				}}>
+					
+					<Image source={ele.name === 'Sample'? ele.image: {uri: ele.image}} style={[styles.videoItem, {
+						borderColor: "#32c9ff",
+						borderWidth: this.boxStore.selectVideo.name === ele.name? 3: 0
+					}]}></Image>
+					<View style={styles.videoTextPane}>
+						<Text style={styles.videoText}>{ele.time}</Text>
+					</View>
+				</View>
+			)
 		})
 
-		// console.log(ans);
-		// console.log(image.length, movie.length, ans.length)
-
-		this.setState({images: ans})
-	}
-
-	async getFS(){
-		return await RNFS.readDir('//private/var/mobile/Media/DCIM/100APPLE')
-		.then((result) => {
-			return Promise.all(result.map(ele => {
-				return {
-					name: ele.name,
-					path: ele.path,
-					time: Math.floor(new Date(ele.ctime).valueOf()/1000)
-				}
-			}));
-		})
-		.then((statResult) => {
-			let arr = [...new Set(statResult.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
-			return arr;
-		})
-		.catch((err) => {
-			console.log(err.message, err.code);
-		});
-	}
-	
-	async getCameraRoll(){
-		return await CameraRoll.getPhotos({
-      first: 13,
-      groupTypes: "All",
-      assetType: "Videos",
-    })
-    .then((data) => {
-			let format = data.edges.map(ele => ({
-				name: ele.node.timestamp,
-				path: ele.node.image.uri,
-				time: ele.node.timestamp
-			}));
-			let arr = [...new Set(format.map(item => JSON.stringify(item)))].map(item => JSON.parse(item));
-			return arr;
-		});
+		return res;
 	}
 
   render() {
@@ -136,33 +88,26 @@ export default class StoryBox extends React.Component {
 			<ImageBackground source={StoryBox_BG} style={{ flex: 1, justifyContent: 'center' }}>
 
 				{/*video list*/}
-				<View style={{paddingHorizontal: 100, marginBottom: 200}}>
-					<FlatList
-						horizontal={true}
-						data={this.state.images}
-						keyExtractor={(item, id) => JSON.stringify(item)}
-						renderItem={({item}) => (
-							
-							<TouchableOpacity style={{
-								marginHorizontal: 20, 
-								justifyContent: "center",
-							}}
-							onPress={() => {
-								this.playVideo(item)
-							}}
-							onLongPress={() => {
-								this.setState({selectVideo: item})
-							}}>
-								<Image source={{uri: item.image}} style={[styles.videoItem]}></Image>
-								<View style={styles.videoTextPane}>
-									<Text style={styles.videoText}>{item.time}</Text>
-								</View>
-							</TouchableOpacity>
+				<Coverflow style={{paddingHorizontal: 100, marginBottom: 200}}
+					onChange={(index) => {
+						this.boxStore.selectVideo = this.boxStore.videoList[index]
+					}}
+					onPress={(index) => {
+						this.playVideo(this.boxStore.videoList[index])
+					}}
+					initialSelection={0}
+					spacing={250}
+					wingSpan={80}
+					rotation={50}
+					midRotation={10}
+					perspective={1000}
+					scaleDown={0.7}
+					scaleFurther={0.7}>
 
-						)}
-					/>
-				</View>
-							
+					{ this.renderVideo()}
+				</Coverflow>
+			
+
 				{/* movie modal */}
 				<Modal
           animationType="slide"
@@ -170,9 +115,9 @@ export default class StoryBox extends React.Component {
           visible={this.state.modalVisible}>
 					
 					<VideoPlayer 
-						source={{uri: this.state.selectVideo.video}}
+						source={this.boxStore.selectVideo.name === 'Sample'? this.boxStore.selectVideo.video: {uri: this.boxStore.selectVideo.video}}
 						onBack={() => {
-							this.setModalVisible(!this.state.modalVisible);
+							this.setState({modalVisible: false});
 							
 							//play bgm
 							this.soundStore.playMusic(this.soundStore.bgmPlayer, 0.4, -1)
@@ -183,15 +128,7 @@ export default class StoryBox extends React.Component {
 
 
 				{/* tool */}
-				<TouchableOpacity 
-				style={{alignItems: "flex-end", marginTop: 0}} 
-				onPress={() => { 
-					this.getVideo() 
-				}}>
-					<Text> Reload </Text>
-				</TouchableOpacity>
-
-				<BoxTool selectVideo={this.state.selectVideo}></BoxTool>
+				<BoxTool selectVideo={this.boxStore.selectVideo}></BoxTool>
 			</ImageBackground>
 			
     );

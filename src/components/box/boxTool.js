@@ -40,6 +40,7 @@ export default class BoxTool extends Component {
   constructor(props) {
     super(props)
     this.storyStore = props.rootStore.storyStore
+    this.boxStore = props.rootStore.boxStore
     this.navigation = props.navigation
   }
 
@@ -66,7 +67,6 @@ export default class BoxTool extends Component {
   render() {
     return (
       <View style={[styles.recordTool]}>
-        <Text style={styles.selectText}>選擇： {this.props.selectVideo.time}</Text>
 
         {supportsSiriButton && (
           <AddToSiriButton
@@ -83,7 +83,7 @@ export default class BoxTool extends Component {
 
         <TouchableOpacity 
           onPress={() => {
-            this.deleteVideo(this.props.selectVideo.video)
+            this.deleteVideo(this.boxStore.selectVideo.video)
           }}>
           <Image style={styles.recordIcon} source={Btn_Delete}></Image>
         </TouchableOpacity>
@@ -91,7 +91,7 @@ export default class BoxTool extends Component {
         <TouchableOpacity
           onPress={() => {
             Share.open({
-              url: "file://" + this.props.selectVideo.video,
+              url: "file://" + this.boxStore.selectVideo.video,
               type: 'video/mp4',
               message: "大家好，這是我做的新故事喔！"
             })
@@ -103,7 +103,7 @@ export default class BoxTool extends Component {
 
         <TouchableOpacity 
           onPress={() => {
-            this.deleteVideo(this.props.selectVideo.video)
+            this.boxStore.getVideo()
           }}>
           <Image style={styles.recordIcon} source={Btn_Reload}></Image>
         </TouchableOpacity>
@@ -123,18 +123,11 @@ const styles = StyleSheet.create({
 
   recordTool: {
     position: 'absolute',
-    right: (screenWidth - (ICON_SIZE + 20) * 2) /2,
-    bottom: screenHeight * 0.2,
-    flexDirection: 'row'
+    width: screenWidth,
+    bottom: screenHeight * 0.23,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
-
-  selectText: {
-    position: 'absolute',
-    marginTop: -35,
-    marginLeft: -50,
-    fontSize: 20
-  },
-
 
   siriButton: {
     marginTop: 10,
