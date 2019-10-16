@@ -1,14 +1,17 @@
 import React, { Component } from "react";
-import { Platform, Image, Alert, TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
+import { Platform, Image, Alert, TouchableOpacity, Modal, Text, StyleSheet, Dimensions } from "react-native";
 import TabBar from "./src/components/tabBar";
 import { SafeAreaView } from "react-navigation";
 import { Provider, observer } from "mobx-react";
 import { Provider as ProviderAntd } from "@ant-design/react-native";
 import * as store from "./src/stores/index";
 import Sound from 'react-native-sound';
+import VideoPlayer from 'react-native-video-controls';
+import Video from 'react-native-video';
 
 import BGM_Open from "./src/assets/images/bgm-open.png";
 import BGM_Close from "./src/assets/images/bgm-close.png";
+import Launch from "./src/assets/launch.mp4";
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -23,7 +26,10 @@ const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
 export default class App extends Component<Props> {  
   bgmOpenPlayer;
   bgmClosePlayer;
-
+	state = {
+		modalVisible: true,
+  };
+  
   constructor(props) {
     super(props)
   };
@@ -31,10 +37,6 @@ export default class App extends Component<Props> {
   componentDidMount(){
     this.bgmOpenPlayer = store.soundStore.genMusic('bgm_open')
     this.bgmClosePlayer = store.soundStore.genMusic('bgm_close')
-
-    setTimeout(() => {
-      store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
-    }, 500)
   }
 
   switchBGM(){
@@ -63,6 +65,33 @@ export default class App extends Component<Props> {
             }}>
               <Image source={store.soundStore.isBgm? BGM_Open: BGM_Close} style={styles.bgmImage}></Image>
             </TouchableOpacity>
+
+
+            <Modal
+              animationType="fade"
+              transparent={false}
+              visible={this.state.modalVisible}>
+              
+              <VideoPlayer
+                disableFullscreen={true}
+                disableBack={true}
+                disablePlayPause={true}
+                disableSeekbar={true}
+                disableVolume={true}
+                disableTimer={true}
+                toggleResizeModeOnFullscreen={false}
+                showOnStart={false}
+
+                source={Launch}
+                onEnd={() => {
+                  this.setState({modalVisible: false});
+
+                  setTimeout(() => {
+                    store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
+                  }, 500)
+                }}/> 
+
+            </Modal>
 
           </SafeAreaView>
         </ProviderAntd>
