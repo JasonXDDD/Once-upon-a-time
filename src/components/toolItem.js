@@ -50,10 +50,8 @@ export default class ToolItem extends Component {
                 setTimeout(() => {
                   if(this.type === 'music'){
                     // is music
-                    if(this.soundStore.isBgm){
-                      this.soundStore.bgmPlayer.stop()
-                      this.soundStore.isBgm = false
-                    }
+                    this.soundStore.playBGM(false)
+
                     this.soundStore.playSoundEffect(ele.player, 0.8, 0)
                   }
                   else {

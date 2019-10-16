@@ -38,20 +38,6 @@ export default class App extends Component<Props> {
     this.bgmOpenPlayer = store.soundStore.genMusic('bgm_open')
     this.bgmClosePlayer = store.soundStore.genMusic('bgm_close')
   }
-
-  switchBGM(){
-    if(store.soundStore.isBgm){
-      store.soundStore.bgmPlayer.stop()
-      store.soundStore.isBgm = false
-    }
-
-    else {
-      setTimeout(() => {
-        store.soundStore.playMusic(store.soundStore.bgmPlayer, 0.4, -1)
-      }, 1000)
-      store.soundStore.isBgm = true
-    }
-  }
   
   render() {
     return (
@@ -61,7 +47,7 @@ export default class App extends Component<Props> {
             <TabBar />
             <TouchableOpacity style={[styles.bgmButton, {display: store.storyStore.isRecord? 'none': 'flex'}]} onPress={() => {
               store.soundStore.playSoundEffect(store.soundStore.isBgm? this.bgmClosePlayer:  this.bgmOpenPlayer, 0.5, 0)
-              this.switchBGM()
+              store.soundStore.playBGM(!store.soundStore.isBgm)
             }}>
               <Image source={store.soundStore.isBgm? BGM_Open: BGM_Close} style={styles.bgmImage}></Image>
             </TouchableOpacity>

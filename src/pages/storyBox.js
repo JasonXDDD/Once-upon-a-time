@@ -54,11 +54,7 @@ export default class StoryBox extends React.Component {
 	playVideo(data){
 		this.boxStore.selectVideo = data
 		this.setState({modalVisible: true});
-
-		if(this.soundStore.isBgm){
-			this.soundStore.bgmPlayer.stop()
-			this.soundStore.isBgm = false
-		}
+		this.soundStore.playBGM(false)
 	}
 
 
@@ -124,8 +120,8 @@ export default class StoryBox extends React.Component {
 							this.setState({modalVisible: false});
 							
 							//play bgm
-							this.soundStore.playMusic(this.soundStore.bgmPlayer, 0.4, -1)
-            	this.soundStore.isBgm = true
+							this.soundStore.playBGM(true)
+
 						}}/> 
 
         </Modal>

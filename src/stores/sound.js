@@ -60,6 +60,21 @@ export default class SoundStore {
   @observable bgmPlayer = this.genMusic('bgm')
   @observable isBgm = true
   
+  @action
+  playBGM(isPlay){
+    if(isPlay){
+      setTimeout(() => {
+        this.playMusic(this.bgmPlayer, 0.4, -1)
+      }, 1000)
+    }
+    else {
+      this.bgmPlayer.stop()
+    }
+    this.isBgm = isPlay
+
+  }
+
+
   prePlayer;
 	@action
 	genMusic(key){
