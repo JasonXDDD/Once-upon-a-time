@@ -27,6 +27,10 @@ import Hunter from "../assets/images/character/hunter.png";
 import Bee from "../assets/images/character/bee.png";
 import Grandma from "../assets/images/character/grandma.png";
 import Wolf from "../assets/images/character/wolf.png";
+import People1 from "../assets/images/character/people1.png";
+import People2 from "../assets/images/character/people2.png";
+import People3 from "../assets/images/character/people3.png";
+import People4 from "../assets/images/character/people4.png";
 import cLock01 from "../assets/images/character/lock01.png";
 
 import stickerSample from "../assets/images/sticker-sample.png";
@@ -120,6 +124,34 @@ export default class ToolStore {
       id: "前前",
       image: SmallMoster,
       animate: SmallMosterAnimate,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "中國人1",
+      image: People1,
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "中國人2",
+      image: People2,
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "中國人3",
+      image: People3,
+      animate: null,
+      isLock: false,
+      isAnimate: false
+    },
+    {
+      id: "中國人4",
+      image: People4,
+      animate: null,
       isLock: false,
       isAnimate: false
     },

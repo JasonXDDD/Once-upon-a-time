@@ -15,7 +15,8 @@ export default class BoxStore {
 			video: Sample_Video,
 			time: 'SAMPLE 2019年 07月 16日 17:45',
 		}]
-    @observable selectVideo = ''
+		@observable selectVideo = {}
+		@observable selectVideoIndex = 0
 
 
   
@@ -47,6 +48,7 @@ export default class BoxStore {
 			}
 		})
 
+		this.selectVideoIndex = 0
     this.selectVideo = this.videoList[0]
 	}
 
