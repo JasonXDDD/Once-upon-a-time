@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Share from 'react-native-share';
 import RNFS from 'react-native-fs';
@@ -9,6 +9,7 @@ import AddToSiriButton, { SiriButtonStyles, supportsSiriButton } from "react-nat
 import Btn_Share from '../../assets/images/StoryBox/Btn_share.png'
 import Btn_Delete from '../../assets/images/StoryBox/Btn_delete.png'
 import Btn_Reload from '../../assets/images/StoryBox/Btn_reload.png'
+import Btn_Siri from '../../assets/images/StoryBox/Btn_siri.png'
 
 const ICON_SIZE = 70;
 const screenWidth = Dimensions.get("window").width;
@@ -67,23 +68,31 @@ export default class BoxTool extends Component {
   render() {
     return (
       <View style={[styles.recordTool]}>
+        <Text style={styles.selectText}>
+          {this.boxStore.selectVideoIndex + 1} / {this.boxStore.videoList.length}
+        </Text>
 
         {supportsSiriButton && (
-          <AddToSiriButton
-            style={styles.siriButton}
-            buttonStyle={SiriButtonStyles.whiteOutline}
-            onPress={() => {
-              presentShortcut(opts1, ({ status }) => {
-                console.log(`I was ${status}`);
-              });
-            }}
-            shortcut={opts1}
-          />
+          <ImageBackground source={Btn_Siri} style={ styles.siriButton }>
+            <AddToSiriButton
+              style={{
+                marginVertical: 4,
+              }}
+              buttonStyle={SiriButtonStyles.white}
+              onPress={() => {
+                presentShortcut(opts1, ({ status }) => {
+                  console.log(`I was ${status}`);
+                });
+              }}
+              shortcut={opts1}
+            />
+          </ImageBackground>
         )}
 
         <TouchableOpacity 
           onPress={() => {
-            this.deleteVideo(this.boxStore.selectVideo.video)
+            if(this.boxStore.selectVideoIndex != 0)
+              this.deleteVideo(this.boxStore.selectVideo.video)
           }}>
           <Image style={styles.recordIcon} source={Btn_Delete}></Image>
         </TouchableOpacity>
@@ -115,6 +124,7 @@ export default class BoxTool extends Component {
 }
 
 const styles = StyleSheet.create({
+
   recordIcon: {
     width: ICON_SIZE,
     height: ICON_SIZE,
@@ -124,13 +134,26 @@ const styles = StyleSheet.create({
   recordTool: {
     position: 'absolute',
     width: screenWidth,
-    bottom: screenHeight * 0.23,
+    bottom: screenHeight * 0.22,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center'
   },
 
   siriButton: {
-    marginTop: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    height: (ICON_SIZE - 7),
+    width: (ICON_SIZE - 7) * 233 / 100,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
+  },
+
+  selectText: {
+    position: 'absolute',
+    top: -60,
+    right: ( screenWidth - 80 ) / 2,
+    fontSize: 30
   }
+
+
 })

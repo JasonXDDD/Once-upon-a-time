@@ -52,6 +52,7 @@ export default class StoryToolRecord extends Component {
         <TouchableOpacity
           onPress={() => {
             this.storyStore.isRecord = true;
+            this.storyStore.openScenePane = true;
             this.toolStore.open = "";
             this.hideBar();
             
