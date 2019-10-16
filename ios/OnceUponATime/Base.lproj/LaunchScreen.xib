@@ -20,7 +20,7 @@
                 </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-            <point key="canvasLocation" x="136.60322108345534" y="19.921875"/>
+            <point key="canvasLocation" x="180" y="-36"/>
         </view>
     </objects>
     <resources>
