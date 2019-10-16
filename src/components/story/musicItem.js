@@ -71,10 +71,7 @@ export default class MusicItem extends React.Component {
           this.deleteMusic(this.item)
         }}
         onPress={() => {
-          if(this.soundStore.isBgm){
-            this.soundStore.bgmPlayer.stop()
-            this.soundStore.isBgm = false
-          }
+          this.soundStore.playBGM(false)
           if(this.storyStore.isRecord){
             this.storyStore.selectMusic = this.item.key
           }

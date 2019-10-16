@@ -15,6 +15,8 @@ const ICON_SIZE = 60;
 @inject('rootStore')
 @observer
 export default class RecordTool extends Component {
+  buttonPlayer;
+
   constructor(props) {
     super(props)
     this.storyStore = props.rootStore.storyStore
@@ -39,6 +41,7 @@ export default class RecordTool extends Component {
   }
 
   componentDidMount(){
+    this.buttonPlayer = this.soundStore.genMusic('button')
     observe(this.storyStore, 'isRecord',(change)=> {
       if(change.newValue)
         this.start()
@@ -49,14 +52,16 @@ export default class RecordTool extends Component {
       <View style={[styles.storyTool, { display: !this.storyStore.isRecord ? "none" : "flex" }]}>
         <TouchableOpacity 
           onPress={() => {
-            this.onStopRecord()
-            this.storyStore.onLive = false
-            this.storyStore.isRecord = false;
-            this.storyStore.selectMusic = '';
-            this.showBar();
-
-            this.soundStore.playMusic(this.soundStore.bgmPlayer, 0.4, -1)
-            this.soundStore.isBgm = true
+            if(this.storyStore.onLive){
+              this.onStopRecord()
+              this.storyStore.onLive = false
+              this.storyStore.isRecord = false;
+              this.storyStore.selectMusic = '';
+              this.showBar();
+  
+              this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
+              this.soundStore.playBGM(true)
+            }
           }}>
           <Image style={styles.toolIcon} source={Btn_Recording_Stop}></Image>
         </TouchableOpacity>
