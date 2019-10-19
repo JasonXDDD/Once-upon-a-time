@@ -128,28 +128,28 @@ export default class ToolStore {
       isAnimate: false
     },
     {
-      id: "中國人1",
+      id: "元元",
       image: People1,
       animate: null,
       isLock: false,
       isAnimate: false
     },
     {
-      id: "中國人2",
+      id: "小漢",
       image: People2,
       animate: null,
       isLock: false,
       isAnimate: false
     },
     {
-      id: "中國人3",
+      id: "小清",
       image: People3,
       animate: null,
       isLock: false,
       isAnimate: false
     },
     {
-      id: "中國人4",
+      id: "阿民",
       image: People4,
       animate: null,
       isLock: false,
