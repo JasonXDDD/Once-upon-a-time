@@ -18,9 +18,14 @@ import DrawStorySelected from "../assets/images/TabBar/DrawStory_Selected.png";
 import DrawStoryUnselected from "../assets/images/TabBar/DrawStory_Unselected.png";
 import StoryBoxSelected from "../assets/images/TabBar/StoryBox_Selected.png";
 import StoryBoxUnselected from "../assets/images/TabBar/StoryBox_Unselected.png";
+import * as store from "../stores/index";
+import * as Animatable from 'react-native-animatable';
 
+const tabPlayer = store.soundStore.genMusic('tab')
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
+
+
 
 const TabMap = {
   EditStory: {
@@ -35,13 +40,25 @@ const TabMap = {
         tabBarLabel: "   ",
         tabBarVisible: showTabBar,
         animationEnabled: true,
-        tabBarIcon: ({ focused }) => (
-          <Image
-            focused={focused}
-            style={[styles.icon]}
-            source={focused ? EditStorySelected : EditStoryUnselected}
-          />
-        )
+        tabBarOnPress: ({ navigation, defaultHandler }) => {
+          store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)
+          defaultHandler()  
+        },
+        tabBarIcon: ({ focused }) => {
+          return (
+            <Animatable.Image
+              animation={focused? "bounce": ""}
+              iterationCount="infinite"
+              iterationDelay={1000}
+              direction="alternate"
+              easing="ease-out"
+
+              focused={focused}
+              style={focused ? styles.selectIcon : styles.icon}
+              source={focused ? EditStorySelected : EditStoryUnselected}
+            />
+          )
+        }
       };
     }
   },
@@ -50,13 +67,25 @@ const TabMap = {
     screen: StoryBox,
     navigationOptions: {
       tabBarLabel: "   ", 
-      tabBarIcon: ({ focused }) => (
-        <Image
-          focused={focused}
-          style={[styles.icon]}
-          source={focused ? StoryBoxSelected : StoryBoxUnselected}
-        />
-      )
+      tabBarOnPress: ({ navigation, defaultHandler }) => {
+        store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)
+        defaultHandler()
+      },
+      tabBarIcon: ({ focused }) => {
+        return (
+          <Animatable.Image
+            animation={focused? "bounce": ""}
+            iterationCount="infinite"
+            iterationDelay={1000}
+            direction="alternate"
+            easing="ease-out"
+
+            focused={focused}
+            style={focused ? styles.selectIcon : styles.icon}
+            source={focused ? StoryBoxSelected : StoryBoxUnselected}
+          />
+        )
+      }
     }
   },
 
@@ -64,20 +93,32 @@ const TabMap = {
     screen: DrawSticker,
     navigationOptions: {
       tabBarLabel: "   ",
-      tabBarIcon: ({ focused }) => (
-        <Image
-          focused={focused}
-          style={[styles.icon]}
-          source={focused ? DrawStorySelected : DrawStoryUnselected}
-        />
-      )
+      tabBarOnPress: ({ navigation, defaultHandler }) => {
+        store.soundStore.playSoundEffect(tabPlayer, 0.5, 1)
+        defaultHandler()
+      },
+      tabBarIcon: ({ focused }) => {
+        return (
+          <Animatable.Image
+            animation={focused? "bounce": ""}
+            iterationCount="infinite"
+            iterationDelay={1000}
+            direction="alternate"
+            easing="ease-out"
+
+            focused={focused}
+            style={focused ? styles.selectIcon : styles.icon}
+            source={focused ? DrawStorySelected : DrawStoryUnselected}
+          />
+        )
+      }
     }
   }
 };
 
 
 const TabBarComponent = (props) => (
-  <BottomTabBar {...props} />  
+  <BottomTabBar {...props}/>  
 );
 
 const TabNavigator = createBottomTabNavigator(TabMap, {
@@ -96,33 +137,37 @@ export default TabBar;
 
 const styles = StyleSheet.create({
   icon: {
-    width: 150,
-    height: 80,
-    position: "absolute",
-    bottom: 15,
-    zIndex: 3
+    width: 150 * 1.1,
+    height: 80 * 1.1,
+  },
+
+  selectIcon: {
+    width: 150 * 1.3,
+    height: 80 * 1.3,
   },
 
   tabBar: {
     position: 'absolute',
     bottom: 0,
     left: 0,
-    width: screenWidth * 0.9,
-    height: 65
+    width: (screenWidth * 0.9),
+    height: (screenWidth * 0.9) * 115 / 1897
   },
 
   tabStyle: {
     backgroundColor: 'transparent',
     borderTopColor: "rgba(255, 255, 255, 0)",
     width: screenWidth * 0.8,
+    bottom: 40
   },
 
   tabView: {
     position: 'absolute',
-    bottom: 0,
     width: screenWidth,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    bottom: 0
+    
   }
 });

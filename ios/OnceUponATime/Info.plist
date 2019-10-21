@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -37,14 +37,22 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>你允許從前從前開啟相機嗎？</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>你允許從前從前讀取目前位置嗎？</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>LaunchScreen</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>XDD</string>
+	<string>你允許從前從前開啟麥克風嗎？</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
+	<string>你允許從前從前讀取影片嗎？</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+	<string>你允許從前從前讀取影片嗎？</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>io.github.jasonxddd.sayHello</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -66,6 +74,8 @@
 		<string>Roboto.ttf</string>
 		<string>rubicon-icon-font.ttf</string>
 		<string>Fontisto.ttf</string>
+		<string>antfill.ttf</string>
+		<string>antoutline.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -73,6 +83,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

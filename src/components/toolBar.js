@@ -3,32 +3,46 @@ import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
 import ToolItem from "./toolItem";
+import * as Animatable from 'react-native-animatable';
 
 import ToolBar_Tap from "../assets/images/img_Topmenu.png";
 
 const TOOL_PANE_WIDTH = 135;
 const TOOL_PANE_OFFSET = 25;
-const ICON_SIZE = 50;
+const ICON_SIZE = 60;
 @inject("rootStore")
 @observer
 export default class ToolBar extends Component {
+
+  toolPlayer;
+
   toolList = [
     {
       type: "scene",
       color: "#f68a50",
-      top: (ICON_SIZE + 10) * 0 + TOOL_PANE_OFFSET
+      top: (ICON_SIZE + 10) * 0 + TOOL_PANE_OFFSET,
+      animated: false
     },
 
     {
       type: "character",
       color: "#fec64c",
-      top: (ICON_SIZE + 10) * 1 + TOOL_PANE_OFFSET
+      top: (ICON_SIZE + 10) * 1 + TOOL_PANE_OFFSET,
+      animated: false
     },
 
     {
       type: "sticker",
       color: "#3e97a5",
-      top: (ICON_SIZE + 10) * 2 + TOOL_PANE_OFFSET
+      top: (ICON_SIZE + 10) * 2 + TOOL_PANE_OFFSET,
+      animated: false
+    },
+
+    {
+      type: "music",
+      color: "#4078b2",
+      top: (ICON_SIZE + 10) * 3 + TOOL_PANE_OFFSET,
+      animated: false
     }
   ];
 
@@ -36,6 +50,11 @@ export default class ToolBar extends Component {
     super(props);
     this.toolStore = props.rootStore.toolStore;
     this.storyStore = props.rootStore.storyStore;
+    this.soundStore = props.rootStore.soundStore;
+  }
+
+  componentWillMount(){
+    this.toolPlayer = this.soundStore.genMusic('tool')
   }
 
   render() {
@@ -44,7 +63,7 @@ export default class ToolBar extends Component {
         { display: this.storyStore.isRecord ? "none" : "flex" }
       ]} >
         
-        {this.toolList.map(ele => {
+        {this.toolList.map((ele, index) => {
           return (
             <View key={ele.type}>
               {/* tool pane */}
@@ -65,19 +84,29 @@ export default class ToolBar extends Component {
               {/* tool icon */}
               <TouchableOpacity
                 onPress={() => {
+                  this.soundStore.playSoundEffect(this.toolPlayer, 3, 0)
                   this.toolStore.toggleOpen(ele.type);
+                  this.toolStore.isAnimate[index] = true
+                  if(this.toolStore.selectIndex === index) 
+                    this.toolStore.selectIndex = -1
+                  else this.toolStore.selectIndex = index
                 }}
                 style={[
                   styles.toolIcon,
                   {
-                    top: ele.top,
+                    top: this.toolStore.selectIndex < index && this.toolStore.selectIndex != -1 ? ele.top + 10: ele.top,
                     left: this.toolStore.open !== "" ? TOOL_PANE_WIDTH : 0
                   }
                 ]}
               >
-                <Image
+                <Animatable.Image
+                  animation={this.toolStore.isAnimate[index]? "rubberBand": ""}
+                  duration={700}
+                  onAnimationEnd={() => {
+                    this.toolStore.isAnimate[index] = false
+                  }}
                   source={this.toolStore[ele.type + "Btn"]}
-                  style={styles.icon}
+                  style={this.toolStore.open === ele.type? styles.selectIcon: styles.icon}
                 />
               </TouchableOpacity>
             </View>
@@ -103,6 +132,12 @@ const styles = StyleSheet.create({
     height: ICON_SIZE
   },
 
+  selectIcon: {
+    position: "relative",
+    width: ICON_SIZE * 1.2,
+    height: ICON_SIZE * 1.2
+  },
+
   toolPane: {
     position: "absolute",
     width: TOOL_PANE_WIDTH,
@@ -112,6 +147,6 @@ const styles = StyleSheet.create({
   toolIcon: {
     textAlign: "center",
     position: "absolute",
-    left: 0
+    left: 0,
   }
 });

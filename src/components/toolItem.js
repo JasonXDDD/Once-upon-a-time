@@ -2,18 +2,31 @@ import React, { Component } from 'react'
 import { ScrollView, Text, Image, Alert, TouchableOpacity, StyleSheet } from 'react-native'
 import { observer, inject } from 'mobx-react'
 import StoryItem from './story/storyItem'
+import * as Animatable from 'react-native-animatable';
 
 @inject('rootStore')
 @observer
 export default class ToolItem extends Component {
+  itemPlayer;
   // times of add item, be unique and only one for the item's key
   count = 0;
+  musicCount = 0;
   
   constructor(props) {
     super(props)
     this.toolStore = props.rootStore.toolStore
     this.storyStore = props.rootStore.storyStore
+    this.soundStore = props.rootStore.soundStore
     this.type = props.type
+  }
+
+  componentDidMount(){
+    this.itemPlayer = this.soundStore.genMusic('tool_item')
+    if(this.type === 'music'){
+      this.toolStore[this.type].forEach(element => {
+        element.player = this.soundStore.genMusicBySound(element.sound)
+      });
+    }
   }
 
   render() {
@@ -25,14 +38,45 @@ export default class ToolItem extends Component {
             <TouchableOpacity
               style={styles.toolImage}
               key={ele.id}
+              onLongPress={() => {
+                if(this.type === 'music')
+                  this.addMuusicItem(ele, this.type)
+              }}
+              
               onPress={() => {
-                if(this.props.select === 'edit')
-                  this.addStoryItem(ele, this.type)
-                else if(this.props.select === 'draw')
-                  this.addDrawItem(ele)
+                this.toolStore[this.type].map(ele => ele.isAnimate = false)
+                ele.isAnimate = true
+                
+                setTimeout(() => {
+                  if(this.type === 'music'){
+                    // is music
+                    this.soundStore.playBGM(false)
+
+                    this.soundStore.playSoundEffect(ele.player, 0.8, 0)
+                  }
+                  else {
+                    this.soundStore.playSoundEffect(this.itemPlayer, 3, 0)
+                    // is image
+                    if(this.props.select === 'edit')
+                      this.addStoryItem(ele, this.type)
+                    else if(this.props.select === 'draw')
+                      this.addDrawItem(ele)
+                  }
+                  
+                }, 200)
+                
               }}>
-              <Image style={{ width: 100, height: 80 }} source={JSON.parse(ele.image)} />
-              <Text style={{ marginTop: 5, color: this.type === 'character'? 'black': 'white' }}>{ele.id}</Text>
+              <Animatable.Image 
+                animation={ele.isAnimate? (this.type === 'music'? 'swing': "bounceOutRight"): ""}
+                duration={this.type === 'music'? 500: 1000}
+                iterationCount={this.type === 'music'? 'infinite': 1}
+                onAnimationEnd={() => {
+                  ele.isAnimate = false
+                }}
+                style={{ width: 100, height: 100 }} 
+                source={ele.animate? ele.animate: JSON.parse(ele.image)} />
+              
+                <Text style={{ marginTop: 5, color: this.type === 'character'? 'black': 'white' }}>{ele.id}</Text>
             </TouchableOpacity>
           )
         })}
@@ -54,13 +98,34 @@ export default class ToolItem extends Component {
     this.toolStore.drawItem = data;
   }
 
+  addMuusicItem(element, type){
+    let data = {
+      image: element.image,
+      sound: element.sound,
+      category: type,
+      name: element.id,
+      key: element.id + this.musicCount,
+    }
+
+    this.musicCount ++;
+
+    if(element.isLock) {
+      this.unlockMessage()
+      return
+    }
+
+    this.storyStore.storyScene[this.storyStore.selectSceneIndex].music.push(data)
+  }
+
   addStoryItem(element, type) {
     let data = {
       image: element.image,
+      animate: element.animate,
       category: type,
       name: element.id,
       key: element.id + this.count,
       style: "{}",
+      sound: element.sound
     }
 
     this.count ++;

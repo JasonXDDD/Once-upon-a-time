@@ -50,47 +50,63 @@ import sFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow_selec
 
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76;
-const BOARD_HEIGHT = screenHeight * 0.7;
+const BOARD_WIDTH = screenHeight * 1590 / 1536;
+const BOARD_HEIGHT = screenHeight;
 const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
-const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.06;
+const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
 const BOARD_POS_BASIC = 25;
 const TOOL_PANE_WIDTH = 135;
 const ICON_SIZE = 70;
 
-const DRAW_BOARD_WIDTH = BOARD_WIDTH * 0.98;
-const DRAW_BOARD_HEIGHT = BOARD_HEIGHT * 0.98;
-const DRAW_PANE_SIZE = 500;
-const DRAW_PANE_TOP = 60;
-const DRAW_PANE_MARGIN_BOTTOM = 50;
+const DRAW_BOARD_WIDTH = BOARD_WIDTH;
+const DRAW_BOARD_HEIGHT = (BOARD_WIDTH) * 38 / 55;
+const DRAW_PANE_SIZE = DRAW_BOARD_HEIGHT * 0.83;
+const DRAW_PANE_TOP = 65;
+const DRAW_PANE_MARGIN_BOTTOM = 55;
 
 @inject("rootStore")
 @observer
 export default class DrawBoard extends Component {
+  timeOut;
+  buttonPlayer;
+  deletePlayer;
+  
   colorList = [
-    { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5 },
-    { color: "#FF403FFF", img: cFF403F, select: sFF403F },
-    { color: "#FF7D1CFF", img: cFF7D1C, select: sFF7D1C },
-    { color: "#FFFF57FF", img: cFFFF57, select: sFFFF57 },
-    { color: "#49C37CFF", img: c49C37C, select: s49C37C },
-    { color: "#6BCCF7FF", img: c6BCCF7, select: s6BCCF7 },
-    { color: "#2367C0FF", img: c2367C0, select: s2367C0 },
-    { color: "#9323A1FF", img: c9323A1, select: s9323A1 },
-    { color: "#FFD298FF", img: cFFD298, select: sFFD298 },
-    { color: "#84574FFF", img: c84574F, select: s84574F },
-    { color: "#FFFFFFFF", img: cFFFFFF, select: sFFFFFF },
-    { color: "#000000FF", img: c000000, select: s000000 }
+    { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5, sound: 'piano_g3', player: {} },
+    { color: "#FF403FFF", img: cFF403F, select: sFF403F, sound: 'piano_a3', player: {} },
+    { color: "#FF7D1CFF", img: cFF7D1C, select: sFF7D1C, sound: 'piano_b3', player: {} },
+    { color: "#FFFF57FF", img: cFFFF57, select: sFFFF57, sound: 'piano_c4', player: {} },
+    { color: "#49C37CFF", img: c49C37C, select: s49C37C, sound: 'piano_d4', player: {} },
+    { color: "#6BCCF7FF", img: c6BCCF7, select: s6BCCF7, sound: 'piano_e4', player: {} },
+    { color: "#2367C0FF", img: c2367C0, select: s2367C0, sound: 'piano_f4', player: {} },
+    { color: "#9323A1FF", img: c9323A1, select: s9323A1, sound: 'piano_g4', player: {} },
+    { color: "#FFD298FF", img: cFFD298, select: sFFD298, sound: 'piano_a4', player: {} },
+    { color: "#84574FFF", img: c84574F, select: s84574F, sound: 'piano_b4', player: {} },
+    { color: "#FFFFFFFF", img: cFFFFFF, select: sFFFFFF, sound: 'piano_c5', player: {} },
+    { color: "#000000FF", img: c000000, select: s000000, sound: 'piano_d5', player: {} },
   ];
 
   state = {
     isDialogVisible: false,
-    selectColor: '#FF75B5FF'
+    selectColor: '#FF75B5FF',
+    selectStrockeToVoice: 0.6
   };
 
   constructor(props) {
     super(props);
     this.storyStore = props.rootStore.storyStore;
     this.toolStore = props.rootStore.toolStore;
+    this.soundStore = props.rootStore.soundStore;
+  }
+
+  componentWillMount(){
+    let self = this
+    this.colorList.forEach(ele => {
+      ele.player = self.soundStore.genMusic(ele.sound)
+    })
+
+    this.buttonPlayer = this.soundStore.genMusic('button')
+    this.deletePlayer = this.soundStore.genMusic('delete')
   }
 
   render() {
@@ -101,15 +117,15 @@ export default class DrawBoard extends Component {
             position: "absolute",
             width: DRAW_BOARD_WIDTH,
             height: DRAW_BOARD_HEIGHT,
-            top: BOARD_HEIGHT * 0.07,
-            left: BOARD_WIDTH * 0.01
+            top: BOARD_HEIGHT * 0.035,
+            left: 0
           }}
         >
           {/* pane style */}
           <View style={[ styles.drawPane, styles.drawPaneBG ]}/>
 
           {/* snapshot */}
-          <ViewShot ref="viewShot" options={{ format: "png" }}>
+          <ViewShot ref="viewShot" options={{ format: "png", result: "data-uri" }}>
             {/* import image */}
             <View style={[ styles.drawPane, styles.imagePane ]}>
               {this.genImage(this.toolStore.drawItem)}
@@ -134,9 +150,13 @@ export default class DrawBoard extends Component {
                 )
               }}
               strokeSelectedComponent={(color, index, changed) => {
-                if(changed) this.setState({selectColor: color})
+                if(changed) {
+                  this.setState({selectColor: color})
+                }
+                this.soundStore.playSoundEffect(this.colorList[index].player, this.state.selectStrockeToVoice, 0)
+                
                 return (
-                  <ImageBackground source={this.colorList[index].select} style={ styles.colorIcon }>
+                  <ImageBackground source={this.colorList[index].select} style={ styles.selectColorIcon }>
                     <View style={{ backgroundColor: color, opacity: 1 }} />
                   </ImageBackground>
                 )
@@ -147,6 +167,9 @@ export default class DrawBoard extends Component {
                   source={Reback}
                 />
               }
+              onUndoPressed={() => {
+                this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
+              }}
               clearComponent={
                 <Image
                   style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 200 } ]}
@@ -154,6 +177,7 @@ export default class DrawBoard extends Component {
                 />
               }
               onClearPressed={() => {
+                this.soundStore.playSoundEffect(this.deletePlayer, 1, 0)
                 this.toolStore.drawItem = {}
               }}
               eraseComponent={
@@ -162,7 +186,10 @@ export default class DrawBoard extends Component {
                   source={Eraser}
                 />
               }
-              strokeWidthComponent={w => {
+              strokeWidthComponent={(w) => {
+                if(w/10 != this.state.selectStrockeToVoice)
+                  this.setState({selectStrockeToVoice: w/10 })
+                
                 return (
                   <View style={{ position: "absolute", left: DRAW_BOARD_WIDTH * -0.92, top: 200 }}>
                     <Image style={[ styles.icon ]} source={Plus} />
@@ -185,7 +212,8 @@ export default class DrawBoard extends Component {
             }}
             style={{
               position: "absolute",
-              left: "46%"
+              left: "45%",
+              top: 5
             }}
           >
             <Image source={Camera} style={[styles.CameraIcon]} />
@@ -197,6 +225,9 @@ export default class DrawBoard extends Component {
           title={"他叫什麼名字？"}
           message={"請給他一個名字吧"}
           hintInput={"名字"}
+          cancelText={"取消"}
+          submitText={"儲存"}
+          dialogStyle={{top: 180, position: 'absolute'}}
           submitInput={inputText => {
             this.snapshot(inputText);
             this.setState({ isDialogVisible: false });
@@ -209,12 +240,15 @@ export default class DrawBoard extends Component {
     );
   }
 
+  updateStrokeToVoice(w){
+  }
   updateColor(color){
     this.setState({selectColor: color})
   }
 
   snapshot(name) {
     this.refs["viewShot"].capture().then(uri => {
+      
       this.toolStore.sticker.push({
         id: name,
         image: JSON.stringify({
@@ -238,10 +272,10 @@ export default class DrawBoard extends Component {
 const styles = StyleSheet.create({
   drawBoard: {
     width: BOARD_WIDTH,
-    height: screenHeight,
+    height: BOARD_HEIGHT,
     right: BOARD_RIGHT,
     position: "absolute",
-    overflow: "hidden"
+    overflow: "hidden",
   },
 
   drawPane: {
@@ -263,7 +297,8 @@ const styles = StyleSheet.create({
     top: DRAW_PANE_TOP
   },
 
-  photoPnae: {
+  photoPane: {
+    // backgroundColor: "#AABBCC55",
     marginTop: DRAW_PANE_TOP,
     marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2
   },
@@ -289,14 +324,20 @@ const styles = StyleSheet.create({
   },
 
   CameraIcon: {
-    marginTop: 0,
+    marginTop: 5,
     width: ICON_SIZE + 18,
     height: ICON_SIZE - 20,
   },
 
   colorIcon: {
-    width: ICON_SIZE,
+    width: ICON_SIZE - 3,
     height: ICON_SIZE,
+    marginLeft: -3,
+  },
+
+  selectColorIcon: {
+    width: (ICON_SIZE - 3) * 1.2,
+    height: ICON_SIZE * 1.2,
     marginLeft: -3
   },
 

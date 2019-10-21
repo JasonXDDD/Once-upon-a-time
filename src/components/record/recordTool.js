@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
-import { View, Image, Text, TouchableOpacity, StyleSheet, requireNativeComponent, UIManager, findNodeHandle } from 'react-native'
+import { View, Image, Text, TouchableOpacity, StyleSheet, requireNativeComponent, UIManager, findNodeHandle, Dimensions } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import { NavigationActions } from "react-navigation";
 
-import Btn_Recording from '../../assets/images/RecordStory/Btn_Recording.png'
-import Btn_Start from '../../assets/images/RecordStory/Btn_Start.png'
-import Btn_Stop from '../../assets/images/RecordStory/Btn_Stop.png'
+import Btn_Recording_Stop from '../../assets/images/RecordStory/Btn_Recording_Stop.png'
+import { observe } from 'mobx';
 
 const SwiftRecordTool = requireNativeComponent('RecordTool')
-const ICON_SIZE = 50;
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+const ICON_SIZE = 60;
 
 @inject('rootStore')
 @observer
 export default class RecordTool extends Component {
+  buttonPlayer;
+
   constructor(props) {
     super(props)
     this.storyStore = props.rootStore.storyStore
+    this.soundStore = props.rootStore.soundStore
     this.navigation = props.navigation
   }
 
-
+  start(){
+    this.storyStore.count = 3
+    this.storyStore.countdownid = setInterval(() => {this.countDown()}, 1000)
+  }
 
   countDown(){ 
     if (this.storyStore.count == 0){
@@ -32,25 +40,30 @@ export default class RecordTool extends Component {
       this.storyStore.count --;
   }
 
+  componentDidMount(){
+    this.buttonPlayer = this.soundStore.genMusic('button')
+    observe(this.storyStore, 'isRecord',(change)=> {
+      if(change.newValue)
+        this.start()
+    })
+  }
   render() {
     return (
-      <View style={[styles.recordTool, { display: !this.storyStore.isRecord ? "none" : "flex" }]}>
-        <TouchableOpacity style={{display: this.storyStore.onLive === false? 'flex': 'none'}} 
+      <View style={[styles.storyTool, { display: !this.storyStore.isRecord ? "none" : "flex" }]}>
+        <TouchableOpacity 
           onPress={() => {
-            this.storyStore.count = 3
-            this.storyStore.countdownid = setInterval(() => {this.countDown()}, 1000)
+            if(this.storyStore.onLive){
+              this.onStopRecord()
+              this.storyStore.onLive = false
+              this.storyStore.isRecord = false;
+              this.storyStore.selectMusic = '';
+              this.showBar();
+  
+              this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
+              this.soundStore.playBGM(true)
+            }
           }}>
-          <Image style={styles.recordIcon} source={Btn_Start}></Image>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={{display: this.storyStore.onLive === true? 'flex': 'none'}} 
-          onPress={() => {
-            this.storyStore.onLive = false
-            this.onStopRecord()
-            this.storyStore.isRecord = false;
-            this.showBar();
-          }}>
-          <Image style={styles.recordIcon} source={Btn_Stop}></Image>
+          <Image style={styles.toolIcon} source={Btn_Recording_Stop}></Image>
         </TouchableOpacity>
 
         <SwiftRecordTool ref={e => this.swiftRecordToolRef = e} style={{display: 'none'}}/>
@@ -76,6 +89,7 @@ export default class RecordTool extends Component {
   }
 
   onStopRecord() {
+    console.log("Stopped")
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this.swiftRecordToolRef),
       UIManager.getViewManagerConfig('RecordTool').Commands.stopRecordFromManager,
@@ -86,14 +100,17 @@ export default class RecordTool extends Component {
 }
 
 const styles = StyleSheet.create({
-  recordIcon: {
-    width: ICON_SIZE,
-    height: ICON_SIZE,
+  storyTool: {
+    left: screenWidth / 2 - ICON_SIZE /2,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute"
   },
 
-  recordTool: {
-    position: 'absolute',
-    right: 50,
-    top: 80
+  toolIcon: {
+    marginTop: 25,
+    width: ICON_SIZE / 50 * 80,
+    height: ICON_SIZE,
+    marginHorizontal: 5
   }
 })

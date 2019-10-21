@@ -22,14 +22,14 @@
 			<key>entitlements</key>
 			<dict>
 				<key>application-identifier</key>
-				<string>5UGJ2FWVS4.io.github.jasonxddd.OnceUponATime</string>
+				<string>5UGJ2FWVS4.io.github.jasonxddd</string>
 				<key>com.apple.developer.team-identifier</key>
 				<string>5UGJ2FWVS4</string>
 				<key>get-task-allow</key>
 				<false/>
 				<key>keychain-access-groups</key>
 				<array>
-					<string>5UGJ2FWVS4.io.github.jasonxddd.OnceUponATime</string>
+					<string>5UGJ2FWVS4.io.github.jasonxddd</string>
 				</array>
 			</dict>
 			<key>name</key>
@@ -37,7 +37,7 @@
 			<key>profile</key>
 			<dict>
 				<key>UUID</key>
-				<string>4da57ecd-f02b-4d25-8c12-8c38fc0f074a</string>
+				<string>985fe9e5-7435-43cd-a06c-e208079374bf</string>
 				<key>name</key>
 				<string>iOS Team Ad Hoc Provisioning Profile: *</string>
 			</dict>

@@ -3,6 +3,9 @@ package com.onceuponatime;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.cameraroll.CameraRollPackage;
+import com.zmxv.RNSound.RNSoundPackage;
+import org.reactnative.camera.RNCameraPackage;
 import cl.json.RNSharePackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.rnfs.RNFSPackage;
@@ -32,6 +35,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new CameraRollPackage(),
+            new RNSoundPackage(),
+            new RNCameraPackage(),
             new RNSharePackage(),
             new ReactVideoPackage(),
             new RNFSPackage(),

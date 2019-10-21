@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { View, Image, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { View, Image, Text, TouchableOpacity, StyleSheet, Dimensions, ImageBackground } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import Share from 'react-native-share';
 import RNFS from 'react-native-fs';
+import { SiriShortcutsEvent, donateShortcut, suggestShortcuts, clearAllShortcuts, clearShortcutsWithIdentifiers, presentShortcut } from "react-native-siri-shortcut";
+import AddToSiriButton, { SiriButtonStyles, supportsSiriButton } from "react-native-siri-shortcut/AddToSiriButton";
 
 import Btn_Share from '../../assets/images/StoryBox/Btn_share.png'
 import Btn_Delete from '../../assets/images/StoryBox/Btn_delete.png'
+import Btn_Reload from '../../assets/images/StoryBox/Btn_reload.png'
+import Btn_Siri from '../../assets/images/StoryBox/Btn_siri.png'
 
 const ICON_SIZE = 70;
 const screenWidth = Dimensions.get("window").width;
@@ -17,13 +21,37 @@ const shareOptions = {
   social: Share.Social.EMAIL
 };
 
+
+const opts1: ShortcutOptions = {
+  activityType: "io.github.jasonxddd.sayHello",
+  title: "從前從前說故事",
+  description: "拉拉",
+  userInfo: { say: 'story' },
+  keywords: ["故事", "從前"],
+  persistentIdentifier: "io.github.jasonxddd.sayHello",
+  isEligibleForSearch: true,
+  isEligibleForPrediction: true,
+  suggestedInvocationPhrase: "講故事給我聽",
+  needsSave: true,
+};
+
 @inject('rootStore')
 @observer
 export default class BoxTool extends Component {
   constructor(props) {
     super(props)
     this.storyStore = props.rootStore.storyStore
+    this.boxStore = props.rootStore.boxStore
     this.navigation = props.navigation
+  }
+
+  componentDidMount(){
+    // set sirikit listener
+    SiriShortcutsEvent.addListener("SiriShortcutListener", ({userInfo, activityType}) => {
+      this.storyStore.shortcutInfo = JSON.stringify(userInfo)
+      this.storyStore.shortcutActivityType = activityType
+    });
+    suggestShortcuts([opts1]);
   }
 
   deleteVideo(path){
@@ -40,11 +68,31 @@ export default class BoxTool extends Component {
   render() {
     return (
       <View style={[styles.recordTool]}>
-        <Text style={styles.selectText}>選擇： {this.props.selectVideo.time}</Text>
+        <Text style={styles.selectText}>
+          {this.boxStore.selectVideoIndex + 1} / {this.boxStore.videoList.length}
+        </Text>
+
+        {supportsSiriButton && (
+          <ImageBackground source={Btn_Siri} style={ styles.siriButton }>
+            <AddToSiriButton
+              style={{
+                marginVertical: 4,
+              }}
+              buttonStyle={SiriButtonStyles.white}
+              onPress={() => {
+                presentShortcut(opts1, ({ status }) => {
+                  console.log(`I was ${status}`);
+                });
+              }}
+              shortcut={opts1}
+            />
+          </ImageBackground>
+        )}
 
         <TouchableOpacity 
           onPress={() => {
-            this.deleteVideo(this.props.selectVideo.video)
+            if(this.boxStore.selectVideoIndex != 0)
+              this.deleteVideo(this.boxStore.selectVideo.video)
           }}>
           <Image style={styles.recordIcon} source={Btn_Delete}></Image>
         </TouchableOpacity>
@@ -52,7 +100,7 @@ export default class BoxTool extends Component {
         <TouchableOpacity
           onPress={() => {
             Share.open({
-              url: "file://" + this.props.selectVideo.video,
+              url: "file://" + this.boxStore.selectVideo.video,
               type: 'video/mp4',
               message: "大家好，這是我做的新故事喔！"
             })
@@ -62,6 +110,13 @@ export default class BoxTool extends Component {
           <Image style={styles.recordIcon} source={Btn_Share}></Image>
         </TouchableOpacity>
 
+        <TouchableOpacity 
+          onPress={() => {
+            this.boxStore.getVideo()
+          }}>
+          <Image style={styles.recordIcon} source={Btn_Reload}></Image>
+        </TouchableOpacity>
+
       </View>
     )
   }
@@ -69,6 +124,7 @@ export default class BoxTool extends Component {
 }
 
 const styles = StyleSheet.create({
+
   recordIcon: {
     width: ICON_SIZE,
     height: ICON_SIZE,
@@ -77,15 +133,27 @@ const styles = StyleSheet.create({
 
   recordTool: {
     position: 'absolute',
-    right: (screenWidth - (ICON_SIZE + 20) * 2) /2,
-    bottom: screenHeight * 0.2,
-    flexDirection: 'row'
+    width: screenWidth,
+    bottom: screenHeight * 0.22,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  siriButton: {
+    marginHorizontal: 10,
+    height: (ICON_SIZE - 7),
+    width: (ICON_SIZE - 7) * 233 / 100,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
   },
 
   selectText: {
     position: 'absolute',
-    marginTop: -35,
-    marginLeft: -50,
-    fontSize: 20
+    top: -60,
+    right: ( screenWidth - 80 ) / 2,
+    fontSize: 30
   }
+
+
 })
