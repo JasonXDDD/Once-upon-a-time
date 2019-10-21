@@ -1894,7 +1894,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5UGJ2FWVS4;
 				HEADER_SEARCH_PATHS = (
@@ -1923,7 +1923,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.jasonxddd;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jasonxddd.OnceUponATime;
 				PRODUCT_NAME = OnceUponATime;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OnceUponATime-Bridging-Header.h";
@@ -1942,7 +1942,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 5UGJ2FWVS4;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1970,7 +1970,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.jasonxddd;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.jasonxddd.OnceUponATime;
 				PRODUCT_NAME = OnceUponATime;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "OnceUponATime-Bridging-Header.h";
