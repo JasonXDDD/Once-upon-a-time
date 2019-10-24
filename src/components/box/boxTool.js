@@ -150,9 +150,9 @@ const styles = StyleSheet.create({
 
   selectText: {
     position: 'absolute',
-    top: -60,
+    top: -40,
     right: ( screenWidth - 80 ) / 2,
-    fontSize: 30
+    fontSize: 20
   }
 
 

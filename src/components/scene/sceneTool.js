@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
 
   sceneItemRecord: {  marginHorizontal: 20, left: 150 },
-  sceneItem: { marginVertical: 10, top: 70 },
+  sceneItem: { marginVertical: 10, top: screenHeight > 800? 70: 50 },
 
   toolIcon: {
     width: ICON_SIZE,
