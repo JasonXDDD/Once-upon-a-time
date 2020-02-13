@@ -1,68 +1,12 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  ImageBackground,
-  TouchableOpacity
-} from "react-native";
+import { Platform, StyleSheet, Text, View, Image, Dimensions, ImageBackground, TouchableOpacity } from "react-native";
 import RNSketchCanvas from "@terrylinla/react-native-sketch-canvas";
 import { inject, observer } from "mobx-react";
 import DialogInput from "react-native-dialog-input";
 import ViewShot from "react-native-view-shot";
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
 
-import DrawBoard_IMG from "../../assets/images/DrawStory/drawBoard.png";
-import Redo from "../../assets/images/DrawStory/btn_clean.png";
-import Reback from "../../assets/images/DrawStory/btn_reback.png";
-import Eraser from "../../assets/images/DrawStory/btn_eraser.png";
-import Plus from "../../assets/images/DrawStory/btn_penPlus.png";
-import Delete from "../../assets/images/StoryBox/Btn_delete.png";
-import Camera from "../../assets/images/DrawStory/btn_camera.png";
-
-import c6BCCF7 from "../../assets/images/DrawStory/color/btn_page03_Aqua_blue.png";
-import s6BCCF7 from "../../assets/images/DrawStory/color/btn_page03_Aqua_blue_selected.png";
-import c000000 from "../../assets/images/DrawStory/color/btn_page03_black.png";
-import s000000 from "../../assets/images/DrawStory/color/btn_page03_black_selected.png";
-import c2367C0 from "../../assets/images/DrawStory/color/btn_page03_blue.png";
-import s2367C0 from "../../assets/images/DrawStory/color/btn_page03_blue_selected.png";
-import c84574F from "../../assets/images/DrawStory/color/btn_page03_Brown.png";
-import s84574F from "../../assets/images/DrawStory/color/btn_page03_Brown_selected.png";
-import c49C37C from "../../assets/images/DrawStory/color/btn_page03_green.png";
-import s49C37C from "../../assets/images/DrawStory/color/btn_page03_green_selected.png";
-import cFF7D1C from "../../assets/images/DrawStory/color/btn_page03_orange.png";
-import sFF7D1C from "../../assets/images/DrawStory/color/btn_page03_orange_selected.png";
-import cFF75B5 from "../../assets/images/DrawStory/color/btn_page03_Pink.png";
-import sFF75B5 from "../../assets/images/DrawStory/color/btn_page03_Pink_selected.png";
-import c9323A1 from "../../assets/images/DrawStory/color/btn_page03_purple.png";
-import s9323A1 from "../../assets/images/DrawStory/color/btn_page03_purple_selected.png";
-import cFF403F from "../../assets/images/DrawStory/color/btn_page03_Red.png";
-import sFF403F from "../../assets/images/DrawStory/color/btn_page03_Red_selected.png";
-import cFFD298 from "../../assets/images/DrawStory/color/btn_page03_skin_color.png";
-import sFFD298 from "../../assets/images/DrawStory/color/btn_page03_skin_color_selected.png";
-import cFFFFFF from "../../assets/images/DrawStory/color/btn_page03_white.png";
-import sFFFFFF from "../../assets/images/DrawStory/color/btn_page03_white_selected.png";
-import cFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow.png";
-import sFFFF57 from "../../assets/images/DrawStory/color/btn_page03_yellow_selected.png";
-
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenHeight * 1590 / 1536;
-const BOARD_HEIGHT = screenHeight;
-const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
-const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
-const BOARD_POS_BASIC = 25;
-const TOOL_PANE_WIDTH = 135;
-const ICON_SIZE = 70;
-
-const DRAW_BOARD_WIDTH = BOARD_WIDTH;
-const DRAW_BOARD_HEIGHT = (BOARD_WIDTH) * 38 / 55;
-const DRAW_PANE_SIZE = DRAW_BOARD_HEIGHT * 0.83;
-const DRAW_PANE_TOP = 65;
-const DRAW_PANE_MARGIN_BOTTOM = 55;
 
 @inject("rootStore")
 @observer
@@ -72,18 +16,18 @@ export default class DrawBoard extends Component {
   deletePlayer;
   
   colorList = [
-    { color: "#FF75B5FF", img: cFF75B5, select: sFF75B5, sound: 'piano_g3', player: {} },
-    { color: "#FF403FFF", img: cFF403F, select: sFF403F, sound: 'piano_a3', player: {} },
-    { color: "#FF7D1CFF", img: cFF7D1C, select: sFF7D1C, sound: 'piano_b3', player: {} },
-    { color: "#FFFF57FF", img: cFFFF57, select: sFFFF57, sound: 'piano_c4', player: {} },
-    { color: "#49C37CFF", img: c49C37C, select: s49C37C, sound: 'piano_d4', player: {} },
-    { color: "#6BCCF7FF", img: c6BCCF7, select: s6BCCF7, sound: 'piano_e4', player: {} },
-    { color: "#2367C0FF", img: c2367C0, select: s2367C0, sound: 'piano_f4', player: {} },
-    { color: "#9323A1FF", img: c9323A1, select: s9323A1, sound: 'piano_g4', player: {} },
-    { color: "#FFD298FF", img: cFFD298, select: sFFD298, sound: 'piano_a4', player: {} },
-    { color: "#84574FFF", img: c84574F, select: s84574F, sound: 'piano_b4', player: {} },
-    { color: "#FFFFFFFF", img: cFFFFFF, select: sFFFFFF, sound: 'piano_c5', player: {} },
-    { color: "#000000FF", img: c000000, select: s000000, sound: 'piano_d5', player: {} },
+    { color: "#FF75B5FF", img: RES.cFF75B5, select: RES.sFF75B5, sound: 'piano_g3', player: {} },
+    { color: "#FF403FFF", img: RES.cFF403F, select: RES.sFF403F, sound: 'piano_a3', player: {} },
+    { color: "#FF7D1CFF", img: RES.cFF7D1C, select: RES.sFF7D1C, sound: 'piano_b3', player: {} },
+    { color: "#FFFF57FF", img: RES.cFFFF57, select: RES.sFFFF57, sound: 'piano_c4', player: {} },
+    { color: "#49C37CFF", img: RES.c49C37C, select: RES.s49C37C, sound: 'piano_d4', player: {} },
+    { color: "#6BCCF7FF", img: RES.c6BCCF7, select: RES.s6BCCF7, sound: 'piano_e4', player: {} },
+    { color: "#2367C0FF", img: RES.c2367C0, select: RES.s2367C0, sound: 'piano_f4', player: {} },
+    { color: "#9323A1FF", img: RES.c9323A1, select: RES.s9323A1, sound: 'piano_g4', player: {} },
+    { color: "#FFD298FF", img: RES.cFFD298, select: RES.sFFD298, sound: 'piano_a4', player: {} },
+    { color: "#84574FFF", img: RES.c84574F, select: RES.s84574F, sound: 'piano_b4', player: {} },
+    { color: "#FFFFFFFF", img: RES.cFFFFFF, select: RES.sFFFFFF, sound: 'piano_c5', player: {} },
+    { color: "#000000FF", img: RES.c000000, select: RES.s000000, sound: 'piano_d5', player: {} },
   ];
 
   state = {
@@ -111,13 +55,13 @@ export default class DrawBoard extends Component {
 
   render() {
     return (
-      <ImageBackground source={DrawBoard_IMG} resizeMode="contain" style={styles.drawBoard} >
+      <ImageBackground source={RES.DrawBoard_IMG} resizeMode="contain" style={styles.drawBoard} >
         {/* draw pane size */}
         <View style={{
             position: "absolute",
-            width: DRAW_BOARD_WIDTH,
-            height: DRAW_BOARD_HEIGHT,
-            top: BOARD_HEIGHT * 0.035,
+            width: VAR.DRAW_PANE_WIDTH,
+            height: VAR.DRAW_PANE_HEIGHT,
+            top: VAR.DRAW_BOARD_HEIGHT * 0.035,
             left: 0
           }}
         >
@@ -163,8 +107,8 @@ export default class DrawBoard extends Component {
               }}
               undoComponent={
                 <Image
-                  style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 100 } ]}
-                  source={Reback}
+                  style={[ styles.icon, { position: "absolute", right: VAR.DRAW_PANE_WIDTH * 0.05, top: 100 } ]}
+                  source={RES.Reback}
                 />
               }
               onUndoPressed={() => {
@@ -172,8 +116,8 @@ export default class DrawBoard extends Component {
               }}
               clearComponent={
                 <Image
-                  style={[ styles.icon, { position: "absolute", right: DRAW_BOARD_WIDTH * 0.05, top: 200 } ]}
-                  source={Redo}
+                  style={[ styles.icon, { position: "absolute", right: VAR.DRAW_PANE_WIDTH * 0.05, top: 200 } ]}
+                  source={RES.Redo}
                 />
               }
               onClearPressed={() => {
@@ -182,8 +126,8 @@ export default class DrawBoard extends Component {
               }}
               eraseComponent={
                 <Image
-                  style={[ styles.icon, { position: "absolute", left: DRAW_BOARD_WIDTH * 0.05, top: 100 } ]}
-                  source={Eraser}
+                  style={[ styles.icon, { position: "absolute", left: VAR.DRAW_PANE_WIDTH * 0.05, top: 100 } ]}
+                  source={RES.Eraser}
                 />
               }
               strokeWidthComponent={(w) => {
@@ -191,8 +135,8 @@ export default class DrawBoard extends Component {
                   this.setState({selectStrockeToVoice: w/10 })
                 
                 return (
-                  <View style={{ position: "absolute", left: DRAW_BOARD_WIDTH * -0.92, top: 200 }}>
-                    <Image style={[ styles.icon ]} source={Plus} />
+                  <View style={{ position: "absolute", left: VAR.DRAW_PANE_WIDTH * -0.92, top: 200 }}>
+                    <Image style={[ styles.icon ]} source={RES.Plus} />
 
                     <View style={[styles.strokeWidthButton, { backgroundColor: this.state.selectColor }]}>
                       <View  style={{
@@ -216,7 +160,7 @@ export default class DrawBoard extends Component {
               top: 5
             }}
           >
-            <Image source={Camera} style={[styles.CameraIcon]} />
+            <Image source={RES.Camera} style={[styles.CameraIcon]} />
           </TouchableOpacity>
         </View>
 
@@ -253,8 +197,8 @@ export default class DrawBoard extends Component {
         id: name,
         image: JSON.stringify({
           uri: uri,
-          width: DRAW_PANE_SIZE,
-          height: DRAW_PANE_SIZE
+          width: VAR.DRAW_PANE_SIZE,
+          height: VAR.DRAW_PANE_SIZE
         })
       });
 
@@ -271,73 +215,73 @@ export default class DrawBoard extends Component {
 
 const styles = StyleSheet.create({
   drawBoard: {
-    width: BOARD_WIDTH,
-    height: BOARD_HEIGHT,
-    right: BOARD_RIGHT,
+    width: VAR.DRAW_BOARD_WIDTH,
+    height: VAR.DRAW_BOARD_HEIGHT,
+    right: VAR.DRAW_BOARD_RIGHT,
     position: "absolute",
     overflow: "hidden",
   },
 
   drawPane: {
-    height: DRAW_PANE_SIZE,
-    width: DRAW_PANE_SIZE,
+    height: VAR.DRAW_PANE_SIZE,
+    width: VAR.DRAW_PANE_SIZE,
   },
 
   drawPaneBG: {
     backgroundColor: "#FFFFFF",
     position: "absolute",
-    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-    top: DRAW_PANE_TOP,
+    left: (VAR.DRAW_PANE_WIDTH - VAR.DRAW_PANE_SIZE) / 2,
+    top: VAR.DRAW_PANE_TOP,
     borderRadius: 10
   },
 
   imagePane: {
     position: "absolute",
-    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2,
-    top: DRAW_PANE_TOP
+    left: (VAR.DRAW_PANE_WIDTH - VAR.DRAW_PANE_SIZE) / 2,
+    top: VAR.DRAW_PANE_TOP
   },
 
   photoPane: {
     // backgroundColor: "#AABBCC55",
-    marginTop: DRAW_PANE_TOP,
-    marginLeft: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2
+    marginTop: VAR.DRAW_PANE_TOP,
+    marginLeft: (VAR.DRAW_PANE_WIDTH - VAR.DRAW_PANE_SIZE) / 2
   },
 
 
   drawContaniner: {
     position: "absolute",
-    width: DRAW_BOARD_WIDTH,
-    height: DRAW_BOARD_HEIGHT,
+    width: VAR.DRAW_PANE_WIDTH,
+    height: VAR.DRAW_PANE_HEIGHT,
     padding: 10
   },
 
   drawCanvas: {
-    left: (DRAW_BOARD_WIDTH - DRAW_PANE_SIZE) / 2 - 10,
-    top: DRAW_PANE_TOP -10,
-    marginBottom: DRAW_PANE_MARGIN_BOTTOM
+    left: (VAR.DRAW_PANE_WIDTH - VAR.DRAW_PANE_SIZE) / 2 - 10,
+    top: VAR.DRAW_PANE_TOP -10,
+    marginBottom: VAR.DRAW_PANE_MARGIN_BOTTOM
   },
 
 
   icon: {
-    height: ICON_SIZE + 5,
-    width: ICON_SIZE
+    height: VAR.DRAW_ICON_SIZE + 5,
+    width: VAR.DRAW_ICON_SIZE
   },
 
   CameraIcon: {
     marginTop: 5,
-    width: ICON_SIZE + 18,
-    height: ICON_SIZE - 20,
+    width: VAR.DRAW_ICON_SIZE + 18,
+    height: VAR.DRAW_ICON_SIZE - 20,
   },
 
   colorIcon: {
-    width: ICON_SIZE - 3,
-    height: ICON_SIZE,
+    width: VAR.DRAW_ICON_SIZE - 3,
+    height: VAR.DRAW_ICON_SIZE,
     marginLeft: -3,
   },
 
   selectColorIcon: {
-    width: (ICON_SIZE - 3) * 1.2,
-    height: ICON_SIZE * 1.2,
+    width: (VAR.DRAW_ICON_SIZE - 3) * 1.2,
+    height: VAR.DRAW_ICON_SIZE * 1.2,
     marginLeft: -3
   },
 

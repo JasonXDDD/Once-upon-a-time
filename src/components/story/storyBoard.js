@@ -1,19 +1,11 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, Dimensions, Image } from 'react-native'
 import { inject, observer } from 'mobx-react'
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
+
 import StoryItem from './storyItem'
 import MusicItem from './musicItem'
-
-import Teaching_BG from '../../assets/images/EditStory/Teaching.png'
-
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
-const BOARD_WIDTH = screenWidth * 0.76
-const BOARD_HEIGHT = screenHeight * 0.7
-const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2
-const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04
-const BOARD_POS_BASIC = 25
-const TOOL_PANE_WIDTH = 135
 
 @inject('rootStore')
 @observer
@@ -26,8 +18,8 @@ export default class StoryBoard extends Component {
 
   render() {
     return (
-      <View style={[styles.storyBoard, { right: BOARD_RIGHT, top: BOARD_TOP }]}>
-        <Image source={Teaching_BG} style={[styles.background]} />
+      <View style={[styles.storyBoard, { right: VAR.BOARD_RIGHT, top: VAR.BOARD_TOP }]}>
+        <Image source={RES.Teaching_BG} style={[styles.background]} />
 
         {this.storyStore.storyScene[this.storyStore.selectSceneIndex].story.map(
           (ele, id) => {
@@ -51,8 +43,8 @@ export default class StoryBoard extends Component {
 
 const styles = StyleSheet.create({
   storyBoard: {
-    width: BOARD_WIDTH,
-    height: BOARD_HEIGHT,
+    width: VAR.BOARD_WIDTH,
+    height: VAR.BOARD_HEIGHT,
     position: 'absolute',
     backgroundColor: '#f6f6f6',
     borderColor: '#bebebe',
@@ -62,8 +54,8 @@ const styles = StyleSheet.create({
   },
 
   background: {
-    width: BOARD_WIDTH,
-    height: BOARD_HEIGHT,
+    width: VAR.BOARD_WIDTH,
+    height: VAR.BOARD_HEIGHT,
     overflow: 'hidden',
   },
 

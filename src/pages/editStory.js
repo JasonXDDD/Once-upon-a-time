@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Platform, ImageBackground, Dimensions, Text, StyleSheet } from "react-native";
+import { observe } from "mobx";
 import { inject, observer } from "mobx-react";
-
-import EditStory_BG from "../assets/images/EditStory/BG.png";
-import RecordStory_BG from "../assets/images/RecordStory/BG.png";
-import Redo from "../assets/images/EditStory/btn_redo.png";
-import Teaching from "../assets/images/EditStory/Teaching.png";
+import { RES } from "../core/resource";
+import { VAR } from "../core/variable";
 
 import ToolBar from "../components/toolBar";
 import StoryBoard from "../components/story/storyBoard";
@@ -14,15 +12,8 @@ import StoryToolRecord from "../components/story/storyToolRecord";
 import GoBack from "../components/record/goBack";
 import RecordTool from "../components/record/recordTool";
 import SceneTool from "../components/scene/sceneTool";
-import { observe } from "mobx";
 import MusicBoard from "../components/record/musicBoard";
 
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const COUNT_WIDTH = 160;
-const COUNT_HEIGHT = 240;
-const COUNT_RIGHT = screenWidth / 2 - COUNT_WIDTH / 2;
-const COUNT_TOP = screenHeight / 2 - COUNT_HEIGHT / 2 - screenHeight * 0.06;
 
 @inject("rootStore")
 @observer
@@ -42,7 +33,7 @@ export default class EditStory extends React.Component {
   render() {
     return (
       <ImageBackground
-        source={this.storyStore.isRecord ? RecordStory_BG : EditStory_BG}
+        source={this.storyStore.isRecord ? RES.RecordStory_BG : RES.EditStory_BG}
         style={{ flex: 1 }}
       >
         {/* draw board and tool */}
@@ -68,9 +59,9 @@ export default class EditStory extends React.Component {
 
 const styles = StyleSheet.create({
   countText: {
-    fontSize: 200, 
+    fontSize: 20, 
     position: 'absolute', 
-    top: COUNT_TOP, 
-    right: COUNT_RIGHT
+    top: VAR.COUNT_TOP, 
+    right: VAR.COUNT_RIGHT
   }
 });

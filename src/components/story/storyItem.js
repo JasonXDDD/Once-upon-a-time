@@ -1,20 +1,10 @@
 import React, { Component } from "react";
-import {
-  TouchableHighlight,
-  Image,
-  Alert,
-  Text,
-  Dimensions,
-  StyleSheet
-} from "react-native";
+import { TouchableHighlight, Image, Alert, Text, Dimensions, StyleSheet } from "react-native";
 import { inject, observer } from "mobx-react";
 import Gestures from "react-native-easy-gestures";
 import { RNCamera } from 'react-native-camera';
+import { VAR } from "../../core/variable";
 
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76;
-const BOARD_HEIGHT = screenHeight * 0.7;
 
 @inject("rootStore")
 @observer
@@ -138,8 +128,8 @@ const styles = StyleSheet.create({
   },
 
   background: {
-    width: BOARD_WIDTH,
-    height: BOARD_HEIGHT,
+    width: VAR.BOARD_WIDTH,
+    height: VAR.BOARD_HEIGHT,
     overflow: "hidden"
   }
 });

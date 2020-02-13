@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import { inject, observer } from "mobx-react";
 import { observable } from "mobx";
-import ToolItem from "./toolItem";
 import * as Animatable from 'react-native-animatable';
+import { RES } from "../core/resource";
+import { VAR } from "../core/variable";
 
-import ToolBar_Tap from "../assets/images/img_Topmenu.png";
+import ToolItem from "./toolItem";
 
-const TOOL_PANE_WIDTH = 135;
-const TOOL_PANE_OFFSET = 25;
-const ICON_SIZE = 60;
 @inject("rootStore")
 @observer
 export default class ToolBar extends Component {
@@ -20,28 +18,28 @@ export default class ToolBar extends Component {
     {
       type: "scene",
       color: "#f68a50",
-      top: (ICON_SIZE + 10) * 0 + TOOL_PANE_OFFSET,
+      top: (VAR.TOOL_PANE_ICON_SIZE + 10) * 0 + VAR.TOOL_PANE_OFFSET,
       animated: false
     },
 
     {
       type: "character",
       color: "#fec64c",
-      top: (ICON_SIZE + 10) * 1 + TOOL_PANE_OFFSET,
+      top: (VAR.TOOL_PANE_ICON_SIZE + 10) * 1 + VAR.TOOL_PANE_OFFSET,
       animated: false
     },
 
     {
       type: "sticker",
       color: "#3e97a5",
-      top: (ICON_SIZE + 10) * 2 + TOOL_PANE_OFFSET,
+      top: (VAR.TOOL_PANE_ICON_SIZE + 10) * 2 + VAR.TOOL_PANE_OFFSET,
       animated: false
     },
 
     {
       type: "music",
       color: "#4078b2",
-      top: (ICON_SIZE + 10) * 3 + TOOL_PANE_OFFSET,
+      top: (VAR.TOOL_PANE_ICON_SIZE + 10) * 3 + VAR.TOOL_PANE_OFFSET,
       animated: false
     }
   ];
@@ -72,12 +70,12 @@ export default class ToolBar extends Component {
                   styles.toolPane,
                   {
                     backgroundColor: ele.color,
-                    left: this.toolStore.open !== "" ? 0 : -1 * TOOL_PANE_WIDTH,
+                    left: this.toolStore.open !== "" ? 0 : -1 * VAR.TOOL_PANE_WIDTH,
                     display: this.toolStore.open === ele.type ? "flex" : "none"
                   }
                 ]}
               >
-                <Image style={{width: TOOL_PANE_WIDTH, height: TOOL_PANE_OFFSET}} source={ToolBar_Tap}></Image>                
+                <Image style={{width: VAR.TOOL_PANE_WIDTH, height: VAR.TOOL_PANE_OFFSET}} source={RES.ToolBar_Tap}></Image>                
                 <ToolItem select={this.props.select} type={ele.type} />
               </View>
 
@@ -95,7 +93,7 @@ export default class ToolBar extends Component {
                   styles.toolIcon,
                   {
                     top: this.toolStore.selectIndex < index && this.toolStore.selectIndex != -1 ? ele.top + 10: ele.top,
-                    left: this.toolStore.open !== "" ? TOOL_PANE_WIDTH : 0
+                    left: this.toolStore.open !== "" ? VAR.TOOL_PANE_WIDTH : 0
                   }
                 ]}
               >
@@ -120,7 +118,7 @@ export default class ToolBar extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: TOOL_PANE_WIDTH,
+    width: VAR.TOOL_PANE_WIDTH,
     flexDirection: "row",
     // justifyContent: "flex-start",
     // textAlign: "center"
@@ -128,19 +126,19 @@ const styles = StyleSheet.create({
 
   icon: {
     position: "relative",
-    width: ICON_SIZE,
-    height: ICON_SIZE
+    width: VAR.TOOL_PANE_ICON_SIZE,
+    height: VAR.TOOL_PANE_ICON_SIZE
   },
 
   selectIcon: {
     position: "relative",
-    width: ICON_SIZE * 1.2,
-    height: ICON_SIZE * 1.2
+    width: VAR.TOOL_PANE_ICON_SIZE * 1.2,
+    height: VAR.TOOL_PANE_ICON_SIZE * 1.2
   },
 
   toolPane: {
     position: "absolute",
-    width: TOOL_PANE_WIDTH,
+    width: VAR.TOOL_PANE_WIDTH,
     height: "100%"
   },
 

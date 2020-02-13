@@ -1,25 +1,12 @@
 import React, { Component } from "react";
-import {
-  ImageBackground,
-  Alert,
-  Text,
-  View,
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { ImageBackground, Alert, Text, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import { inject, observer } from "mobx-react";
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
 
-import BG_Music from "../../assets/images/RecordStory/BG_Music.png";
 import MusicItem from "../story/musicItem";
 
 
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76;
-const BOARD_HEIGHT = screenHeight * 0.7;
-const PANE_WIDTH = 1406 * 0.55
-const PANE_HEIGHT = 239 * 0.55
 
 @inject("rootStore")
 @observer
@@ -43,7 +30,7 @@ export default class MusicBoard extends React.Component {
   
   render() {
     return (
-      <ImageBackground style={[styles.musicBoard, {display: this.storyStore.isRecord? 'flex': 'none'}]} source={BG_Music}>
+      <ImageBackground style={[styles.musicBoard, {display: this.storyStore.isRecord? 'flex': 'none'}]} source={RES.BG_Music}>
         <View style={styles.musicPane}>
           {this.storyStore.storyScene[this.storyStore.selectSceneIndex].music.map(
             (ele, id) => {
@@ -61,14 +48,14 @@ const styles = StyleSheet.create({
   musicBoard: {
     position: 'absolute',
     bottom: 25,
-    left: (screenWidth - PANE_WIDTH) / 2,
-    width: PANE_WIDTH,
-    height: PANE_HEIGHT,
+    left: (VAR.SCREEN_WIDTH - VAR.PANE_WIDTH) / 2,
+    width: VAR.PANE_WIDTH,
+    height: VAR.PANE_HEIGHT,
     alignItems: 'flex-end'
   },
 
   musicPane: {
-    width: PANE_WIDTH - 100, 
+    width: VAR.PANE_WIDTH - 100, 
     flexDirection: 'row'
   }
 });

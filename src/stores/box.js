@@ -2,17 +2,15 @@ import { observable, action, observe } from "mobx";
 import RNFS from 'react-native-fs';
 import CameraRoll from "@react-native-community/cameraroll"
 import moment from 'moment';
-
-import Sample_Video from '../assets/sample.mp4'
-import Sample_Image from '../assets/images/sample-video.png'
+import { RES } from "../core/resource";
 
 
 export default class BoxStore {
 		
     @observable videoList = [{
 			name: 'Sample',
-			image: Sample_Image,
-			video: Sample_Video,
+			image: RES.Sample_Image,
+			video: RES.Sample_Video,
 			time: 'SAMPLE 2019年 07月 16日 17:45',
 		}]
 		@observable selectVideo = {}
@@ -28,8 +26,8 @@ export default class BoxStore {
     //init
     this.videoList = [{
 			name: 'Sample',
-			image: Sample_Image,
-			video: Sample_Video,
+			image: RES.Sample_Image,
+			video: RES.Sample_Video,
 			time: 'SAMPLE 2019年 07月 16日 17:45',
     }]
     

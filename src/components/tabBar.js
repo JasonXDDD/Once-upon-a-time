@@ -1,31 +1,16 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, ImageBackground, Dimensions } from "react-native";
-import {
-  createBottomTabNavigator,
-  createAppContainer,
-  createStackNavigator,
-  BottomTabBar
-} from "react-navigation";
+import { createBottomTabNavigator, createAppContainer, createStackNavigator, BottomTabBar } from "react-navigation";
+import * as store from "../stores/index";
+import * as Animatable from 'react-native-animatable';
+import { RES } from "../core/resource";
+import { VAR } from "../core/variable";
 
 import DrawSticker from "../pages/drawSticker";
 import StoryBox from "../pages/storyBox";
 import EditStory from "../pages/editStory";
 
-import TabBar_BG from "../assets/images/TabBar/BG.png";
-import EditStorySelected from "../assets/images/TabBar/EditStory_Selected.png";
-import EditStoryUnselected from "../assets/images/TabBar/EditStory_Unselected.png";
-import DrawStorySelected from "../assets/images/TabBar/DrawStory_Selected.png";
-import DrawStoryUnselected from "../assets/images/TabBar/DrawStory_Unselected.png";
-import StoryBoxSelected from "../assets/images/TabBar/StoryBox_Selected.png";
-import StoryBoxUnselected from "../assets/images/TabBar/StoryBox_Unselected.png";
-import * as store from "../stores/index";
-import * as Animatable from 'react-native-animatable';
-
 const tabPlayer = store.soundStore.genMusic('tab')
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-
-
 
 const TabMap = {
   EditStory: {
@@ -55,7 +40,7 @@ const TabMap = {
 
               focused={focused}
               style={focused ? styles.selectIcon : styles.icon}
-              source={focused ? EditStorySelected : EditStoryUnselected}
+              source={focused ? RES.EditStorySelected : RES.EditStoryUnselected}
             />
           )
         }
@@ -82,7 +67,7 @@ const TabMap = {
 
             focused={focused}
             style={focused ? styles.selectIcon : styles.icon}
-            source={focused ? StoryBoxSelected : StoryBoxUnselected}
+            source={focused ? RES.StoryBoxSelected : RES.StoryBoxUnselected}
           />
         )
       }
@@ -108,7 +93,7 @@ const TabMap = {
 
             focused={focused}
             style={focused ? styles.selectIcon : styles.icon}
-            source={focused ? DrawStorySelected : DrawStoryUnselected}
+            source={focused ? RES.DrawStorySelected : RES.DrawStoryUnselected}
           />
         )
       }
@@ -125,7 +110,7 @@ const TabNavigator = createBottomTabNavigator(TabMap, {
   initialRouteName: "EditStory",
   tabBarComponent: (props) => ( 
     <View style={styles.tabView}>
-      <Image style={styles.tabBar} source={TabBar_BG} />
+      <Image style={styles.tabBar} source={RES.TabBar_BG} />
       <TabBarComponent {...props} style={styles.tabStyle}/>
     </View>
   )
@@ -150,24 +135,23 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    width: (screenWidth * 0.9),
-    height: (screenWidth * 0.9) * 115 / 1897
+    width: (VAR.SCREEN_WIDTH * 0.9),
+    height: (VAR.SCREEN_WIDTH * 0.9) * 115 / 1897
   },
 
   tabStyle: {
     backgroundColor: 'transparent',
     borderTopColor: "rgba(255, 255, 255, 0)",
-    width: screenWidth * 0.8,
+    width: VAR.SCREEN_WIDTH * 0.8,
     bottom: 40
   },
 
   tabView: {
     position: 'absolute',
-    width: screenWidth,
+    width: VAR.SCREEN_WIDTH,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    bottom: 0
-    
+    bottom: 0  
   }
 });

@@ -3,6 +3,7 @@ import { ScrollView, Text, Image, Alert, TouchableOpacity, StyleSheet } from 're
 import { observer, inject } from 'mobx-react'
 import StoryItem from './story/storyItem'
 import * as Animatable from 'react-native-animatable';
+import { VAR } from '../core/variable';
 
 @inject('rootStore')
 @observer
@@ -73,7 +74,7 @@ export default class ToolItem extends Component {
                 onAnimationEnd={() => {
                   ele.isAnimate = false
                 }}
-                style={{ width: 100, height: 100 }} 
+                style={styles.iconSize} 
                 source={ele.animate? ele.animate: JSON.parse(ele.image)} />
               
                 <Text style={{ marginTop: 5, color: this.type === 'character'? 'black': 'white' }}>{ele.id}</Text>
@@ -173,4 +174,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignItems: 'center',
   },
+
+  iconSize: {
+    width: VAR.TOOL_ITEM_ICON_SIZE, 
+    height: VAR.TOOL_ITEM_ICON_SIZE
+  }
 })

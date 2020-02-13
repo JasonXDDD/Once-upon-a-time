@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import { View, Image, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { inject, observer } from "mobx-react";
 import { NavigationActions } from "react-navigation";
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
 
-import Btn_Edit from "../../assets/images/RecordStory/Btn_Edit.png";
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const ICON_SIZE = 60;
 
 @inject("rootStore")
 @observer
@@ -41,7 +38,7 @@ export default class GoBack extends Component {
             this.showBar();
           }}
         >
-          <Image style={styles.toolIcon} source={Btn_Edit} />
+          <Image style={styles.toolIcon} source={RES.Btn_Edit} />
         </TouchableOpacity>
       </View>
     );
@@ -50,7 +47,7 @@ export default class GoBack extends Component {
 
 const styles = StyleSheet.create({
   goBackTool: {
-    left: screenWidth / 2 - ICON_SIZE /2,
+    left: VAR.SCREEN_WIDTH / 2 - VAR.ICON_SIZE /2,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute"
@@ -58,8 +55,8 @@ const styles = StyleSheet.create({
 
   toolIcon: {
     marginTop: 10,
-    width: ICON_SIZE / 50 * 80,
-    height: ICON_SIZE,
+    width: VAR.ICON_SIZE / 50 * 80,
+    height: VAR.ICON_SIZE,
     marginHorizontal: 5
   }
 });

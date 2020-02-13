@@ -1,32 +1,8 @@
 import React, { Component } from "react";
-import {
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  StyleSheet,
-  Dimensions,
-  Alert
-} from "react-native";
+import { View, Image, Text, TouchableOpacity, ImageBackground, StyleSheet, Dimensions, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
-
-import Movie_Selected from "../../assets/images/EditStory/btn_movie_Selected.png";
-import Movie_Unselected from "../../assets/images/EditStory/btn_movie_Unselected.png";
-import BG_Scene_V from "../../assets/images/EditStory/BG_ScenesBar_v.png";
-import BG_Scene_H from "../../assets/images/EditStory/BG_ScenesBar_h.png";
-import Btn_NumberBackground from "../../assets/images/EditStory/Btn_SceneNumberBackground.png";
-import Btn_NumberBackground_Selected from "../../assets/images/EditStory/Btn_SceneNumberBackground_selected.png";
-import Btn_AddScene from "../../assets/images/EditStory/Btn_AddScene.png";
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76;
-const BOARD_HEIGHT = screenHeight * 0.7;
-const ICON_SIZE = 50;
-const BOARD_POS_BASIC = 25;
-const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
-const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
 
 @inject("rootStore")
 @observer
@@ -78,8 +54,8 @@ export default class SceneTool extends Component {
   render() {
     return (
       <View style={[styles.sceneTool, {
-        top: this.storyStore.isRecord? BOARD_TOP + 30: BOARD_TOP - 10,
-        right: this.storyStore.isRecord? BOARD_RIGHT - ICON_SIZE - 60: BOARD_RIGHT - ICON_SIZE - 30,
+        top: this.storyStore.isRecord? VAR.BOARD_TOP + 30: VAR.BOARD_TOP - 10,
+        right: this.storyStore.isRecord? VAR.BOARD_RIGHT - VAR.SCENE_ICON_SIZE - 60: VAR.BOARD_RIGHT - VAR.SCENE_ICON_SIZE - 30,
       }]}>
         {/* scene board */}
         <TouchableOpacity
@@ -89,7 +65,7 @@ export default class SceneTool extends Component {
             this.soundStore.playSoundEffect(this.buttonPlayer, 1, 0)
           }}
         >
-          <Image style={styles.sceneIcon} source={this.storyStore.openScenePane? Movie_Selected: Movie_Unselected} />
+          <Image style={styles.sceneIcon} source={this.storyStore.openScenePane? RES.Movie_Selected: RES.Movie_Unselected} />
         </TouchableOpacity>
 
         <View
@@ -98,7 +74,7 @@ export default class SceneTool extends Component {
             { display: this.storyStore.openScenePane ? "flex" : "none" },
           ]}
         >
-          <ImageBackground source={BG_Scene_V}  style={styles.sceneBar}>
+          <ImageBackground source={RES.BG_Scene_V}  style={styles.sceneBar}>
             {this.storyStore.storyScene.map((ele, id) => {
               return (
                 <TouchableOpacity
@@ -119,7 +95,7 @@ export default class SceneTool extends Component {
                 >
                   <Image
                     style={styles.NumberBackground}
-                    source={this.storyStore.selectSceneIndex === id? Btn_NumberBackground_Selected: Btn_NumberBackground}
+                    source={this.storyStore.selectSceneIndex === id? RES.Btn_NumberBackground_Selected: RES.Btn_NumberBackground}
                   />
                   <Text style={styles.toolNumber}>{id + 1}</Text>
                 </TouchableOpacity>
@@ -138,7 +114,7 @@ export default class SceneTool extends Component {
               }
             }}
           >
-            <Image style={styles.toolIcon} source={Btn_AddScene} />
+            <Image style={styles.toolIcon} source={RES.Btn_AddScene} />
           </TouchableOpacity>
         </View>
       </View>
@@ -152,8 +128,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     flexDirection: "column",
-    width: ICON_SIZE,
-    height: ICON_SIZE
+    width: VAR.SCENE_ICON_SIZE,
+    height: VAR.SCENE_ICON_SIZE
   },
 
   scenePane: {
@@ -164,42 +140,42 @@ const styles = StyleSheet.create({
   sceneRecordPane: {
     display: "flex",
     position: "absolute",
-    bottom: -1 * (ICON_SIZE + 15 + 50),
-    left: ICON_SIZE
+    bottom: -1 * (VAR.SCENE_ICON_SIZE + 15 + 50),
+    left: VAR.SCENE_ICON_SIZE
   },
 
   sceneBar: {
     alignItems: "center",
     marginVertical: 15,
-    height: BOARD_HEIGHT - ICON_SIZE * 2 - 10,
-    width: (BOARD_HEIGHT - ICON_SIZE * 2 - 10) * 120 / 850,
+    height: VAR.BOARD_HEIGHT - VAR.SCENE_ICON_SIZE * 2 - 10,
+    width: (VAR.BOARD_HEIGHT - VAR.SCENE_ICON_SIZE * 2 - 10) * 120 / 850,
     flexDirection: "column"
   },
 
   sceneIcon: {
-    width: ICON_SIZE + 10,
-    height: ICON_SIZE + 10
+    width: VAR.SCENE_ICON_SIZE + 10,
+    height: VAR.SCENE_ICON_SIZE + 10
   },
 
   sceneItemRecord: {  marginHorizontal: 20, left: 150 },
-  sceneItem: { marginVertical: 10, top: screenHeight > 800? 70: 50 },
+  sceneItem: { marginVertical: 10, top: VAR.SCREEN_HEIGHT > 800? 70: 50 },
 
   toolIcon: {
-    width: ICON_SIZE,
-    height: ICON_SIZE
+    width: VAR.SCENE_ICON_SIZE,
+    height: VAR.SCENE_ICON_SIZE
   },
 
   toolNumber: {
-    left: (ICON_SIZE * 0.9) * 60 / 100 - 6,
+    left: (VAR.SCENE_ICON_SIZE * 0.9) * 60 / 100 - 6,
     position: "absolute",
-    top: (ICON_SIZE * 0.9) / 2 - 12,
+    top: (VAR.SCENE_ICON_SIZE * 0.9) / 2 - 12,
     fontSize: 20,
     color: "#ef9d17",
     fontWeight: "bold"
   },
 
   NumberBackground: {
-    width: (ICON_SIZE * 0.9) * 60 / 50,
-    height: ICON_SIZE * 0.9
+    width: (VAR.SCENE_ICON_SIZE * 0.9) * 60 / 50,
+    height: VAR.SCENE_ICON_SIZE * 0.9
   }
 });

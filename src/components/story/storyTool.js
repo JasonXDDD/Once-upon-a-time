@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import { View, Image, TouchableOpacity, Dimensions, StyleSheet, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
 
-import Redo from "../../assets/images/EditStory/btn_redo.png";
-
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76
-const BOARD_HEIGHT = screenHeight * 0.7
-const ICON_SIZE = 60;
-const BOARD_RIGHT = screenWidth / 2 - BOARD_WIDTH / 2;
-const BOARD_TOP = screenHeight / 2 - BOARD_HEIGHT / 2 - screenHeight * 0.04;
 
 @inject("rootStore")
 @observer
@@ -65,7 +57,7 @@ export default class StoryTool extends Component {
             this.cleaerScene()
           }}
         >
-          <Image style={styles.toolIcon} source={Redo} />
+          <Image style={styles.toolIcon} source={RES.Redo} />
         </TouchableOpacity>
 
       </View>
@@ -75,17 +67,17 @@ export default class StoryTool extends Component {
 
 const styles = StyleSheet.create({
   storyTool: {
-    top: BOARD_TOP + 20,
-    right: BOARD_RIGHT + 20,
+    top: VAR.BOARD_TOP + 20,
+    right: VAR.BOARD_RIGHT + 20,
     flexDirection: "row",
     justifyContent: "flex-start",
     position: "absolute",
-    width: ICON_SIZE,
-    height: ICON_SIZE
+    width: VAR.ICON_SIZE,
+    height: VAR.ICON_SIZE
   },
 
   toolIcon: {
-    width: ICON_SIZE,
-    height: ICON_SIZE
+    width: VAR.ICON_SIZE,
+    height: VAR.ICON_SIZE
   }
 });
