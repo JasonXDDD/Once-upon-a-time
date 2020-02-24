@@ -82,6 +82,7 @@ export default class StoryItem extends React.Component {
   
   render() {
     this.initStyle = JSON.parse(this.item.style);
+    console.log('init', this.initStyle)
     if (!this.initStyle["position"]) this.initStyle["position"] = "absolute";
     let itemData = (this.item.category === "scene" && this.item.name === "相機")? this.genItemCamera(): this.genItemImage()
     if(this.item.sound && this.storyStore.isRecord){
@@ -97,6 +98,7 @@ export default class StoryItem extends React.Component {
         style={{ ...this.initStyle }}
         onEnd={(event, styles) => {
           this.item.style = JSON.stringify(styles);
+          console.log(this.item.style)
           this.setState({imageTmp: JSON.parse(this.item.image)})
         }}
         onChange={(event, styles) => {

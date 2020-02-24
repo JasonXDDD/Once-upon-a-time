@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   toolPane: {
     position: "absolute",
     width: VAR.TOOL_PANE_WIDTH,
-    height: "100%"
+    height: VAR.SCREEN_HEIGHT
   },
 
   toolIcon: {

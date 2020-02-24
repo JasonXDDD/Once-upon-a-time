@@ -18,49 +18,56 @@ export default class ToolStore {
       image: RES.Forest,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "房間",
       image: RES.Room,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "奶奶家",
       image: RES.Outside,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "相機",
       image: RES.CameraItem,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "付費解鎖1",
       image: RES.sLock01,
       animate: null,
       isLock: true,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "付費解鎖2",
       image: RES.sLock02,
       animate: null,
       isLock: true,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "付費解鎖3",
       image: RES.sLock03,
       animate: null,
       isLock: true,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     }
   ];
 
@@ -70,91 +77,104 @@ export default class ToolStore {
       image: RES.Sun,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "從從",
       image: RES.BigMonster,
       animate: RES.BigMonsterAnimate,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "前前",
       image: RES.SmallMoster,
       animate: RES.SmallMosterAnimate,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "元元",
       image: RES.People1,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "小漢",
       image: RES.People2,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "小清",
       image: RES.People3,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "阿民",
       image: RES.People4,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "蜜蜂",
       image: RES.Bee,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "小紅帽",
       image: RES.Redhat,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "獵人",
       image: RES.Hunter,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "阿嬤",
       image: RES.Grandma,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "狼",
       image: RES.Wolf,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "付費解鎖",
       image: RES.cLock01,
       animate: null,
       isLock: true,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     }
   ];
 
@@ -164,7 +184,8 @@ export default class ToolStore {
       image: RES.stickerSample,
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     }
   ];
 
@@ -176,7 +197,8 @@ export default class ToolStore {
       player: {},
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "沙漠",
@@ -185,7 +207,8 @@ export default class ToolStore {
       player: {},
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "打仗",
@@ -194,7 +217,8 @@ export default class ToolStore {
       player: {},
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "懸疑",
@@ -203,7 +227,8 @@ export default class ToolStore {
       player: {},
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
     {
       id: "晴天霹靂",
@@ -212,7 +237,8 @@ export default class ToolStore {
       player: {},
       animate: null,
       isLock: false,
-      isAnimate: false
+      isAnimate: false,
+      isMove: false,
     },
   ];
 
