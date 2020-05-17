@@ -3,17 +3,13 @@ import React, {Component} from 'react';
 import {Platform, Dimensions, StyleSheet, Alert, Text, View, Image, Modal, TouchableOpacity, TouchableHighlight, ImageBackground} from 'react-native';
 import VideoPlayer from 'react-native-video-controls';
 import Video from 'react-native-video';
-import { inject, observer } from "mobx-react";
 import Coverflow from 'react-native-coverflow';
+import { inject, observer } from "mobx-react";
 import { observe } from 'mobx';
+import { RES } from "../core/resource";
+import { VAR } from "../core/variable";
 
-
-import StoryBox_BG from '../assets/images/StoryBox/BG.png'
 import BoxTool from '../components/box/boxTool'
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-
 
 @inject("rootStore")
 @observer
@@ -84,7 +80,7 @@ export default class StoryBox extends React.Component {
   render() {
     return (
 
-			<ImageBackground source={StoryBox_BG} style={{ flex: 1, justifyContent: 'center' }}>
+			<ImageBackground source={RES.StoryBox_BG} style={{ flex: 1, justifyContent: 'center' }}>
 
 				{/*video list*/}
 				<Coverflow style={{paddingHorizontal: 100, marginBottom: 200}}
@@ -170,7 +166,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-		width: screenWidth,
-		height: screenHeight
+		width: VAR.SCREEN_WIDTH,
+		height: VAR.SCREEN_HEIGHT
   },
 });

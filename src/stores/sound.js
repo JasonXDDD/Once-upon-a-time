@@ -1,60 +1,36 @@
 import { observable, action } from "mobx";
 import Sound from 'react-native-sound';
 import { Alert } from "react-native";
-
-import Background_Music from "../assets/sound/Rainbow_Forest.mp3";
-import TabBar_Click from "../assets/sound/button-tab.mp3";
-import Button_Click from "../assets/sound/button-click.mp3";
-import Delete_Click from "../assets/sound/button-delete.mp3";
-import Pop_Click from "../assets/sound/button-pop.wav";
-import Long_Press_Click from "../assets/sound/button-long-press.mp3";
-import Bubble from "../assets/sound/bubble.wav";
-import ToolBar_Click from "../assets/sound/bloop-noise.wav";
-import DrawColor_Click from "../assets/sound/bloop-noise.wav";
-import BGM_Open from "../assets/sound/bgm-open.wav";
-import BGM_Close from "../assets/sound/bgm-close.wav";
-
-import g3 from "../assets/sound/piano/g3.wav";
-import a3 from "../assets/sound/piano/a3.wav";
-import b3 from "../assets/sound/piano/b3.wav";
-import c4 from "../assets/sound/piano/c4.wav";
-import d4 from "../assets/sound/piano/d4.wav";
-import e4 from "../assets/sound/piano/e4.wav";
-import f4 from "../assets/sound/piano/f4.wav";
-import g4 from "../assets/sound/piano/g4.wav";
-import a4 from "../assets/sound/piano/a4.wav";
-import b4 from "../assets/sound/piano/b4.wav";
-import c5 from "../assets/sound/piano/c5.wav";
-import d5 from "../assets/sound/piano/d5.wav";
+import { RES } from "../core/resource";
 
 
 export default class SoundStore {
 	@observable soundPlayer;
 	@observable soundList = {
-    bgm: Background_Music,
-    tab: TabBar_Click,
-    tool: ToolBar_Click,
-    tool_item: Bubble,
-    button: Button_Click,
-    delete: Delete_Click,
-    add: Pop_Click,
-    box: Pop_Click,
-    long_press: Long_Press_Click,
-    draw_color: DrawColor_Click,
-    piano_g3: g3,
-    piano_a3: a3,
-    piano_b3: b3,
-    piano_c4: c4,
-    piano_d4: d4,
-    piano_e4: e4,
-    piano_f4: f4,
-    piano_g4: g4,
-    piano_a4: a4,
-    piano_b4: b4,
-    piano_c5: c5,
-    piano_d5: d5,
-    bgm_open: BGM_Open,
-    bgm_close: BGM_Close
+    bgm: RES.Background_Music,
+    tab: RES.TabBar_Click,
+    tool: RES.ToolBar_Click,
+    tool_item: RES.Bubble,
+    button: RES.Button_Click,
+    delete: RES.Delete_Click,
+    add: RES.Pop_Click,
+    box: RES.Pop_Click,
+    long_press: RES.Long_Press_Click,
+    draw_color: RES.DrawColor_Click,
+    piano_g3: RES.g3,
+    piano_a3: RES.a3,
+    piano_b3: RES.b3,
+    piano_c4: RES.c4,
+    piano_d4: RES.d4,
+    piano_e4: RES.e4,
+    piano_f4: RES.f4,
+    piano_g4: RES.g4,
+    piano_a4: RES.a4,
+    piano_b4: RES.b4,
+    piano_c5: RES.c5,
+    piano_d5: RES.d5,
+    bgm_open: RES.BGM_Open,
+    bgm_close: RES.BGM_Close
   };
 
   @observable bgmPlayer = this.genMusic('bgm')

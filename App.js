@@ -11,8 +11,8 @@ import Video from 'react-native-video';
 
 import BGM_Open from "./src/assets/images/bgm-open.png";
 import BGM_Close from "./src/assets/images/bgm-close.png";
-import Launch from "./src/assets/launch.mp4";
 
+const LaunchURL = "http://jasonxddd.nctu.me:8001/launch.mp4";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 const BOARD_WIDTH = screenWidth * 0.76;
@@ -68,7 +68,7 @@ export default class App extends Component<Props> {
                 toggleResizeModeOnFullscreen={false}
                 showOnStart={false}
 
-                source={Launch}
+                source={{ uri: LaunchURL }}
                 onEnd={() => {
                   this.setState({modalVisible: false});
 

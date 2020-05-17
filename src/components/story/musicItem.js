@@ -1,18 +1,7 @@
 import React, { Component } from "react";
-import {
-  Image,
-  Alert,
-  Text,
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { Image, Alert, Text, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import { inject, observer } from "mobx-react";
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76;
-const BOARD_HEIGHT = screenHeight * 0.7;
+import { VAR } from '../../core/variable';
 
 @inject("rootStore")
 @observer
@@ -94,8 +83,8 @@ const styles = StyleSheet.create({
   },
 
   background: {
-    width: BOARD_WIDTH,
-    height: BOARD_HEIGHT,
+    width: VAR.BOARD_WIDTH,
+    height: VAR.BOARD_HEIGHT,
     overflow: "hidden"
   }
 });

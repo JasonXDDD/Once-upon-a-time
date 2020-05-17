@@ -1,20 +1,10 @@
 import React, { Component } from "react";
-import {
-  TouchableHighlight,
-  Image,
-  Alert,
-  Text,
-  Dimensions,
-  StyleSheet
-} from "react-native";
+import { TouchableHighlight, Image, Alert, Text, Dimensions, StyleSheet } from "react-native";
 import { inject, observer } from "mobx-react";
 import Gestures from "react-native-easy-gestures";
 import { RNCamera } from 'react-native-camera';
+import { VAR } from "../../core/variable";
 
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const BOARD_WIDTH = screenWidth * 0.76;
-const BOARD_HEIGHT = screenHeight * 0.7;
 
 @inject("rootStore")
 @observer
@@ -92,6 +82,7 @@ export default class StoryItem extends React.Component {
   
   render() {
     this.initStyle = JSON.parse(this.item.style);
+    console.log('init', this.initStyle)
     if (!this.initStyle["position"]) this.initStyle["position"] = "absolute";
     let itemData = (this.item.category === "scene" && this.item.name === "相機")? this.genItemCamera(): this.genItemImage()
     if(this.item.sound && this.storyStore.isRecord){
@@ -107,6 +98,7 @@ export default class StoryItem extends React.Component {
         style={{ ...this.initStyle }}
         onEnd={(event, styles) => {
           this.item.style = JSON.stringify(styles);
+          console.log(this.item.style)
           this.setState({imageTmp: JSON.parse(this.item.image)})
         }}
         onChange={(event, styles) => {
@@ -138,8 +130,8 @@ const styles = StyleSheet.create({
   },
 
   background: {
-    width: BOARD_WIDTH,
-    height: BOARD_HEIGHT,
+    width: VAR.BOARD_WIDTH,
+    height: VAR.BOARD_HEIGHT,
     overflow: "hidden"
   }
 });

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { View, Image, Text, TouchableOpacity, StyleSheet, requireNativeComponent, UIManager, findNodeHandle, Dimensions } from 'react-native'
 import { inject, observer } from 'mobx-react'
 import { NavigationActions } from "react-navigation";
-
-import Btn_Recording_Stop from '../../assets/images/RecordStory/Btn_Recording_Stop.png'
 import { observe } from 'mobx';
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
 
 const SwiftRecordTool = requireNativeComponent('RecordTool')
 
@@ -63,7 +63,7 @@ export default class RecordTool extends Component {
               this.soundStore.playBGM(true)
             }
           }}>
-          <Image style={styles.toolIcon} source={Btn_Recording_Stop}></Image>
+          <Image style={styles.toolIcon} source={RES.Btn_Recording_Stop}></Image>
         </TouchableOpacity>
 
         <SwiftRecordTool ref={e => this.swiftRecordToolRef = e} style={{display: 'none'}}/>
@@ -101,7 +101,7 @@ export default class RecordTool extends Component {
 
 const styles = StyleSheet.create({
   storyTool: {
-    left: screenWidth / 2 - ICON_SIZE /2,
+    left: VAR.SCREEN_WIDTH / 2 - VAR.ICON_SIZE /2,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute"
@@ -109,8 +109,8 @@ const styles = StyleSheet.create({
 
   toolIcon: {
     marginTop: 25,
-    width: ICON_SIZE / 50 * 80,
-    height: ICON_SIZE,
+    width: VAR.ICON_SIZE / 50 * 80,
+    height: VAR.ICON_SIZE,
     marginHorizontal: 5
   }
 })

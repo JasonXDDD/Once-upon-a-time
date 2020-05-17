@@ -1,19 +1,9 @@
 import React, { Component } from "react";
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions
-} from "react-native";
+import { View, Image, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { inject, observer } from "mobx-react";
 import { NavigationActions } from "react-navigation";
-
-import Btn_Recording from "../../assets/images/RecordStory/Btn_Recording.png";
-
-const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
-const ICON_SIZE = 60;
+import { RES } from "../../core/resource";
+import { VAR } from "../../core/variable";
 
 @inject("rootStore")
 @observer
@@ -60,7 +50,7 @@ export default class StoryToolRecord extends Component {
             this.soundStore.playBGM(false)
           }}
         >
-          <Image style={styles.toolIcon} source={Btn_Recording} />
+          <Image style={styles.toolIcon} source={RES.Btn_Recording} />
         </TouchableOpacity>
       </View>
     );
@@ -69,7 +59,7 @@ export default class StoryToolRecord extends Component {
 
 const styles = StyleSheet.create({
   storyTool: {
-    left: screenWidth / 2 - ICON_SIZE /2,
+    left: VAR.SCREEN_WIDTH / 2 - VAR.ICON_SIZE /2,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute"
@@ -77,8 +67,8 @@ const styles = StyleSheet.create({
 
   toolIcon: {
     marginTop: 25,
-    width: ICON_SIZE / 50 * 80,
-    height: ICON_SIZE,
+    width: VAR.ICON_SIZE / 50 * 80,
+    height: VAR.ICON_SIZE,
     marginHorizontal: 5
   }
 });

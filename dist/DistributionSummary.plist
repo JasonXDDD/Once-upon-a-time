@@ -13,23 +13,23 @@
 			<key>certificate</key>
 			<dict>
 				<key>SHA1</key>
-				<string>CCF389AA53775E627418C08154E424FFA5BE1375</string>
+				<string>C782981FC6CB4E92C6AA43605F1A282203CA9136</string>
 				<key>dateExpires</key>
-				<string>2020/7/11</string>
+				<string>2020/10/20</string>
 				<key>type</key>
-				<string>iOS Distribution</string>
+				<string>Apple Distribution</string>
 			</dict>
 			<key>entitlements</key>
 			<dict>
 				<key>application-identifier</key>
-				<string>5UGJ2FWVS4.io.github.jasonxddd</string>
+				<string>5UGJ2FWVS4.io.github.jasonxddd.OnceUponATime</string>
 				<key>com.apple.developer.team-identifier</key>
 				<string>5UGJ2FWVS4</string>
 				<key>get-task-allow</key>
 				<false/>
 				<key>keychain-access-groups</key>
 				<array>
-					<string>5UGJ2FWVS4.io.github.jasonxddd</string>
+					<string>5UGJ2FWVS4.io.github.jasonxddd.OnceUponATime</string>
 				</array>
 			</dict>
 			<key>name</key>
@@ -37,9 +37,9 @@
 			<key>profile</key>
 			<dict>
 				<key>UUID</key>
-				<string>985fe9e5-7435-43cd-a06c-e208079374bf</string>
+				<string>8fe5ba28-996c-4b7c-93c7-0fcacfd89351</string>
 				<key>name</key>
-				<string>iOS Team Ad Hoc Provisioning Profile: *</string>
+				<string>iOS Team Ad Hoc Provisioning Profile: io.github.jasonxddd.OnceUponATime</string>
 			</dict>
 			<key>team</key>
 			<dict>
