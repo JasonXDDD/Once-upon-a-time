@@ -34,7 +34,6 @@ export default class DrawBoard extends Component {
     isDialogVisible: false,
     selectColor: '#FF75B5FF',
     selectStrockeToVoice: 0.6,
-    strokeWidth: 1
   };
 
   constructor(props) {
@@ -83,8 +82,7 @@ export default class DrawBoard extends Component {
               containerStyle={ styles.drawContaniner }
               canvasStyle={[ styles.drawPane, styles.drawCanvas ]}
               defaultStrokeIndex={0}
-              defaultStrokeWidth={this.state.strokeWidth}
-              strokeWidth={this.state.strokeWidth}
+              defaultStrokeWidth={6}
 
               strokeColors={this.colorList}
               
@@ -120,7 +118,7 @@ export default class DrawBoard extends Component {
               clearComponent={
                 <Image
                   style={[ styles.icon, { position: "absolute", right: VAR.DRAW_PANE_WIDTH * 0.05, top: 200 } ]}
-                  source={RES.Redo}
+                  source={RES.Delete}
                 />
               }
               onClearPressed={() => {
@@ -156,7 +154,7 @@ export default class DrawBoard extends Component {
 
           <TouchableOpacity
             onPress={() => {
-              this.setState({ strokeWidth: 10 });
+              this.setState({ isDialogVisible: true });
             }}
             style={{
               position: "absolute",

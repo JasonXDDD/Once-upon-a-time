@@ -51,7 +51,7 @@ import DrawBoard_IMG from '../assets/images/DrawStory/drawBoard.png'
 import Reback from '../assets/images/DrawStory/btn_reback.png'
 import Eraser from '../assets/images/DrawStory/btn_eraser.png'
 import Plus from '../assets/images/DrawStory/btn_penPlus.png'
-import Delete from '../assets/images/StoryBox/Btn_delete.png'
+import Delete from '../assets/images/DrawStory/btn_clean.png'
 import Camera from '../assets/images/DrawStory/btn_camera.png'
 
 import c6BCCF7 from '../assets/images/DrawStory/color/btn_page03_Aqua_blue.png'
@@ -88,7 +88,6 @@ import Btn_Siri from '../assets/images/StoryBox/Btn_siri.png'
 // box store
 // import Sample_Video from '../assets/sample.mp4'
 import Sample_Image from '../assets/images/sample-video.png'
-const Sample_Vedio_URL = 'http://jasonxddd.nctu.me:8001/sample.mp4'
 
 // sound store
 import Background_Music from '../assets/sound/Rainbow_Forest.mp3'
@@ -158,6 +157,7 @@ import Desert from '../assets/sound/scene/Desert_Caravan.mp3'
 import War from '../assets/sound/scene/Eyes_of_Glory.mp3'
 import Suspense from '../assets/sound/scene/Carol_of_the_Bells.mp3'
 import Thunder from '../assets/sound/scene/Thunder_Crack.mp3'
+const Sample_Vedio_URL = 'http://jasonxddd.nctu.me:8001/sample.mp4'
 
 export const RES = {
   DrawStory_BG: DrawStory_BG,

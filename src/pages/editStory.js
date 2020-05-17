@@ -74,7 +74,7 @@ export default class EditStory extends React.Component {
 
 const styles = StyleSheet.create({
   countText: {
-    fontSize: 20,
+    fontSize: 200,
     position: 'absolute',
     top: VAR.COUNT_TOP,
     right: VAR.COUNT_RIGHT,
